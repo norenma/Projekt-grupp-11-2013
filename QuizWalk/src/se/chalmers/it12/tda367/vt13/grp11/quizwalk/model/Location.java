@@ -12,7 +12,7 @@ public class Location extends Coordinates {
 		super(latitude, longitude);
 		
 		this.description = checkNotNull(description);
-		checkArgument(description.isEmpty(), "Description can't be empty");
+		checkArgument(!description.isEmpty(), "Description can't be empty");
 		
 		this.image = checkNotNull(image);
 	}
