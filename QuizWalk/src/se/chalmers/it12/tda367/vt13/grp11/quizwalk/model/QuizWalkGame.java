@@ -4,7 +4,6 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.utils.Utilities.checkNotNullOrEmpty;
 import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.Challenge.ChallengeState;
-import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.Game.State;
 
 /**
  * A game of QuizWalk! This class will retain all information needed to describe
@@ -51,9 +50,13 @@ public class QuizWalkGame extends Game {
 	}
 
 	/**
-	 * Returns {@link State.RUNNING} if not all {@link #challenges}. More
-	 * formally, if at least one challenge in this game is
-	 * <TT>Challenge.State.UNVISITED</TT> then the game is still running.
+	 * Return {@link Challenge.ChallengeState} if not all {@link #challenges}
+	 * has been interacted with. More formally, if at least one challenge in
+	 * this game is <TT>ChallengeState.UNIVISTED</TT> is is considered to be
+	 * RUNNING.
+	 * 
+	 * @return <TT>State.RUNNING</TT> if not all challenges have been interacted
+	 *         with.
 	 */
 	@Override
 	public State getState() {
