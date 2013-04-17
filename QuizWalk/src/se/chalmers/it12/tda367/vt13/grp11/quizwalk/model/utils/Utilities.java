@@ -36,7 +36,7 @@ public class Utilities {
 	public static <K, V> java.util.Map<K, V> checkNotNullOrEmpty(
 			java.util.Map<K, V> mapToCheck, Object errorMessage) {
 		checkNotNull(mapToCheck);
-		checkArgument(mapToCheck.isEmpty(), errorMessage);
+		checkArgument(!mapToCheck.isEmpty(), errorMessage);
 		for (K e : mapToCheck.keySet()) {
 			checkArgument(e != null, errorMessage + ":"
 					+ "Some entry in map is null");
