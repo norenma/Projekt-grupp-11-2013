@@ -51,9 +51,9 @@ public class Utilities {
 	 * 
 	 * @param listToCheck
 	 * @param errorMessage
-	 * @return
+	 * @return the listToCheck if no exceptions are thrown.
 	 */
-	public static <T> Collection<T> checkNotNullOrEmpty(List<T> listToCheck,
+	public static <T> Collection<T> checkNotNullOrEmpty(Collection<T> listToCheck,
 			Object errorMessage) {
 		checkNotNull(listToCheck);
 		checkArgument(!listToCheck.isEmpty(), errorMessage);

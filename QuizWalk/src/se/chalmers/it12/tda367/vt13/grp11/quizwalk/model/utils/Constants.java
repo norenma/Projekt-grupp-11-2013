@@ -6,7 +6,7 @@ package se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.utils;
 public class Constants {
 
 	/**
-	 * Identifiers for different types of {@link Media}.
+	 * Identifiers for different types of {@link se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.Media}.
 	 */
 	public static class MediaID {
 		
@@ -22,7 +22,13 @@ public class Constants {
 		public final static String IMAGE = "quizwalk.media.image";
 	}
 
+	/**
+	 * Some query to a server.
+	 */
 	public static class DatabaseQuery {
+		/**
+		 * Retrieve a Set<QuizWalkGame>
+		 */
 		public final static String GET_QUIZWALKS = "quizwalk.server.get_quizwalks";
 
 	}
