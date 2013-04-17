@@ -26,7 +26,7 @@ public class Utilities {
 	}
 
 	/**
-	 * Throws appropriate exception if {@link java.lang.Map} object is either
+	 * Throws appropriate exception if {@link java.util.Map} object is either
 	 * null, an element is null, or it's empty.
 	 * 
 	 * @param mapToCheck
