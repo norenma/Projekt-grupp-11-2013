@@ -42,7 +42,7 @@ public class Testing {
 		qLocation.add(new Location(1, 2, "Testlocation", null));
 
 		Challenge c = new Challenge("testing challenge", new StringQuestion(
-				"Vad heter jag?"), answers, new StringAnswer("Hampus"),
+				"What's my name?"), answers, new StringAnswer("Hampus"),
 				qLocation, new ChallengeReward(10, "Testreward", null));
 
 		return c;
@@ -51,26 +51,26 @@ public class Testing {
 
 	public static void main(String[] args) {
 		Testing t = new Testing();
-		System.out.println(testRound.getDescription());
+		System.out.println("Description: " + testRound.getDescription());
 
 		Map<Challenge, ChallengeState> challenges = testRound.getChallenges();
 
 		Set<Challenge> questions = challenges.keySet();
 
-
 		Iterator<Challenge> it = questions.iterator();
 		Challenge c = it.next();
+		
 
-		System.out.println(c.getQuestion().toString());
+		System.out.println(c.getQuestion().getMedia());
 
 		for (Answer answer : c.getListOfAnswers()) {
-			System.out.println(answer);
+			System.out.println(answer.getMedia());
 		}
 		
 		Scanner sc = new Scanner(System.in);
 		while (true) {
 			String input = sc.next();
-			if (c.getCorrectAnswer().toString().equals(input)) {
+			if (c.getCorrectAnswer().getMedia().equals(input)) {
 				System.out.println("Correct!");
 				break;
 			} else {
