@@ -46,7 +46,7 @@ public class Utilities {
 
 	/**
 	 * 
-	 * Throws appropriate exception if @link Collection} object is either null,
+	 * Throws appropriate exception if {@link Collection} object is either null,
 	 * empty, or contain null elements.
 	 * 
 	 * @param listToCheck
