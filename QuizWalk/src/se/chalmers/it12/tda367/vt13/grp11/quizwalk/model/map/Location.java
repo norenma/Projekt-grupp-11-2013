@@ -2,8 +2,13 @@ package se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.map;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
+import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.Challenge;
 import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.Image;
 
+/**
+ * A Coordinate with some description and optionally an Image. These locations
+ * can populate {@link Map}s and linked to {@link Challenge}s
+ */
 public class Location extends Coordinates {
 
 	private final String description;

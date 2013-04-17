@@ -7,10 +7,15 @@ import java.util.Set;
 
 import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.QuizWalkGame;
 
+/**
+ * A <TT>Map</TT> object will keep track of active {@link #activeGames} and
+ * custom {@link #nodes} local to the client.
+ * 
+ */
 public class Map {
 
 	/**
-	 * Custom nodes that user can set up on the map.
+	 * Custom location nodes that user can set up on the map.
 	 */
 	private final Set<Location> nodes;
 

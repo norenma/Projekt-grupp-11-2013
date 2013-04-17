@@ -4,6 +4,9 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.utils.Constants;
 
+/**
+ * Text questions.
+ */
 public class StringQuestion extends Question {
 
 	private final String question;
@@ -25,11 +28,6 @@ public class StringQuestion extends Question {
 
 	@Override
 	public Object getMedia() {
-		return getQuestion();
-	}
-
-	@Override
-	public String getQuestion() {
 		return question;
 	}
 

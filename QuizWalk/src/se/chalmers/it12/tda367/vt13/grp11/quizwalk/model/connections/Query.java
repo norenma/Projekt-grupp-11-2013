@@ -1,9 +1,11 @@
 package se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.connections;
 
+import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.utils.Constants;
+
 /**
- * A server Query. The query should contain a command, and an attached Object.
- * Create a query and use it to pass it to some Class implementing
- * {@link IServerDatabase}
+ * A server Query. The query should contain a command, defined
+ * {@link Constants.DatabaseQuery} Create a query and use it to pass it to some
+ * Class implementing {@link IServerDatabase}
  * 
  */
 public interface Query {
@@ -14,8 +16,4 @@ public interface Query {
 	 */
 	public String getQuery();
 
-	/**
-	 * @return the requested object
-	 */
-	public Object getObject();
 }

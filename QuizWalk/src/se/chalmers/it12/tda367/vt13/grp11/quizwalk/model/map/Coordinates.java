@@ -1,5 +1,9 @@
 package se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.map;
 
+//TODO: Coordinates must better represent a true GPS location.
+/**
+ * Coordinates.
+ */
 public class Coordinates {
 
 	private final int latitude;

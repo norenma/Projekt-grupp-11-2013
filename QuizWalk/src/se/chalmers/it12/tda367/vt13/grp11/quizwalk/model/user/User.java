@@ -1,4 +1,4 @@
-package se.chalmers.it12.tda367.vt13.grp11.quizwalk.model;
+package se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.user;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -6,6 +6,12 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.Reward;
+
+/**
+ * A <TT>User</TT> represents a person using the Application.
+ * 
+ */
 public class User {
 
 	/**
