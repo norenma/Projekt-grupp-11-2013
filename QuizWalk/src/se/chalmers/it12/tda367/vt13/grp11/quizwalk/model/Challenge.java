@@ -74,8 +74,7 @@ public class Challenge {
 
 		// Set correctAnswer only if present in list.
 		this.correctAnswer = checkNotNull(correctAnswer);
-		checkArgument(!listOfAnswers.contains(correctAnswer),
-				"correctAnswer must be present in the set of answers");
+		checkArgument(listOfAnswers.contains(correctAnswer), "correctAnswer must be present in the set of answers");
 
 		this.challengeReward = challengeReward;
 

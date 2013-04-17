@@ -44,9 +44,9 @@ public class QuizWalkGame extends Game {
 		this.description = checkNotNull(description);
 		checkArgument(!description.isEmpty(), "description can't be empty");
 
-		this.image = checkNotNull(image);
+		this.image = image;
 		this.challenges = checkNotNullOrEmpty(challenges,
-				"challanges must contain at least one entry and a non-null value.");
+				"challenges must contain at least one entry and a non-null value.");
 	}
 
 	/**

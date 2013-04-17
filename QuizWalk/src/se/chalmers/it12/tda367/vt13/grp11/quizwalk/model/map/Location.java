@@ -20,7 +20,7 @@ public class Location extends Coordinates {
 		this.description = checkNotNull(description);
 		checkArgument(!description.isEmpty(), "Description can't be empty");
 
-		this.image = checkNotNull(image);
+		this.image = image;
 	}
 
 	/**

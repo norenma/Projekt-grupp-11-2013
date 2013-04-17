@@ -48,7 +48,7 @@ public abstract class Reward {
 		this.description = checkNotNull(description);
 		checkArgument(!description.isEmpty(), "Description can't be empty");
 
-		this.image = checkNotNull(image);
+		this.image = image;
 	}
 
 	public int getScore() {
