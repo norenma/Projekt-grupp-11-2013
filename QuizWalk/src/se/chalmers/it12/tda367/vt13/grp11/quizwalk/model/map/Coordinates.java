@@ -1,4 +1,4 @@
-package se.chalmers.it12.tda367.vt13.grp11.quizwalk.model;
+package se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.map;
 
 public class Coordinates {
 
@@ -43,7 +43,7 @@ public class Coordinates {
 			return false;
 		return true;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "latitude: " + latitude + ". longitude: " + longitude;

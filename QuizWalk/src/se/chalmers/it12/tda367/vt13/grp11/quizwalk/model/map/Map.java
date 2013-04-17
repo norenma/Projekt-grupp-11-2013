@@ -1,9 +1,11 @@
-package se.chalmers.it12.tda367.vt13.grp11.quizwalk.model;
+package se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.map;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.QuizWalkGame;
 
 public class Map {
 
@@ -11,12 +13,12 @@ public class Map {
 	 * Custom nodes that user can set up on the map.
 	 */
 	private final Set<Location> nodes;
-	
+
 	/**
 	 * Games that the player is participating in.
 	 */
 	private final Set<QuizWalkGame> activeGames;
-	
+
 	/**
 	 * The users current location, or at least the last known position.
 	 */
@@ -37,7 +39,8 @@ public class Map {
 	}
 
 	/**
-	 * @param node the custom location to be added to map.
+	 * @param node
+	 *            the custom location to be added to map.
 	 * @return true, only if map was modified
 	 */
 	public boolean addNode(Location node) {
@@ -45,16 +48,17 @@ public class Map {
 	}
 
 	/**
-	 * @param node the custom location to be removed from map.
+	 * @param node
+	 *            the custom location to be removed from map.
 	 * @return true, only if map was modified
 	 */
 	public boolean removeNode(Location node) {
 		return nodes.remove(node);
 	}
 
-	
 	/**
-	 * @param game that will supply locations to be marked on the map
+	 * @param game
+	 *            that will supply locations to be marked on the map
 	 * @return true, only if map was modified
 	 */
 	public boolean addGame(QuizWalkGame game) {
@@ -62,20 +66,24 @@ public class Map {
 	}
 
 	/**
-	 * @param game locations to be removed from map
+	 * @param game
+	 *            locations to be removed from map
 	 * @return true, only if map was modified
 	 */
 	public boolean removeGame(QuizWalkGame game) {
 		return activeGames.remove(game);
 	}
 
-	// TODO: Debug methods to get all nodes. I don't like arrays but since we don't want to let implementation to modify our list we'll do this way now.
-	//	Check Google Guava on Immutable Collections. https://google-collections.googlecode.com/svn/trunk/javadoc/com/google/common/collect/ImmutableList.html
-	
-	public Location[] getNodes(){
+	// TODO: Debug methods to get all nodes. I don't like arrays but since we
+	// don't want to let implementation to modify our list we'll do this way
+	// now.
+	// Check Google Guava on Immutable Collections.
+	// https://google-collections.googlecode.com/svn/trunk/javadoc/com/google/common/collect/ImmutableList.html
+
+	public Location[] getNodes() {
 		return (Location[]) nodes.toArray();
 	}
-	
+
 	public QuizWalkGame[] getQuizGameWalks() {
 		return (QuizWalkGame[]) activeGames.toArray();
 	}

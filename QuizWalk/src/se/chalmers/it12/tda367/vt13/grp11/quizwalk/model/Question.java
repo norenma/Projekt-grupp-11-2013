@@ -1,6 +1,6 @@
 package se.chalmers.it12.tda367.vt13.grp11.quizwalk.model;
 
-public abstract class Question {
+public abstract class Question implements Media {
 
 	// TODO: Abstract Question should NOT return by default a String. Since
 	// there will probably only be two media types (Strings and Images) for

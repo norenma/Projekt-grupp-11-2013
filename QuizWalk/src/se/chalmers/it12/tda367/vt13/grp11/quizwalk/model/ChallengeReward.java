@@ -7,5 +7,4 @@ public class ChallengeReward extends Reward {
 		// TODO Auto-generated constructor stub
 	}
 
-	
 }

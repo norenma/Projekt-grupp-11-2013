@@ -1,8 +1,10 @@
 package se.chalmers.it12.tda367.vt13.grp11.quizwalk.model;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class User {
 
@@ -10,23 +12,48 @@ public class User {
 	 * String representation of this user globally.
 	 */
 	private String userName;
-	
+
 	/**
 	 * Local client settings.
 	 */
-	private Setting userSettings;
-	
+	private UserSettings userSettings;
+
 	/**
 	 * Rewards collected by this user.
 	 */
-	private final ArrayList<Reward> listOfUserRewards;
+	private final List<Reward> listOfUserRewards;
 
-	// TODO: Incomplete constructor
-	public User(String userName) {
+	/**
+	 * Create a user. This represents the actual human user using the game
+	 * client.
+	 * 
+	 * @param userName
+	 *            Public user name for this User.
+	 * @param userSettings
+	 *            Personal settings for this user.
+	 * @param listOfUserRewards
+	 *            Rewards awarded this user.
+	 */
+	public User(String userName, UserSettings userSettings,
+			List<Reward> listOfUserRewards) {
+
 		this.userName = checkNotNull(userName);
-		if (userName.isEmpty()) throw new IllegalArgumentException("User name can't be empty");
-		this.userSettings = new Setting();
-		this.listOfUserRewards = new ArrayList<Reward>();
+		checkArgument(!userName.isEmpty(), "userName can't be empty");
+
+		this.userSettings = checkNotNull(userSettings);
+
+		this.listOfUserRewards = checkNotNull(listOfUserRewards);
+	}
+
+	/**
+	 * Create a user with default settings and no rewards.
+	 * 
+	 * @param userName
+	 *            Public user name for this User.
+	 */
+	public User(String userName) {
+		this(userName, new UserSettings(), new ArrayList<Reward>());
+
 	}
 
 	public boolean addReward(Reward reward) {
@@ -46,11 +73,11 @@ public class User {
 		this.userName = userName;
 	}
 
-	public Setting getUserSettings() {
+	public UserSettings getUserSettings() {
 		return userSettings;
 	}
 
-	public void setUserSettings(Setting userSettings) {
+	public void setUserSettings(UserSettings userSettings) {
 		this.userSettings = userSettings;
 	}
 }

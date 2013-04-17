@@ -5,10 +5,13 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.Set;
 
+import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.map.Location;
+
 /**
- * A challenge is a question with a correct answer. Challenges are integral
- * parts of a QuizWalkGame and often involve geographical locations related to
- * the specific challenge.
+ * A challenge is its simplest form a question with a correct answer. Challenges
+ * are integral parts of a {@link QuizWalkGame} and also often involve
+ * geographical locations related to the specific challenge. Populate your
+ * {@link QuizWalkGame} with challenges.
  * 
  */
 public class Challenge {
@@ -22,16 +25,19 @@ public class Challenge {
 		COMPLETED, IGNORED, FAILED, UNVISITED, DEFAULT;
 	}
 
-	/** Description of this challenge */
+	/** Description of this Challenge */
 	private final String challengeDescription;
 
 	/** The question representing this Challenge */
 	private final Question question;
 
-	/** List of available answers */
+	/** Set of available answers */
 	private final Set<Answer> setOfAnswers;
 
-	/** The correct answer to this challenge. {@link #setOfAnswers} */
+	/**
+	 * The correct answer to this challenge. Is always an entry in
+	 * {@link #setOfAnswers}
+	 */
 	private final Answer correctAnswer;
 
 	/** List of locations associated with this challenge */
@@ -41,7 +47,7 @@ public class Challenge {
 	private final ChallengeReward challengeReward;
 
 	/**
-	 * Create a new challenge.
+	 * Create a challenge.
 	 * 
 	 * @param challengeDescription
 	 * @param question
@@ -76,12 +82,12 @@ public class Challenge {
 	}
 
 	/**
-	 * Checks if the parameter object is indeed the correct answer in this
-	 * challenge.
+	 * Checks if the argument is indeed the correct answer in this challenge.
 	 * 
 	 * @param answer
-	 *            to be controlled
-	 * @return true only if the supplied argument equals {@link #correctAnswer}
+	 *            to be compared.
+	 * @return <TT>TRUE</TT> only if the supplied argument equals
+	 *         {@link #correctAnswer}
 	 */
 	public final boolean isCorrectAnswer(Answer answer) {
 		return correctAnswer.equals(answer);
