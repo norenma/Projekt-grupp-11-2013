@@ -5,13 +5,16 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.Set;
 
+import android.R.anim;
+
 import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.map.Location;
 
 /**
- * A challenge is its simplest form a question with a correct answer. Challenges
- * are integral parts of a {@link QuizWalkGame} and also often involve
- * geographical locations related to the specific challenge. Populate your
- * {@link QuizWalkGame} with challenges.
+ * A challenge is in its most minimal form contains a {@link Question} with its
+ * corresponding and correct {@link Answer}. Challenges are integral parts of a
+ * {@link QuizWalkGame} and should also involve geographical locations related
+ * to the specific challenge. Populate your {@link QuizWalkGame} with
+ * challenges.
  * 
  */
 public class Challenge {
@@ -74,7 +77,8 @@ public class Challenge {
 
 		// Set correctAnswer only if present in list.
 		this.correctAnswer = checkNotNull(correctAnswer);
-		checkArgument(listOfAnswers.contains(correctAnswer), "correctAnswer must be present in the set of answers");
+		checkArgument(listOfAnswers.contains(correctAnswer),
+				"correctAnswer must be present in the set of answers");
 
 		this.challengeReward = challengeReward;
 

@@ -1,4 +1,4 @@
-package temp.debug;
+package temp.debug.tortal;
 
 import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.StringAnswer;
 
@@ -26,6 +26,7 @@ public class Tortal {
 		StringAnswer answer4 = new StringAnswer("2");
 
 		System.out.println(answer2.equals(answer4));
+		
 
 	}
 

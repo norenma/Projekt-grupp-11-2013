@@ -1,7 +1,8 @@
-package se.chalmers.it12.tda367.vt13.grp11.quizwalk;
+package se.chalmers.it12.tda367.vt13.grp11.quizwalk.activities;
 
-import android.os.Bundle;
+import se.chalmers.it12.tda367.vt13.grp11.quizwalk.R;
 import android.app.Activity;
+import android.os.Bundle;
 import android.view.Menu;
 
 public class MainActivity extends Activity {

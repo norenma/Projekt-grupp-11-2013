@@ -6,10 +6,19 @@ package se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.utils;
 public class Constants {
 
 	/**
-	 * Different media types.
+	 * Identifiers for different types of {@link Media}.
 	 */
 	public static class MediaID {
+		
+		/**
+		 * A String media.
+		 */
 		public final static String STRING = "quizwalk.media.string";
+		
+		
+		/**
+		 * An Image media.
+		 */
 		public final static String IMAGE = "quizwalk.media.image";
 	}
 
