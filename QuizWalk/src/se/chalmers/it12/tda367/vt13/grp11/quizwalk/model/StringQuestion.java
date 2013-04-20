@@ -1,7 +1,6 @@
 package se.chalmers.it12.tda367.vt13.grp11.quizwalk.model;
 
-import static com.google.common.base.Preconditions.checkArgument;
-import static com.google.common.base.Preconditions.checkNotNull;
+import static se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.utils.Utilities.checkNotNullOrEmpty;
 import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.utils.Constants;
 
 /**
@@ -17,8 +16,7 @@ public class StringQuestion extends Question {
 	 * @param question
 	 */
 	public StringQuestion(String question) {
-		this.question = checkNotNull(question);
-		checkArgument(!question.isEmpty(), "question can't be empty");
+		this.question = checkNotNullOrEmpty(question, "question can't be empty");
 	}
 
 	@Override
@@ -26,6 +24,9 @@ public class StringQuestion extends Question {
 		return Constants.MediaID.STRING;
 	}
 
+	/**
+	 * @return the question string.
+	 */
 	@Override
 	public Object getMedia() {
 		return question;

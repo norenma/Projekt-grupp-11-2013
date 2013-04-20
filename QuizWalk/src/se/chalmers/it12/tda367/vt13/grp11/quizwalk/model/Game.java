@@ -1,7 +1,7 @@
 package se.chalmers.it12.tda367.vt13.grp11.quizwalk.model;
 
 /**
- * QuizWalkGame will subclass this for extensibility.
+ * QuizWalkGame will subclass this.
  * 
  */
 public abstract class Game {

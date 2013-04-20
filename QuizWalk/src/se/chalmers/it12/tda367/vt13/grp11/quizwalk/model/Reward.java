@@ -2,13 +2,16 @@ package se.chalmers.it12.tda367.vt13.grp11.quizwalk.model;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
+import static se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.utils.Utilities.checkNotNullOrEmpty;
 import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.user.User;
+
+import com.google.common.base.Optional;
 
 /**
  * A reward is an achievement that a {@link User} can collect.
  * 
  */
-public abstract class Reward {
+public class Reward {
 
 	/**
 	 * The value of this reward.
@@ -24,31 +27,33 @@ public abstract class Reward {
 	/**
 	 * Image associated with this reward.
 	 */
-	private final Image image;
+	private final Optional<Image> image;
 
 	/**
 	 * 
 	 * Create a new Reward. A reward can be added to a {@link Challenge}.
 	 * 
 	 * @param score
+	 *            is a numerical value representing this reward. Can't be
+	 *            negative.
 	 * @param description
 	 *            of this reward
 	 * @param image
-	 *            to be shown in association with this reward
+	 *            to represent this Reward, if any.
 	 * @throws IllegalArgumentException
 	 *             if score is negative, or description is empty
 	 * @throws NullPointerException
 	 *             if any object is null.
 	 */
-	public Reward(int score, String description, Image image) {
+	public Reward(int score, String description, Optional<Image> image) {
 
 		this.score = score;
 		checkArgument(score >= 0, "Score can't be negative");
 
-		this.description = checkNotNull(description);
-		checkArgument(!description.isEmpty(), "Description can't be empty");
+		this.description = checkNotNullOrEmpty(description,
+				"Description can't be empty");
 
-		this.image = image;
+		this.image = checkNotNull(image);
 	}
 
 	public int getScore() {
@@ -59,7 +64,7 @@ public abstract class Reward {
 		return description;
 	}
 
-	public Image getImage() {
+	public Optional<Image> getImage() {
 		return image;
 	}
 }

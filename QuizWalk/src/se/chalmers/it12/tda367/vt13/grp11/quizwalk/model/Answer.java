@@ -19,7 +19,7 @@ public abstract class Answer implements Media {
 	public abstract boolean equals(Object answer);
 
 	/**
-	 * A hashCode based on the implemented {@link Media}
+	 * A hashCode based on the implemented properties of the {@link Media}
 	 */
 	public abstract int hashCode();
 }

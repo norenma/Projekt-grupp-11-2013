@@ -1,62 +1,87 @@
 package se.chalmers.it12.tda367.vt13.grp11.quizwalk.model;
 
-import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.utils.Utilities.checkNotNullOrEmpty;
+
+import java.util.Map;
+
 import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.Challenge.ChallengeState;
 
+import com.google.common.base.Optional;
+
 /**
- * A game of QuizWalk! This class will retain all information needed to describe
- * a whole set of {@link Challenge}s, including their current
+ * A game of QuizWalk! This class will contain all information needed to
+ * describe a whole set of {@link Challenge}s, including their current
  * {@link Challenge.ChallengeState}.
  * 
  */
 public class QuizWalkGame extends Game {
 
 	/**
+	 * Name of this game of QuizWalk.
+	 */
+	private final String name;
+
+	/**
 	 * Description of this QuizWalkGame. Describing the set of challenges
-	 * included.
+	 * included. Can be empty.
 	 */
 	private final String description;
 
 	/**
 	 * Image representing this Game.
 	 */
-	private final Image image;
+	private final Optional<Image> image;
 
 	/**
 	 * The challenges that constitute this QuizWalk. Associated with every
-	 * challenge is its current state defined in enum
+	 * challenge in an active game is its current state defined in Enum
 	 * {@link Challenge.ChallengeState}.
 	 */
-	private final java.util.Map<Challenge, ChallengeState> challenges;
+	private final Map<Challenge, ChallengeState> challenges;
+
+	/**
+	 * The reward, if any, granted to user who completes this QuizWalk.
+	 */
+	private final Optional<QuizWalkGameReward> reward;
 
 	/**
 	 * Create a new QuizWalkGame.
 	 * 
+	 * @param name
+	 *            of this game. Can't be empty.
 	 * @param description
+	 *            of this game, if any.
 	 * @param image
+	 *            of this game, if any.
 	 * @param challenges
+	 *            of this game. Can't be empty.
+	 * @param reward
+	 *            of this game, if any.
 	 */
-	public QuizWalkGame(String description, Image image,
-			java.util.Map<Challenge, ChallengeState> challenges) {
+	public QuizWalkGame(String name, String description, Optional<Image> image,
+			Map<Challenge, ChallengeState> challenges,
+			Optional<QuizWalkGameReward> reward) {
+
+		this.name = checkNotNullOrEmpty(name, "name can't be non-empty.");
 
 		this.description = checkNotNull(description);
-		checkArgument(!description.isEmpty(), "description can't be empty");
 
-		this.image = image;
+		this.image = checkNotNull(image);
+
 		this.challenges = checkNotNullOrEmpty(challenges,
-				"challenges must contain at least one entry and a non-null value.");
+				"challenges can't be empty");
+
+		this.reward = checkNotNull(reward);
 	}
 
 	/**
-	 * Return {@link Challenge.ChallengeState} if not all {@link #challenges}
-	 * has been interacted with. More formally, if at least one challenge in
-	 * this game is <TT>ChallengeState.UNIVISTED</TT> is is considered to be
-	 * RUNNING.
+	 * Returns if the game is still running. More formally, if at least one
+	 * challenge in this game is <TT>ChallengeState.UNIVISTED</TT> is is
+	 * considered to be RUNNING.
 	 * 
-	 * @return <TT>State.RUNNING</TT> if not all challenges have been interacted
-	 *         with.
+	 * @return {@link Game.State#RUNNING} if not all challenges have been
+	 *         interacted with. {@link Game.State#GAME_OVER} otherwise.
 	 */
 	@Override
 	public State getState() {
@@ -71,23 +96,37 @@ public class QuizWalkGame extends Game {
 	}
 
 	/**
-	 * @return the description
+	 * @return the name.
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * @return the description. Can be empty.
 	 */
 	public String getDescription() {
 		return description;
 	}
 
 	/**
-	 * @return the image
+	 * @return the image if available.
 	 */
-	public Image getImage() {
+	public Optional<Image> getImage() {
 		return image;
 	}
 
 	/**
 	 * @return the challenges
 	 */
-	public java.util.Map<Challenge, ChallengeState> getChallenges() {
+	public Map<Challenge, ChallengeState> getChallenges() {
 		return challenges;
+	}
+
+	/**
+	 * @return the reward
+	 */
+	public Optional<QuizWalkGameReward> getReward() {
+		return reward;
 	}
 }

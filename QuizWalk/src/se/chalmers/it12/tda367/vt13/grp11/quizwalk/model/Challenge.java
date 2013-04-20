@@ -2,13 +2,16 @@ package se.chalmers.it12.tda367.vt13.grp11.quizwalk.model;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
+import static se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.utils.Utilities.checkNotNullOrEmpty;
 
 import java.util.Set;
 
 import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.map.Location;
 
+import com.google.common.base.Optional;
+
 /**
- * A challenge is in its most minimal form contains a {@link Question} with its
+ * A Challenge, in its most minimal form, contains a {@link Question} with its
  * corresponding and correct {@link Answer}. Challenges are integral parts of a
  * {@link QuizWalkGame} and should also involve geographical locations related
  * to the specific challenge. Populate your {@link QuizWalkGame} with
@@ -26,11 +29,14 @@ public class Challenge {
 		COMPLETED, IGNORED, FAILED, UNVISITED, DEFAULT;
 	}
 
-	/** Description of this Challenge */
-	private final String challengeDescription;
-
 	/** The question representing this Challenge */
 	private final Question question;
+
+	/** Description of this Challenge. Can be empty. */
+	private final String challengeDescription;
+
+	/** List of locations associated with this challenge, if any. */
+	private final Set<Location> setOfLocations;
 
 	/** Set of available answers */
 	private final Set<Answer> setOfAnswers;
@@ -41,11 +47,11 @@ public class Challenge {
 	 */
 	private final Answer correctAnswer;
 
-	/** List of locations associated with this challenge */
-	private final Set<Location> setOfLocations;
-
-	/** Reward for this challenge, can be null if no reward is given. */
-	private final ChallengeReward challengeReward;
+	/**
+	 * Optionally, a <code>ChallengeReward</code> to be granted the
+	 * <code>User</code> who completes this <code>Challenge</code>.
+	 */
+	private final Optional<ChallengeReward> challengeReward;
 
 	/**
 	 * Create a challenge.
@@ -59,26 +65,24 @@ public class Challenge {
 	 */
 	public Challenge(String challengeDescription, Question question,
 			Set<Answer> listOfAnswers, Answer correctAnswer,
-			Set<Location> listOfLocations, ChallengeReward challengeReward) {
-
-		this.challengeDescription = checkNotNull(challengeDescription);
-		checkArgument(!challengeDescription.isEmpty(),
-				"Description can't be empty");
+			Set<Location> listOfLocations,
+			Optional<ChallengeReward> challengeReward) {
 
 		this.question = checkNotNull(question);
 
-		this.setOfAnswers = checkNotNull(listOfAnswers);
-		checkArgument(!listOfAnswers.isEmpty(),
-				"Set of answers must be present");
+		this.challengeDescription = checkNotNull(challengeDescription);
 
 		this.setOfLocations = checkNotNull(listOfLocations);
+
+		this.setOfAnswers = checkNotNullOrEmpty(listOfAnswers,
+				"Set of answers must be present");
 
 		// Set correctAnswer only if present in list.
 		this.correctAnswer = checkNotNull(correctAnswer);
 		checkArgument(listOfAnswers.contains(correctAnswer),
 				"correctAnswer must be present in the set of answers");
 
-		this.challengeReward = challengeReward;
+		this.challengeReward = checkNotNull(challengeReward);
 
 	}
 
@@ -95,17 +99,17 @@ public class Challenge {
 	}
 
 	/**
-	 * @return the challengeDescription
-	 */
-	public String getChallengeDescription() {
-		return challengeDescription;
-	}
-
-	/**
 	 * @return the question
 	 */
 	public Question getQuestion() {
 		return question;
+	}
+
+	/**
+	 * @return the challengeDescription
+	 */
+	public String getChallengeDescription() {
+		return challengeDescription;
 	}
 
 	/**
@@ -123,16 +127,16 @@ public class Challenge {
 	}
 
 	/**
-	 * @return the listOfLocations
+	 * @return the listOfLocations. Can be empty.
 	 */
 	public Set<Location> getListOfLocations() {
 		return setOfLocations;
 	}
 
 	/**
-	 * @return the reward. null if no reward is present.
+	 * @return the reward of this Challenge.
 	 */
-	public ChallengeReward getReward() {
+	public Optional<ChallengeReward> getReward() {
 		return challengeReward;
 	}
 

@@ -4,14 +4,16 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.utils.Constants;
 
-import com.google.common.base.Objects;
-
 /**
- * An Answer in form of a text String.
+ * An Answer in form of a text String. An answer can be either correct or
+ * incorrect when they populate {@link Challenge}s.
  * 
  */
 public class StringAnswer extends Answer {
 
+	/**
+	 * An answer.
+	 */
 	private final String answer;
 
 	/**
@@ -30,18 +32,10 @@ public class StringAnswer extends Answer {
 	}
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((answer == null) ? 0 : answer.hashCode());
-		return result;
+	public Object getMedia() {
+		return answer;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -51,12 +45,15 @@ public class StringAnswer extends Answer {
 		if (getClass() != obj.getClass())
 			return false;
 		StringAnswer other = (StringAnswer) obj;
-		return Objects.equal(obj, other);
+		return answer.equals(other);
 	}
 
 	@Override
-	public String getMedia() {
-		return answer;
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((answer == null) ? 0 : answer.hashCode());
+		return result;
 	}
 
 }

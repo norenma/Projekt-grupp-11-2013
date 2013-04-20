@@ -12,7 +12,7 @@ import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.QuizWalkGame;
  * custom {@link #nodes} local to the client.
  * 
  */
-public class Map {
+public class GameMap {
 
 	/**
 	 * Custom location nodes that user can set up on the map.
@@ -29,13 +29,13 @@ public class Map {
 	 */
 	private final Location currentLocation;
 
-	public Map() {
+	public GameMap() {
 		this.nodes = new HashSet<Location>();
 		this.activeGames = new HashSet<QuizWalkGame>();
 		this.currentLocation = null;
 	}
 
-	public Map(Set<Location> nodes, Set<QuizWalkGame> activeGames,
+	public GameMap(Set<Location> nodes, Set<QuizWalkGame> activeGames,
 			Location currentLocation) {
 
 		this.nodes = checkNotNull(nodes);
