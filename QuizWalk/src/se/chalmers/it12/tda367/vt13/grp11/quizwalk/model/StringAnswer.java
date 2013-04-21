@@ -3,6 +3,7 @@ package se.chalmers.it12.tda367.vt13.grp11.quizwalk.model;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.utils.Constants;
+import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.utils.Constants.MediaType;
 
 /**
  * An Answer in form of a text String. An answer can be either correct or
@@ -27,12 +28,12 @@ public class StringAnswer extends Answer {
 	}
 
 	@Override
-	public String getMediaID() {
-		return Constants.MediaID.STRING;
+	public MediaType getMediaType() {
+		return Constants.MediaType.STRING_MEDIA;
 	}
 
 	@Override
-	public Object getMedia() {
+	public String getMedia() {
 		return answer;
 	}
 
@@ -55,5 +56,6 @@ public class StringAnswer extends Answer {
 		result = prime * result + ((answer == null) ? 0 : answer.hashCode());
 		return result;
 	}
+
 
 }

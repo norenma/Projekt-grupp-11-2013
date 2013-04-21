@@ -4,11 +4,13 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.utils.Utilities.checkNotNullOrEmpty;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.map.Location;
 
 import com.google.common.base.Optional;
+import com.google.common.collect.ImmutableSet;
 
 /**
  * A Challenge, in its most minimal form, contains a {@link Question} with its
@@ -29,23 +31,23 @@ public class Challenge {
 		COMPLETED, IGNORED, FAILED, UNVISITED, DEFAULT;
 	}
 
-	/** The question representing this Challenge */
+	/** The <code>Question</code> representing this Challenge */
 	private final Question question;
-
-	/** Description of this Challenge. Can be empty. */
-	private final String challengeDescription;
-
-	/** List of locations associated with this challenge, if any. */
-	private final Set<Location> setOfLocations;
-
-	/** Set of available answers */
-	private final Set<Answer> setOfAnswers;
 
 	/**
 	 * The correct answer to this challenge. Is always an entry in
 	 * {@link #setOfAnswers}
 	 */
 	private final Answer correctAnswer;
+
+	/** Description of this Challenge. Can be empty. */
+	private final String challengeDescription;
+
+	/** Set of available answers */
+	private final Set<Answer> setOfAnswers;
+
+	/** List of locations associated with this challenge, if any. */
+	private final Set<Location> setOfLocations;
 
 	/**
 	 * Optionally, a <code>ChallengeReward</code> to be granted the
@@ -106,20 +108,6 @@ public class Challenge {
 	}
 
 	/**
-	 * @return the challengeDescription
-	 */
-	public String getChallengeDescription() {
-		return challengeDescription;
-	}
-
-	/**
-	 * @return the listOfAnswers
-	 */
-	public Set<Answer> getListOfAnswers() {
-		return setOfAnswers;
-	}
-
-	/**
 	 * @return the correctAnswer
 	 */
 	public Answer getCorrectAnswer() {
@@ -127,17 +115,50 @@ public class Challenge {
 	}
 
 	/**
-	 * @return the listOfLocations. Can be empty.
+	 * @return the challengeDescription. Can be empty.
 	 */
-	public Set<Location> getListOfLocations() {
-		return setOfLocations;
+	public String getChallengeDescription() {
+		return challengeDescription;
 	}
 
 	/**
-	 * @return the reward of this Challenge.
+	 * @return the setOfAnswers.
+	 */
+	public ImmutableSet<Answer> getSetOfAnswers() {
+		return ImmutableSet.copyOf(setOfAnswers);
+	}
+
+	/**
+	 * @return the setOfLocations. Can be empty.
+	 */
+	public ImmutableSet<Location> getSetOfLocations() {
+		return ImmutableSet.copyOf(setOfLocations);
+	}
+
+	/**
+	 * @return the reward of this Challenge, if available.
 	 */
 	public Optional<ChallengeReward> getReward() {
 		return challengeReward;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Challenge [getQuestion()=");
+		builder.append(getQuestion());
+		builder.append(", getCorrectAnswer()=");
+		builder.append(getCorrectAnswer());
+		builder.append(", getChallengeDescription()=");
+		builder.append(getChallengeDescription());
+		builder.append(", getSetOfAnswers()=");
+		builder.append(getSetOfAnswers());
+		builder.append(", getSetOfLocations()=");
+		builder.append(getSetOfLocations());
+		builder.append(", getReward()=");
+		builder.append(getReward());
+		builder.append("]");
+		return builder.toString();
 	}
 
 }

@@ -5,19 +5,24 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.google.common.base.Optional;
+import com.google.common.collect.ImmutableSet;
+
 import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.QuizWalkGame;
 
 /**
- * A <TT>Map</TT> object will keep track of active {@link #activeGames} and
- * custom {@link #nodes} local to the client.
+ * A <TT>Map</TT> singleton will keep track of active {@link #activeGames} and
+ * custom {@link #nodes} local to the client. 
  * 
  */
-public class GameMap {
+public enum GameMap {
+	
+	INSTANCE;
 
 	/**
-	 * Custom location nodes that user can set up on the map.
+	 * The users current location, or at least the last known position.
 	 */
-	private final Set<Location> nodes;
+	private Optional<Location> currentLocation;
 
 	/**
 	 * Games that the player is participating in.
@@ -25,22 +30,28 @@ public class GameMap {
 	private final Set<QuizWalkGame> activeGames;
 
 	/**
-	 * The users current location, or at least the last known position.
+	 * Custom location nodes that user can set up on the map.
 	 */
-	private final Location currentLocation;
+	private final Set<Location> nodes;
 
-	public GameMap() {
+	private GameMap() {
 		this.nodes = new HashSet<Location>();
 		this.activeGames = new HashSet<QuizWalkGame>();
-		this.currentLocation = null;
+		this.currentLocation = Optional.<Location>absent();
 	}
 
-	public GameMap(Set<Location> nodes, Set<QuizWalkGame> activeGames,
-			Location currentLocation) {
+	/**
+	 * @return the currentLocation, if available.
+	 */
+	public Optional<Location> getCurrentLocation() {
+		return currentLocation;
+	}
 
-		this.nodes = checkNotNull(nodes);
-		this.activeGames = checkNotNull(activeGames);
-		this.currentLocation = currentLocation;
+	/**
+	 * @param currentLocation the currentLocation to set
+	 */
+	public void setCurrentLocation(Optional<Location> currentLocation) {
+		this.currentLocation = checkNotNull(currentLocation);
 	}
 
 	/**
@@ -49,7 +60,7 @@ public class GameMap {
 	 * @return true, only if map was modified
 	 */
 	public boolean addNode(Location node) {
-		return nodes.add(node);
+		return nodes.add(checkNotNull(node));
 	}
 
 	/**
@@ -67,7 +78,7 @@ public class GameMap {
 	 * @return true, only if map was modified
 	 */
 	public boolean addGame(QuizWalkGame game) {
-		return activeGames.add(game);
+		return activeGames.add(checkNotNull(game));
 	}
 
 	/**
@@ -80,20 +91,16 @@ public class GameMap {
 	}
 
 	// TODO: Debug methods to get all nodes. I don't like arrays but since we
-	// don't want to let implementation to modify our list we'll do this way
+	// don't want to let View (mVc) to modify our list we'll do this way
 	// now.
 	// Check Google Guava on Immutable Collections.
 	// https://google-collections.googlecode.com/svn/trunk/javadoc/com/google/common/collect/ImmutableList.html
 
-	public Location[] getNodes() {
-		return (Location[]) nodes.toArray();
+	public ImmutableSet<Location> getNodes() {
+		return ImmutableSet.copyOf(nodes);
 	}
 
-	public QuizWalkGame[] getQuizGameWalks() {
-		return (QuizWalkGame[]) activeGames.toArray();
-	}
-
-	public Location getCurrentLocation() {
-		return currentLocation;
+	public ImmutableSet<QuizWalkGame> getQuizGameWalks() {
+		return ImmutableSet.copyOf(activeGames);
 	}
 }

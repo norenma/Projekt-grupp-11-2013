@@ -1,5 +1,7 @@
 package se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.utils;
 
+import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.Media;
+
 /**
  * Global identifiers here.
  */
@@ -7,30 +9,33 @@ public class Constants {
 
 	/**
 	 * Identifiers for different types of
-	 * {@link se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.Media}.
+	 * {@link Media}.
 	 */
-	public static class MediaID {
-
+	public static enum MediaType {
+		
 		/**
-		 * A String media.
+		 * This media is of type <code>String</code>.
 		 */
-		public final static String STRING = "quizwalk.media.string";
-
+		STRING_MEDIA,
+		
 		/**
-		 * An Image media.
+		 * This media is of type <code>Image</code>.
 		 */
-		public final static String IMAGE = "quizwalk.media.image";
+		IMAGE_MEDIA;
 	}
 
-	/**
-	 * Some query to a server.
-	 */
-	public static class DatabaseQuery {
-		/**
-		 * Retrieve a Set<QuizWalkGame>
-		 */
-		public final static String GET_QUIZWALKS = "quizwalk.server.get_quizwalks";
-
-	}
+	
+	//	TODO: Not yet relevant.
+//	/**
+//	 * Some query to a server.
+//	 */
+//	
+//	public static class DatabaseQuery {
+//		/**
+//		 * Retrieve a Set<QuizWalkGame>
+//		 */
+//		public final static String GET_QUIZWALKS = "quizwalk.server.get_quizwalks";
+//
+//	}
 
 }

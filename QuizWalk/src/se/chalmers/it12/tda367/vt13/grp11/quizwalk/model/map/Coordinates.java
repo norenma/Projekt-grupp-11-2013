@@ -1,34 +1,44 @@
 package se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.map;
 
-//TODO: Coordinates must better represent a true GPS location.
+import static se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.utils.Utilities.checkNotNullOrEmpty;
+
+//TODO: this Class with probably be replace/linked with Google Maps API Coordinates class. We must however keep MVC and aim to make the model autonomous.
 /**
  * Coordinates.
  */
 public class Coordinates {
 
-	private final int latitude;
-	private final int longitude;
+	private final String latitude;
+	private final String longitude;
 
-	public Coordinates(int latitude, int longitude) {
-
-		this.latitude = latitude;
-		this.longitude = longitude;
+	public Coordinates(String latitude, String longitude) {
+		this.latitude = checkNotNullOrEmpty(latitude, "latitude is missing");
+		this.longitude = checkNotNullOrEmpty(longitude, "longitude is missing");
 	}
 
-	public int getLatitude() {
+	/**
+	 * @return the latitude
+	 */
+	public String getLatitude() {
 		return latitude;
 	}
 
-	public int getLongitude() {
+	/**
+	 * @return the longitude
+	 */
+	public String getLongitude() {
 		return longitude;
 	}
+
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + latitude;
-		result = prime * result + longitude;
+		result = prime * result
+				+ ((latitude == null) ? 0 : latitude.hashCode());
+		result = prime * result
+				+ ((longitude == null) ? 0 : longitude.hashCode());
 		return result;
 	}
 
@@ -41,15 +51,29 @@ public class Coordinates {
 		if (getClass() != obj.getClass())
 			return false;
 		Coordinates other = (Coordinates) obj;
-		if (latitude != other.latitude)
+		if (latitude == null) {
+			if (other.latitude != null)
+				return false;
+		} else if (!latitude.equals(other.latitude))
 			return false;
-		if (longitude != other.longitude)
+		if (longitude == null) {
+			if (other.longitude != null)
+				return false;
+		} else if (!longitude.equals(other.longitude))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "latitude: " + latitude + ". longitude: " + longitude;
+		StringBuilder builder = new StringBuilder();
+		builder.append("Coordinates [getLatitude()=");
+		builder.append(getLatitude());
+		builder.append(", getLongitude()=");
+		builder.append(getLongitude());
+		builder.append("]");
+		return builder.toString();
 	}
+	
+	
 }

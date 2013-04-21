@@ -116,6 +116,7 @@ public class QuizWalkGame extends Game {
 		return image;
 	}
 
+	//TODO: return immutable list instead. Not done for debugging purposes.
 	/**
 	 * @return the challenges
 	 */
@@ -128,5 +129,27 @@ public class QuizWalkGame extends Game {
 	 */
 	public Optional<QuizWalkGameReward> getReward() {
 		return reward;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("QuizWalkGame [getState()=");
+		builder.append(getState());
+		builder.append(", getName()=");
+		builder.append(getName());
+		builder.append(", getDescription()=");
+		builder.append(getDescription());
+		builder.append(", getImage()=");
+		builder.append(getImage());
+		builder.append(", getChallenges()=");
+		builder.append(getChallenges());
+		builder.append(", getReward()=");
+		builder.append(getReward());
+		builder.append("]");
+		return builder.toString();
 	}
 }

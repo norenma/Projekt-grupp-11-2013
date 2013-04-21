@@ -62,6 +62,14 @@ public class User {
 
 	}
 
+	public final String getUserName() {
+		return userName;
+	}
+
+	public final void setUserName(String userName) {
+		this.userName = userName;
+	}
+
 	public boolean addReward(Reward reward) {
 		return listOfUserRewards.add(reward);
 	}
@@ -71,19 +79,22 @@ public class User {
 
 	}
 
-	public final String getUserName() {
-		return userName;
-	}
-
-	public final void setUserName(String userName) {
-		this.userName = userName;
-	}
-
 	public UserSettings getUserSettings() {
 		return userSettings;
 	}
 
 	public void setUserSettings(UserSettings userSettings) {
 		this.userSettings = userSettings;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("User [getUserName()=");
+		builder.append(getUserName());
+		builder.append(", getUserSettings()=");
+		builder.append(getUserSettings());
+		builder.append("]");
+		return builder.toString();
 	}
 }

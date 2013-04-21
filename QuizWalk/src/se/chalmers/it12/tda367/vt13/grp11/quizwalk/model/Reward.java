@@ -67,4 +67,17 @@ public class Reward {
 	public Optional<Image> getImage() {
 		return image;
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Reward [getScore()=");
+		builder.append(getScore());
+		builder.append(", getDescription()=");
+		builder.append(getDescription());
+		builder.append(", getImage()=");
+		builder.append(getImage());
+		builder.append("]");
+		return builder.toString();
+	}
 }
