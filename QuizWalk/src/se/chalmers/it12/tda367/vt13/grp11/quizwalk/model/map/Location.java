@@ -1,12 +1,10 @@
 package se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.map;
 
-import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
-
-import com.google.common.base.Optional;
-
 import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.Challenge;
 import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.Image;
+
+import com.google.common.base.Optional;
 
 /**
  * A Coordinate with some optional description and optional Image. These locations
@@ -28,7 +26,7 @@ public class Location extends Coordinates {
 	 * @param description is optional.
 	 * @param image is optional.
 	 */
-	public Location(String latitude, String longitude, String description,
+	public Location(double latitude, double longitude, String description,
 			Optional<Image> image) {
 		super(latitude, longitude);
 		

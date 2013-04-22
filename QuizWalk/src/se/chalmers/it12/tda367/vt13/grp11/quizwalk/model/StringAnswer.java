@@ -46,7 +46,12 @@ public class StringAnswer extends Answer {
 		if (getClass() != obj.getClass())
 			return false;
 		StringAnswer other = (StringAnswer) obj;
-		return answer.equals(other);
+		if (answer == null) {
+			if (other.answer != null)
+				return false;
+		} else if (!answer.equals(other.answer))
+			return false;
+		return true;
 	}
 
 	@Override
