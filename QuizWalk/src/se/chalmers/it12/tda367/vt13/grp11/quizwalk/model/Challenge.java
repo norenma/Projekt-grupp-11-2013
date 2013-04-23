@@ -4,12 +4,13 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.utils.Utilities.checkNotNullOrEmpty;
 
-import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.map.Location;
 
 import com.google.common.base.Optional;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 
 /**
@@ -28,7 +29,28 @@ public class Challenge {
 	 * that challenge will be <TT>COMPLETED</TT> for the particular player.
 	 */
 	public static enum ChallengeState {
-		COMPLETED, IGNORED, FAILED, UNVISITED, DEFAULT;
+		/**
+		 * Completed challenge.
+		 */
+		COMPLETED, FAILED,
+
+		/**
+		 * The challenge has been ignored.
+		 */
+		IGNORED,
+
+		/**
+		 * Not yet visited challenge. This is what all the active
+		 * ChallengeStates should be in a newly initialized running
+		 * QuizWalkGame.
+		 */
+		UNVISITED,
+
+		/**
+		 * The challenge is inactive or dormant. In a running game all
+		 * challenges should be set to something else than <code>DEFAULT</code>
+		 */
+		DEFAULT;
 	}
 
 	/** The <code>Question</code> representing this Challenge */
@@ -36,7 +58,7 @@ public class Challenge {
 
 	/**
 	 * The correct answer to this challenge. Is always an entry in
-	 * {@link #setOfAnswers}
+	 * {@link #listOfAnswers}
 	 */
 	private final Answer correctAnswer;
 
@@ -47,7 +69,7 @@ public class Challenge {
 	private final Set<Answer> setOfAnswers;
 
 	/** List of locations associated with this challenge, if any. */
-	private final Set<Location> setOfLocations;
+	private final List<Location> listOfLocations;
 
 	/**
 	 * Optionally, a <code>ChallengeReward</code> to be granted the
@@ -57,30 +79,23 @@ public class Challenge {
 
 	/**
 	 * Create a challenge.
-	 * 
-	 * @param challengeDescription
-	 * @param question
-	 * @param listOfAnswers
-	 * @param correctAnswer
-	 * @param listOfLocations
-	 * @param challengeReward
 	 */
 	public Challenge(String challengeDescription, Question question,
 			Set<Answer> listOfAnswers, Answer correctAnswer,
-			Set<Location> listOfLocations,
+			List<Location> listOfLocations,
 			Optional<ChallengeReward> challengeReward) {
 
 		this.question = checkNotNull(question);
 
 		this.challengeDescription = checkNotNull(challengeDescription);
 
-		this.setOfLocations = checkNotNull(listOfLocations);
+		this.listOfLocations = checkNotNull(listOfLocations);
 
 		this.setOfAnswers = checkNotNullOrEmpty(listOfAnswers,
 				"Set of answers must be present");
 
-		// Set correctAnswer only if present in list.
 		this.correctAnswer = checkNotNull(correctAnswer);
+		// Set correctAnswer only if it's present in list.
 		checkArgument(listOfAnswers.contains(correctAnswer),
 				"correctAnswer must be present in the set of answers");
 
@@ -129,10 +144,10 @@ public class Challenge {
 	}
 
 	/**
-	 * @return the setOfLocations. Can be empty.
+	 * @return the {@link #listOfLocations}. Can be empty.
 	 */
-	public ImmutableSet<Location> getSetOfLocations() {
-		return ImmutableSet.copyOf(setOfLocations);
+	public ImmutableList<Location> getListOfLocations() {
+		return ImmutableList.copyOf(listOfLocations);
 	}
 
 	/**
@@ -153,8 +168,8 @@ public class Challenge {
 		builder.append(getChallengeDescription());
 		builder.append(", getSetOfAnswers()=");
 		builder.append(getSetOfAnswers());
-		builder.append(", getSetOfLocations()=");
-		builder.append(getSetOfLocations());
+		builder.append(", getListOfLocations()=");
+		builder.append(getListOfLocations());
 		builder.append(", getReward()=");
 		builder.append(getReward());
 		builder.append("]");

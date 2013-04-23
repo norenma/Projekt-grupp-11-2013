@@ -1,18 +1,29 @@
 package se.chalmers.it12.tda367.vt13.grp11.quizwalk.model;
 
 /**
- * QuizWalkGame will subclass this.
+ * <code>QuizWalkGame</code> will subclass this.
  * 
  */
 public abstract class Game {
 
-	public static enum State {
-		RUNNING, GAME_OVER;
+	/**
+	 * Identifiers for different states of a <code>Game</code>.
+	 */
+	public static enum GameState {
+		/**
+		 * The game is ongoing.
+		 */
+		RUNNING,
+
+		/**
+		 * The game has ended.
+		 */
+		GAME_OVER;
 	}
 
 	/**
-	 * @return the current state of this Game.
+	 * @return the current {@link GameState} of this game.
 	 */
-	abstract public State getState();
+	abstract public GameState getGameState();
 
 }

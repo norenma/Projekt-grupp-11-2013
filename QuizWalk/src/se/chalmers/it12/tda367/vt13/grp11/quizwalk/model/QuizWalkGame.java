@@ -3,11 +3,14 @@ package se.chalmers.it12.tda367.vt13.grp11.quizwalk.model;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.utils.Utilities.checkNotNullOrEmpty;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.Challenge.ChallengeState;
 
 import com.google.common.base.Optional;
+import com.google.common.collect.ImmutableMap;
 
 /**
  * A game of QuizWalk! This class will contain all information needed to
@@ -34,11 +37,22 @@ public class QuizWalkGame extends Game {
 	private final Optional<Image> image;
 
 	/**
-	 * The challenges that constitute this QuizWalk. Associated with every
-	 * challenge in an active game is its current state defined in Enum
-	 * {@link Challenge.ChallengeState}.
+	 * The challenges that constitute this QuizWalk in the order they are to be
+	 * presented. More formally, <code>challenges.get(0)</code> represents the
+	 * first Challenge - while higher index number indicate later access.
+	 * Associated with every challenge in an active game is its current state
+	 * defined in {@link #challengeStates}.
+	 * 
 	 */
-	private final Map<Challenge, ChallengeState> challenges;
+	private final List<Challenge> challenges;
+
+	/**
+	 * Keeps track of the {@link ChallengeState}s of this game's
+	 * <code>Challenge</code>s. This is done by means of key-value pairs where
+	 * keys reflects (points to same object) as the elements of
+	 * {@link #challenges}.
+	 */
+	private final Map<Challenge, ChallengeState> challengeStates;
 
 	/**
 	 * The reward, if any, granted to user who completes this QuizWalk.
@@ -46,7 +60,9 @@ public class QuizWalkGame extends Game {
 	private final Optional<QuizWalkGameReward> reward;
 
 	/**
-	 * Create a new QuizWalkGame.
+	 * Create a new QuizWalkGame. This is a whole description of a game of
+	 * QuizWalk - either running or dormant. This constructor sets all
+	 * {@link ChallengeState}s to <code>ChallengeState.DEFAULT</code>.
 	 * 
 	 * @param name
 	 *            of this game. Can't be empty.
@@ -55,13 +71,13 @@ public class QuizWalkGame extends Game {
 	 * @param image
 	 *            of this game, if any.
 	 * @param challenges
-	 *            of this game. Can't be empty.
+	 *            of this game and their order. A QuizWalkGame must contain at
+	 *            least one challenge by definition.
 	 * @param reward
 	 *            of this game, if any.
 	 */
 	public QuizWalkGame(String name, String description, Optional<Image> image,
-			Map<Challenge, ChallengeState> challenges,
-			Optional<QuizWalkGameReward> reward) {
+			List<Challenge> challenges, Optional<QuizWalkGameReward> reward) {
 
 		this.name = checkNotNullOrEmpty(name, "name can't be non-empty.");
 
@@ -70,29 +86,54 @@ public class QuizWalkGame extends Game {
 		this.image = checkNotNull(image);
 
 		this.challenges = checkNotNullOrEmpty(challenges,
-				"challenges can't be empty");
+				"list of challenges can't be empty");
 
 		this.reward = checkNotNull(reward);
+
+		this.challengeStates = new HashMap<Challenge, Challenge.ChallengeState>();
+
+		// Add challenges from list and set them to default.
+		for (Challenge c : challenges) {
+			challengeStates.put(c, ChallengeState.DEFAULT);
+		}
 	}
 
 	/**
-	 * Returns if the game is still running. More formally, if at least one
-	 * challenge in this game is <TT>ChallengeState.UNIVISTED</TT> is is
-	 * considered to be RUNNING.
+	 * Returns the {@link GameState} of the game.
 	 * 
-	 * @return {@link Game.State#RUNNING} if not all challenges have been
-	 *         interacted with. {@link Game.State#GAME_OVER} otherwise.
+	 * @return {@link Game.GameState#RUNNING} if not all challenges have been
+	 *         interacted with. {@link GameState#GAME_OVER} otherwise.
 	 */
 	@Override
-	public State getState() {
+	public GameState getGameState() {
 
-		State s = State.GAME_OVER;
+		GameState s = GameState.GAME_OVER;
 
-		for (Challenge c : challenges.keySet()) {
-			if (challenges.get(c).equals(ChallengeState.UNVISITED))
-				s = State.RUNNING;
+		for (Challenge c : challengeStates.keySet()) {
+			if (challengeStates.get(c).equals(ChallengeState.UNVISITED))
+				s = GameState.RUNNING;
 		}
 		return s;
+	}
+
+	/**
+	 * Sets a Challenge in this game to a particular {@link GameState}. (Don't
+	 * set to DEFAULT - as its implementation during a RUNNING GAME is not
+	 * defined)
+	 * 
+	 * @param challenge
+	 *            must be a challenge already contained in the game.
+	 * @param challengeState
+	 * @return <code>true</code> if an entry was set. <code>false</code>
+	 *         otherwise.
+	 */
+	public boolean setChallengeState(Challenge challenge, ChallengeState challengeState) {
+		if (this.challengeStates.containsKey(challenge))
+			return false;
+		else
+			this.challengeStates.put(challenge, challengeState);
+		return true;
+
 	}
 
 	/**
@@ -116,12 +157,12 @@ public class QuizWalkGame extends Game {
 		return image;
 	}
 
-	//TODO: return immutable list instead. Not done for debugging purposes.
 	/**
-	 * @return the challenges
+	 * @return the challenges states.
 	 */
-	public Map<Challenge, ChallengeState> getChallenges() {
-		return challenges;
+	Map<Challenge, ChallengeState> getChallenges() {
+
+		return ImmutableMap.copyOf(challengeStates);
 	}
 
 	/**
@@ -131,14 +172,11 @@ public class QuizWalkGame extends Game {
 		return reward;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("QuizWalkGame [getState()=");
-		builder.append(getState());
+		builder.append(getGameState());
 		builder.append(", getName()=");
 		builder.append(getName());
 		builder.append(", getDescription()=");
@@ -151,5 +189,13 @@ public class QuizWalkGame extends Game {
 		builder.append(getReward());
 		builder.append("]");
 		return builder.toString();
+	}
+
+	// TODO: Exposing guts (of mutabble map) here. Will continue to expose until
+	/**
+	 * @return the challengeStates
+	 */
+	public Map<Challenge, ChallengeState> getChallengeStates() {
+		return challengeStates;
 	}
 }
