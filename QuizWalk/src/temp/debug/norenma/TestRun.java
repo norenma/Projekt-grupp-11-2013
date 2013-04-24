@@ -123,6 +123,7 @@ public class TestRun {
 		challenges.add(createChallenge2());
 		challenges.add(createChallenge3());
 		QuizWalkGameReward reward=new QuizWalkGameReward(15,"Awesome!" , Optional.<Image>absent());
+		
 		return new QuizWalkGame("Quiz","A test-run for QuizWalk", Optional.<Image>absent(), challenges, Optional.of(reward));
 	}
 

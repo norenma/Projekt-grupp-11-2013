@@ -120,15 +120,19 @@ public class Utilities {
 			//Adds a Marker for every available location
 			//TODO: Different states should generate different icons, not descriptions.
 			while(itLoc.hasNext()){
-				if(q.getChallengesStates(currentIt) == ChallengeState.COMPLETED){
-					m.addMarker(new MarkerOptions().position(coordinatesToLatLng(itLoc.next()))).setTitle("Completed");
-				}else if(q.getChallengesStates(currentIt) == ChallengeState.FAILED){
-					m.addMarker(new MarkerOptions().position(coordinatesToLatLng(itLoc.next()))).setTitle("Failed");
-				}else if(q.getChallengesStates(currentIt) == ChallengeState.UNVISITED){
-					m.addMarker(new MarkerOptions().position(coordinatesToLatLng(itLoc.next()))).setTitle("Unvisited");
+//				if(q.getChallengesStates(currentIt) == ChallengeState.COMPLETED){
+//					m.addMarker(new MarkerOptions().position(coordinatesToLatLng(itLoc.next()))).setTitle("Completed");
+//				}else if(q.getChallengesStates(currentIt) == ChallengeState.FAILED){
+//					m.addMarker(new MarkerOptions().position(coordinatesToLatLng(itLoc.next()))).setTitle("Failed");
+//				}else if(q.getChallengesStates(currentIt) == ChallengeState.UNVISITED){
+//					m.addMarker(new MarkerOptions().position(coordinatesToLatLng(itLoc.next()))).setTitle("Unvisited");
+//				}
+//					//TODO to make UC work, for now. 
+				m.addMarker(new MarkerOptions().position(coordinatesToLatLng(itLoc.next()))).setTitle(currentIt.getChallengeDescription());
+				
 				}
 			}
-		}
+//		}
 		
 		//TODO: Add proper use of return value
 		return true;

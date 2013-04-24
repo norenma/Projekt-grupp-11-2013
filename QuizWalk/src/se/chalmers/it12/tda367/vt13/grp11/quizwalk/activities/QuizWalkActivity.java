@@ -29,23 +29,21 @@ public class QuizWalkActivity extends Activity {
 
 		// Gets a question from test-class, good for now.
 		final QuizWalkGame q = TestRun.createGame();
+		Iterator<Challenge> challengeIt = q.getChallenges().iterator();
 
 		// Sets out locations on map
 		Utilities.populateMap(map, q);
 
 
-		Iterator<Challenge> challengeIt = q.getChallenges().iterator();
+
 		map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.558, 9.927), 3));
 
 		final QuestionFragment questionFragment = new QuestionFragment(this);
 
 		map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-
-			
 			@Override
 			public boolean onMarkerClick(Marker arg0) {
 				for (int i = 0; i < q.getChallenges().size(); i++) {
-					
 					if (arg0.getTitle().equals(
 							q.getChallenges().get(i).getChallengeDescription())) {
 						questionFragment
