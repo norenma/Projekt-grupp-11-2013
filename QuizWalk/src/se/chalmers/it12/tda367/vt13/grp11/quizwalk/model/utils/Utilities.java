@@ -117,6 +117,7 @@ public class Utilities {
 			Iterator<Location> itLoc = locations.iterator();
 			
 			//Adds a Marker for every available location
+			//TODO: Different markerStages? Correct, Incorrect, Uncompleted etc. etc.
 			while(itLoc.hasNext()){
 				m.addMarker(new MarkerOptions().position(coordinatesToLatLng(itLoc.next()))).setTitle(currentIt.getChallengeDescription());
 			}
