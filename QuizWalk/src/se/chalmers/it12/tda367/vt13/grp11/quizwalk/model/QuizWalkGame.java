@@ -160,7 +160,7 @@ public class QuizWalkGame extends Game {
 	/**
 	 * @return the challenges states.
 	 */
-	Map<Challenge, ChallengeState> getChallenges() {
+	public Map<Challenge, ChallengeState> getChallenges() {
 
 		return ImmutableMap.copyOf(challengeStates);
 	}
