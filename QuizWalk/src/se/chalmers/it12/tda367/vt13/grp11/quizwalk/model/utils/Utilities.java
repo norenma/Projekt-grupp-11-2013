@@ -10,8 +10,10 @@ import java.util.Map;
 
 import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.Challenge;
 import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.QuizWalkGame;
+import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.map.Coordinates;
 
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.LatLng;
 
 /**
  * Common static utility methods goes here.
@@ -72,6 +74,16 @@ public class Utilities {
 					+ "Some entry in Collection is null");
 		}
 		return collectionToCheck;
+	}
+	
+	/**
+	 * Converts {@link Coordinates} to {@link LatLng}
+	 * @param c
+	 * 		Coordinates
+	 * @return LatLng
+	 */
+	public static LatLng coordinatesToLatLng(Coordinates c){
+		return new LatLng(c.getLatitude(),c.getLongitude());
 	}
 	
 	public static boolean populateMap(GoogleMap m, QuizWalkGame q){
