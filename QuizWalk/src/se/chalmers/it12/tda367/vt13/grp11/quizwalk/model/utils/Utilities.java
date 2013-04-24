@@ -5,15 +5,18 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.Challenge;
 import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.QuizWalkGame;
 import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.map.Coordinates;
+import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.map.Location;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 /**
  * Common static utility methods goes here.
@@ -86,15 +89,34 @@ public class Utilities {
 		return new LatLng(c.getLatitude(),c.getLongitude());
 	}
 	
+	/**
+	 * Populates a map with {@link Challenge} {@link Location} based on a {@link QuizWalkGame}w
+	 * @param m
+	 * 		Map to be populated
+	 * @param q
+	 * 		QuizWalkGame of which ChallengeLocations will be presented
+	 * @return 
+	 * 		boolean for debugg purposes
+	 */
 	public static boolean populateMap(GoogleMap m, QuizWalkGame q){
 		checkNotNull(q);
 		checkNotNull(m);
+		
 		List<Challenge> challenges = q.getChallenges();
 		
-		Iterator it = challenges.iterator();
+		Iterator<Challenge> itChallenge = challenges.iterator();
+		Challenge currentIt;
+		//extracts the locations of all the challenges
 		
-		while(it.hasNext()){
-			it.next();
+		while(itChallenge.hasNext()){
+			currentIt = itChallenge.next();
+			List<Location> locations = currentIt.getListOfLocations();
+			Iterator<Location> itLoc = locations.iterator();
+			
+			//Adds a Marker for every available location
+			while(itLoc.hasNext()){
+				m.addMarker(new MarkerOptions().position(coordinatesToLatLng(itLoc.next()))).setTitle(currentIt.getChallengeDescription());
+			}
 		}
 		
 		return false;
