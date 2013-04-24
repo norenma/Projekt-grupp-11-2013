@@ -51,6 +51,7 @@ public class Challenge {
 		 * challenges should be set to something else than <code>DEFAULT</code>
 		 */
 		DEFAULT;
+		
 	}
 
 	/** The <code>Question</code> representing this Challenge */
