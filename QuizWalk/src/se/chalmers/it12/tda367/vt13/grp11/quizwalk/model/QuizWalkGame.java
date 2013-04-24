@@ -102,7 +102,7 @@ public class QuizWalkGame extends Game {
 	/**
 	 * @return the challenges of this QuizWalk
 	 */
-	public List<Challenge> getChallenges() {
+	public ImmutableList<Challenge> getChallenges() {
 		return ImmutableList.copyOf(challenges);
 	}
 
