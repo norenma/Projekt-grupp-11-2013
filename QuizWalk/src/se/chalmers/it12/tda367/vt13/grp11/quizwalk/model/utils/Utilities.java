@@ -111,6 +111,9 @@ public class Utilities {
 		while(itChallenge.hasNext()){
 			currentIt = itChallenge.next();
 			List<Location> locations = currentIt.getListOfLocations();
+			
+			checkNotNull(locations);
+			
 			Iterator<Location> itLoc = locations.iterator();
 			
 			//Adds a Marker for every available location
