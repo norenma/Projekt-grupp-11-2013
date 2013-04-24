@@ -66,7 +66,7 @@ public class TestRun {
 		
 		//Genereates a position
 		List<Location> locations=new ArrayList<Location>();
-		locations.add(new Location(100,100,"By the rock", Optional.<Image>absent()));
+		locations.add(new Location(53.558, 9.927,"By the rock", Optional.<Image>absent()));
 		
 		ChallengeReward reward=new ChallengeReward(100, "Good job!", Optional.<Image>absent());
 		
@@ -85,7 +85,7 @@ public class TestRun {
 		
 		//Genereates a position
 		List<Location> locations=new ArrayList<Location>();
-		locations.add(new Location(100,100,"By the rock", Optional.<Image>absent()));
+		locations.add(new Location(41.312, 8.123,"By the rock", Optional.<Image>absent()));
 		
 		ChallengeReward reward=new ChallengeReward(100, "Sweet!", Optional.<Image>absent());
 		
@@ -105,7 +105,7 @@ public class TestRun {
 		
 		//Genereates a position
 		List<Location> locations=new ArrayList<Location>();
-		locations.add(new Location(100,100,"By the rock", Optional.<Image>absent()));
+		locations.add(new Location(53.551, 9.993,"By the rock", Optional.<Image>absent()));
 		
 		ChallengeReward reward=new ChallengeReward(100, "Awesome!", Optional.<Image>absent());
 		
