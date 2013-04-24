@@ -100,6 +100,13 @@ public class QuizWalkGame extends Game {
 	}
 
 	/**
+	 * @return the challenges of this QuizWalk
+	 */
+	public List<Challenge> getChallenges() {
+		return ImmutableList.copyOf(challenges);
+	}
+
+	/**
 	 * Returns the {@link GameState} of the game.
 	 * 
 	 * @return {@link Game.GameState#RUNNING} if not all challenges have been
@@ -118,21 +125,6 @@ public class QuizWalkGame extends Game {
 	}
 
 	/**
-	 * @return the challenges of this QuizWalk in the order they were declared.
-	 */
-	public List<Challenge> getChallenges() {
-		return ImmutableList.copyOf(challenges);
-	}
-
-	/**
-	 * @return the challenges states.
-	 */
-	Map<Challenge, ChallengeState> getChallengesStates() {
-	
-		return ImmutableMap.copyOf(challengeStates);
-	}
-
-	/**
 	 * Sets a Challenge in this game to a particular {@link GameState}. (Don't
 	 * set to DEFAULT - as its implementation during a RUNNING GAME is not
 	 * defined)
@@ -143,14 +135,21 @@ public class QuizWalkGame extends Game {
 	 * @return <code>true</code> if an entry was set. <code>false</code>
 	 *         otherwise.
 	 */
-	public boolean setChallengeState(Challenge challenge,
-			ChallengeState challengeState) {
+	public boolean setChallengeState(Challenge challenge, ChallengeState challengeState) {
 		if (this.challengeStates.containsKey(challenge))
 			return false;
 		else
 			this.challengeStates.put(challenge, challengeState);
 		return true;
 
+	}
+
+	/**
+	 * @return the challenges states.
+	 */
+	Map<Challenge, ChallengeState> getChallengesStates() {
+	
+		return ImmutableMap.copyOf(challengeStates);
 	}
 
 	/**

@@ -6,6 +6,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.util.Collection;
 import java.util.Map;
 
+import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.QuizWalkGame;
+
 /**
  * Common static utility methods goes here.
  */
@@ -65,6 +67,10 @@ public class Utilities {
 					+ "Some entry in Collection is null");
 		}
 		return collectionToCheck;
+	}
+	
+	public static boolean populateMap(GoogleMap m, QuizWalkGame q){
+		
 	}
 
 }
