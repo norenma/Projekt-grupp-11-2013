@@ -10,6 +10,7 @@ import java.util.Map;
 import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.Challenge.ChallengeState;
 
 import com.google.common.base.Optional;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 
 /**
@@ -117,6 +118,21 @@ public class QuizWalkGame extends Game {
 	}
 
 	/**
+	 * @return the challenges of this QuizWalk in the order they were declared.
+	 */
+	public List<Challenge> getChallenges() {
+		return ImmutableList.copyOf(challenges);
+	}
+
+	/**
+	 * @return the challenges states.
+	 */
+	Map<Challenge, ChallengeState> getChallengesStates() {
+	
+		return ImmutableMap.copyOf(challengeStates);
+	}
+
+	/**
 	 * Sets a Challenge in this game to a particular {@link GameState}. (Don't
 	 * set to DEFAULT - as its implementation during a RUNNING GAME is not
 	 * defined)
@@ -127,7 +143,8 @@ public class QuizWalkGame extends Game {
 	 * @return <code>true</code> if an entry was set. <code>false</code>
 	 *         otherwise.
 	 */
-	public boolean setChallengeState(Challenge challenge, ChallengeState challengeState) {
+	public boolean setChallengeState(Challenge challenge,
+			ChallengeState challengeState) {
 		if (this.challengeStates.containsKey(challenge))
 			return false;
 		else
@@ -158,44 +175,10 @@ public class QuizWalkGame extends Game {
 	}
 
 	/**
-	 * @return the challenges states.
-	 */
-	Map<Challenge, ChallengeState> getChallenges() {
-
-		return ImmutableMap.copyOf(challengeStates);
-	}
-
-	/**
 	 * @return the reward
 	 */
 	public Optional<QuizWalkGameReward> getReward() {
 		return reward;
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("QuizWalkGame [getState()=");
-		builder.append(getGameState());
-		builder.append(", getName()=");
-		builder.append(getName());
-		builder.append(", getDescription()=");
-		builder.append(getDescription());
-		builder.append(", getImage()=");
-		builder.append(getImage());
-		builder.append(", getChallenges()=");
-		builder.append(getChallenges());
-		builder.append(", getReward()=");
-		builder.append(getReward());
-		builder.append("]");
-		return builder.toString();
-	}
-
-	// TODO: Exposing guts (of mutabble map) here. Will continue to expose until
-	/**
-	 * @return the challengeStates
-	 */
-	public Map<Challenge, ChallengeState> getChallengeStates() {
-		return challengeStates;
-	}
 }
