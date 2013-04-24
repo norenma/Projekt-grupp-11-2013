@@ -4,9 +4,14 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
+import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.Challenge;
 import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.QuizWalkGame;
+
+import com.google.android.gms.maps.GoogleMap;
 
 /**
  * Common static utility methods goes here.
@@ -70,7 +75,17 @@ public class Utilities {
 	}
 	
 	public static boolean populateMap(GoogleMap m, QuizWalkGame q){
+		checkNotNull(q);
+		checkNotNull(m);
+		List<Challenge> challenges = q.getChallenges();
 		
+		Iterator it = challenges.iterator();
+		
+		while(it.hasNext()){
+			it.next();
+		}
+		
+		return false;
 	}
 
 }
