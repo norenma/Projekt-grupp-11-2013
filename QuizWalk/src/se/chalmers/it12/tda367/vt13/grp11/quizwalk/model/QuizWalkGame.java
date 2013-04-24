@@ -147,9 +147,11 @@ public class QuizWalkGame extends Game {
 	/**
 	 * @return the challenges states.
 	 */
-	Map<Challenge, ChallengeState> getChallengesStates() {
+	public ChallengeState getChallengesStates(Challenge c) {
 	
-		return ImmutableMap.copyOf(challengeStates);
+		//TODO: Handle null challengeStates
+		checkNotNull(challengeStates.get(c));
+		return challengeStates.get(c);
 	}
 
 	/**
