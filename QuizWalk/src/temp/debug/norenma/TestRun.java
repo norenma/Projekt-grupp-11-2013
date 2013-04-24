@@ -1,8 +1,10 @@
 package temp.debug.norenma;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
@@ -10,12 +12,15 @@ import java.util.Set;
 import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.Answer;
 import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.Challenge;
 import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.ChallengeReward;
+import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.Image;
 import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.Question;
 import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.QuizWalkGame;
-import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.Reward;
+import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.QuizWalkGameReward;
 import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.StringAnswer;
 import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.StringQuestion;
 import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.map.Location;
+
+import com.google.common.base.Optional;
 
 public class TestRun {
 
@@ -24,7 +29,7 @@ public class TestRun {
 	 */
 	public static void main(String[] args) {
 		QuizWalkGame quiz=createGame();
-		Iterator<Challenge> i=quiz.getChallenges().keySet().iterator();
+		Iterator<Challenge> i=quiz.getChallenges().iterator();
 		while(i.hasNext()){
 			playChallenge(i.next());
 		}
@@ -33,14 +38,15 @@ public class TestRun {
 	
 	private static void playChallenge(Challenge c) {
 		System.out.println(c.getQuestion().getMedia().toString() + "\n");
-		Iterator<Answer> i=c.getListOfAnswers().iterator();
+		Iterator<Answer> i=c.getSetOfAnswers().iterator();
 		Scanner sc=new Scanner(System.in);
 		while(i.hasNext()){
 			System.out.println(i.next().getMedia().toString());
 		}
 		String s=sc.nextLine();
 		if(c.isCorrectAnswer(new StringAnswer(s))){
-			System.out.println(c.getReward().getDescription() + "\n");
+			if(c.getReward().isPresent())
+			System.out.println(c.getReward().get().getDescription() + "\n");
 			System.out.println("---------------------------------\n");
 		}
 		
@@ -55,17 +61,18 @@ public class TestRun {
 		answers.add(new StringAnswer("Los Angeles"));
 		
 		Answer correctAnswer=new StringAnswer("Washington");
+
+
 		
 		//Genereates a position
-		Set<Location> locations=new HashSet<Location>();
-		locations.add(new Location(100,100,"By the rock", null));
+		List<Location> locations=new ArrayList<Location>();
+		locations.add(new Location(100,100,"By the rock", Optional.<Image>absent()));
 		
-		ChallengeReward reward=new ChallengeReward(100, "Good job!", null);
+		ChallengeReward reward=new ChallengeReward(100, "Good job!", Optional.<Image>absent());
 		
 		return new Challenge("A question about America..", question, 
-				answers, correctAnswer, locations, reward);
+				answers, correctAnswer, locations, Optional.of(reward));
 	}
-	
 	public static Challenge createChallenge2(){
 		//Creates a question and answers
 		Question question=new StringQuestion("Where was the olympic games 1996?");
@@ -77,13 +84,13 @@ public class TestRun {
 		Answer correctAnswer=new StringAnswer("Atlanta");
 		
 		//Genereates a position
-		Set<Location> locations=new HashSet<Location>();
-		locations.add(new Location(100,100,"By the rock", null));
+		List<Location> locations=new ArrayList<Location>();
+		locations.add(new Location(100,100,"By the rock", Optional.<Image>absent()));
 		
-		ChallengeReward reward=new ChallengeReward(100, "Sweet!", null);
+		ChallengeReward reward=new ChallengeReward(100, "Sweet!", Optional.<Image>absent());
 		
 		return new Challenge("A question about OS..", question, 
-				answers, correctAnswer, locations, reward);
+				answers, correctAnswer, locations, Optional.of(reward));
 	}
 	
 	public static Challenge createChallenge3(){
@@ -97,22 +104,23 @@ public class TestRun {
 		Answer correctAnswer=new StringAnswer("Mount Everest");
 		
 		//Genereates a position
-		Set<Location> locations=new HashSet<Location>();
-		locations.add(new Location(100,100,"By the rock", null));
+		List<Location> locations=new ArrayList<Location>();
+		locations.add(new Location(100,100,"By the rock", Optional.<Image>absent()));
 		
-		ChallengeReward reward=new ChallengeReward(100, "Awesome!", null);
+		ChallengeReward reward=new ChallengeReward(100, "Awesome!", Optional.<Image>absent());
 		
 		return new Challenge("A question about Mountains", question, 
-				answers, correctAnswer, locations, reward);
+				answers, correctAnswer, locations, Optional.of(reward));
 	}
 	
 	public static QuizWalkGame createGame(){
 		//Fills a Map with challenges
-		Map<Challenge, Challenge.ChallengeState> challenges=new HashMap<Challenge, Challenge.ChallengeState>();
-		challenges.put(createChallenge1(), Challenge.ChallengeState.DEFAULT);
-		challenges.put(createChallenge2(), Challenge.ChallengeState.DEFAULT);
-		challenges.put(createChallenge3(), Challenge.ChallengeState.DEFAULT);
-		return new QuizWalkGame("A test-run for QuizWalk", null, challenges);
+		List<Challenge> challenges=new ArrayList<Challenge>();
+		challenges.add(createChallenge1());
+		challenges.add(createChallenge2());
+		challenges.add(createChallenge3());
+		QuizWalkGameReward reward=new QuizWalkGameReward(15,"Awesome!" , Optional.<Image>absent());
+		return new QuizWalkGame("Quiz","A test-run for QuizWalk", Optional.<Image>absent(), challenges, Optional.of(reward));
 	}
 
 }
