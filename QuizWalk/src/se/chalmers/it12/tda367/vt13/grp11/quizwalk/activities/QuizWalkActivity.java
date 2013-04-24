@@ -8,35 +8,56 @@ import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.QuizWalkGame;
 import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.utils.Utilities;
 import temp.debug.norenma.TestRun;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.os.Bundle;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 
 public class QuizWalkActivity extends Activity {
-  private GoogleMap map;
+	private GoogleMap map;
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_quiz_walk_game);
-    map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map))
-        .getMap();
-    
-    QuizWalkGame q=TestRun.createGame();
-    Utilities.populateMap(map, q);
-    
-    AlertDialog.Builder ab=new AlertDialog.Builder(this);
-    
-    Iterator<Challenge> i =q.getChallenges().iterator();
-    Challenge c=i.next();
-    
-    ab.setTitle(c.getChallengeDescription());
-    ab.show();
-    
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_quiz_walk_game);
+		map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map))
+				.getMap();
+		
 
-    
-  } 
-  
+		// Gets a question from test-class, good for now.
+		final QuizWalkGame q = TestRun.createGame();
+
+		// Sets out locations on map
+		Utilities.populateMap(map, q);
+
+
+		Iterator<Challenge> challengeIt = q.getChallenges().iterator();
+		map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.558, 9.927), 3));
+
+		final QuestionFragment questionFragment = new QuestionFragment(this);
+
+		map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+
+			
+			@Override
+			public boolean onMarkerClick(Marker arg0) {
+				for (int i = 0; i < q.getChallenges().size(); i++) {
+					
+					if (arg0.getTitle().equals(
+							q.getChallenges().get(i).getChallengeDescription())) {
+						questionFragment
+								.showChallenge(q.getChallenges().get(i));
+					}
+				}
+				return false;
+			}
+
+		});
+
+		// questionFragment.ShowChallenge(c);
+
+	}
 }

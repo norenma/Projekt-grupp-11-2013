@@ -59,6 +59,7 @@ public class TestRun {
 		answers.add(new StringAnswer("New York"));
 		answers.add(new StringAnswer("Washington"));
 		answers.add(new StringAnswer("Los Angeles"));
+		answers.add(new StringAnswer("Boston"));
 		
 		Answer correctAnswer=new StringAnswer("Washington");
 
@@ -80,6 +81,7 @@ public class TestRun {
 		answers.add(new StringAnswer("Sidney"));
 		answers.add(new StringAnswer("London"));
 		answers.add(new StringAnswer("Atlanta"));
+		answers.add(new StringAnswer("Stockholm"));
 		
 		Answer correctAnswer=new StringAnswer("Atlanta");
 		
@@ -100,6 +102,7 @@ public class TestRun {
 		answers.add(new StringAnswer("Month blanc"));
 		answers.add(new StringAnswer("K2"));
 		answers.add(new StringAnswer("Mount Everest"));
+		answers.add(new StringAnswer("Rocky Mountains"));
 		
 		Answer correctAnswer=new StringAnswer("Mount Everest");
 		
