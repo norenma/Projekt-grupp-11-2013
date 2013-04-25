@@ -62,5 +62,4 @@ public class StringAnswer extends Answer {
 		return result;
 	}
 
-
 }

@@ -17,9 +17,9 @@ import android.content.DialogInterface;
  * 
  */
 @SuppressLint("ValidFragment")
-public class QuestionFragment extends AlertDialog.Builder {
+public class QuestionDialogBuilder extends AlertDialog.Builder {
 
-	public QuestionFragment(Context arg0) {
+	public QuestionDialogBuilder(Context arg0) {
 		super(arg0);
 	}
 

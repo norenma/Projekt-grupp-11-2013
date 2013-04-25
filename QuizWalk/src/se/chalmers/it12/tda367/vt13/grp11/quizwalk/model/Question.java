@@ -18,7 +18,7 @@ public abstract class Question implements Media {
 	 * A <code>hashCode()</code> based on the implemented {@link Media}
 	 */
 	public abstract int hashCode();
-	
+
 	@Override
 	public String toString() {
 		return getMedia().toString();

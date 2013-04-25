@@ -25,7 +25,6 @@ public class QuizWalkActivity extends Activity {
 		setContentView(R.layout.activity_quiz_walk_game);
 		map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map))
 				.getMap();
-		
 
 		// Gets a question from test-class, good for now.
 		final QuizWalkGame q = TestRun.createGame();
@@ -34,11 +33,11 @@ public class QuizWalkActivity extends Activity {
 		// Sets out locations on map
 		Utilities.populateMap(map, q);
 
+		map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.558,
+				9.927), 3));
 
-
-		map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.558, 9.927), 3));
-
-		final QuestionFragment questionFragment = new QuestionFragment(this);
+		final QuestionDialogBuilder questionFragment = new QuestionDialogBuilder(
+				this);
 
 		map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
 			@Override

@@ -2,21 +2,28 @@ package se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.map;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
-
-import com.google.common.base.Optional;
-import com.google.common.collect.ImmutableSet;
 
 import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.QuizWalkGame;
 
+import com.google.common.base.Optional;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
+
 /**
- * A <TT>Map</TT> singleton will keep track of active {@link #activeGames} and
- * custom {@link #nodes} local to the client. 
+ * A singleton class to keep track of active QuizWalkGames and custom nodes
+ * local to the client.
+ * 
+ * Useful to use as an Wrapper of active games (Games started by the player).
+ * Store and retrieve data of activated games, last known position and custom
+ * location nodes.
  * 
  */
 public enum GameMap {
-	
+
 	INSTANCE;
 
 	/**
@@ -32,26 +39,53 @@ public enum GameMap {
 	/**
 	 * Custom location nodes that user can set up on the map.
 	 */
-	private final Set<Location> nodes;
+	private final List<Location> nodes;
 
 	private GameMap() {
-		this.nodes = new HashSet<Location>();
+		this.nodes = new ArrayList<Location>();
 		this.activeGames = new HashSet<QuizWalkGame>();
-		this.currentLocation = Optional.<Location>absent();
+		this.currentLocation = Optional.<Location> absent();
+	}
+
+	// TODO: Debug methods to get all nodes. I don't like arrays but since we
+	// don't want to let View (mVc) to modify our list we'll do this way
+	// now.
+	// Check Google Guava on Immutable Collections.
+	// https://google-collections.googlecode.com/svn/trunk/javadoc/com/google/common/collect/ImmutableList.html
+
+	/**
+	 * Gets the list of saved nodes. Use <code>addNode()</code> to save nodes.
+	 * 
+	 * @return a list of previously added custom Location object ("node").
+	 */
+	public ImmutableList<Location> getNodes() {
+		return ImmutableList.copyOf(nodes);
 	}
 
 	/**
+	 * @return a set of previously added QuizWalkGames. Use addGame() to add a
+	 *         Game to the set.
+	 */
+	public ImmutableSet<QuizWalkGame> getQuizGameWalks() {
+		return ImmutableSet.copyOf(activeGames);
+	}
+
+	/**
+	 * @param currentLocation
+	 *            the location to be saved.
+	 */
+	public void setCurrentLocation(Location currentLocation) {
+		this.currentLocation = Optional.fromNullable(currentLocation);
+	}
+
+	/**
+	 * The last saved location. Will return Optional.absent() if current
+	 * location never been saved or it was set to null.
+	 * 
 	 * @return the currentLocation, if available.
 	 */
 	public Optional<Location> getCurrentLocation() {
 		return currentLocation;
-	}
-
-	/**
-	 * @param currentLocation the currentLocation to set
-	 */
-	public void setCurrentLocation(Optional<Location> currentLocation) {
-		this.currentLocation = checkNotNull(currentLocation);
 	}
 
 	/**
@@ -96,11 +130,4 @@ public enum GameMap {
 	// Check Google Guava on Immutable Collections.
 	// https://google-collections.googlecode.com/svn/trunk/javadoc/com/google/common/collect/ImmutableList.html
 
-	public ImmutableSet<Location> getNodes() {
-		return ImmutableSet.copyOf(nodes);
-	}
-
-	public ImmutableSet<QuizWalkGame> getQuizGameWalks() {
-		return ImmutableSet.copyOf(activeGames);
-	}
 }
