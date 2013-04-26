@@ -176,6 +176,17 @@ public class QuizWalkGame extends Game {
 	 */
 	private final Optional<QuizWalkGameReward> reward;
 
+	// Can't do this.
+	@SuppressWarnings("unused")
+	private QuizWalkGame() {
+		name = null;
+		description = null;
+		image = null;
+		challenges = null;
+		challengeStates = null;
+		reward = null;
+	}
+
 	/**
 	 * Create a new QuizWalkGame. This is a whole description of a game of
 	 * QuizWalk - either running or dormant. This constructor sets all

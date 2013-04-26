@@ -106,6 +106,12 @@ public class Challenge {
 			return this;
 		}
 
+		/**
+		 * @param a
+		 *            the correct answer to this Challenge. The builder will
+		 *            create a StringAnswer-object. (This will add the correct
+		 *            answer to the setOfAnswers as well.)
+		 */
 		public Builder correctAnswer(String a) {
 			this.correctAnswer = new StringAnswer(checkNotNullOrEmpty(a,
 					"correctAnswer can't be empty"));
@@ -202,7 +208,6 @@ public class Challenge {
 			return challengeReward;
 		}
 
-		// CONTINUE HERE
 	}
 
 	/** The <code>Question</code> representing this Challenge */
@@ -228,6 +233,17 @@ public class Challenge {
 	 * <code>User</code> who completes this <code>Challenge</code>.
 	 */
 	private final Optional<ChallengeReward> challengeReward;
+
+	// Can't do this.
+	@SuppressWarnings("unused")
+	private Challenge() {
+		question = null;
+		correctAnswer = null;
+		challengeDescription = null;
+		setOfAnswers = null;
+		listOfLocations = null;
+		challengeReward = null;
+	}
 
 	/**
 	 * Create a challenge.
