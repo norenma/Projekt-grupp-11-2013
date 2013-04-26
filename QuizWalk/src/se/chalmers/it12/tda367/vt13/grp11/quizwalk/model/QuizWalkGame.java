@@ -123,10 +123,10 @@ public class QuizWalkGame extends Game {
 		}
 
 		/**
-		 * @return the challenges
+		 * @return the challenges, MUTABLE.
 		 */
 		public List<Challenge> getChallenges() {
-			return ImmutableList.copyOf(challenges);
+			return challenges;
 		}
 
 		/**

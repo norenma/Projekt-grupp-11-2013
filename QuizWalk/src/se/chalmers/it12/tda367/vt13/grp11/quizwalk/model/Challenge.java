@@ -61,9 +61,10 @@ public class Challenge {
 
 	/**
 	 * Builder pattern class for Challenge. "Builder"-class makes it easier to
-	 * create a Challenge. Useful to be called from GUI that lets users to create
-	 * Challenges. Every method returns the same Builder it was called upon,
-	 * enabling "method chaining". Call build() to get the Challenge-object.
+	 * create a Challenge. Useful to be called from GUI that lets users to
+	 * create Challenges. Every method returns the same Builder it was called
+	 * upon, enabling "method chaining". Call build() to get the
+	 * Challenge-object.
 	 * 
 	 * Be sure that you set <code>correctAnswer()</code> and
 	 * <code>question()</code> before calling <code>build()</code>
@@ -88,6 +89,12 @@ public class Challenge {
 			return this;
 		}
 
+		public Builder question(String q) {
+			this.question = new StringQuestion(checkNotNullOrEmpty(q,
+					"Question can't be empty."));
+			return this;
+		}
+
 		/**
 		 * @param a
 		 *            the correct answer to this Challenge. (This will add the
@@ -97,6 +104,13 @@ public class Challenge {
 			this.correctAnswer = checkNotNull(a);
 			setOfAnswers.add(a);
 			return this;
+		}
+
+		public Builder correctAnswer(String a) {
+			this.correctAnswer = new StringAnswer(checkNotNullOrEmpty(a,
+					"correctAnswer can't be empty"));
+			return this;
+
 		}
 
 		/**
@@ -168,17 +182,17 @@ public class Challenge {
 		}
 
 		/**
-		 * @return the setOfAnswers
+		 * @return the setOfAnswers, MUTABLE!
 		 */
 		public Set<Answer> getSetOfAnswers() {
-			return ImmutableSet.copyOf(setOfAnswers);
+			return setOfAnswers;
 		}
 
 		/**
-		 * @return the listOfLocations
+		 * @return the listOfLocations, MUTABLE!
 		 */
 		public List<Location> getListOfLocations() {
-			return ImmutableList.copyOf(listOfLocations);
+			return listOfLocations;
 		}
 
 		/**
