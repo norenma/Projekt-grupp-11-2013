@@ -298,12 +298,12 @@ public class QuizWalkGame extends Game {
 	 * @param challenge
 	 *            must be a challenge already contained in the game.
 	 * @param challengeState
-	 * @return <code>true</code> if an entry was set. <code>false</code>
-	 *         otherwise.
+	 * @return <code>true</code> if the challenge was on the list and state was
+	 *         set. <code>false</code> otherwise.
 	 */
 	public boolean setChallengeState(Challenge challenge,
 			ChallengeState challengeState) {
-		if (this.challengeStates.containsKey(challenge))
+		if (!challenges.contains(challenge))
 			return false;
 		else {
 			this.challengeStates.put(challenge, challengeState);
