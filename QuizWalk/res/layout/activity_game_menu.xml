@@ -19,7 +19,8 @@
         android:text="Create Game"
         android:textColor="#FFFFFF"
         android:textSize="26sp"
-        android:textStyle="bold|italic" />
+        android:textStyle="bold|italic" 
+         android:onClick="onButtonClick_CreateGame"/>
 
     <Button
         android:id="@+id/button1"

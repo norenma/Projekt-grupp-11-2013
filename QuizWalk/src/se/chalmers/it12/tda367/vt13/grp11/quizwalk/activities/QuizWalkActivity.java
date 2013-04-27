@@ -55,7 +55,6 @@ public class QuizWalkActivity extends Activity {
 
 		});
 
-		// questionFragment.ShowChallenge(c);
 
 	}
 }
