@@ -3,6 +3,7 @@ package se.chalmers.it12.tda367.vt13.grp11.quizwalk.model;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.utils.Utilities.checkNotNullOrEmpty;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,7 +12,6 @@ import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.Challenge.ChallengeStat
 
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
 
 /**
  * A game of QuizWalk! This class will contain all information needed to
@@ -20,6 +20,122 @@ import com.google.common.collect.ImmutableMap;
  * 
  */
 public class QuizWalkGame extends Game {
+
+	/**
+	 * Builder pattern class for QuizWalkGame. "Builder"-class makes it easier
+	 * to create a QuizWalkGame. Useful to be called from GUI that lets users to
+	 * create a QuizWalkGame. Every method returns the same Builder it was
+	 * called upon, enabling "method chaining". Call build() to get a
+	 * QuizWalk-object.
+	 * 
+	 */
+	public static class Builder {
+		private String name;
+		private String description;
+		private Optional<Image> image;
+		private List<Challenge> challenges;
+		private Optional<QuizWalkGameReward> reward;
+
+		/**
+		 * Get a new Builder.
+		 */
+		public Builder() {
+			name = "DEFAULT";
+			description = "";
+			image = Optional.<Image> absent();
+			challenges = new ArrayList<Challenge>();
+			reward = Optional.<QuizWalkGameReward> absent();
+
+		}
+
+		/**
+		 * @param name
+		 *            of this Game. COMPULSORY
+		 */
+		public Builder name(String name) {
+			this.name = name;
+			return this;
+		}
+
+		/**
+		 * @param description
+		 *            of the Game. COMPULSORY
+		 */
+		public Builder description(String description) {
+			this.description = description;
+			return this;
+		}
+
+		/**
+		 * @param image
+		 *            of the Game.
+		 */
+		public Builder image(Image image) {
+			this.image = Optional.fromNullable(image);
+			return this;
+		}
+
+		/**
+		 * @param c
+		 *            the Challenge to add to the Game.
+		 */
+		public Builder addChallenge(Challenge c) {
+			this.challenges.add(c);
+			return this;
+		}
+
+		/**
+		 * @param r
+		 *            the Reward of the game.
+		 */
+		public Builder reward(QuizWalkGameReward r) {
+			this.reward = Optional.fromNullable(r);
+			return this;
+		}
+
+		/**
+		 * @return the QuizWalkGame that was built.
+		 */
+		public QuizWalkGame build() {
+			return new QuizWalkGame(name, description, image, challenges,
+					reward);
+		}
+
+		/**
+		 * @return the name
+		 */
+		public String getName() {
+			return name;
+		}
+
+		/**
+		 * @return the description
+		 */
+		public String getDescription() {
+			return description;
+		}
+
+		/**
+		 * @return the image
+		 */
+		public Optional<Image> getImage() {
+			return image;
+		}
+
+		/**
+		 * @return the challenges, MUTABLE.
+		 */
+		public List<Challenge> getChallenges() {
+			return challenges;
+		}
+
+		/**
+		 * @return the reward
+		 */
+		public Optional<QuizWalkGameReward> getReward() {
+			return reward;
+		}
+	}
 
 	/**
 	 * Name of this game of QuizWalk.
@@ -60,10 +176,23 @@ public class QuizWalkGame extends Game {
 	 */
 	private final Optional<QuizWalkGameReward> reward;
 
+	// Can't do this.
+	@SuppressWarnings("unused")
+	private QuizWalkGame() {
+		name = null;
+		description = null;
+		image = null;
+		challenges = null;
+		challengeStates = null;
+		reward = null;
+	}
+
 	/**
 	 * Create a new QuizWalkGame. This is a whole description of a game of
 	 * QuizWalk - either running or dormant. This constructor sets all
-	 * {@link ChallengeState}s to <code>ChallengeState.DEFAULT</code>.
+	 * {@link ChallengeState}s to <code>ChallengeState.DEFAULT</code>. Use
+	 * start() immediately after calling this constructor if you intend to run
+	 * the game.
 	 * 
 	 * @param name
 	 *            of this game. Can't be empty.
@@ -100,7 +229,45 @@ public class QuizWalkGame extends Game {
 	}
 
 	/**
-	 * @return the challenges of this QuizWalk
+	 * Creates a copy of the provided QuizWalkGame. This constructor will also
+	 * copy the ChallengeStates.
+	 * 
+	 * @param o
+	 *            the Game to be copied.
+	 */
+	public QuizWalkGame(QuizWalkGame o) {
+		this.name = o.getName();
+		this.description = o.getDescription();
+		this.image = o.getImage();
+		this.challenges = new ArrayList<Challenge>(o.getChallenges());
+		this.reward = o.getReward();
+		this.challengeStates = new HashMap<Challenge, Challenge.ChallengeState>();
+		for (Challenge c : o.getChallenges()) {
+			challengeStates.put(c, o.getChallengeStateOf(c));
+		}
+	}
+
+	/**
+	 * Starts game by setting all ChallengeStates to <code>UNVISITED</code>. You
+	 * might also want to call this to reset the game.
+	 */
+	public void start() {
+		for (Challenge c : challenges) {
+			challengeStates.put(c, ChallengeState.UNVISITED);
+		}
+	}
+
+	/**
+	 * Stops game by setting all ChallengeStates to <code>DEFAULT</code>.
+	 */
+	public void stop() {
+		for (Challenge c : challenges) {
+			challengeStates.put(c, ChallengeState.DEFAULT);
+		}
+	}
+
+	/**
+	 * @return the Challenges of this QuizWalk.
 	 */
 	public ImmutableList<Challenge> getChallenges() {
 		return ImmutableList.copyOf(challenges);
@@ -125,43 +292,46 @@ public class QuizWalkGame extends Game {
 	}
 
 	/**
-	 * Sets a Challenge in this game to a particular {@link GameState}. (Don't
-	 * set to DEFAULT - as its implementation during a RUNNING GAME is not
-	 * defined)
+	 * Sets a Challenge in this game to a particular {@link GameState}. If you
+	 * want to clean ChallengeState data use stop() or start() instead.
 	 * 
 	 * @param challenge
 	 *            must be a challenge already contained in the game.
 	 * @param challengeState
-	 * @return <code>true</code> if an entry was set. <code>false</code>
-	 *         otherwise.
+	 * @return <code>true</code> if the challenge was on the list and state was
+	 *         set. <code>false</code> otherwise.
 	 */
-	public boolean setChallengeState(Challenge challenge, ChallengeState challengeState) {
-		if (this.challengeStates.containsKey(challenge))
+	public boolean setChallengeState(Challenge challenge,
+			ChallengeState challengeState) {
+		if (!challenges.contains(challenge))
 			return false;
-		else
+		else {
 			this.challengeStates.put(challenge, challengeState);
-		return true;
+			return true;
+		}
 
 	}
 
 	/**
-	 * @return the challenges states.
+	 * @return the state of the provided Challenge.
 	 */
-	public ChallengeState getChallengesStates(Challenge c) {
-	
-		//TODO: Handle null challengeStates
-		checkNotNull(challengeStates.get(c));
-		return challengeStates.get(c);
+	public ChallengeState getChallengeStateOf(Challenge c) {
+
+		// TODO: Handle null challengeStates
+		return checkNotNull(challengeStates.get(c));
 	}
 
 	/**
-	 * @return the name.
+	 * @return the name of this Game.
 	 */
 	public String getName() {
 		return name;
 	}
 
 	/**
+	 * Description of this QuizWalkGame. Describing the set of challenges
+	 * included. Can be empty.
+	 * 
 	 * @return the description. Can be empty.
 	 */
 	public String getDescription() {
@@ -169,17 +339,17 @@ public class QuizWalkGame extends Game {
 	}
 
 	/**
-	 * @return the image if available.
+	 * @return the image representing this game, if available.
 	 */
 	public Optional<Image> getImage() {
 		return image;
 	}
 
 	/**
-	 * @return the reward
+	 * @return The reward, if any. <code>Optional.absent()</code> otherwise.
+	 *         Should be granted to user who completes this QuizWalk.
 	 */
 	public Optional<QuizWalkGameReward> getReward() {
 		return reward;
 	}
-
 }

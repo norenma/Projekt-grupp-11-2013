@@ -59,5 +59,4 @@ public class StringQuestion extends Question {
 		return true;
 	}
 
-
 }

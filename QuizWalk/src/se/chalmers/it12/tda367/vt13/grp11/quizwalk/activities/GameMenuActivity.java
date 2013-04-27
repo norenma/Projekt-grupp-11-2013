@@ -18,7 +18,7 @@ public class GameMenuActivity extends Activity {
 		// Show the Up button in the action bar.
 		setupActionBar();
 	}
-	
+
 	public void onButtonClick_StartGame(View v) {
 		startActivity(new Intent(this, QuizWalkActivity.class));
 	}
@@ -39,7 +39,7 @@ public class GameMenuActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-	//	getMenuInflater().inflate(R.menu.second_screen, menu);
+		// getMenuInflater().inflate(R.menu.second_screen, menu);
 		return true;
 	}
 
@@ -59,6 +59,5 @@ public class GameMenuActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
 
 }
