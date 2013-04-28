@@ -115,6 +115,7 @@ public class Challenge {
 		public Builder correctAnswer(String a) {
 			this.correctAnswer = new StringAnswer(checkNotNullOrEmpty(a,
 					"correctAnswer can't be empty"));
+			setOfAnswers.add(correctAnswer);
 			return this;
 
 		}
