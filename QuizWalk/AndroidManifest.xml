@@ -54,6 +54,16 @@
             android:name="se.chalmers.it12.tda367.vt13.grp11.quizwalk.activities.CreateGameActivity"
             android:label="@string/title_activity_create_game" >
         </activity>
+        <activity
+            android:name="se.chalmers.it12.tda367.vt13.grp11.quizwalk.activities.CreateQuestionActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_create_question"
+            android:parentActivityName="se.chalmers.it12.tda367.vt13.grp11.quizwalk.activities.CreateGameActivity"
+            android:theme="@style/FullscreenTheme" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="se.chalmers.it12.tda367.vt13.grp11.quizwalk.activities.CreateGameActivity" />
+        </activity>
     </application>
 
 </manifest>

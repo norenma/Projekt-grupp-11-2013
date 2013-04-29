@@ -25,6 +25,9 @@ public class QuizWalkActivity extends Activity {
 		setContentView(R.layout.activity_quiz_walk_game);
 		map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map))
 				.getMap();
+		
+		//shows where user is now. 
+		map.setMyLocationEnabled(true);
 
 		// Gets a question from test-class, good for now.
 		final QuizWalkGame q = TestRun.createGame();

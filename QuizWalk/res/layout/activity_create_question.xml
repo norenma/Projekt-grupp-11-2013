@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/questionText"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:hint="@string/enter_your_question" >
+
+    </EditText>
+
+    <EditText
+        android:id="@+id/answer1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/questionText"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="22dp"
+        android:ems="10"
+        android:hint="@string/answer1" />
+
+    <EditText
+        android:id="@+id/answer2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/answer1"
+        android:layout_below="@+id/answer1"
+        android:layout_marginTop="19dp"
+        android:ems="10"
+        android:hint="@string/answer2" />
+
+    <EditText
+        android:id="@+id/answer3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/answer2"
+        android:layout_below="@+id/answer2"
+        android:layout_marginTop="18dp"
+        android:ems="10"
+        android:hint="@string/answer3" />
+
+    <EditText
+        android:id="@+id/answer4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/answer3"
+        android:layout_below="@+id/answer3"
+        android:layout_marginTop="18dp"
+        android:ems="10"
+        android:hint="@string/answer4" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="42dp"
+        android:text="@string/create_question" />
+
+    <RadioButton
+        android:id="@+id/radioButton1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/answer2"
+        android:layout_marginLeft="17dp"
+        android:layout_toRightOf="@+id/answer1"
+        android:text="@string/empty" />
+
+    <RadioButton
+        android:id="@+id/RadioButton01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/answer2"
+        android:layout_alignBottom="@+id/answer2"
+        android:layout_alignLeft="@+id/radioButton1"
+        android:text="@string/empty" />
+
+    <RadioButton
+        android:id="@+id/RadioButton02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/answer3"
+        android:layout_alignBottom="@+id/answer3"
+        android:layout_alignLeft="@+id/RadioButton01"
+        android:text="@string/empty" />
+
+    <RadioButton
+        android:id="@+id/RadioButton03"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/answer4"
+        android:layout_alignLeft="@+id/RadioButton02"
+        android:text="@string/empty" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/radioButton1"
+        android:layout_toLeftOf="@+id/RadioButton01"
+        android:text="@string/correct_answer"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+</RelativeLayout>
