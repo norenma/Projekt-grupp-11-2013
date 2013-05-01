@@ -2,6 +2,9 @@ package se.chalmers.it12.tda367.vt13.grp11.quizwalk.model;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
+
+import java.io.Serializable;
+
 import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.utils.Constants;
 import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.utils.Constants.MediaType;
 
@@ -10,7 +13,7 @@ import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.utils.Constants.MediaTy
  * incorrect when they populate {@link Challenge}s.
  * 
  */
-public class StringAnswer extends Answer {
+public class StringAnswer extends Answer implements Serializable {
 
 	/**
 	 * An answer.

@@ -1,12 +1,14 @@
 package se.chalmers.it12.tda367.vt13.grp11.quizwalk.model;
 
+import java.io.Serializable;
+
 /**
  * An answer must be able to be compared to another answer. It also contain some
  * {@link Media} implementation. Typical usage in a {@link Challenge} for
  * <TT>Answer</TT> would be to see if an answer indeed corresponds to the to
  * correct answer in that same <tt>Challenge</tt>.
  */
-public abstract class Answer implements Media {
+public abstract class Answer implements Media, Serializable {
 
 	/**
 	 * An equals() based on the implemented {@link Media}

@@ -4,6 +4,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.utils.Utilities.checkNotNullOrEmpty;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -23,7 +24,7 @@ import com.google.common.collect.ImmutableSet;
  * challenges.
  * 
  */
-public class Challenge {
+public class Challenge implements Serializable{
 
 	/**
 	 * A challenge can have different states in an active game of QuizWalk. For

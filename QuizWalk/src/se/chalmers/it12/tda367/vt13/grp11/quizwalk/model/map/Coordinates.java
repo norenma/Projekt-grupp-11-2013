@@ -1,11 +1,13 @@
 package se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.map;
 
+import java.io.Serializable;
+
 
 //TODO: this Class with probably be replace/linked with Google Maps API Coordinates class. We must however keep MVC and aim to make the model autonomous.
 /**
  * Coordinates.
  */
-public class Coordinates {
+public class Coordinates implements Serializable{
 
 	private final double latitude;
 	private final double longitude;

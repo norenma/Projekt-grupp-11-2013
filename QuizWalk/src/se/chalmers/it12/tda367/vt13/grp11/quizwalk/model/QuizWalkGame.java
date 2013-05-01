@@ -3,6 +3,7 @@ package se.chalmers.it12.tda367.vt13.grp11.quizwalk.model;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.utils.Utilities.checkNotNullOrEmpty;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,7 +20,7 @@ import com.google.common.collect.ImmutableList;
  * {@link Challenge.ChallengeState}.
  * 
  */
-public class QuizWalkGame extends Game {
+public class QuizWalkGame extends Game implements Serializable {
 
 	/**
 	 * Builder pattern class for QuizWalkGame. "Builder"-class makes it easier

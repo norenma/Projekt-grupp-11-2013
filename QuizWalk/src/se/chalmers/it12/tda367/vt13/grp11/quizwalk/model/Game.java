@@ -1,10 +1,12 @@
 package se.chalmers.it12.tda367.vt13.grp11.quizwalk.model;
 
+import java.io.Serializable;
+
 /**
  * <code>QuizWalkGame</code> will subclass this.
  * 
  */
-public abstract class Game {
+public abstract class Game implements Serializable{
 
 	/**
 	 * Identifiers for different states of a <code>Game</code>.

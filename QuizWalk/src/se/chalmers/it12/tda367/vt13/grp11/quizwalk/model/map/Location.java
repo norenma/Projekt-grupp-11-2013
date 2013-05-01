@@ -1,6 +1,9 @@
 package se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.map;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+
+import java.io.Serializable;
+
 import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.Challenge;
 import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.Image;
 
@@ -12,7 +15,7 @@ import com.google.common.base.Optional;
  */
 
 //TODO: Class name might(read will) interfere with com.android.location
-public class Location extends Coordinates {
+public class Location extends Coordinates implements Serializable{
 
 
 	private final String description;

@@ -17,5 +17,7 @@
     <string name="empty"></string>
     <string name="right_answer">Right:</string>
     <string name="correct_answer">Correct:</string>
+    <string name="correct_Answer">Correct Answer</string>
+    <color  name="white">#FFFFFF</color>
 
 </resources>

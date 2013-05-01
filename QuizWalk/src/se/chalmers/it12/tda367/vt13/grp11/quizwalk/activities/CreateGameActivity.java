@@ -1,6 +1,8 @@
 package se.chalmers.it12.tda367.vt13.grp11.quizwalk.activities;
 
 import se.chalmers.it12.tda367.vt13.grp11.quizwalk.R;
+import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.QuizWalkGame;
+import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.QuizWalkGame.Builder;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,8 +10,10 @@ import android.os.Bundle;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 public class CreateGameActivity extends Activity {
+	private QuizWalkGame.Builder builder=new Builder();
 	private GoogleMap map;
 
 	@Override
@@ -22,11 +26,17 @@ public class CreateGameActivity extends Activity {
 		//shows where user is now. 
 		map.setMyLocationEnabled(true);
 		
+		
+		
 		map.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
 			
 			@Override
 			public void onMapLongClick(LatLng arg0) {
-				startActivity(new Intent(CreateGameActivity.this, CreateQuestionActivity.class));
+				map.addMarker(new MarkerOptions().position(arg0));
+				Intent intent=new Intent(CreateGameActivity.this, CreateQuestionActivity.class);
+				double[] location={arg0.latitude, arg0.longitude};
+				intent.putExtra(LOCATION_SERVICE, location);
+				startActivity(intent);
 				
 				
 			}
