@@ -23,5 +23,15 @@ public abstract class Question implements Media {
 	public String toString() {
 		return getMedia().toString();
 	}
+	
+	/**
+	 * Describes the genre of the question
+	 * @author Hampus Forsvall, forzvall@gmail.com
+	 *
+	 */
+	//TODO: Will need a more thorough implementation. Discussion will be held in a later iteration
+	public enum Genre{
+		POLITICS, SPORTS, MOVIES, MUSIC, HISTORY, GEOGRAPHY, SCIENCE, MISC
+	}
 
 }

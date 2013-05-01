@@ -13,6 +13,7 @@ import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.utils.Constants.MediaTy
 public class StringQuestion extends Question implements Serializable {
 
 	private final String question;
+	private final Genre genre;
 
 	/**
 	 * Create a string question. Questions can be added to games.
@@ -21,6 +22,8 @@ public class StringQuestion extends Question implements Serializable {
 	 */
 	public StringQuestion(String question) {
 		this.question = checkNotNullOrEmpty(question, "question can't be empty");
+		//see the TODO in Question.java!
+		genre = Genre.MISC;
 	}
 
 	@Override
