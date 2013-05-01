@@ -10,12 +10,16 @@ import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.QuizWalkGame;
 import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.utils.Utilities;
 import temp.debug.norenma.TestRun;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -68,15 +72,18 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 
 		});
 		
+		//Checks if the gps is turned on
+		LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
+		if(!service.isProviderEnabled(LocationManager.GPS_PROVIDER)){
+			showEnableGPSDialog();
+		}
 		
 	    locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 	    provider = locationManager.getBestProvider(new Criteria(), false);
 	    location = locationManager.getLastKnownLocation(provider);
 		
 	    checkNotNull(location);
-	    
 	    onLocationChanged(location);
-
 
 	}
 	/* Request updates at startup */
@@ -85,6 +92,13 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 		super.onResume();
 		locationManager.requestLocationUpdates(provider, 400, 1, this);
 	}
+	
+	/* Remove the locationlistener updates when Activity is paused */
+	  @Override
+	  protected void onPause() {
+	    super.onPause();
+	    locationManager.removeUpdates(this);
+	  }
 
 	@Override
 	public void onLocationChanged(Location location) {
@@ -94,8 +108,7 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 
 	@Override
 	public void onProviderDisabled(String provider) {
-		// TODO Auto-generated method stub
-		
+		showEnableGPSDialog();
 	}
 
 	@Override
@@ -108,5 +121,27 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 	public void onStatusChanged(String provider, int status, Bundle extras) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	/**
+	 * Displays a popup prompting the user to enable the gps and then, if the user choses to, takes the user to the android settings interface
+	 */
+	public void showEnableGPSDialog() {
+		
+		AlertDialog.Builder ab = new AlertDialog.Builder(this);
+		String[] choice = {"Enable GPS", "Exit"};
+		ab.setItems(choice, new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface d, int choice) {
+				if(choice == 0){
+					Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+					startActivity(intent);
+				}
+				
+			}
+		});
+		
+		ab.setTitle("Your GPS is disabled, it must be enabled to play to game");
+
+		ab.show();
 	}
 }
