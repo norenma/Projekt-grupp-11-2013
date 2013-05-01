@@ -65,7 +65,7 @@
                 android:value="se.chalmers.it12.tda367.vt13.grp11.quizwalk.activities.CreateGameActivity" />
         </activity>
         <activity
-            android:name="se.chalmers.it12.tda367.vt13.grp11.quizwalk.EnableGPSDialogBuilder"
+            android:name="se.chalmers.it12.tda367.vt13.grp11.quizwalk.activities.EnableGPSDialogBuilder"
             android:label="@string/title_activity_enable_gpsdialog_builder"
             android:parentActivityName="se.chalmers.it12.tda367.vt13.grp11.quizwalk.activities.QuizWalkActivity" >
             <meta-data
