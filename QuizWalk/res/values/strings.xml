@@ -21,4 +21,6 @@
 
     <color name="white">#FFFFFF</color>
 
+    <string name="title_activity_temporary_proximity">TemporaryProximityActivity</string>
+
 </resources>
