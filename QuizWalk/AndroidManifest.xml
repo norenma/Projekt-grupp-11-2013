@@ -64,6 +64,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="se.chalmers.it12.tda367.vt13.grp11.quizwalk.activities.CreateGameActivity" />
         </activity>
+        <activity
+            android:name="debug.activities.TemporaryProximityActivity"
+            android:label="@string/title_activity_temporary_proximity"
+            android:parentActivityName="se.chalmers.it12.tda367.vt13.grp11.quizwalk.activities.QuizWalkActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="se.chalmers.it12.tda367.vt13.grp11.quizwalk.activities.QuizWalkActivity" />
+        </activity>
     </application>
 
 </manifest>
