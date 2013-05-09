@@ -38,11 +38,11 @@ public class CreateQuestionActivity extends Activity {
 		build.addIncorrectAnswer(new StringAnswer(((EditText) this.findViewById(R.id.answer2)).getText().toString()));
 		build.addIncorrectAnswer(new StringAnswer(((EditText) this.findViewById(R.id.answer3)).getText().toString()));
 		build.addIncorrectAnswer(new StringAnswer(((EditText) this.findViewById(R.id.answer4)).getText().toString()));
-		build.challengeReward(new ChallengeReward(100, "Good Job", Optional.<Image>absent()));
+		build.challengeReward(new ChallengeReward(100, " ", Optional.<Image>absent()));
 	
 		//Gets the coordinates
 		double[] locs=getIntent().getExtras().getDoubleArray(LOCATION_SERVICE);
-		build.addLocation(new Location(locs[0],locs[1]," D", Optional.<Image>absent()));
+		build.addLocation(new Location(locs[0],locs[1]," ", Optional.<Image>absent()));
 		
 		//Builds the challenge
 		Challenge c=build.build();

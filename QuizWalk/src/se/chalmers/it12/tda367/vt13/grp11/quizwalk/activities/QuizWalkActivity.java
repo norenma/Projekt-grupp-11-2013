@@ -79,7 +79,9 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 		}
 		
 	    locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+	    checkNotNull(locationManager.getBestProvider(new Criteria(), false));
 	    provider = locationManager.getBestProvider(new Criteria(), false);
+
 	    location = locationManager.getLastKnownLocation(provider);
 		
 	    checkNotNull(location);
@@ -102,7 +104,7 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 
 	@Override
 	public void onLocationChanged(Location location) {
-		Log.v("Debugg", location.getLongitude() + " " + location.getLatitude());
+		Log.v("Debug", location.getLongitude() + " " + location.getLatitude());
 		map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(),location.getLongitude()),3));	
 	}
 
