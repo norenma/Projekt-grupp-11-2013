@@ -7,10 +7,12 @@ import java.util.Iterator;
 import se.chalmers.it12.tda367.vt13.grp11.quizwalk.R;
 import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.Challenge;
 import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.QuizWalkGame;
+import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.utils.Constants;
 import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.utils.Utilities;
 import temp.debug.norenma.TestRun;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -28,11 +30,18 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 
+import debug.activities.TemporaryProximityActivity;
+
 public class QuizWalkActivity extends Activity implements LocationListener {
 	private GoogleMap map;
 	private LocationManager locationManager;
 	private String provider;
 	private Location location;
+	/**
+	 * Public message key for proximity alert
+	 */
+	//TODO: Remember to change value when changing packages name
+	public final static String PROXIMITY_ALERT_MESSAGE = "se.chalmers.it12.tda367.vt13.grp11.quizwalk.activities.MESSAGE";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -145,5 +154,29 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 		ab.setTitle("Your GPS is disabled, it must be enabled to play to game");
 
 		ab.show();
+	}
+	/**
+	 * Initiates all the proximity alerts for the QuizWalkGame
+	 * @param q
+	 * 		Extracts locations from the quizwalk
+	 * @param lm
+	 * 		Adds proximity alerts to the LocationManager
+	 */
+	
+	//TODO: Not sure how referencing a LocationManager works. Will need testing
+	//TODO: Reformat this method. The way it looks makes my brain scream in agony and pain
+	private void initProximityAlerts(QuizWalkGame q, LocationManager lm){
+		Iterator<Challenge> it = q.getChallenges().iterator();
+		while(it.hasNext()){
+			Iterator<se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.map.Location> locIt = it.next().getListOfLocations().iterator();
+			while(locIt.hasNext()){
+				se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.map.Location location = locIt.next();
+				Intent intent = new Intent(this, TemporaryProximityActivity.class);
+				float[] lngAndLat = {(float)location.getLatitude(),(float)location.getLongitude()};
+				intent.putExtra(PROXIMITY_ALERT_MESSAGE, lngAndLat);
+				PendingIntent pIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
+				lm.addProximityAlert(location.getLatitude(), location.getLongitude(), Constants.MARKER_PROXIMITY_RADIUS, -1, pIntent);
+			}
+		}
 	}
 }

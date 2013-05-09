@@ -8,6 +8,11 @@ import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.Media;
 public class Constants {
 
 	/**
+	 * The radius of which, if entered, the marker proximity alert will be fired
+	 */
+	public final static int MARKER_PROXIMITY_RADIUS = 10;
+	
+	/**
 	 * Identifiers for different types of
 	 * {@link Media}.
 	 */
