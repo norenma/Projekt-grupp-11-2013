@@ -36,4 +36,19 @@
         android:textSize="26sp"
         android:textStyle="bold|italic" />
 
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button2"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/button2"
+        android:layout_marginBottom="15dp"
+        android:background="@color/black_overlay"
+        android:onClick="onButtonClick_QuizWalkManager"
+        android:text="QuizWalks"
+        android:textColor="#FFFFFF"
+        android:textSize="26sp"
+        android:textStyle="bold|italic" />
+
 </RelativeLayout>

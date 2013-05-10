@@ -26,7 +26,10 @@ public class GameMenuActivity extends Activity {
 	public void onButtonClick_CreateGame(View v) {
 		startActivity(new Intent(this, CreateGameActivity.class));
 	}
-
+	public void onButtonClick_QuizWalkManager(View v) {
+		startActivity(new Intent(this, QuizWalkManagerActivity.class));
+	}
+	
 	/**
 	 * Set up the {@link android.app.ActionBar}.
 	 */

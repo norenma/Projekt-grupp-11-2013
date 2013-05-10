@@ -13,6 +13,8 @@ import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.Challenge.ChallengeStat
 
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 
 /**
  * A game of QuizWalk! This class will contain all information needed to
@@ -20,7 +22,9 @@ import com.google.common.collect.ImmutableList;
  * {@link Challenge.ChallengeState}.
  * 
  */
+@DatabaseTable(tableName = "quizwalkgames")
 public class QuizWalkGame extends Game implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Builder pattern class for QuizWalkGame. "Builder"-class makes it easier
@@ -138,20 +142,26 @@ public class QuizWalkGame extends Game implements Serializable {
 		}
 	}
 
+	@DatabaseField(generatedId = true)
+	private int id;
+
 	/**
 	 * Name of this game of QuizWalk.
 	 */
+	@DatabaseField
 	private final String name;
 
 	/**
 	 * Description of this QuizWalkGame. Describing the set of challenges
 	 * included. Can be empty.
 	 */
+	@DatabaseField
 	private final String description;
 
 	/**
 	 * Image representing this Game.
 	 */
+	@DatabaseField
 	private final Optional<Image> image;
 
 	/**
@@ -162,6 +172,7 @@ public class QuizWalkGame extends Game implements Serializable {
 	 * defined in {@link #challengeStates}.
 	 * 
 	 */
+	@DatabaseField
 	private final List<Challenge> challenges;
 
 	/**
@@ -170,16 +181,18 @@ public class QuizWalkGame extends Game implements Serializable {
 	 * keys reflects (points to same object) as the elements of
 	 * {@link #challenges}.
 	 */
+	@DatabaseField
 	private final Map<Challenge, ChallengeState> challengeStates;
 
 	/**
 	 * The reward, if any, granted to user who completes this QuizWalk.
 	 */
+	@DatabaseField
 	private final Optional<QuizWalkGameReward> reward;
 
-	// Can't do this.
+	// Needed for ORMLite reflection.
 	@SuppressWarnings("unused")
-	private QuizWalkGame() {
+	QuizWalkGame() {
 		name = null;
 		description = null;
 		image = null;
@@ -352,5 +365,12 @@ public class QuizWalkGame extends Game implements Serializable {
 	 */
 	public Optional<QuizWalkGameReward> getReward() {
 		return reward;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
 	}
 }

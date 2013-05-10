@@ -15,6 +15,8 @@ import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.map.Location;
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 
 /**
  * A Challenge, in its most minimal form, contains a {@link Question} with its
@@ -24,7 +26,8 @@ import com.google.common.collect.ImmutableSet;
  * challenges.
  * 
  */
-public class Challenge implements Serializable{
+@DatabaseTable
+public class Challenge implements Serializable {
 
 	/**
 	 * A challenge can have different states in an active game of QuizWalk. For
@@ -213,27 +216,34 @@ public class Challenge implements Serializable{
 	}
 
 	/** The <code>Question</code> representing this Challenge */
+	@DatabaseField
 	private final Question question;
 
 	/**
 	 * The correct answer to this challenge. Is always an entry in
 	 * {@link #listOfAnswers}
 	 */
+	@DatabaseField
 	private final Answer correctAnswer;
 
 	/** Description of this Challenge. Can be empty. */
+
+	@DatabaseField
 	private final String challengeDescription;
 
 	/** Set of available answers */
+	@DatabaseField
 	private final Set<Answer> setOfAnswers;
 
 	/** List of locations associated with this challenge, if any. */
+	@DatabaseField
 	private final List<Location> listOfLocations;
 
 	/**
 	 * Optionally, a <code>ChallengeReward</code> to be granted the
 	 * <code>User</code> who completes this <code>Challenge</code>.
 	 */
+	@DatabaseField
 	private final Optional<ChallengeReward> challengeReward;
 
 	// Can't do this.
