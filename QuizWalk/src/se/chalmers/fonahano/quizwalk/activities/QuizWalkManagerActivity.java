@@ -1,11 +1,11 @@
-package se.chalmers.it12.tda367.vt13.grp11.quizwalk.activities;
+package se.chalmers.fonahano.quizwalk.activities;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import se.chalmers.fonahano.quizwalk.R;
 import se.chalmers.fonahano.quizwalk.database.GameDatabaseManager;
-import se.chalmers.it12.tda367.vt13.grp11.quizwalk.R;
-import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.QuizWalkGame;
+import se.chalmers.fonahano.quizwalk.model.QuizWalkGame;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;

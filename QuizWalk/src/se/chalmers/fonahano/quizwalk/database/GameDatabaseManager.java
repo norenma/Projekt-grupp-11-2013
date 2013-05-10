@@ -3,7 +3,7 @@ package se.chalmers.fonahano.quizwalk.database;
 import java.sql.SQLException;
 import java.util.List;
 
-import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.QuizWalkGame;
+import se.chalmers.fonahano.quizwalk.model.QuizWalkGame;
 import android.content.Context;
 
 public class GameDatabaseManager {

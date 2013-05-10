@@ -1,14 +1,15 @@
-package se.chalmers.it12.tda367.vt13.grp11.quizwalk.activities;
+package se.chalmers.fonahano.quizwalk.activities;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.Iterator;
 
-import se.chalmers.it12.tda367.vt13.grp11.quizwalk.R;
-import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.Challenge;
-import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.QuizWalkGame;
+import se.chalmers.fonahano.quizwalk.R;
+import se.chalmers.fonahano.quizwalk.model.Challenge;
+import se.chalmers.fonahano.quizwalk.model.QuizWalkGame;
 import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.utils.Constants;
 import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.utils.Utilities;
+import temp.activities.TemporaryProximityActivity;
 import temp.debug.norenma.TestRun;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -30,7 +31,6 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 
-import debug.activities.TemporaryProximityActivity;
 
 public class QuizWalkActivity extends Activity implements LocationListener {
 	private GoogleMap map;
@@ -168,9 +168,9 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 	private void initProximityAlerts(QuizWalkGame q, LocationManager lm){
 		Iterator<Challenge> it = q.getChallenges().iterator();
 		while(it.hasNext()){
-			Iterator<se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.map.Location> locIt = it.next().getListOfLocations().iterator();
+			Iterator<se.chalmers.fonahano.quizwalk.map.Location> locIt = it.next().getListOfLocations().iterator();
 			while(locIt.hasNext()){
-				se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.map.Location location = locIt.next();
+				se.chalmers.fonahano.quizwalk.map.Location location = locIt.next();
 				Intent intent = new Intent(this, TemporaryProximityActivity.class);
 				float[] lngAndLat = {(float)location.getLatitude(),(float)location.getLongitude()};
 				intent.putExtra(PROXIMITY_ALERT_MESSAGE, lngAndLat);

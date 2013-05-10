@@ -1,4 +1,4 @@
-package se.chalmers.it12.tda367.vt13.grp11.quizwalk.model;
+package se.chalmers.fonahano.quizwalk.model;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.map.Location;
+import se.chalmers.fonahano.quizwalk.map.Location;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;

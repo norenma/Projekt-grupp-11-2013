@@ -1,6 +1,6 @@
-package se.chalmers.it12.tda367.vt13.grp11.quizwalk.activities;
+package se.chalmers.fonahano.quizwalk.activities;
 
-import se.chalmers.it12.tda367.vt13.grp11.quizwalk.R;
+import se.chalmers.fonahano.quizwalk.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;

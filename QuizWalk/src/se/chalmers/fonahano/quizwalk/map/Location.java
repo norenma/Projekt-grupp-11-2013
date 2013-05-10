@@ -1,11 +1,11 @@
-package se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.map;
+package se.chalmers.fonahano.quizwalk.map;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.io.Serializable;
 
-import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.Challenge;
-import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.Image;
+import se.chalmers.fonahano.quizwalk.model.Challenge;
+import se.chalmers.fonahano.quizwalk.model.Image;
 
 import com.google.common.base.Optional;
 

@@ -1,4 +1,4 @@
-package se.chalmers.it12.tda367.vt13.grp11.quizwalk.model;
+package se.chalmers.fonahano.quizwalk.model;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.utils.Utilities.checkNotNullOrEmpty;
@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.Challenge.ChallengeState;
+import se.chalmers.fonahano.quizwalk.model.Challenge.ChallengeState;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;

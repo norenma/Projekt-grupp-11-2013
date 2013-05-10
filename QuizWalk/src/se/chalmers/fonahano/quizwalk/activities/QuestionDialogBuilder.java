@@ -1,10 +1,10 @@
-package se.chalmers.it12.tda367.vt13.grp11.quizwalk.activities;
+package se.chalmers.fonahano.quizwalk.activities;
 
 import java.util.Iterator;
 
-import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.Answer;
-import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.Challenge;
-import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.StringAnswer;
+import se.chalmers.fonahano.quizwalk.model.Answer;
+import se.chalmers.fonahano.quizwalk.model.Challenge;
+import se.chalmers.fonahano.quizwalk.model.StringAnswer;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;

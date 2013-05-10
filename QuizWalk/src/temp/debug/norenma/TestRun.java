@@ -1,24 +1,22 @@
 package temp.debug.norenma;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
-import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.Answer;
-import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.Challenge;
-import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.ChallengeReward;
-import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.Image;
-import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.Question;
-import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.QuizWalkGame;
-import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.QuizWalkGameReward;
-import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.StringAnswer;
-import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.StringQuestion;
-import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.map.Location;
+import se.chalmers.fonahano.quizwalk.map.Location;
+import se.chalmers.fonahano.quizwalk.model.Answer;
+import se.chalmers.fonahano.quizwalk.model.Challenge;
+import se.chalmers.fonahano.quizwalk.model.ChallengeReward;
+import se.chalmers.fonahano.quizwalk.model.Image;
+import se.chalmers.fonahano.quizwalk.model.Question;
+import se.chalmers.fonahano.quizwalk.model.QuizWalkGame;
+import se.chalmers.fonahano.quizwalk.model.QuizWalkGameReward;
+import se.chalmers.fonahano.quizwalk.model.StringAnswer;
+import se.chalmers.fonahano.quizwalk.model.StringQuestion;
 
 import com.google.common.base.Optional;
 

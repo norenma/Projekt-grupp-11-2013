@@ -1,4 +1,4 @@
-package se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.map;
+package se.chalmers.fonahano.quizwalk.map;
 
 import java.io.Serializable;
 

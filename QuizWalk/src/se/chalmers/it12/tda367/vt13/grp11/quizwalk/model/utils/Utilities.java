@@ -8,10 +8,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.Challenge;
-import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.QuizWalkGame;
-import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.map.Coordinates;
-import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.map.Location;
+import se.chalmers.fonahano.quizwalk.map.Coordinates;
+import se.chalmers.fonahano.quizwalk.map.Location;
+import se.chalmers.fonahano.quizwalk.model.Challenge;
+import se.chalmers.fonahano.quizwalk.model.QuizWalkGame;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
