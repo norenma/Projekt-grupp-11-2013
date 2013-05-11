@@ -1,10 +1,14 @@
 package se.chalmers.fonahano.quizwalk.activities;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+
 import se.chalmers.fonahano.quizwalk.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +21,18 @@ public class GameMenuActivity extends Activity {
 		setContentView(R.layout.activity_game_menu);
 		// Show the Up button in the action bar.
 		setupActionBar();
+		
+		//Check if Google play service APK is installed
+		ensureGooglePlayServicesIsEnabled();
+		
+	}
+	
+	private void ensureGooglePlayServicesIsEnabled() {
+		int result = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
+		Log.i("GOOGLE_PLAY_SERVICES_AVAILABLE", String.valueOf(result));
+		if (result != ConnectionResult.SUCCESS) {
+			GooglePlayServicesUtil.getErrorDialog(result, this, 0).show();
+		}
 	}
 
 	public void onButtonClick_StartGame(View v) {

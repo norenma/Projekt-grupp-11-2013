@@ -1,6 +1,6 @@
 package se.chalmers.fonahano.quizwalk.model;
 
-import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.utils.Constants.MediaType;
+import se.chalmers.fonahano.quizwalk.utils.Constants.MediaType;
 
 /**
  * Represents a Media. Examples of media types are human readable strings (e.g

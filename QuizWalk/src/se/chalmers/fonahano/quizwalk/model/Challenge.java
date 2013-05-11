@@ -2,7 +2,7 @@ package se.chalmers.fonahano.quizwalk.model;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
-import static se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.utils.Utilities.checkNotNullOrEmpty;
+import static se.chalmers.fonahano.quizwalk.utils.Utilities.checkNotNullOrEmpty;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -15,6 +15,7 @@ import se.chalmers.fonahano.quizwalk.map.Location;
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
+import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
@@ -28,6 +29,11 @@ import com.j256.ormlite.table.DatabaseTable;
  */
 @DatabaseTable
 public class Challenge implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * A challenge can have different states in an active game of QuizWalk. For
@@ -76,16 +82,25 @@ public class Challenge implements Serializable {
 	public static class Builder {
 		private Question question;
 		private Answer correctAnswer;
-		private String challengeDescription;
+		private String description;
 		private Set<Answer> setOfAnswers;
 		private List<Location> listOfLocations;
 		private Optional<ChallengeReward> challengeReward;
 
 		public Builder() {
-			challengeDescription = "";
+			description = "";
 			setOfAnswers = new HashSet<Answer>();
 			listOfLocations = new ArrayList<Location>();
 			challengeReward = Optional.<ChallengeReward> absent();
+		}
+
+		/**
+		 * @param d
+		 *            the description.
+		 */
+		public Builder description(String d) {
+			this.description = d;
+			return this;
 		}
 
 		public Builder question(Question q) {
@@ -95,7 +110,7 @@ public class Challenge implements Serializable {
 
 		public Builder question(String q) {
 			this.question = new StringQuestion(checkNotNullOrEmpty(q,
-					"Question can't be empty."));
+				"Question can't be empty."));
 			return this;
 		}
 
@@ -118,28 +133,24 @@ public class Challenge implements Serializable {
 		 */
 		public Builder correctAnswer(String a) {
 			this.correctAnswer = new StringAnswer(checkNotNullOrEmpty(a,
-					"correctAnswer can't be empty"));
+				"correctAnswer can't be empty"));
 			setOfAnswers.add(correctAnswer);
 			return this;
 
 		}
 
 		/**
-		 * @param d
-		 *            the description.
-		 */
-		public Builder challengeDescription(String d) {
-			this.challengeDescription = d;
-			return this;
-		}
-
-		/**
 		 * @param a
-		 *            an incorrect answer.
+		 *            (OPTIONAL) an incorrect answer.
 		 */
 		public Builder addIncorrectAnswer(Answer a) {
 			setOfAnswers.add(a);
 			return this;
+		}
+
+		public Builder addIncorrectAnswer(String a) {
+			return addIncorrectAnswer(new StringAnswer(checkNotNullOrEmpty(a,
+				"incorrect answer can't be empty")));
 		}
 
 		/**
@@ -149,6 +160,14 @@ public class Challenge implements Serializable {
 		public Builder addLocation(Location l) {
 			listOfLocations.add(l);
 			return this;
+		}
+
+		public Builder addLocation(double latitude, double longitude) {
+			Location l = new Location(latitude,
+				longitude,
+				"some place",
+				Optional.<Image> absent());
+			return addLocation(l);
 		}
 
 		/**
@@ -167,8 +186,12 @@ public class Challenge implements Serializable {
 		 * @return the Challenge defined in the builder.
 		 */
 		public Challenge build() {
-			return new Challenge(challengeDescription, question, setOfAnswers,
-					correctAnswer, listOfLocations, challengeReward);
+			return new Challenge(description,
+				question,
+				setOfAnswers,
+				correctAnswer,
+				listOfLocations,
+				challengeReward);
 		}
 
 		/**
@@ -189,7 +212,7 @@ public class Challenge implements Serializable {
 		 * @return the challengeDescription
 		 */
 		public String getChallengeDescription() {
-			return challengeDescription;
+			return description;
 		}
 
 		/**
@@ -215,15 +238,18 @@ public class Challenge implements Serializable {
 
 	}
 
+	// Class vars
+	@DatabaseField(generatedId = true)
+	private int id;
 	/** The <code>Question</code> representing this Challenge */
-	@DatabaseField
+	@DatabaseField(dataType = DataType.SERIALIZABLE)
 	private final Question question;
 
 	/**
 	 * The correct answer to this challenge. Is always an entry in
 	 * {@link #listOfAnswers}
 	 */
-	@DatabaseField
+	@DatabaseField(dataType = DataType.SERIALIZABLE)
 	private final Answer correctAnswer;
 
 	/** Description of this Challenge. Can be empty. */
@@ -232,12 +258,12 @@ public class Challenge implements Serializable {
 	private final String challengeDescription;
 
 	/** Set of available answers */
-	@DatabaseField
-	private final Set<Answer> setOfAnswers;
+	@DatabaseField(dataType = DataType.SERIALIZABLE)
+	private final HashSet<Answer> setOfAnswers;
 
 	/** List of locations associated with this challenge, if any. */
-	@DatabaseField
-	private final List<Location> listOfLocations;
+	@DatabaseField(dataType = DataType.SERIALIZABLE)
+	private final ArrayList<Location> listOfLocations;
 
 	/**
 	 * Optionally, a <code>ChallengeReward</code> to be granted the
@@ -269,15 +295,15 @@ public class Challenge implements Serializable {
 
 		this.challengeDescription = checkNotNull(challengeDescription);
 
-		this.listOfLocations = checkNotNull(listOfLocations);
+		this.listOfLocations = new ArrayList<Location>(checkNotNull(listOfLocations));
 
-		this.setOfAnswers = checkNotNullOrEmpty(setOfAnswers,
-				"Set of answers must be present");
+		this.setOfAnswers = new HashSet<Answer>(checkNotNullOrEmpty(setOfAnswers,
+			"Set of answers must be present"));
 
 		this.correctAnswer = checkNotNull(correctAnswer);
 		// Set correctAnswer only if it's present in list.
 		checkArgument(setOfAnswers.contains(correctAnswer),
-				"correctAnswer must be present in the set of answers");
+			"correctAnswer must be present in the set of answers");
 
 		this.challengeReward = checkNotNull(challengeReward);
 

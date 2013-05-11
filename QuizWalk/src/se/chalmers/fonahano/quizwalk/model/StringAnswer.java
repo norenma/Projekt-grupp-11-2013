@@ -5,8 +5,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.io.Serializable;
 
-import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.utils.Constants;
-import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.utils.Constants.MediaType;
+import se.chalmers.fonahano.quizwalk.utils.Constants;
+import se.chalmers.fonahano.quizwalk.utils.Constants.MediaType;
 
 /**
  * An Answer in form of a text String. An answer can be either correct or

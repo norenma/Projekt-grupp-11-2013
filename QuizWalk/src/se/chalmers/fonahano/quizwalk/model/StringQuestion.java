@@ -1,11 +1,11 @@
 package se.chalmers.fonahano.quizwalk.model;
 
-import static se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.utils.Utilities.checkNotNullOrEmpty;
+import static se.chalmers.fonahano.quizwalk.utils.Utilities.checkNotNullOrEmpty;
 
 import java.io.Serializable;
 
-import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.utils.Constants;
-import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.utils.Constants.MediaType;
+import se.chalmers.fonahano.quizwalk.utils.Constants;
+import se.chalmers.fonahano.quizwalk.utils.Constants.MediaType;
 
 /**
  * Text question.

@@ -10,35 +10,39 @@ import se.chalmers.fonahano.quizwalk.model.Image;
 import com.google.common.base.Optional;
 
 /**
- * A Coordinate with some optional description and optional Image. These locations
- * can populate the {@link GameMap} and constitute {@link Challenge}s
+ * A Coordinate with some optional description and optional Image. These
+ * locations can populate the {@link GameMap} and constitute {@link Challenge}s
  */
 
-//TODO: Class name might(read will) interfere with com.android.location
-public class Location extends Coordinates implements Serializable{
-
+// TODO: Class name might(read will) interfere with com.android.location
+public class Location extends Coordinates implements Serializable {
 
 	private final String description;
-	
-	private final Optional<Image> image;
 
+	private final Optional<Image> image;
 
 	/**
 	 * Create a new Location.
 	 * 
 	 * @param latitude
 	 * @param longitude
-	 * @param description is optional.
-	 * @param image is optional.
+	 * @param description
+	 *            is optional.
+	 * @param image
+	 *            is optional.
 	 */
 	public Location(double latitude, double longitude, String description,
 			Optional<Image> image) {
 		super(latitude, longitude);
+
+		if (null == description) {
+			this.description = "";
+		} else {
+			this.description = description;
+		}
 		
-		this.description = checkNotNull(description);
 		this.image = checkNotNull(image);
 	}
-
 
 	/**
 	 * @return the description of this Location. May be empty.
@@ -47,15 +51,12 @@ public class Location extends Coordinates implements Serializable{
 		return description;
 	}
 
-
 	/**
 	 * @return the image
 	 */
 	public Optional<Image> getImage() {
 		return image;
 	}
-
-
 
 	@Override
 	public String toString() {

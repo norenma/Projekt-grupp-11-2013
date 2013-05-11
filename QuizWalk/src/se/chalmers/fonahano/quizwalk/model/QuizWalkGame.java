@@ -1,7 +1,7 @@
 package se.chalmers.fonahano.quizwalk.model;
 
 import static com.google.common.base.Preconditions.checkNotNull;
-import static se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.utils.Utilities.checkNotNullOrEmpty;
+import static se.chalmers.fonahano.quizwalk.utils.Utilities.checkNotNullOrEmpty;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -13,6 +13,7 @@ import se.chalmers.fonahano.quizwalk.model.Challenge.ChallengeState;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
+import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
@@ -99,11 +100,15 @@ public class QuizWalkGame extends Game implements Serializable {
 		}
 
 		/**
-		 * @return the QuizWalkGame that was built.
+		 * @return the QuizWalkGame that was built. Be sure to have set name,
+		 *         description, an preferably some challenges.
 		 */
 		public QuizWalkGame build() {
-			return new QuizWalkGame(name, description, image, challenges,
-					reward);
+			return new QuizWalkGame(name,
+				description,
+				image,
+				challenges,
+				reward);
 		}
 
 		/**
@@ -142,6 +147,7 @@ public class QuizWalkGame extends Game implements Serializable {
 		}
 	}
 
+	// Class vars
 	@DatabaseField(generatedId = true)
 	private int id;
 
@@ -161,7 +167,7 @@ public class QuizWalkGame extends Game implements Serializable {
 	/**
 	 * Image representing this Game.
 	 */
-	@DatabaseField
+	@DatabaseField(dataType = DataType.SERIALIZABLE)
 	private final Optional<Image> image;
 
 	/**
@@ -172,8 +178,8 @@ public class QuizWalkGame extends Game implements Serializable {
 	 * defined in {@link #challengeStates}.
 	 * 
 	 */
-	@DatabaseField
-	private final List<Challenge> challenges;
+	@DatabaseField(dataType = DataType.SERIALIZABLE)
+	private final ArrayList<Challenge> challenges;
 
 	/**
 	 * Keeps track of the {@link ChallengeState}s of this game's
@@ -181,13 +187,13 @@ public class QuizWalkGame extends Game implements Serializable {
 	 * keys reflects (points to same object) as the elements of
 	 * {@link #challenges}.
 	 */
-	@DatabaseField
-	private final Map<Challenge, ChallengeState> challengeStates;
+	@DatabaseField(dataType = DataType.SERIALIZABLE)
+	private final HashMap<Challenge, ChallengeState> challengeStates;
 
 	/**
 	 * The reward, if any, granted to user who completes this QuizWalk.
 	 */
-	@DatabaseField
+	@DatabaseField(dataType = DataType.SERIALIZABLE)
 	private final Optional<QuizWalkGameReward> reward;
 
 	// Needed for ORMLite reflection.
@@ -223,14 +229,15 @@ public class QuizWalkGame extends Game implements Serializable {
 	public QuizWalkGame(String name, String description, Optional<Image> image,
 			List<Challenge> challenges, Optional<QuizWalkGameReward> reward) {
 
-		this.name = checkNotNullOrEmpty(name, "name can't be non-empty.");
+		this.name = checkNotNullOrEmpty(name,
+			"name can't be non-empty.");
 
 		this.description = checkNotNull(description);
 
 		this.image = checkNotNull(image);
 
-		this.challenges = checkNotNullOrEmpty(challenges,
-				"list of challenges can't be empty");
+		this.challenges = new ArrayList<Challenge>(checkNotNullOrEmpty(challenges,
+			"list of challenges can't be empty"));
 
 		this.reward = checkNotNull(reward);
 
@@ -238,7 +245,8 @@ public class QuizWalkGame extends Game implements Serializable {
 
 		// Add challenges from list and set them to default.
 		for (Challenge c : challenges) {
-			challengeStates.put(c, ChallengeState.DEFAULT);
+			challengeStates.put(c,
+				ChallengeState.DEFAULT);
 		}
 	}
 
@@ -257,7 +265,8 @@ public class QuizWalkGame extends Game implements Serializable {
 		this.reward = o.getReward();
 		this.challengeStates = new HashMap<Challenge, Challenge.ChallengeState>();
 		for (Challenge c : o.getChallenges()) {
-			challengeStates.put(c, o.getChallengeStateOf(c));
+			challengeStates.put(c,
+				o.getChallengeStateOf(c));
 		}
 	}
 
@@ -267,7 +276,8 @@ public class QuizWalkGame extends Game implements Serializable {
 	 */
 	public void start() {
 		for (Challenge c : challenges) {
-			challengeStates.put(c, ChallengeState.UNVISITED);
+			challengeStates.put(c,
+				ChallengeState.UNVISITED);
 		}
 	}
 
@@ -276,7 +286,8 @@ public class QuizWalkGame extends Game implements Serializable {
 	 */
 	public void stop() {
 		for (Challenge c : challenges) {
-			challengeStates.put(c, ChallengeState.DEFAULT);
+			challengeStates.put(c,
+				ChallengeState.DEFAULT);
 		}
 	}
 
@@ -299,7 +310,8 @@ public class QuizWalkGame extends Game implements Serializable {
 		GameState s = GameState.GAME_OVER;
 
 		for (Challenge c : challengeStates.keySet()) {
-			if (challengeStates.get(c).equals(ChallengeState.UNVISITED))
+			if (challengeStates.get(c)
+				.equals(ChallengeState.UNVISITED))
 				s = GameState.RUNNING;
 		}
 		return s;
@@ -320,7 +332,8 @@ public class QuizWalkGame extends Game implements Serializable {
 		if (!challenges.contains(challenge))
 			return false;
 		else {
-			this.challengeStates.put(challenge, challengeState);
+			this.challengeStates.put(challenge,
+				challengeState);
 			return true;
 		}
 

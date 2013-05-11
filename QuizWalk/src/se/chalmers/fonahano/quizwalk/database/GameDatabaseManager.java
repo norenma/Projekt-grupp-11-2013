@@ -35,16 +35,30 @@ public class GameDatabaseManager {
 	public List<QuizWalkGame> getAllQuizWalkGame() {
 		List<QuizWalkGame> quizWalkGameList = null;
 		try {
-			quizWalkGameList = getHelper().getQuizWalkDao().queryForAll();
+			quizWalkGameList = getHelper().getQuizWalkDao()
+				.queryForAll();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return quizWalkGameList;
 	}
 
-	public void addQuizWalkGame(QuizWalkGame q) {
+	/**
+	 * @param q
+	 * @param createIfNotExists
+	 *            set this to true to ensure that the item does now exist before
+	 *            it is persisted. (If it does exist and this is set to false
+	 *            there will be error.) Use update methods to update entries.
+	 */
+	public void addQuizWalkGame(QuizWalkGame q, boolean createIfNotExists) {
 		try {
-			getHelper().getQuizWalkDao().create(q);
+			if (createIfNotExists) {
+				getHelper().getQuizWalkDao()
+					.createIfNotExists(q);
+			} else {
+				getHelper().getQuizWalkDao()
+					.create(q);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -53,7 +67,8 @@ public class GameDatabaseManager {
 	public QuizWalkGame getQuizWalkGameById(int quizWalkId) {
 		QuizWalkGame quizWalk = null;
 		try {
-			quizWalk = getHelper().getQuizWalkDao().queryForId(quizWalkId);
+			quizWalk = getHelper().getQuizWalkDao()
+				.queryForId(quizWalkId);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -62,10 +77,10 @@ public class GameDatabaseManager {
 
 	// ///////////////
 
-
 	public void deleteWishList(QuizWalkGame q) {
 		try {
-			getHelper().getQuizWalkDao().delete(q);
+			getHelper().getQuizWalkDao()
+				.delete(q);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -73,7 +88,8 @@ public class GameDatabaseManager {
 
 	public void updateQuizWalkGame(QuizWalkGame quizWalkGame) {
 		try {
-			getHelper().getQuizWalkDao().update(quizWalkGame);
+			getHelper().getQuizWalkDao()
+				.update(quizWalkGame);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
