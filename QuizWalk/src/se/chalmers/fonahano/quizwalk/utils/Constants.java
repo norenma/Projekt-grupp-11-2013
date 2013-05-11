@@ -1,4 +1,4 @@
-package se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.utils;
+package se.chalmers.fonahano.quizwalk.utils;
 
 import se.chalmers.fonahano.quizwalk.model.Media;
 
