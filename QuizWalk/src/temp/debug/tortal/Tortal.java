@@ -2,12 +2,15 @@ package temp.debug.tortal;
 
 import java.util.Map;
 
+import android.telephony.gsm.GsmCellLocation;
+
 import com.google.common.base.Optional;
+import com.google.gson.Gson;
 
 public class Tortal {
-	
-	public static class Tester{
-		
+
+	public static class Tester {
+
 		private Optional<Map> map;
 
 		public Tester(Optional<Map> map) {
@@ -23,26 +26,21 @@ public class Tortal {
 		}
 
 		/**
-		 * @param map the map to set
+		 * @param map
+		 *            the map to set
 		 */
 		public void setMap(Optional<Map> map) {
 			this.map = Optional.absent();
 		}
-		
+
 	}
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		
-		Tester t = new Tester(Optional.<Map>absent());
-		
-		t.setMap(Optional.<Map>absent());
-		
-		Optional<String> o = Optional.of("Hello");
-		
-		System.out.println(o.toString());
+
+		System.out.println(new Gson().toJson(DebugFactory.getRandomTortalChalmersQuizWalkGame1()));
 	}
 
 }

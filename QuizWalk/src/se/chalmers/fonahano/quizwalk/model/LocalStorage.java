@@ -2,7 +2,7 @@ package se.chalmers.fonahano.quizwalk.model;
 
 import java.util.List;
 
-import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.user.User;
+import se.chalmers.fonahano.quizwalk.user.User;
 
 /**
  * The local database/storage handler on the client should implement this class.

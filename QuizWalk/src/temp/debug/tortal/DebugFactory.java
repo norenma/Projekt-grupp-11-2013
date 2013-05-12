@@ -20,7 +20,8 @@ public class DebugFactory {
 			.build();
 
 		Challenge c2 = new Challenge.Builder().description("2: Kiosken")
-			.addLocation(57.687107d,11.981138d)
+			.addLocation(57.687107d,
+				11.981138d)
 			.question("Vilken film är bäst?")
 			.correctAnswer("Mad Max 2: The Road Warrior")
 			.addIncorrectAnswer("Avatar")
@@ -28,6 +29,11 @@ public class DebugFactory {
 			.addIncorrectAnswer("Fast & Furious 8")
 			.build();
 
-		return builder.name("tortal test game 1").description("Two challenges in chalmers").addChallenge(c1).addChallenge(c2).build();
+		// Return QuizWalkGame
+		return builder.name("tortal test game :: " + (int) (1 + Math.random() * 99))
+			.description("Two challenges in chalmers")
+			.addChallenge(c1)
+			.addChallenge(c2)
+			.build();
 	}
 }

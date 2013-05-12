@@ -6,7 +6,7 @@ import static se.chalmers.fonahano.quizwalk.utils.Utilities.checkNotNullOrEmpty;
 
 import java.io.Serializable;
 
-import se.chalmers.it12.tda367.vt13.grp11.quizwalk.model.user.User;
+import se.chalmers.fonahano.quizwalk.user.User;
 
 import com.google.common.base.Optional;
 

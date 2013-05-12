@@ -8,12 +8,18 @@ import se.chalmers.fonahano.quizwalk.database.GameDatabaseManager;
 import se.chalmers.fonahano.quizwalk.model.QuizWalkGame;
 import temp.debug.tortal.DebugFactory;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+
+import com.google.gson.Gson;
 
 public class QuizWalkManagerActivity extends Activity {
 
@@ -42,16 +48,16 @@ public class QuizWalkManagerActivity extends Activity {
 	}
 
 	private void setupListView(ListView listView) {
-		
-		//TODO: Debugging
+
+		// TODO: Debugging
 		addEntryFromDebugFactory();
-		
+
 		final List<QuizWalkGame> allQuizWalkGames = GameDatabaseManager.getInstance()
 			.getAllQuizWalkGame();
 
 		List<String> titles = new ArrayList<String>();
 		for (QuizWalkGame q : allQuizWalkGames) {
-			titles.add(q.getName());
+			titles.add("ID: " + q.getId() + " - Name: " + q.getName());
 		}
 
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
@@ -61,18 +67,18 @@ public class QuizWalkManagerActivity extends Activity {
 
 		final Activity activity = this;
 
-		// lv.setOnItemClickListener(new OnItemClickListener() {
+		listView.setOnItemClickListener(new OnItemClickListener() {
 
-		// TODO: Next Screen.
-		// public void onItemClick(AdapterView<?> parent, View view,
-		// int position, long id) {
-		// QuizWalkGame clickedQuizWalk = allQuizWalkGames.get(position);
-		// Intent intent = new Intent(activity, QuizWalkEditorActivity.class);
-		// intent.putExtra(Constants.keyQuizWalkGametId,
-		// clickedQuizWalk.getId());
-		// //startActivity(intent);
-		// }
-		// });
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				QuizWalkGame clickedQuizWalk = allQuizWalkGames.get(position);
+				Intent intent = new Intent(activity,
+					DebugActivity.class);
+				intent.putExtra("se.chalmers.fonahano.quizwalk.json_data",
+					new Gson().toJson(clickedQuizWalk));
+				 startActivity(intent);
+			}
+		});
 	}
 
 	// private void setupButton(Button btn) {
@@ -85,11 +91,14 @@ public class QuizWalkManagerActivity extends Activity {
 	// });
 	// }
 
-	// TODO: Persisting static QuizWalkGame (temp.debub.tortal.DebugFactory.java)
+	// TODO: Persisting static QuizWalkGame
+	// (temp.debub.tortal.DebugFactory.java)
 	private void addEntryFromDebugFactory() {
-			QuizWalkGame g = DebugFactory.getRandomTortalChalmersQuizWalkGame1();
-			GameDatabaseManager.getInstance().addQuizWalkGame(g, true);
-		}
+		QuizWalkGame g = DebugFactory.getRandomTortalChalmersQuizWalkGame1();
+		GameDatabaseManager.getInstance()
+			.addQuizWalkGame(g,
+				true);
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
