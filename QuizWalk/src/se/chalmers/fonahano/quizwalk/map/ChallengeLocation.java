@@ -15,14 +15,14 @@ import com.google.common.base.Optional;
  */
 
 // TODO: Class name might(read will) interfere with com.android.location
-public class Location extends Coordinates implements Serializable {
+public class ChallengeLocation extends Coordinates implements Serializable {
 
 	private final String description;
 
 	private final Optional<Image> image;
 
 	/**
-	 * Create a new Location.
+	 * Create a new ChallengeLocation.
 	 * 
 	 * @param latitude
 	 * @param longitude
@@ -31,7 +31,7 @@ public class Location extends Coordinates implements Serializable {
 	 * @param image
 	 *            is optional.
 	 */
-	public Location(double latitude, double longitude, String description,
+	public ChallengeLocation(double latitude, double longitude, String description,
 			Optional<Image> image) {
 		super(latitude, longitude);
 
@@ -45,7 +45,7 @@ public class Location extends Coordinates implements Serializable {
 	}
 
 	/**
-	 * @return the description of this Location. May be empty.
+	 * @return the description of this ChallengeLocation. May be empty.
 	 */
 	public String getDescription() {
 		return description;
@@ -61,7 +61,7 @@ public class Location extends Coordinates implements Serializable {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Location [getDescription()=");
+		builder.append("ChallengeLocation [getDescription()=");
 		builder.append(getDescription());
 		builder.append(", getImage()=");
 		builder.append(getImage());

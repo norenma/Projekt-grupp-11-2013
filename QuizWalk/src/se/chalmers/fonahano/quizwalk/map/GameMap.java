@@ -29,7 +29,7 @@ public enum GameMap {
 	/**
 	 * The users current location, or at least the last known position.
 	 */
-	private Optional<Location> currentLocation;
+	private Optional<ChallengeLocation> currentLocation;
 
 	/**
 	 * Games that the player is participating in.
@@ -39,12 +39,12 @@ public enum GameMap {
 	/**
 	 * Custom location nodes that user can set up on the map.
 	 */
-	private final List<Location> nodes;
+	private final List<ChallengeLocation> nodes;
 
 	private GameMap() {
-		this.nodes = new ArrayList<Location>();
+		this.nodes = new ArrayList<ChallengeLocation>();
 		this.activeGames = new HashSet<QuizWalkGame>();
-		this.currentLocation = Optional.<Location> absent();
+		this.currentLocation = Optional.<ChallengeLocation> absent();
 	}
 
 	// TODO: Debug methods to get all nodes. I don't like arrays but since we
@@ -56,9 +56,9 @@ public enum GameMap {
 	/**
 	 * Gets the list of saved nodes. Use <code>addNode()</code> to save nodes.
 	 * 
-	 * @return a list of previously added custom Location object ("node").
+	 * @return a list of previously added custom ChallengeLocation object ("node").
 	 */
-	public ImmutableList<Location> getNodes() {
+	public ImmutableList<ChallengeLocation> getNodes() {
 		return ImmutableList.copyOf(nodes);
 	}
 
@@ -74,7 +74,7 @@ public enum GameMap {
 	 * @param currentLocation
 	 *            the location to be saved.
 	 */
-	public void setCurrentLocation(Location currentLocation) {
+	public void setCurrentLocation(ChallengeLocation currentLocation) {
 		this.currentLocation = Optional.fromNullable(currentLocation);
 	}
 
@@ -84,7 +84,7 @@ public enum GameMap {
 	 * 
 	 * @return the currentLocation, if available.
 	 */
-	public Optional<Location> getCurrentLocation() {
+	public Optional<ChallengeLocation> getCurrentLocation() {
 		return currentLocation;
 	}
 
@@ -93,7 +93,7 @@ public enum GameMap {
 	 *            the custom location to be added to map.
 	 * @return true, only if map was modified
 	 */
-	public boolean addNode(Location node) {
+	public boolean addNode(ChallengeLocation node) {
 		return nodes.add(checkNotNull(node));
 	}
 
@@ -102,7 +102,7 @@ public enum GameMap {
 	 *            the custom location to be removed from map.
 	 * @return true, only if map was modified
 	 */
-	public boolean removeNode(Location node) {
+	public boolean removeNode(ChallengeLocation node) {
 		return nodes.remove(node);
 	}
 

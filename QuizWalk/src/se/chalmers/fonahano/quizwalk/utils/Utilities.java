@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import se.chalmers.fonahano.quizwalk.map.Coordinates;
-import se.chalmers.fonahano.quizwalk.map.Location;
+import se.chalmers.fonahano.quizwalk.map.ChallengeLocation;
 import se.chalmers.fonahano.quizwalk.model.Challenge;
 import se.chalmers.fonahano.quizwalk.model.QuizWalkGame;
 
@@ -33,7 +33,8 @@ public class Utilities {
 	public static String checkNotNullOrEmpty(String stringToCheck,
 			Object errorMessage) {
 		checkNotNull(stringToCheck);
-		checkArgument(!stringToCheck.isEmpty(), errorMessage);
+		checkArgument(!stringToCheck.isEmpty(),
+			errorMessage);
 		return stringToCheck;
 	}
 
@@ -49,7 +50,8 @@ public class Utilities {
 	public static <K, V> Map<K, V> checkNotNullOrEmpty(Map<K, V> mapToCheck,
 			Object errorMessage) {
 		checkNotNull(mapToCheck);
-		checkArgument(!mapToCheck.isEmpty(), errorMessage);
+		checkArgument(!mapToCheck.isEmpty(),
+			errorMessage);
 		for (K e : mapToCheck.keySet()) {
 			checkNotNull(e);
 		}
@@ -70,10 +72,11 @@ public class Utilities {
 	public static <T extends Collection<E>, E> T checkNotNullOrEmpty(
 			T collectionToCheck, Object errorMessage) {
 		checkNotNull(collectionToCheck);
-		checkArgument(!collectionToCheck.isEmpty(), errorMessage);
+		checkArgument(!collectionToCheck.isEmpty(),
+			errorMessage);
 		for (E t : collectionToCheck) {
-			checkArgument(t != null, errorMessage + ":"
-					+ "Some entry in Collection is null");
+			checkArgument(t != null,
+				errorMessage + ":" + "Some entry in Collection is null");
 		}
 		return collectionToCheck;
 	}
@@ -86,12 +89,13 @@ public class Utilities {
 	 * @return LatLng
 	 */
 	public static LatLng coordinatesToLatLng(Coordinates c) {
-		return new LatLng(c.getLatitude(), c.getLongitude());
+		return new LatLng(c.getLatitude(),
+			c.getLongitude());
 	}
 
 	/**
-	 * Populates a map with {@link Challenge} {@link Location} based on a
-	 * {@link QuizWalkGame}w
+	 * Populates a map with {@link Challenge} {@link ChallengeLocation} based on
+	 * a {@link QuizWalkGame}w
 	 * 
 	 * @param m
 	 *            Map to be populated
@@ -111,38 +115,12 @@ public class Utilities {
 
 		while (itChallenge.hasNext()) {
 			currentIt = itChallenge.next();
-			List<Location> locations = currentIt.getListOfLocations();
 
-			checkNotNull(locations);
+			// //TODO to make UC work, for now.
+			m.addMarker(new MarkerOptions().position(coordinatesToLatLng(currentIt.getLocation())))
+				.setTitle(currentIt.getChallengeDescription());
 
-			Iterator<Location> itLoc = locations.iterator();
-
-			// Adds a Marker for every available location
-			// TODO: Different states should generate different icons, not
-			// descriptions.
-			while (itLoc.hasNext()) {
-				// if(q.getChallengesStates(currentIt) ==
-				// ChallengeState.COMPLETED){
-				// m.addMarker(new
-				// MarkerOptions().position(coordinatesToLatLng(itLoc.next()))).setTitle("Completed");
-				// }else if(q.getChallengesStates(currentIt) ==
-				// ChallengeState.FAILED){
-				// m.addMarker(new
-				// MarkerOptions().position(coordinatesToLatLng(itLoc.next()))).setTitle("Failed");
-				// }else if(q.getChallengesStates(currentIt) ==
-				// ChallengeState.UNVISITED){
-				// m.addMarker(new
-				// MarkerOptions().position(coordinatesToLatLng(itLoc.next()))).setTitle("Unvisited");
-				// }
-				// //TODO to make UC work, for now.
-				m.addMarker(
-						new MarkerOptions().position(coordinatesToLatLng(itLoc
-								.next()))).setTitle(
-						currentIt.getChallengeDescription());
-
-			}
 		}
-		// }
 
 		// TODO: Add proper use of return value
 		return true;

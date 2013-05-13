@@ -5,6 +5,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.util.Iterator;
 
 import se.chalmers.fonahano.quizwalk.R;
+import se.chalmers.fonahano.quizwalk.map.ChallengeLocation;
 import se.chalmers.fonahano.quizwalk.model.Challenge;
 import se.chalmers.fonahano.quizwalk.model.QuizWalkGame;
 import se.chalmers.fonahano.quizwalk.utils.Constants;
@@ -168,15 +169,15 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 	private void initProximityAlerts(QuizWalkGame q, LocationManager lm){
 		Iterator<Challenge> it = q.getChallenges().iterator();
 		while(it.hasNext()){
-			Iterator<se.chalmers.fonahano.quizwalk.map.Location> locIt = it.next().getListOfLocations().iterator();
-			while(locIt.hasNext()){
-				se.chalmers.fonahano.quizwalk.map.Location location = locIt.next();
+			//Iterator<se.chalmers.fonahano.quizwalk.map.ChallengeLocation> locIt = it.next().getListOfLocations().iterator();
+			//while(locIt.hasNext()){
+				ChallengeLocation location = it.next().getLocation();
 				Intent intent = new Intent(this, TemporaryProximityActivity.class);
 				float[] lngAndLat = {(float)location.getLatitude(),(float)location.getLongitude()};
 				intent.putExtra(PROXIMITY_ALERT_MESSAGE, lngAndLat);
 				PendingIntent pIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
 				lm.addProximityAlert(location.getLatitude(), location.getLongitude(), Constants.MARKER_PROXIMITY_RADIUS, -1, pIntent);
-			}
+			//}
 		}
 	}
 }

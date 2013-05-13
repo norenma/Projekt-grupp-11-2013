@@ -1,7 +1,7 @@
 package se.chalmers.fonahano.quizwalk.activities;
 
 import se.chalmers.fonahano.quizwalk.R;
-import se.chalmers.fonahano.quizwalk.map.Location;
+import se.chalmers.fonahano.quizwalk.map.ChallengeLocation;
 import se.chalmers.fonahano.quizwalk.model.Challenge;
 import se.chalmers.fonahano.quizwalk.model.ChallengeReward;
 import se.chalmers.fonahano.quizwalk.model.Image;
@@ -87,8 +87,8 @@ public class CreateGameActivity extends Activity {
 		build.challengeReward(new ChallengeReward(100, " ", Optional.<Image>absent()));
 	
 		//Gets the coordinates
-		Location location=new Location(activeLocation.latitude, activeLocation.longitude, " ", Optional.<Image>absent());
-		build.addLocation(location);
+		ChallengeLocation location=new ChallengeLocation(activeLocation.latitude, activeLocation.longitude, " ", Optional.<Image>absent());
+		build.location(location);
 		
 		
 		//Builds the challenge

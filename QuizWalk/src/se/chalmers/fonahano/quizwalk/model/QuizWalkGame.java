@@ -147,7 +147,9 @@ public class QuizWalkGame extends Game implements Serializable {
 		}
 	}
 
-	// Class vars
+	// Class variables //
+	
+	//SQL id
 	@DatabaseField(generatedId = true)
 	private int id;
 

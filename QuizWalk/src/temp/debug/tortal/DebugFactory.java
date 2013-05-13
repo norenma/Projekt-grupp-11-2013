@@ -10,7 +10,7 @@ public class DebugFactory {
 
 		// Challenges
 		Challenge c1 = new Challenge.Builder().description("1: Korsningen")
-			.addLocation(57.689854d,
+			.location(57.689854d,
 				11.978145d)
 			.question("What is really cool?")
 			.correctAnswer("42")
@@ -20,7 +20,7 @@ public class DebugFactory {
 			.build();
 
 		Challenge c2 = new Challenge.Builder().description("2: Kiosken")
-			.addLocation(57.687107d,
+			.location(57.687107d,
 				11.981138d)
 			.question("Vilken film är bäst?")
 			.correctAnswer("Mad Max 2: The Road Warrior")
@@ -30,7 +30,8 @@ public class DebugFactory {
 			.build();
 
 		// Return QuizWalkGame
-		return builder.name("tortal test game :: " + (int) (1 + Math.random() * 99))
+		return builder.name("tortal test game :: "
+				+ (int) (1 + Math.random() * 99))
 			.description("Two challenges in chalmers")
 			.addChallenge(c1)
 			.addChallenge(c2)

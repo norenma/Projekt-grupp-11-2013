@@ -6,11 +6,12 @@ import static se.chalmers.fonahano.quizwalk.utils.Utilities.checkNotNullOrEmpty;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import se.chalmers.fonahano.quizwalk.map.Location;
+import se.chalmers.fonahano.quizwalk.map.ChallengeLocation;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
@@ -84,13 +85,16 @@ public class Challenge implements Serializable {
 		private Answer correctAnswer;
 		private String description;
 		private Set<Answer> setOfAnswers;
-		private List<Location> listOfLocations;
+		private ChallengeLocation location;
 		private Optional<ChallengeReward> challengeReward;
 
 		public Builder() {
 			description = "";
 			setOfAnswers = new HashSet<Answer>();
-			listOfLocations = new ArrayList<Location>();
+			location = new ChallengeLocation(0d,
+				0d,
+				"default location",
+				Optional.<Image> absent());
 			challengeReward = Optional.<ChallengeReward> absent();
 		}
 
@@ -152,22 +156,29 @@ public class Challenge implements Serializable {
 			return addIncorrectAnswer(new StringAnswer(checkNotNullOrEmpty(a,
 				"incorrect answer can't be empty")));
 		}
+		
+		public Builder addIncorrectAnswers(Collection<? extends Answer> answers){
+			for (Answer a : answers) {
+				setOfAnswers.add(a);
+			}
+			return this;
+		}
 
 		/**
 		 * @param l
 		 *            location to add.
 		 */
-		public Builder addLocation(Location l) {
-			listOfLocations.add(l);
+		public Builder location(ChallengeLocation l) {
+			location = checkNotNull(l);
 			return this;
 		}
 
-		public Builder addLocation(double latitude, double longitude) {
-			Location l = new Location(latitude,
+		public Builder location(double latitude, double longitude) {
+			ChallengeLocation l = new ChallengeLocation(latitude,
 				longitude,
-				"some place",
+				latitude + ":" + longitude,
 				Optional.<Image> absent());
-			return addLocation(l);
+			return location(l);
 		}
 
 		/**
@@ -190,7 +201,7 @@ public class Challenge implements Serializable {
 				question,
 				setOfAnswers,
 				correctAnswer,
-				listOfLocations,
+				location,
 				challengeReward);
 		}
 
@@ -223,10 +234,10 @@ public class Challenge implements Serializable {
 		}
 
 		/**
-		 * @return the listOfLocations, MUTABLE!
+		 * @return the location.
 		 */
-		public List<Location> getListOfLocations() {
-			return listOfLocations;
+		public ChallengeLocation getLocation() {
+			return location;
 		}
 
 		/**
@@ -263,7 +274,7 @@ public class Challenge implements Serializable {
 
 	/** List of locations associated with this challenge, if any. */
 	@DatabaseField(dataType = DataType.SERIALIZABLE)
-	private final ArrayList<Location> listOfLocations;
+	private final ChallengeLocation location;
 
 	/**
 	 * Optionally, a <code>ChallengeReward</code> to be granted the
@@ -274,12 +285,12 @@ public class Challenge implements Serializable {
 
 	// Can't do this.
 	@SuppressWarnings("unused")
-	private Challenge() {
+	Challenge() {
 		question = null;
 		correctAnswer = null;
 		challengeDescription = null;
 		setOfAnswers = null;
-		listOfLocations = null;
+		location = null;
 		challengeReward = null;
 	}
 
@@ -288,14 +299,14 @@ public class Challenge implements Serializable {
 	 */
 	public Challenge(String challengeDescription, Question question,
 			Set<Answer> setOfAnswers, Answer correctAnswer,
-			List<Location> listOfLocations,
+			ChallengeLocation location,
 			Optional<ChallengeReward> challengeReward) {
 
 		this.question = checkNotNull(question);
 
 		this.challengeDescription = checkNotNull(challengeDescription);
 
-		this.listOfLocations = new ArrayList<Location>(checkNotNull(listOfLocations));
+		this.location = checkNotNull(location);
 
 		this.setOfAnswers = new HashSet<Answer>(checkNotNullOrEmpty(setOfAnswers,
 			"Set of answers must be present"));
@@ -320,7 +331,7 @@ public class Challenge implements Serializable {
 		this.correctAnswer = c.getCorrectAnswer();
 		this.challengeDescription = c.getChallengeDescription();
 		this.setOfAnswers = new HashSet<Answer>(c.getSetOfAnswers());
-		this.listOfLocations = new ArrayList<Location>(c.getListOfLocations());
+		this.location = c.getLocation();
 		this.challengeReward = c.getReward();
 
 	}
@@ -366,10 +377,10 @@ public class Challenge implements Serializable {
 	}
 
 	/**
-	 * @return the {@link #listOfLocations}. Can be empty.
+	 * @return the {@link #location}. Can be empty.
 	 */
-	public ImmutableList<Location> getListOfLocations() {
-		return ImmutableList.copyOf(listOfLocations);
+	public ChallengeLocation getLocation() {
+		return location;
 	}
 
 	/**
@@ -377,25 +388,6 @@ public class Challenge implements Serializable {
 	 */
 	public Optional<ChallengeReward> getReward() {
 		return challengeReward;
-	}
-
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Challenge [getQuestion()=");
-		builder.append(getQuestion());
-		builder.append(", getCorrectAnswer()=");
-		builder.append(getCorrectAnswer());
-		builder.append(", getChallengeDescription()=");
-		builder.append(getChallengeDescription());
-		builder.append(", getSetOfAnswers()=");
-		builder.append(getSetOfAnswers());
-		builder.append(", getListOfLocations()=");
-		builder.append(getListOfLocations());
-		builder.append(", getReward()=");
-		builder.append(getReward());
-		builder.append("]");
-		return builder.toString();
 	}
 
 }
