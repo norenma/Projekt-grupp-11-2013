@@ -16,7 +16,7 @@ public class DebugActivity extends Activity {
 		setContentView(R.layout.debug_screen);
 
 		textView = (TextView) findViewById(R.id.debug_text);
-		if (getIntent().hasExtra("se.chalmers.fonahano.quizwalk.json_data")) {
+		if (getIntent().hasExtra("chalmers.fonahano.quizwalk.json_data")) {
 			textView.setText(getIntent().getStringExtra("se.chalmers.fonahano.quizwalk.json_data"));
 		}
 	}
@@ -25,8 +25,8 @@ public class DebugActivity extends Activity {
 	//INACTIVE
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.edit_quiz_walk_game,
-			menu);
+		//getMenuInflater().inflate(R.menu.edit_quiz_walk_game,
+		//	menu);
 		//INACTIVE
 		return false;
 	}
