@@ -7,7 +7,7 @@ import se.chalmers.fonahano.quizwalk.model.Media;
  */
 public class Constants {
 
-	// ORMLite Keys
+	// Database (ORMLite) Keys
 	public final static String keyQuizWalkGametId = "QuizWalkGameId";
 
 	/**

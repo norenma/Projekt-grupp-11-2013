@@ -16,8 +16,8 @@ public class DebugActivity extends Activity {
 		setContentView(R.layout.debug_screen);
 
 		textView = (TextView) findViewById(R.id.debug_text);
-		if (getIntent().hasExtra("chalmers.fonahano.quizwalk.json_data")) {
-			textView.setText(getIntent().getStringExtra("se.chalmers.fonahano.quizwalk.json_data"));
+		if (getIntent().hasExtra("json_data")) {
+			textView.setText(getIntent().getStringExtra("json_data"));
 		}
 	}
 	

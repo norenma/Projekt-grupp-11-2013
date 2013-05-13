@@ -5,6 +5,7 @@ import java.util.List;
 
 import se.chalmers.fonahano.quizwalk.R;
 import se.chalmers.fonahano.quizwalk.database.GameDatabaseManager;
+import se.chalmers.fonahano.quizwalk.database.GameOrmLiteSQLiteOpenHelper;
 import se.chalmers.fonahano.quizwalk.model.QuizWalkGame;
 import temp.debug.tortal.DebugFactory;
 import android.app.Activity;
@@ -29,6 +30,10 @@ public class QuizWalkManagerActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		//TODO: Uncomment to delete database
+		//deleteDatabase(GameOrmLiteSQLiteOpenHelper.DATABASE_NAME);
+		
 		GameDatabaseManager.init(this);
 
 		ViewGroup contentView = (ViewGroup) getLayoutInflater().inflate(R.layout.activity_quiz_walk_manager,
@@ -74,9 +79,9 @@ public class QuizWalkManagerActivity extends Activity {
 				QuizWalkGame clickedQuizWalk = allQuizWalkGames.get(position);
 				Intent intent = new Intent(activity,
 					DebugActivity.class);
-				intent.putExtra("se.chalmers.fonahano.quizwalk.json_data",
+				intent.putExtra("json_data",
 					new Gson().toJson(clickedQuizWalk));
-				 startActivity(intent);
+				startActivity(intent);
 			}
 		});
 	}

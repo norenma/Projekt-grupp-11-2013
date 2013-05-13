@@ -16,7 +16,7 @@ import com.j256.ormlite.table.TableUtils;
 
 public class GameOrmLiteSQLiteOpenHelper extends OrmLiteSqliteOpenHelper {
 	// name of the database file for your application
-	private static final String DATABASE_NAME = "QuizWalkDB.sqlite";
+	public static final String DATABASE_NAME = "QuizWalkDB.sqlite";
 
 	// any time you make changes to your database objects, you may have to increase the database version
 	private static final int DATABASE_VERSION = 1;
