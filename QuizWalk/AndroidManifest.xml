@@ -55,16 +55,6 @@
             android:label="@string/title_activity_create_game" >
         </activity>
         <activity
-            android:name="se.chalmers.fonahano.quizwalk.activities.CreateQuestionActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_create_question"
-            android:parentActivityName="se.chalmers.fonahano.quizwalk.activities.CreateGameActivity"
-            android:theme="@style/FullscreenTheme" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="se.chalmers.it12.tda367.vt13.grp11.quizwalk.activities.CreateGameActivity" />
-        </activity>
-        <activity
             android:name="temp.activities.TemporaryProximityActivity"
             android:label="@string/title_activity_temporary_proximity"
             android:parentActivityName="se.chalmers.fonahano.quizwalk.activities.QuizWalkActivity" >
@@ -83,6 +73,15 @@
         <activity
             android:name="se.chalmers.fonahano.quizwalk.activities.DebugActivity"
             android:label="@string/title_activity_debug" >
+        </activity>
+        <!-- Android API v2 Key -->
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyDRPZc9dBBl_SV-Rx4P_3N8WZmUIAsWHr4" />
+
+        <activity
+            android:name="se.chalmers.fonahano.quizwalk.activities.SettingsActivity"
+            android:label="@string/title_activity_settings" >
         </activity>
     </application>
 
