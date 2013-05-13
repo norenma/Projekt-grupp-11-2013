@@ -19,8 +19,8 @@ public class EditQuizWalkGameActivity extends Activity {
 	//INACTIVE
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.edit_quiz_walk_game,
-			menu);
+		//getMenuInflater().inflate(R.menu.edit_quiz_walk_game,
+		//	menu);
 		//INACTIVE
 		return false;
 	}
