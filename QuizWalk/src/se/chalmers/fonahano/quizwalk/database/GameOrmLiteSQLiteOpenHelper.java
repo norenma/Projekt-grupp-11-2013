@@ -14,7 +14,7 @@ import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
-public class GameDatabaseHelper extends OrmLiteSqliteOpenHelper {
+public class GameOrmLiteSQLiteOpenHelper extends OrmLiteSqliteOpenHelper {
 	// name of the database file for your application -- change to something appropriate for your app
 	private static final String DATABASE_NAME = "QuizWalkDB.sqlite";
 
@@ -24,7 +24,7 @@ public class GameDatabaseHelper extends OrmLiteSqliteOpenHelper {
 	// the DAO object we use to access the SimpleData table
 	private Dao<QuizWalkGame, Integer> wishListDao = null;
 
-	public GameDatabaseHelper(Context context) {
+	public GameOrmLiteSQLiteOpenHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 	}
 
@@ -34,7 +34,7 @@ public class GameDatabaseHelper extends OrmLiteSqliteOpenHelper {
 			TableUtils.createTable(connectionSource, QuizWalkGame.class);
 			//TableUtils.createTable(connectionSource, WishItem.class);
 		} catch (SQLException e) {
-			Log.e(GameDatabaseHelper.class.getName(), "Can't create database", e);
+			Log.e(GameOrmLiteSQLiteOpenHelper.class.getName(), "Can't create database", e);
 			throw new RuntimeException(e);
 		} catch (java.sql.SQLException e) {
 			e.printStackTrace();
@@ -56,7 +56,7 @@ public class GameDatabaseHelper extends OrmLiteSqliteOpenHelper {
 				db.execSQL(sql);
 			}
 		} catch (SQLException e) {
-			Log.e(GameDatabaseHelper.class.getName(), "exception during onUpgrade", e);
+			Log.e(GameOrmLiteSQLiteOpenHelper.class.getName(), "exception during onUpgrade", e);
 			throw new RuntimeException(e);
 		}
 		

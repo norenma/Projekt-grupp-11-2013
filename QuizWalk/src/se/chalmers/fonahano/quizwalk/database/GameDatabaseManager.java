@@ -20,17 +20,17 @@ public class GameDatabaseManager {
 		return instance;
 	}
 
-	private GameDatabaseHelper helper;
+	private GameOrmLiteSQLiteOpenHelper helper;
 
 	private GameDatabaseManager(Context ctx) {
-		helper = new GameDatabaseHelper(ctx);
+		helper = new GameOrmLiteSQLiteOpenHelper(ctx);
 	}
 
-	private GameDatabaseHelper getHelper() {
+	private GameOrmLiteSQLiteOpenHelper getHelper() {
 		return helper;
 	}
 
-	// - DAO OBJECTS for QUIZWALKGAMES - //
+	// - RETRIEVE-QUERIES - //
 
 	public List<QuizWalkGame> getAllQuizWalkGame() {
 		List<QuizWalkGame> quizWalkGameList = null;
@@ -41,6 +41,17 @@ public class GameDatabaseManager {
 			e.printStackTrace();
 		}
 		return quizWalkGameList;
+	}
+
+	public QuizWalkGame getQuizWalkGameById(int quizWalkId) {
+		QuizWalkGame quizWalk = null;
+		try {
+			quizWalk = getHelper().getQuizWalkDao()
+				.queryForId(quizWalkId);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return quizWalk;
 	}
 
 	/**
@@ -64,20 +75,11 @@ public class GameDatabaseManager {
 		}
 	}
 
-	public QuizWalkGame getQuizWalkGameById(int quizWalkId) {
-		QuizWalkGame quizWalk = null;
-		try {
-			quizWalk = getHelper().getQuizWalkDao()
-				.queryForId(quizWalkId);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return quizWalk;
-	}
+	
 
 	// ///////////////
 
-	public void deleteWishList(QuizWalkGame q) {
+	public void deleteQuizWalkGame(QuizWalkGame q) {
 		try {
 			getHelper().getQuizWalkDao()
 				.delete(q);
