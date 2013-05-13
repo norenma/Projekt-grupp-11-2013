@@ -15,14 +15,14 @@ import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
 public class GameOrmLiteSQLiteOpenHelper extends OrmLiteSqliteOpenHelper {
-	// name of the database file for your application -- change to something appropriate for your app
+	// name of the database file for your application
 	private static final String DATABASE_NAME = "QuizWalkDB.sqlite";
 
 	// any time you make changes to your database objects, you may have to increase the database version
 	private static final int DATABASE_VERSION = 1;
 
 	// the DAO object we use to access the SimpleData table
-	private Dao<QuizWalkGame, Integer> wishListDao = null;
+	private Dao<QuizWalkGame, Integer> quizWalkDao = null;
 
 	public GameOrmLiteSQLiteOpenHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -32,7 +32,6 @@ public class GameOrmLiteSQLiteOpenHelper extends OrmLiteSqliteOpenHelper {
 	public void onCreate(SQLiteDatabase database,ConnectionSource connectionSource) {
 		try {
 			TableUtils.createTable(connectionSource, QuizWalkGame.class);
-			//TableUtils.createTable(connectionSource, WishItem.class);
 		} catch (SQLException e) {
 			Log.e(GameOrmLiteSQLiteOpenHelper.class.getName(), "Can't create database", e);
 			throw new RuntimeException(e);
@@ -63,14 +62,14 @@ public class GameOrmLiteSQLiteOpenHelper extends OrmLiteSqliteOpenHelper {
 	}
 
 	public Dao<QuizWalkGame, Integer> getQuizWalkDao() {
-		if (null == wishListDao) {
+		if (null == quizWalkDao) {
 			try {
-				wishListDao = getDao(QuizWalkGame.class);
+				quizWalkDao = getDao(QuizWalkGame.class);
 			}catch (java.sql.SQLException e) {
 				e.printStackTrace();
 			}
 		}
-		return wishListDao;
+		return quizWalkDao;
 	}
 
 }
