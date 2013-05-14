@@ -29,5 +29,10 @@
     <string name="title_section3">Section 3</string>
     <string name="title_activity_edit_quiz_walk_game">EditQuizWalkGameActivity</string>
     <string name="title_activity_debug">DebugActivity</string>
+    <string name="menuButton_Settings">Settings</string>
+    <string name="menuButton_StartGame">Start Game</string>
+    <string name="menuButton_CreateGame">Create Game</string>
+    <string name="menuButton_QuizWalks">QuizWalks</string>
+    
 
 </resources>
