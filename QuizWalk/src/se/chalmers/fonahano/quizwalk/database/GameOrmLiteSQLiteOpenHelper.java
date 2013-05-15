@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import se.chalmers.fonahano.quizwalk.model.QuizWalkGame;
+import se.chalmers.fonahano.quizwalk.utils.C;
 import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -15,9 +16,6 @@ import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
 public class GameOrmLiteSQLiteOpenHelper extends OrmLiteSqliteOpenHelper {
-	// name of the database file for your application
-	public static final String DATABASE_NAME = "QuizWalkDB.sqlite";
-
 	// any time you make changes to your database objects, you may have to increase the database version
 	private static final int DATABASE_VERSION = 1;
 
@@ -25,7 +23,7 @@ public class GameOrmLiteSQLiteOpenHelper extends OrmLiteSqliteOpenHelper {
 	private Dao<QuizWalkGame, Integer> quizWalkDao = null;
 
 	public GameOrmLiteSQLiteOpenHelper(Context context) {
-		super(context, DATABASE_NAME, null, DATABASE_VERSION);
+		super(context, C.Data.DATABASE_NAME, null, DATABASE_VERSION);
 	}
 
 	@Override

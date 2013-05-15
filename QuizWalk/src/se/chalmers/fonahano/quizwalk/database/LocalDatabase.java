@@ -8,20 +8,23 @@ public interface LocalDatabase {
 
 	public abstract List<QuizWalkGame> getAllQuizWalkGame();
 
+	/**
+	 * Get a QuizWalkGame by its ID in the database.
+	 * 
+	 * @param quizWalkId
+	 * @return The
+	 */
 	public abstract QuizWalkGame getQuizWalkGameById(int quizWalkId);
 
 	/**
-	 * @param q
-	 * @param createIfNotExists
-	 *            set this to true to ensure that the item does now exist before
-	 *            it is persisted. (If it does exist and this is set to false
-	 *            there will be error.) Use update methods to update entries.
+	 * Add a QuizWalkGame to the database.
 	 */
-	public abstract void addQuizWalkGame(QuizWalkGame q,
-			boolean createIfNotExists);
+	public abstract void addQuizWalkGame(QuizWalkGame q);
 
+	/**
+	 * Delete the QuizWalkGame from the database.
+	 */
 	public abstract void deleteQuizWalkGame(QuizWalkGame q);
-
-	public abstract void updateQuizWalkGame(QuizWalkGame quizWalkGame);
+	
 
 }
