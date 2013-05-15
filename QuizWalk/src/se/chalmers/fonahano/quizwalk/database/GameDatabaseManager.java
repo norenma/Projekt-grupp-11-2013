@@ -32,9 +32,6 @@ public class GameDatabaseManager implements LocalDatabase {
 
 	// - RETRIEVE-QUERIES - //
 
-	/* (non-Javadoc)
-	 * @see se.chalmers.fonahano.quizwalk.database.LocalDatabase#getAllQuizWalkGame()
-	 */
 	@Override
 	public List<QuizWalkGame> getAllQuizWalkGame() {
 		List<QuizWalkGame> quizWalkGameList = null;
@@ -47,9 +44,6 @@ public class GameDatabaseManager implements LocalDatabase {
 		return quizWalkGameList;
 	}
 
-	/* (non-Javadoc)
-	 * @see se.chalmers.fonahano.quizwalk.database.LocalDatabase#getQuizWalkGameById(int)
-	 */
 	@Override
 	public QuizWalkGame getQuizWalkGameById(int quizWalkId) {
 		QuizWalkGame quizWalk = null;
@@ -62,31 +56,16 @@ public class GameDatabaseManager implements LocalDatabase {
 		return quizWalk;
 	}
 
-	/* (non-Javadoc)
-	 * @see se.chalmers.fonahano.quizwalk.database.LocalDatabase#addQuizWalkGame(se.chalmers.fonahano.quizwalk.model.QuizWalkGame, boolean)
-	 */
 	@Override
-	public void addQuizWalkGame(QuizWalkGame q, boolean createIfNotExists) {
+	public void addQuizWalkGame(QuizWalkGame q) {
 		try {
-			if (createIfNotExists) {
-				getHelper().getQuizWalkDao()
-					.createIfNotExists(q);
-			} else {
-				getHelper().getQuizWalkDao()
-					.create(q);
-			}
+			getHelper().getQuizWalkDao()
+				.create(q);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
-	
-
-	// ///////////////
-
-	/* (non-Javadoc)
-	 * @see se.chalmers.fonahano.quizwalk.database.LocalDatabase#deleteQuizWalkGame(se.chalmers.fonahano.quizwalk.model.QuizWalkGame)
-	 */
 	@Override
 	public void deleteQuizWalkGame(QuizWalkGame q) {
 		try {
@@ -97,17 +76,15 @@ public class GameDatabaseManager implements LocalDatabase {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see se.chalmers.fonahano.quizwalk.database.LocalDatabase#updateQuizWalkGame(se.chalmers.fonahano.quizwalk.model.QuizWalkGame)
-	 */
-	@Override
-	public void updateQuizWalkGame(QuizWalkGame quizWalkGame) {
-		try {
-			getHelper().getQuizWalkDao()
-				.update(quizWalkGame);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
+
+//	@Override
+//	public void updateQuizWalkGame(QuizWalkGame quizWalkGame) {
+//		try {
+//			getHelper().getQuizWalkDao()
+//				.update(quizWalkGame);
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 }
