@@ -20,6 +20,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import se.chalmers.fonahano.quizwalk.R;
 import se.chalmers.fonahano.quizwalk.map.ChallengeLocation;
+import se.chalmers.fonahano.quizwalk.map.Coordinates;
 import se.chalmers.fonahano.quizwalk.model.Challenge;
 import se.chalmers.fonahano.quizwalk.model.QuizWalkGame;
 import se.chalmers.fonahano.quizwalk.utils.C;
@@ -60,23 +61,37 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 		final QuestionDialogBuilder questionFragment = new QuestionDialogBuilder(
 				this);
 
+        //Handles if the activity has been prompted by a "questionintent" which has been fired by the proximity alert.
+        Intent intent = getIntent();
+
+        if(intent.getBooleanExtra(C.PROXIMITY_ALERT_MESSAGE, false) == true) {
+            double[] intentChallengeLatLng = intent.getDoubleArrayExtra(C.PROXIMITY_ALERT_MESSAGE);
+            questionFragment.showChallenge(q.getChallenge(new Coordinates(intentChallengeLatLng[0], intentChallengeLatLng[1])));
+        }
+
+
 
 		map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
 			@Override
-			public boolean onMarkerClick(Marker arg0) {
-				for (int i = 0; i < q.getChallenges().size(); i++) {
+            public boolean onMarkerClick(Marker arg0) {
+				/*for (int i = 0; i < q.getChallenges().size(); i++) {
 					if (arg0.getTitle().equals(
 							q.getChallenges().get(i).getChallengeDescription())) {
 						questionFragment
 								.showChallenge(q.getChallenges().get(i));
+
+                        arg0.getPosition();
 					}
 				}
-				return false;
+				return false;*/
+
+                questionFragment.showChallenge(q.getChallenge(Utilities.latLngToCoordinates(arg0.getPosition())));
+                return true;
 			}
 
-		});
-		
-		//Checks if the gps is turned on
+            });
+
+            //Checks if the gps is turned on
 		LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
 		if(!service.isProviderEnabled(LocationManager.GPS_PROVIDER)){
 			showEnableGPSDialog();
@@ -168,9 +183,11 @@ public class QuizWalkActivity extends Activity implements LocationListener {
                 Challenge itNext = it.next();
 				ChallengeLocation location = itNext.getLocation();
 				Intent intent = new Intent(this, QuizWalkActivity.class);
+                double[] latNLng = {itNext.getLocation().getLatitude(),itNext.getLocation().getLongitude()};
 
-				double[] lngAndLat = {location.getLatitude(),location.getLongitude()};
-				intent.putExtra(C.PROXIMITY_ALERT_MESSAGE, itNext.getId());
+				intent.putExtra(C.PROXIMITY_ALERT_MESSAGE, latNLng);
+                //To verify that the intent is infact a question
+                intent.putExtra(C.PROXIMITY_ALERT_MESSAGE, true);
 
 				PendingIntent pIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
 				lm.addProximityAlert(location.getLatitude(), location.getLongitude(), C.MARKER_PROXIMITY_RADIUS, -1, pIntent);
