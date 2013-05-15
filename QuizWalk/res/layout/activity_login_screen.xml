@@ -44,7 +44,7 @@
         android:ems="10"
         android:inputType="textEmailAddress"
         android:shadowColor="@android:color/white"
-        android:text="@string/hello_world"
+        android:text="@string/username_login"
         android:textColor="#FFFFFF" >
 
         <requestFocus />
