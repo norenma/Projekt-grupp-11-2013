@@ -1,17 +1,5 @@
 package se.chalmers.fonahano.quizwalk.activities;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
-import java.util.Iterator;
-
-import se.chalmers.fonahano.quizwalk.R;
-import se.chalmers.fonahano.quizwalk.map.ChallengeLocation;
-import se.chalmers.fonahano.quizwalk.model.Challenge;
-import se.chalmers.fonahano.quizwalk.model.QuizWalkGame;
-import se.chalmers.fonahano.quizwalk.utils.C;
-import se.chalmers.fonahano.quizwalk.utils.Utilities;
-import temp.activities.TemporaryProximityActivity;
-import temp.debug.norenma.TestRun;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.PendingIntent;
@@ -25,12 +13,22 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
-
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
+import se.chalmers.fonahano.quizwalk.R;
+import se.chalmers.fonahano.quizwalk.map.ChallengeLocation;
+import se.chalmers.fonahano.quizwalk.model.Challenge;
+import se.chalmers.fonahano.quizwalk.model.QuizWalkGame;
+import se.chalmers.fonahano.quizwalk.utils.C;
+import se.chalmers.fonahano.quizwalk.utils.Utilities;
+import temp.debug.norenma.TestRun;
+
+import java.util.Iterator;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 
 public class QuizWalkActivity extends Activity implements LocationListener {
@@ -38,11 +36,6 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 	private LocationManager locationManager;
 	private String provider;
 	private Location location;
-	/**
-	 * Public message key for proximity alert
-	 */
-	//TODO: Remember to change value when changing packages name
-	public final static String PROXIMITY_ALERT_MESSAGE = "se.chalmers.it12.tda367.vt13.grp11.quizwalk.activities.MESSAGE";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +59,7 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 
 		final QuestionDialogBuilder questionFragment = new QuestionDialogBuilder(
 				this);
+
 
 		map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
 			@Override
@@ -171,10 +165,13 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 		while(it.hasNext()){
 			//Iterator<se.chalmers.fonahano.quizwalk.map.ChallengeLocation> locIt = it.next().getListOfLocations().iterator();
 			//while(locIt.hasNext()){
-				ChallengeLocation location = it.next().getLocation();
-				Intent intent = new Intent(this, TemporaryProximityActivity.class);
-				float[] lngAndLat = {(float)location.getLatitude(),(float)location.getLongitude()};
-				intent.putExtra(PROXIMITY_ALERT_MESSAGE, lngAndLat);
+                Challenge itNext = it.next();
+				ChallengeLocation location = itNext.getLocation();
+				Intent intent = new Intent(this, QuizWalkActivity.class);
+
+				double[] lngAndLat = {location.getLatitude(),location.getLongitude()};
+				intent.putExtra(C.PROXIMITY_ALERT_MESSAGE, itNext.getId());
+
 				PendingIntent pIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
 				lm.addProximityAlert(location.getLatitude(), location.getLongitude(), C.MARKER_PROXIMITY_RADIUS, -1, pIntent);
 			//}
