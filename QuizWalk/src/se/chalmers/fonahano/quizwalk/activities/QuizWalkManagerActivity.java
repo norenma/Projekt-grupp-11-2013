@@ -101,8 +101,7 @@ public class QuizWalkManagerActivity extends Activity {
 	private void addEntryFromDebugFactory() {
 		QuizWalkGame g = DebugFactory.getRandomTortalChalmersQuizWalkGame1();
 		GameDatabaseManager.getInstance()
-			.addQuizWalkGame(g,
-				true);
+			.addQuizWalkGame(g);
 	}
 
 	@Override
