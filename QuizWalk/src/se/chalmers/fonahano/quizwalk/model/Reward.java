@@ -15,6 +15,7 @@ import com.google.common.base.Optional;
  * 
  */
 public class Reward implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * The value of this reward.

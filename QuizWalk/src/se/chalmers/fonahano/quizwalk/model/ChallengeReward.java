@@ -1,7 +1,5 @@
 package se.chalmers.fonahano.quizwalk.model;
 
-import java.io.Serializable;
-
 import com.google.common.base.Optional;
 
 /**
@@ -9,7 +7,8 @@ import com.google.common.base.Optional;
  * typically granted the user for have completing that <TT>Challenge</TT>
  * 
  */
-public class ChallengeReward extends Reward implements Serializable {
+public class ChallengeReward extends Reward {
+	private static final long serialVersionUID = 1L;
 
 	public ChallengeReward(int score, String description, Optional<Image> image) {
 		super(score, description, image);

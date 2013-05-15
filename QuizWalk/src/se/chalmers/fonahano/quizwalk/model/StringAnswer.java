@@ -2,19 +2,16 @@ package se.chalmers.fonahano.quizwalk.model;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
-
-import java.io.Serializable;
-
-import se.chalmers.fonahano.quizwalk.utils.Constants;
-import se.chalmers.fonahano.quizwalk.utils.Constants.MediaType;
+import se.chalmers.fonahano.quizwalk.utils.C;
+import se.chalmers.fonahano.quizwalk.utils.C.MediaType;
 
 /**
  * An Answer in form of a text String. An answer can be either correct or
  * incorrect when they populate {@link Challenge}s.
  * 
  */
-public class StringAnswer extends Answer implements Serializable {
-
+public class StringAnswer extends Answer {
+	private static final long serialVersionUID = 1L;
 	/**
 	 * An answer.
 	 */
@@ -32,7 +29,7 @@ public class StringAnswer extends Answer implements Serializable {
 
 	@Override
 	public MediaType getMediaType() {
-		return Constants.MediaType.STRING_MEDIA;
+		return C.MediaType.STRING_MEDIA;
 	}
 
 	@Override

@@ -7,6 +7,7 @@ import java.io.Serializable;
  * 
  */
 public abstract class Game implements Serializable{
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Identifiers for different states of a <code>Game</code>.

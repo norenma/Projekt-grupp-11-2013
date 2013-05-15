@@ -1,10 +1,13 @@
 package se.chalmers.fonahano.quizwalk.model;
 
+import java.io.Serializable;
+
 /**
  * Some <code>Question</code> to be added into {@link Challenge}s you create.
  * 
  */
-public abstract class Question implements Media {
+public abstract class Question implements Media, Serializable {
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * An equals() based on the implemented {@link Media}

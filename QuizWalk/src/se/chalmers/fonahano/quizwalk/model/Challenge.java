@@ -5,16 +5,13 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static se.chalmers.fonahano.quizwalk.utils.Utilities.checkNotNullOrEmpty;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import se.chalmers.fonahano.quizwalk.map.ChallengeLocation;
 
 import com.google.common.base.Optional;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
@@ -284,7 +281,6 @@ public class Challenge implements Serializable {
 	private final Optional<ChallengeReward> challengeReward;
 
 	// Can't do this.
-	@SuppressWarnings("unused")
 	Challenge() {
 		question = null;
 		correctAnswer = null;

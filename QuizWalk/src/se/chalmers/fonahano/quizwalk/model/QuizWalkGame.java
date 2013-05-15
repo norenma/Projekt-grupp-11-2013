@@ -3,11 +3,9 @@ package se.chalmers.fonahano.quizwalk.model;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static se.chalmers.fonahano.quizwalk.utils.Utilities.checkNotNullOrEmpty;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import se.chalmers.fonahano.quizwalk.model.Challenge.ChallengeState;
 
@@ -24,7 +22,7 @@ import com.j256.ormlite.table.DatabaseTable;
  * 
  */
 @DatabaseTable(tableName = "quizwalkgames")
-public class QuizWalkGame extends Game implements Serializable {
+public class QuizWalkGame extends Game{
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -199,7 +197,6 @@ public class QuizWalkGame extends Game implements Serializable {
 	private final Optional<QuizWalkGameReward> reward;
 
 	// Needed for ORMLite reflection.
-	@SuppressWarnings("unused")
 	QuizWalkGame() {
 		name = null;
 		description = null;

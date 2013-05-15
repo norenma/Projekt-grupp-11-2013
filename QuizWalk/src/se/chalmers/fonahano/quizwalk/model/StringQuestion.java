@@ -1,17 +1,15 @@
 package se.chalmers.fonahano.quizwalk.model;
 
 import static se.chalmers.fonahano.quizwalk.utils.Utilities.checkNotNullOrEmpty;
-
-import java.io.Serializable;
-
-import se.chalmers.fonahano.quizwalk.utils.Constants;
-import se.chalmers.fonahano.quizwalk.utils.Constants.MediaType;
+import se.chalmers.fonahano.quizwalk.utils.C;
+import se.chalmers.fonahano.quizwalk.utils.C.MediaType;
 
 /**
  * Text question.
  */
-public class StringQuestion extends Question implements Serializable {
-
+public class StringQuestion extends Question {
+	private static final long serialVersionUID = 1L;
+	
 	private final String question;
 	private final Genre genre;
 
@@ -28,7 +26,7 @@ public class StringQuestion extends Question implements Serializable {
 
 	@Override
 	public MediaType getMediaType() {
-		return Constants.MediaType.STRING_MEDIA;
+		return C.MediaType.STRING_MEDIA;
 	}
 
 	/**

@@ -12,6 +12,7 @@ import com.j256.ormlite.table.DatabaseTable;
  */
 @DatabaseTable
 public abstract class Answer implements Media, Serializable {
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * An equals() based on the implemented {@link Media}
