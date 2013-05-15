@@ -3,12 +3,23 @@ package se.chalmers.fonahano.quizwalk.utils;
 import se.chalmers.fonahano.quizwalk.model.Media;
 
 /**
- * Global identifiers here.
+ * Global identifiers here. Constants, Keys, etc.
  */
-public class Constants {
+public class C {
 
-	// Database (ORMLite) Keys
-	public final static String keyQuizWalkGametId = "QuizWalkGameId";
+	/**
+	 * Database constants
+	 *
+	 */
+	public static class Data {
+
+		public final static String QUIZ_WALK_GAME_ID = "QuizWalkGameId";
+		
+		public final static String JSON_DATA = "se.chalmers.fonahano.quizwalk.json_data";
+
+		// name of the database file for your application
+		public static final String DATABASE_NAME = "QuizWalkDB.sqlite";
+	}
 
 	/**
 	 * The radius of which, if entered, the marker proximity alert will be fired
