@@ -5,6 +5,7 @@ import com.google.common.collect.ImmutableList;
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
+import se.chalmers.fonahano.quizwalk.map.Coordinates;
 import se.chalmers.fonahano.quizwalk.model.Challenge.ChallengeState;
 
 import java.util.ArrayList;
@@ -388,19 +389,20 @@ public class QuizWalkGame extends Game{
 
     /**
      *
-     * @param id
+     * @param c
      * @return
      *      returns the challenge coresponding to the id
      */
     //TODO: might be a better way to handle this
 
-    public Challenge getChallenge(int id){
+    public Challenge getChallenge(Coordinates c){
         Iterator<Challenge> it = challenges.iterator();
         Challenge itNext;
         while(it.hasNext()) {
             itNext = it.next();
-            if(id == itNext.getId()) return itNext;
+            if(c == itNext.getLocation()) return itNext;
         }
         return null;
     }
+
 }
