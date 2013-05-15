@@ -8,7 +8,7 @@ import se.chalmers.fonahano.quizwalk.R;
 import se.chalmers.fonahano.quizwalk.map.ChallengeLocation;
 import se.chalmers.fonahano.quizwalk.model.Challenge;
 import se.chalmers.fonahano.quizwalk.model.QuizWalkGame;
-import se.chalmers.fonahano.quizwalk.utils.Constants;
+import se.chalmers.fonahano.quizwalk.utils.C;
 import se.chalmers.fonahano.quizwalk.utils.Utilities;
 import temp.activities.TemporaryProximityActivity;
 import temp.debug.norenma.TestRun;
@@ -176,7 +176,7 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 				float[] lngAndLat = {(float)location.getLatitude(),(float)location.getLongitude()};
 				intent.putExtra(PROXIMITY_ALERT_MESSAGE, lngAndLat);
 				PendingIntent pIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
-				lm.addProximityAlert(location.getLatitude(), location.getLongitude(), Constants.MARKER_PROXIMITY_RADIUS, -1, pIntent);
+				lm.addProximityAlert(location.getLatitude(), location.getLongitude(), C.MARKER_PROXIMITY_RADIUS, -1, pIntent);
 			//}
 		}
 	}
