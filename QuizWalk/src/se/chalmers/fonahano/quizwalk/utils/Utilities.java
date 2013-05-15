@@ -1,21 +1,20 @@
 package se.chalmers.fonahano.quizwalk.utils;
 
-import static com.google.common.base.Preconditions.checkArgument;
-import static com.google.common.base.Preconditions.checkNotNull;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+import se.chalmers.fonahano.quizwalk.map.ChallengeLocation;
+import se.chalmers.fonahano.quizwalk.map.Coordinates;
+import se.chalmers.fonahano.quizwalk.model.Challenge;
+import se.chalmers.fonahano.quizwalk.model.QuizWalkGame;
 
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import se.chalmers.fonahano.quizwalk.map.Coordinates;
-import se.chalmers.fonahano.quizwalk.map.ChallengeLocation;
-import se.chalmers.fonahano.quizwalk.model.Challenge;
-import se.chalmers.fonahano.quizwalk.model.QuizWalkGame;
-
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Common static utility methods goes here.
@@ -125,5 +124,9 @@ public class Utilities {
 		// TODO: Add proper use of return value
 		return true;
 	}
+
+    public static Coordinates latLngToCoordinates(LatLng ll){
+        return new Coordinates(ll.latitude,ll.longitude);
+    }
 
 }
