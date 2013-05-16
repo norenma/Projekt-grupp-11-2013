@@ -7,7 +7,13 @@ import se.chalmers.fonahano.quizwalk.model.Media;
  */
 public class C {
 
-	/**
+
+    /**
+     * Public message key for proximity alert
+     */
+    public final static String PROXIMITY_ALERT_MESSAGE = "se.chalmers.fonahano.quizwalk.activitiesMESSAGE";
+
+    /**
 	 * Database constants
 	 *
 	 */
