@@ -57,4 +57,9 @@ public class StringAnswer implements Answer<String> {
 		return result;
 	}
 
+	@Override
+	public String toString() {
+		return answer;
+	}
+
 }

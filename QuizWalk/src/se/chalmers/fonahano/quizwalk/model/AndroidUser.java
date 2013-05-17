@@ -37,6 +37,10 @@ public class AndroidUser implements Serializable {
 		public boolean isSoundEnabled() {
 			return soundEnabled;
 		}
+		
+		public boolean setSoundEnabled(boolean soundEnabled) {
+			return soundEnabled == (this.soundEnabled = soundEnabled);
+		}
 	}
 
 	@DatabaseField(generatedId = true)

@@ -1,9 +1,6 @@
 package se.chalmers.fonahano.quizwalk.model;
 
 import static com.google.common.base.Preconditions.checkNotNull;
-
-import java.io.Serializable;
-
 import se.chalmers.fonahano.quizwalk.interfaces.Image;
 
 import com.google.common.base.Optional;
@@ -14,7 +11,8 @@ import com.google.common.base.Optional;
  */
 
 // TODO: Class name might(read will) interfere with com.android.location
-public class ChallengeLocation extends Coordinates implements Serializable {
+public class ChallengeLocation extends Coordinates {
+	private static final long serialVersionUID = 1L;
 
 	private final String description;
 
