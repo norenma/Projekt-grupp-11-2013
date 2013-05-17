@@ -7,12 +7,12 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
-import se.chalmers.fonahano.quizwalk.map.ChallengeLocation;
-import se.chalmers.fonahano.quizwalk.model.Answer;
+import se.chalmers.fonahano.quizwalk.interfaces.Answer;
+import se.chalmers.fonahano.quizwalk.interfaces.Image;
+import se.chalmers.fonahano.quizwalk.interfaces.Question;
 import se.chalmers.fonahano.quizwalk.model.Challenge;
+import se.chalmers.fonahano.quizwalk.model.ChallengeLocation;
 import se.chalmers.fonahano.quizwalk.model.ChallengeReward;
-import se.chalmers.fonahano.quizwalk.model.Image;
-import se.chalmers.fonahano.quizwalk.model.Question;
 import se.chalmers.fonahano.quizwalk.model.QuizWalkGame;
 import se.chalmers.fonahano.quizwalk.model.QuizWalkGameReward;
 import se.chalmers.fonahano.quizwalk.model.StringAnswer;
@@ -36,15 +36,15 @@ public class TestRun {
 	}
 
 	private static void playChallenge(Challenge c) {
-		System.out.println(c.getQuestion()
-			.getMedia()
-			.toString() + "\n");
-		Iterator<Answer> i = c.getSetOfAnswers()
+//		System.out.println(c.getQuestion()
+//			.getAnswer()
+//			.toString() + "\n");
+		Iterator<Answer<String>> i = c.getSetOfAnswers()
 			.iterator();
 		Scanner sc = new Scanner(System.in);
 		while (i.hasNext()) {
 			System.out.println(i.next()
-				.getMedia()
+				.getAnswer()
 				.toString());
 		}
 		String s = sc.nextLine();
@@ -61,14 +61,14 @@ public class TestRun {
 
 	public static Challenge createChallenge1() {
 		// Creates a question and answers
-		Question question = new StringQuestion("What is the capital of USA?");
-		Set<Answer> answers = new HashSet<Answer>();
+		String question = "What is the capital of USA?";
+		Set<Answer<String>> answers = new HashSet<Answer<String>>();
 		answers.add(new StringAnswer("New York"));
 		answers.add(new StringAnswer("Washington"));
 		answers.add(new StringAnswer("Los Angeles"));
 		answers.add(new StringAnswer("Boston"));
 
-		Answer correctAnswer = new StringAnswer("Washington");
+		String correctAnswer = "Washington";
 
 		// Genereates a position
 //		List<ChallengeLocation> locations = new ArrayList<ChallengeLocation>();
@@ -91,7 +91,7 @@ public class TestRun {
 		return new Challenge.Builder().description("A question about America..")
 			.question(question)
 			.correctAnswer(correctAnswer)
-			.addIncorrectAnswers(answers)
+			.addSetOfIncorrectAnswers(answers)
 			.location(53.558d,
 				9.927d)
 			.challengeReward(reward)
@@ -100,14 +100,14 @@ public class TestRun {
 
 	public static Challenge createChallenge2() {
 		// Creates a question and answers
-		Question question = new StringQuestion("Where was the olympic games 1996?");
-		Set<Answer> answers = new HashSet<Answer>();
+		String question = "Where was the olympic games 1996?";
+		Set<Answer<String>> answers = new HashSet<Answer<String>>();
 		answers.add(new StringAnswer("Sidney"));
 		answers.add(new StringAnswer("London"));
 		answers.add(new StringAnswer("Atlanta"));
 		answers.add(new StringAnswer("Stockholm"));
 
-		Answer correctAnswer = new StringAnswer("Atlanta");
+		Answer<String> correctAnswer = new StringAnswer("Atlanta");
 
 		// Genereates a position
 		List<ChallengeLocation> locations = new ArrayList<ChallengeLocation>();
@@ -133,14 +133,14 @@ public class TestRun {
 
 	public static Challenge createChallenge3() {
 		// Creates a question and answers
-		Question question = new StringQuestion("What is the highest mountain on earth?");
-		Set<Answer> answers = new HashSet<Answer>();
+		Question<String> question = new StringQuestion("What is the highest mountain on earth?");
+		Set<Answer<String>> answers = new HashSet<Answer<String>>();
 		answers.add(new StringAnswer("Month blanc"));
 		answers.add(new StringAnswer("K2"));
 		answers.add(new StringAnswer("Mount Everest"));
 		answers.add(new StringAnswer("Rocky Mountains"));
 
-		Answer correctAnswer = new StringAnswer("Mount Everest");
+		Answer<String> correctAnswer = new StringAnswer("Mount Everest");
 
 		// Genereates a position
 		List<ChallengeLocation> locations = new ArrayList<ChallengeLocation>();

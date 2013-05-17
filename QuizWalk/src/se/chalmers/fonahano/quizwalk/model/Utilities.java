@@ -1,20 +1,18 @@
-package se.chalmers.fonahano.quizwalk.utils;
+package se.chalmers.fonahano.quizwalk.model;
 
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-import se.chalmers.fonahano.quizwalk.map.ChallengeLocation;
-import se.chalmers.fonahano.quizwalk.map.Coordinates;
-import se.chalmers.fonahano.quizwalk.model.Challenge;
-import se.chalmers.fonahano.quizwalk.model.QuizWalkGame;
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import static com.google.common.base.Preconditions.checkArgument;
-import static com.google.common.base.Preconditions.checkNotNull;
+import se.chalmers.fonahano.quizwalk.interfaces.LatitudeLongitude;
+
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 /**
  * Common static utility methods goes here.
@@ -87,7 +85,7 @@ public class Utilities {
 	 *            Coordinates
 	 * @return LatLng
 	 */
-	public static LatLng coordinatesToLatLng(Coordinates c) {
+	public static LatLng coordinatesToLatLng(LatitudeLongitude c) {
 		return new LatLng(c.getLatitude(),
 			c.getLongitude());
 	}
@@ -125,7 +123,7 @@ public class Utilities {
 		return true;
 	}
 
-    public static Coordinates latLngToCoordinates(LatLng ll){
+    public static LatitudeLongitude latLngToCoordinates(LatLng ll){
         return new Coordinates(ll.latitude,ll.longitude);
     }
 

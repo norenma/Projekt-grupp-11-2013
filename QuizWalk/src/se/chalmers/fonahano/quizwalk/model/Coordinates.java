@@ -1,14 +1,17 @@
-package se.chalmers.fonahano.quizwalk.map;
+package se.chalmers.fonahano.quizwalk.model;
 
 import java.io.Serializable;
+
+import se.chalmers.fonahano.quizwalk.interfaces.LatitudeLongitude;
 
 
 //TODO: this Class with probably be replace/linked with Google Maps API Coordinates class. We must however keep MVC and aim to make the model autonomous.
 /**
  * Coordinates.
  */
-public class Coordinates implements Serializable{
-
+public class Coordinates implements Serializable, LatitudeLongitude{
+	private static final long serialVersionUID = 1L;
+	
 	private final double latitude;
 	private final double longitude;
 
@@ -17,16 +20,18 @@ public class Coordinates implements Serializable{
 		this.longitude = longitude;
 	}
 
-	/**
-	 * @return the latitude
+	/* (non-Javadoc)
+	 * @see se.chalmers.fonahano.quizwalk.model.LatitudeLongitude#getLatitude()
 	 */
+	@Override
 	public double getLatitude() {
 		return latitude;
 	}
 
-	/**
-	 * @return the longitude
+	/* (non-Javadoc)
+	 * @see se.chalmers.fonahano.quizwalk.model.LatitudeLongitude#getLongitude()
 	 */
+	@Override
 	public double getLongitude() {
 		return longitude;
 	}

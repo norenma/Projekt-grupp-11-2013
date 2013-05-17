@@ -5,7 +5,7 @@ import java.util.List;
 
 import se.chalmers.fonahano.quizwalk.R;
 import se.chalmers.fonahano.quizwalk.database.GameDatabaseManager;
-import se.chalmers.fonahano.quizwalk.database.GameOrmLiteSQLiteOpenHelper;
+import se.chalmers.fonahano.quizwalk.interfaces.C;
 import se.chalmers.fonahano.quizwalk.model.QuizWalkGame;
 import temp.debug.tortal.DebugFactory;
 import android.app.Activity;
@@ -32,7 +32,7 @@ public class QuizWalkManagerActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		
 		//TODO: Uncomment to delete database
-		//deleteDatabase(GameOrmLiteSQLiteOpenHelper.DATABASE_NAME);
+		deleteDatabase(C.Data.DATABASE_NAME);
 		
 		GameDatabaseManager.init(this);
 

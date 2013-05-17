@@ -1,10 +1,8 @@
 package se.chalmers.fonahano.quizwalk.activities;
 
 import se.chalmers.fonahano.quizwalk.R;
-import se.chalmers.fonahano.quizwalk.R.layout;
-import se.chalmers.fonahano.quizwalk.R.menu;
-import android.os.Bundle;
 import android.app.Activity;
+import android.os.Bundle;
 import android.view.Menu;
 
 public class EditQuizWalkGameActivity extends Activity {

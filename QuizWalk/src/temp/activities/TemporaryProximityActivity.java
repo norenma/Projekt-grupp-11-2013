@@ -2,6 +2,7 @@ package temp.activities;
 
 import se.chalmers.fonahano.quizwalk.R;
 import se.chalmers.fonahano.quizwalk.activities.QuizWalkActivity;
+import se.chalmers.fonahano.quizwalk.interfaces.C;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,7 +26,7 @@ public class TemporaryProximityActivity extends Activity {
 		// Show the Up button in the action bar.
 		setupActionBar();
 		Intent intent = getIntent();
-		float[] f = intent.getFloatArrayExtra(QuizWalkActivity.PROXIMITY_ALERT_MESSAGE);
+		float[] f = intent.getFloatArrayExtra(C.PROXIMITY_ALERT_MESSAGE);
 		
 		TextView latitudeTV = (TextView) findViewById(R.id.debug_latitude);
 		TextView longitudeTV = (TextView) findViewById(R.id.debug_longitude);

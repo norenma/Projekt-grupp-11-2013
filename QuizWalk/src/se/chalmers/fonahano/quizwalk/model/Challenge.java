@@ -2,14 +2,15 @@ package se.chalmers.fonahano.quizwalk.model;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
-import static se.chalmers.fonahano.quizwalk.utils.Utilities.checkNotNullOrEmpty;
+import static se.chalmers.fonahano.quizwalk.model.Utilities.checkNotNullOrEmpty;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import se.chalmers.fonahano.quizwalk.map.ChallengeLocation;
+import se.chalmers.fonahano.quizwalk.interfaces.Answer;
+import se.chalmers.fonahano.quizwalk.interfaces.Image;
+import se.chalmers.fonahano.quizwalk.interfaces.Question;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableSet;
@@ -78,16 +79,16 @@ public class Challenge implements Serializable {
 	 * <code>question()</code> before calling <code>build()</code>
 	 */
 	public static class Builder {
-		private Question question;
-		private Answer correctAnswer;
+		private Question<String> question;
+		private Answer<String> correctAnswer;
 		private String description;
-		private Set<Answer> setOfAnswers;
+		private Set<Answer<String>> setOfAnswers;
 		private ChallengeLocation location;
 		private Optional<ChallengeReward> challengeReward;
 
 		public Builder() {
 			description = "";
-			setOfAnswers = new HashSet<Answer>();
+			setOfAnswers = new HashSet<Answer<String>>();
 			location = new ChallengeLocation(0d,
 				0d,
 				"default location",
@@ -104,25 +105,14 @@ public class Challenge implements Serializable {
 			return this;
 		}
 
-		public Builder question(Question q) {
-			this.question = checkNotNull(q);
-			return this;
-		}
-
 		public Builder question(String q) {
 			this.question = new StringQuestion(checkNotNullOrEmpty(q,
 				"Question can't be empty."));
 			return this;
 		}
-
-		/**
-		 * @param a
-		 *            the correct answer to this Challenge. (This will add the
-		 *            correct answer to the setOfAnswers as well.)
-		 */
-		public Builder correctAnswer(Answer a) {
-			this.correctAnswer = checkNotNull(a);
-			setOfAnswers.add(a);
+		
+		public Builder question(Question<String> s) {
+			this.question = s;
 			return this;
 		}
 
@@ -139,25 +129,26 @@ public class Challenge implements Serializable {
 			return this;
 
 		}
-
-		/**
-		 * @param a
-		 *            (OPTIONAL) an incorrect answer.
-		 */
-		public Builder addIncorrectAnswer(Answer a) {
-			setOfAnswers.add(a);
+		
+		public Builder correctAnswer(Answer<String> a) {
+			this.correctAnswer = a;
 			return this;
 		}
 
+
 		public Builder addIncorrectAnswer(String a) {
-			return addIncorrectAnswer(new StringAnswer(checkNotNullOrEmpty(a,
+			setOfAnswers.add(new StringAnswer(checkNotNullOrEmpty(a,
 				"incorrect answer can't be empty")));
+			return this;
 		}
 		
-		public Builder addIncorrectAnswers(Collection<? extends Answer> answers){
-			for (Answer a : answers) {
-				setOfAnswers.add(a);
-			}
+		public Builder addIncorrectAnswer(Answer<String> a) {
+			setOfAnswers.add(a);
+			return this;
+		}
+		
+		public Builder addSetOfIncorrectAnswers(Set<Answer<String>> l) {
+			setOfAnswers = l;
 			return this;
 		}
 
@@ -205,14 +196,14 @@ public class Challenge implements Serializable {
 		/**
 		 * @return the question
 		 */
-		public Question getQuestion() {
+		public Question<String> getQuestion() {
 			return question;
 		}
 
 		/**
 		 * @return the correctAnswer
 		 */
-		public Answer getCorrectAnswer() {
+		public Answer<String> getCorrectAnswer() {
 			return correctAnswer;
 		}
 
@@ -226,7 +217,7 @@ public class Challenge implements Serializable {
 		/**
 		 * @return the setOfAnswers, MUTABLE!
 		 */
-		public Set<Answer> getSetOfAnswers() {
+		public Set<Answer<String>> getSetOfAnswers() {
 			return setOfAnswers;
 		}
 
@@ -251,14 +242,14 @@ public class Challenge implements Serializable {
 	private int id;
 	/** The <code>Question</code> representing this Challenge */
 	@DatabaseField(dataType = DataType.SERIALIZABLE)
-	private final Question question;
+	private final Question<String> question;
 
 	/**
 	 * The correct answer to this challenge. Is always an entry in
 	 * {@link #listOfAnswers}
 	 */
 	@DatabaseField(dataType = DataType.SERIALIZABLE)
-	private final Answer correctAnswer;
+	private final Answer<String> correctAnswer;
 
 	/** Description of this Challenge. Can be empty. */
 
@@ -267,7 +258,7 @@ public class Challenge implements Serializable {
 
 	/** Set of available answers */
 	@DatabaseField(dataType = DataType.SERIALIZABLE)
-	private final HashSet<Answer> setOfAnswers;
+	private final HashSet<Answer<String>> setOfAnswers;
 
 	/** List of locations associated with this challenge, if any. */
 	@DatabaseField(dataType = DataType.SERIALIZABLE)
@@ -275,7 +266,7 @@ public class Challenge implements Serializable {
 
 	/**
 	 * Optionally, a <code>ChallengeReward</code> to be granted the
-	 * <code>User</code> who completes this <code>Challenge</code>.
+	 * <code>AndroidUser</code> who completes this <code>Challenge</code>.
 	 */
 	@DatabaseField
 	private final Optional<ChallengeReward> challengeReward;
@@ -293,8 +284,8 @@ public class Challenge implements Serializable {
 	/**
 	 * Create a challenge.
 	 */
-	public Challenge(String challengeDescription, Question question,
-			Set<Answer> setOfAnswers, Answer correctAnswer,
+	public Challenge(String challengeDescription, Question<String> question,
+			Set<Answer<String>> setOfAnswers, Answer<String> correctAnswer,
 			ChallengeLocation location,
 			Optional<ChallengeReward> challengeReward) {
 
@@ -304,7 +295,7 @@ public class Challenge implements Serializable {
 
 		this.location = checkNotNull(location);
 
-		this.setOfAnswers = new HashSet<Answer>(checkNotNullOrEmpty(setOfAnswers,
+		this.setOfAnswers = new HashSet<Answer<String>>(checkNotNullOrEmpty(setOfAnswers,
 			"Set of answers must be present"));
 
 		this.correctAnswer = checkNotNull(correctAnswer);
@@ -326,7 +317,7 @@ public class Challenge implements Serializable {
 		this.question = c.getQuestion();
 		this.correctAnswer = c.getCorrectAnswer();
 		this.challengeDescription = c.getChallengeDescription();
-		this.setOfAnswers = new HashSet<Answer>(c.getSetOfAnswers());
+		this.setOfAnswers = new HashSet<Answer<String>>(c.getSetOfAnswers());
 		this.location = c.getLocation();
 		this.challengeReward = c.getReward();
 
@@ -340,21 +331,21 @@ public class Challenge implements Serializable {
 	 * @return <TT>TRUE</TT> only if the supplied argument equals
 	 *         {@link #correctAnswer}
 	 */
-	public final boolean isCorrectAnswer(Answer answer) {
+	public final boolean isCorrectAnswer(Answer<String> answer) {
 		return correctAnswer.equals(answer);
 	}
 
 	/**
 	 * @return the question
 	 */
-	public Question getQuestion() {
+	public Question<String> getQuestion() {
 		return question;
 	}
 
 	/**
 	 * @return the correctAnswer
 	 */
-	public Answer getCorrectAnswer() {
+	public Answer<String> getCorrectAnswer() {
 		return correctAnswer;
 	}
 
@@ -368,7 +359,7 @@ public class Challenge implements Serializable {
 	/**
 	 * @return the setOfAnswers.
 	 */
-	public ImmutableSet<Answer> getSetOfAnswers() {
+	public ImmutableSet<Answer<String>> getSetOfAnswers() {
 		return ImmutableSet.copyOf(setOfAnswers);
 	}
 

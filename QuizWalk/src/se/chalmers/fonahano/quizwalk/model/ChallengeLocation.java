@@ -1,11 +1,10 @@
-package se.chalmers.fonahano.quizwalk.map;
+package se.chalmers.fonahano.quizwalk.model;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.io.Serializable;
 
-import se.chalmers.fonahano.quizwalk.model.Challenge;
-import se.chalmers.fonahano.quizwalk.model.Image;
+import se.chalmers.fonahano.quizwalk.interfaces.Image;
 
 import com.google.common.base.Optional;
 

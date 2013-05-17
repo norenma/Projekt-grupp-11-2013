@@ -3,8 +3,9 @@ package se.chalmers.fonahano.quizwalk.database;
 import java.util.ArrayList;
 import java.util.List;
 
+import se.chalmers.fonahano.quizwalk.interfaces.C;
+import se.chalmers.fonahano.quizwalk.model.AndroidUser;
 import se.chalmers.fonahano.quizwalk.model.QuizWalkGame;
-import se.chalmers.fonahano.quizwalk.utils.C;
 import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -21,6 +22,7 @@ public class GameOrmLiteSQLiteOpenHelper extends OrmLiteSqliteOpenHelper {
 
 	// the DAO object we use to access the SimpleData table
 	private Dao<QuizWalkGame, Integer> quizWalkDao = null;
+	private Dao<AndroidUser, Integer> androidUserDao = null;
 
 	public GameOrmLiteSQLiteOpenHelper(Context context) {
 		super(context, C.Data.DATABASE_NAME, null, DATABASE_VERSION);
@@ -29,7 +31,10 @@ public class GameOrmLiteSQLiteOpenHelper extends OrmLiteSqliteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase database,ConnectionSource connectionSource) {
 		try {
+			//Create QuizWalkGame table
 			TableUtils.createTable(connectionSource, QuizWalkGame.class);
+			//Create AndroidUser table
+			TableUtils.createTable(connectionSource, AndroidUser.class);
 		} catch (SQLException e) {
 			Log.e(GameOrmLiteSQLiteOpenHelper.class.getName(), "Can't create database", e);
 			throw new RuntimeException(e);
@@ -68,6 +73,17 @@ public class GameOrmLiteSQLiteOpenHelper extends OrmLiteSqliteOpenHelper {
 			}
 		}
 		return quizWalkDao;
+	}
+	
+	public Dao<AndroidUser, Integer> getAndroidUserDao(){
+		if (null == androidUserDao) {
+			try {
+				androidUserDao = getDao(AndroidUser.class);
+			}catch (java.sql.SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return androidUserDao;
 	}
 
 }

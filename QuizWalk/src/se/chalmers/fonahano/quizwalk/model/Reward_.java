@@ -2,19 +2,20 @@ package se.chalmers.fonahano.quizwalk.model;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
-import static se.chalmers.fonahano.quizwalk.utils.Utilities.checkNotNullOrEmpty;
+import static se.chalmers.fonahano.quizwalk.model.Utilities.checkNotNullOrEmpty;
 
 import java.io.Serializable;
 
-import se.chalmers.fonahano.quizwalk.user.User;
+import se.chalmers.fonahano.quizwalk.interfaces.Image;
+import se.chalmers.fonahano.quizwalk.interfaces.Reward;
 
 import com.google.common.base.Optional;
 
 /**
- * A reward is an achievement that a {@link User} can collect.
+ * A reward is an achievement that a {@link AndroidUser} can collect.
  * 
  */
-public class Reward implements Serializable {
+public class Reward_ implements Serializable, Reward {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -35,7 +36,7 @@ public class Reward implements Serializable {
 
 	/**
 	 * 
-	 * Create a new Reward. A reward can be added to a {@link Challenge}.
+	 * Create a new Reward_. A reward can be added to a {@link Challenge}.
 	 * 
 	 * @param score
 	 *            is a numerical value representing this reward. Can't be
@@ -43,13 +44,13 @@ public class Reward implements Serializable {
 	 * @param description
 	 *            of this reward
 	 * @param image
-	 *            to represent this Reward, if any.
+	 *            to represent this Reward_, if any.
 	 * @throws IllegalArgumentException
 	 *             if score is negative, or description is empty
 	 * @throws NullPointerException
 	 *             if any object is null.
 	 */
-	public Reward(int score, String description, Optional<Image> image) {
+	public Reward_(int score, String description, Optional<Image> image) {
 
 		this.score = score;
 		checkArgument(score >= 0, "Score can't be negative");
@@ -60,28 +61,28 @@ public class Reward implements Serializable {
 		this.image = checkNotNull(image);
 	}
 
+	/* (non-Javadoc)
+	 * @see se.chalmers.fonahano.quizwalk.model.Reward#getScore()
+	 */
+	@Override
 	public int getScore() {
 		return score;
 	}
 
+	/* (non-Javadoc)
+	 * @see se.chalmers.fonahano.quizwalk.model.Reward#getDescription()
+	 */
+	@Override
 	public String getDescription() {
 		return description;
 	}
 
+	/* (non-Javadoc)
+	 * @see se.chalmers.fonahano.quizwalk.model.Reward#getImage()
+	 */
+	@Override
 	public Optional<Image> getImage() {
 		return image;
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Reward [getScore()=");
-		builder.append(getScore());
-		builder.append(", getDescription()=");
-		builder.append(getDescription());
-		builder.append(", getImage()=");
-		builder.append(getImage());
-		builder.append("]");
-		return builder.toString();
-	}
 }

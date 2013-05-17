@@ -1,14 +1,12 @@
 package se.chalmers.fonahano.quizwalk.activities;
 
 import se.chalmers.fonahano.quizwalk.R;
-import se.chalmers.fonahano.quizwalk.map.ChallengeLocation;
+import se.chalmers.fonahano.quizwalk.interfaces.Image;
 import se.chalmers.fonahano.quizwalk.model.Challenge;
+import se.chalmers.fonahano.quizwalk.model.ChallengeLocation;
 import se.chalmers.fonahano.quizwalk.model.ChallengeReward;
-import se.chalmers.fonahano.quizwalk.model.Image;
 import se.chalmers.fonahano.quizwalk.model.QuizWalkGame;
 import se.chalmers.fonahano.quizwalk.model.QuizWalkGame.Builder;
-import se.chalmers.fonahano.quizwalk.model.StringAnswer;
-import se.chalmers.fonahano.quizwalk.model.StringQuestion;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -79,11 +77,11 @@ public class CreateGameActivity extends Activity {
 		Challenge.Builder build=new Challenge.Builder();
 		
 		//Gets question and answers
-		build.question(new StringQuestion((((EditText) this.findViewById(R.id.questionText)).getText().toString())));
+		build.question((((EditText) this.findViewById(R.id.questionText)).getText().toString()));
 		build.correctAnswer(((EditText) this.findViewById(R.id.answer1)).getText().toString());
-		build.addIncorrectAnswer(new StringAnswer(((EditText) this.findViewById(R.id.answer2)).getText().toString()));
-		build.addIncorrectAnswer(new StringAnswer(((EditText) this.findViewById(R.id.answer3)).getText().toString()));
-		build.addIncorrectAnswer(new StringAnswer(((EditText) this.findViewById(R.id.answer4)).getText().toString()));
+		build.addIncorrectAnswer(((EditText) this.findViewById(R.id.answer2)).getText().toString());
+		build.addIncorrectAnswer(((EditText) this.findViewById(R.id.answer3)).getText().toString());
+		build.addIncorrectAnswer(((EditText) this.findViewById(R.id.answer4)).getText().toString());
 		build.challengeReward(new ChallengeReward(100, " ", Optional.<Image>absent()));
 	
 		//Gets the coordinates

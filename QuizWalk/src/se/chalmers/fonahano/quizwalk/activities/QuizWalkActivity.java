@@ -1,5 +1,17 @@
 package se.chalmers.fonahano.quizwalk.activities;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
+import java.util.Iterator;
+
+import se.chalmers.fonahano.quizwalk.R;
+import se.chalmers.fonahano.quizwalk.interfaces.C;
+import se.chalmers.fonahano.quizwalk.model.Challenge;
+import se.chalmers.fonahano.quizwalk.model.ChallengeLocation;
+import se.chalmers.fonahano.quizwalk.model.Coordinates;
+import se.chalmers.fonahano.quizwalk.model.QuizWalkGame;
+import se.chalmers.fonahano.quizwalk.model.Utilities;
+import temp.debug.norenma.TestRun;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.PendingIntent;
@@ -13,23 +25,12 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
+
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
-import se.chalmers.fonahano.quizwalk.R;
-import se.chalmers.fonahano.quizwalk.map.ChallengeLocation;
-import se.chalmers.fonahano.quizwalk.map.Coordinates;
-import se.chalmers.fonahano.quizwalk.model.Challenge;
-import se.chalmers.fonahano.quizwalk.model.QuizWalkGame;
-import se.chalmers.fonahano.quizwalk.utils.C;
-import se.chalmers.fonahano.quizwalk.utils.Utilities;
-import temp.debug.norenma.TestRun;
-
-import java.util.Iterator;
-
-import static com.google.common.base.Preconditions.checkNotNull;
 
 
 public class QuizWalkActivity extends Activity implements LocationListener {

@@ -3,6 +3,7 @@ package se.chalmers.fonahano.quizwalk.database;
 import java.sql.SQLException;
 import java.util.List;
 
+import se.chalmers.fonahano.quizwalk.model.AndroidUser;
 import se.chalmers.fonahano.quizwalk.model.QuizWalkGame;
 import android.content.Context;
 
@@ -76,15 +77,46 @@ public class GameDatabaseManager implements LocalDatabase {
 		}
 	}
 
+	@Override
+	public void createUser(AndroidUser u) {
+		try {
+			getHelper().getAndroidUserDao()
+				.create(u);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
-//	@Override
-//	public void updateQuizWalkGame(QuizWalkGame quizWalkGame) {
-//		try {
-//			getHelper().getQuizWalkDao()
-//				.update(quizWalkGame);
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-//	}
+	@Override
+	public void updateUser(AndroidUser u) {
+		try {
+			getHelper().getAndroidUserDao()
+				.update(u);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public AndroidUser getUser() {
+		AndroidUser u = null;
+		try {
+			u = getHelper().getAndroidUserDao()
+				.queryForId(1);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return u;
+	}
+
+	// @Override
+	// public void updateQuizWalkGame(QuizWalkGame quizWalkGame) {
+	// try {
+	// getHelper().getQuizWalkDao()
+	// .update(quizWalkGame);
+	// } catch (SQLException e) {
+	// e.printStackTrace();
+	// }
+	// }
 
 }

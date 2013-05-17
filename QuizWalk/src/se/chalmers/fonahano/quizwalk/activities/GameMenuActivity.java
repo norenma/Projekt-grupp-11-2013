@@ -1,8 +1,5 @@
 package se.chalmers.fonahano.quizwalk.activities;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
-
 import se.chalmers.fonahano.quizwalk.R;
 import android.app.Activity;
 import android.content.Intent;
@@ -12,6 +9,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 
 public class GameMenuActivity extends Activity {
 

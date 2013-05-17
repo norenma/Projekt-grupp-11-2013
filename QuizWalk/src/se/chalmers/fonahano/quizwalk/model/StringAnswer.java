@@ -2,15 +2,14 @@ package se.chalmers.fonahano.quizwalk.model;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
-import se.chalmers.fonahano.quizwalk.utils.C;
-import se.chalmers.fonahano.quizwalk.utils.C.MediaType;
+import se.chalmers.fonahano.quizwalk.interfaces.Answer;
 
 /**
  * An Answer in form of a text String. An answer can be either correct or
  * incorrect when they populate {@link Challenge}s.
  * 
  */
-public class StringAnswer extends Answer {
+public class StringAnswer implements Answer<String> {
 	private static final long serialVersionUID = 1L;
 	/**
 	 * An answer.
@@ -28,12 +27,7 @@ public class StringAnswer extends Answer {
 	}
 
 	@Override
-	public MediaType getMediaType() {
-		return C.MediaType.STRING_MEDIA;
-	}
-
-	@Override
-	public String getMedia() {
+	public String getAnswer() {
 		return answer;
 	}
 

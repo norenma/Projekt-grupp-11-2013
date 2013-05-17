@@ -2,7 +2,7 @@ package se.chalmers.fonahano.quizwalk.activities;
 
 import java.util.Iterator;
 
-import se.chalmers.fonahano.quizwalk.model.Answer;
+import se.chalmers.fonahano.quizwalk.interfaces.Answer;
 import se.chalmers.fonahano.quizwalk.model.Challenge;
 import se.chalmers.fonahano.quizwalk.model.StringAnswer;
 import android.annotation.SuppressLint;
@@ -34,10 +34,10 @@ public class QuestionDialogBuilder extends AlertDialog.Builder {
 	 */
 	public void showChallenge(Challenge c) {
 		// Gets answers from challenge
-		Iterator<Answer> answersIt = c.getSetOfAnswers().iterator();
+		Iterator<Answer<String>> answersIt = c.getSetOfAnswers().iterator();
 		for (int i = 0; i < 4; i++) {
 			if (answersIt.hasNext())
-				answers[i] = (String) answersIt.next().getMedia();
+				answers[i] = (String) answersIt.next().getAnswer();
 			else
 				break;
 		}
@@ -67,7 +67,7 @@ public class QuestionDialogBuilder extends AlertDialog.Builder {
 			}
 		});
 		// Sets the question
-		this.setTitle((String) c.getQuestion().getMedia());
+		this.setTitle(c.getQuestion().get());
 		// Displays the pop-up
 		this.show();
 	}

@@ -1,4 +1,4 @@
-package se.chalmers.fonahano.quizwalk.model;
+package se.chalmers.fonahano.quizwalk.interfaces;
 
 import java.io.Serializable;
 

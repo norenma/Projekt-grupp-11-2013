@@ -1,15 +1,16 @@
 package se.chalmers.fonahano.quizwalk.model;
 
-import static se.chalmers.fonahano.quizwalk.utils.Utilities.checkNotNullOrEmpty;
-import se.chalmers.fonahano.quizwalk.utils.C;
-import se.chalmers.fonahano.quizwalk.utils.C.MediaType;
+import static se.chalmers.fonahano.quizwalk.model.Utilities.checkNotNullOrEmpty;
+import se.chalmers.fonahano.quizwalk.interfaces.C;
+import se.chalmers.fonahano.quizwalk.interfaces.C.Genre;
+import se.chalmers.fonahano.quizwalk.interfaces.Question;
 
 /**
  * Text question.
  */
-public class StringQuestion extends Question {
+public class StringQuestion implements Question<String> {
 	private static final long serialVersionUID = 1L;
-	
+
 	private final String question;
 	private final Genre genre;
 
@@ -19,48 +20,19 @@ public class StringQuestion extends Question {
 	 * @param question
 	 */
 	public StringQuestion(String question) {
-		this.question = checkNotNullOrEmpty(question, "question can't be empty");
-		//see the TODO in Question.java!
-		genre = Genre.MISC;
+		this.question = checkNotNullOrEmpty(question,
+			"question can't be empty");
+		this.genre = C.Genre.MISC;
 	}
 
 	@Override
-	public MediaType getMediaType() {
-		return C.MediaType.STRING_MEDIA;
-	}
-
-	/**
-	 * @return the question string.
-	 */
-	@Override
-	public String getMedia() {
+	public String get() {
 		return question;
 	}
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((question == null) ? 0 : question.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		StringQuestion other = (StringQuestion) obj;
-		if (question == null) {
-			if (other.question != null)
-				return false;
-		} else if (!question.equals(other.question))
-			return false;
-		return true;
+	public Genre getGenre() {
+		return genre;
 	}
 
 }

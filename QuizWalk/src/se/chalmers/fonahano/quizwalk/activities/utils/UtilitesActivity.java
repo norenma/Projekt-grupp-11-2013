@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import se.chalmers.fonahano.quizwalk.R;
-import se.chalmers.fonahano.quizwalk.map.Coordinates;
+import se.chalmers.fonahano.quizwalk.interfaces.LatitudeLongitude;
 import se.chalmers.fonahano.quizwalk.model.Challenge;
 import se.chalmers.fonahano.quizwalk.model.QuizWalkGame;
 import android.app.Activity;
@@ -42,11 +42,11 @@ public class UtilitesActivity extends Activity {
 	 * @param result
 	 * 		an array containing the result
 	 */
-	public static void distance(Coordinates firstPos, Coordinates secondPos, float[] result){
+	public static void distance(LatitudeLongitude firstPos, LatitudeLongitude secondPos, float[] result){
 		Location.distanceBetween(firstPos.getLatitude(), firstPos.getLongitude(), secondPos.getLatitude(), secondPos.getLongitude(), result);
 	}
 	
-	public static double distance(Coordinates firstPos, Coordinates secondPos){
+	public static double distance(LatitudeLongitude firstPos, LatitudeLongitude secondPos){
 		float[] r = new float[1];
 		distance(firstPos, secondPos, r);
 		return r[0];
@@ -55,7 +55,7 @@ public class UtilitesActivity extends Activity {
 	public static List<Double> distance(QuizWalkGame q){
 		List<Double> l = new ArrayList<Double>();
 		Iterator<Challenge> it = q.getChallenges().iterator();
-		Coordinates f, s;
+		LatitudeLongitude f, s;
 		Challenge itNext = it.hasNext() ? it.next():null;
 		
 		while(true){
