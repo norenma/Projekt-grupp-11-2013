@@ -35,4 +35,9 @@ public class StringQuestion implements Question<String> {
 		return genre;
 	}
 
+	@Override
+	public String toString() {
+		return question;
+	}
+
 }

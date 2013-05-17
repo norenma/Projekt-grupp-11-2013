@@ -11,7 +11,6 @@ import java.util.List;
 import se.chalmers.fonahano.quizwalk.interfaces.Game;
 import se.chalmers.fonahano.quizwalk.interfaces.Image;
 import se.chalmers.fonahano.quizwalk.interfaces.LatitudeLongitude;
-import se.chalmers.fonahano.quizwalk.model.Challenge.ChallengeState;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
@@ -20,13 +19,15 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 /**
- * A game of QuizWalk! This class will contain all information needed to
- * describe a whole set of {@link Challenge}s, including their current
- * {@link Challenge.ChallengeState}.
+ * The Main class of QuizWalk!
+ * 
+ * This class describes a game of QuizWalk and will contain all information
+ * needed to describe a whole set of {@link Challenge}s, including their current
+ * {@link ChallengeState}.
  * 
  */
 @DatabaseTable(tableName = "quizwalkgames")
-public class QuizWalkGame extends Game{
+public class QuizWalkGame extends Game {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -94,7 +95,7 @@ public class QuizWalkGame extends Game{
 
 		/**
 		 * @param r
-		 *            the Reward_ of the game.
+		 *            the AbstractReward of the game.
 		 */
 		public Builder reward(QuizWalkGameReward r) {
 			this.reward = Optional.fromNullable(r);
@@ -150,8 +151,42 @@ public class QuizWalkGame extends Game{
 	}
 
 	// Class variables //
-	
-	//SQL id
+
+	/**
+	 * A challenge can have different states in an active game of QuizWalk. For
+	 * instance, if a player successfully completes a challenge - the state of
+	 * that challenge will be <TT>COMPLETED</TT> for the particular player. This
+	 * class is used by {@link QuizWalkGame}.
+	 */
+	public static enum ChallengeState {
+		/**
+		 * Completed challenge.
+		 */
+		COMPLETED,
+
+		FAILED,
+
+		/**
+		 * The challenge has been ignored.
+		 */
+		IGNORED,
+
+		/**
+		 * Not yet visited challenge. This is what all the active
+		 * ChallengeStates should be in a newly initialized running
+		 * QuizWalkGame.
+		 */
+		UNVISITED,
+
+		/**
+		 * The challenge is inactive or dormant. In a running game all
+		 * challenges should be set to something else than <code>DEFAULT</code>
+		 */
+		DEFAULT;
+
+	}
+
+	// SQL id
 	@DatabaseField(generatedId = true)
 	private int id;
 
@@ -244,7 +279,7 @@ public class QuizWalkGame extends Game{
 
 		this.reward = checkNotNull(reward);
 
-		this.challengeStates = new HashMap<Challenge, Challenge.ChallengeState>();
+		this.challengeStates = new HashMap<Challenge, ChallengeState>();
 
 		// Add challenges from list and set them to default.
 		for (Challenge c : challenges) {
@@ -266,7 +301,7 @@ public class QuizWalkGame extends Game{
 		this.image = o.getImage();
 		this.challenges = new ArrayList<Challenge>(o.getChallenges());
 		this.reward = o.getReward();
-		this.challengeStates = new HashMap<Challenge, Challenge.ChallengeState>();
+		this.challengeStates = new HashMap<Challenge, ChallengeState>();
 		for (Challenge c : o.getChallenges()) {
 			challengeStates.put(c,
 				o.getChallengeStateOf(c));
@@ -390,20 +425,20 @@ public class QuizWalkGame extends Game{
 		return id;
 	}
 
-    /**
-     *
-     * @param c
-     * @return
-     *      returns the challenge coresponding to the id
-     */
-    public Challenge getChallenge(LatitudeLongitude c){
-        Iterator<Challenge> it = challenges.iterator();
-        Challenge itNext;
-        while(it.hasNext()) {
-            itNext = it.next();
-            if(c == itNext.getLocation()) return itNext;
-        }
-        return null;
-    }
+	/**
+	 * 
+	 * @param c
+	 * @return returns the challenge corresponding the id
+	 */
+	public Challenge getChallenge(LatitudeLongitude c) {
+		Iterator<Challenge> it = challenges.iterator();
+		Challenge itNext;
+		while (it.hasNext()) {
+			itNext = it.next();
+			if (c == itNext.getLocation())
+				return itNext;
+		}
+		return null;
+	}
 
 }

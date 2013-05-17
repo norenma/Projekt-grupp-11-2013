@@ -123,8 +123,9 @@ public class Utilities {
 		return true;
 	}
 
-    public static LatitudeLongitude latLngToCoordinates(LatLng ll){
-        return new Coordinates(ll.latitude,ll.longitude);
-    }
+	public static LatitudeLongitude latLngToCoordinates(LatLng ll) {
+		return new Coordinates(ll.latitude,
+			ll.longitude);
+	}
 
 }

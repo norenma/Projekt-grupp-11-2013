@@ -35,40 +35,6 @@ public class Challenge implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * A challenge can have different states in an active game of QuizWalk. For
-	 * instance, if a player successfully completes a challenge - the state of
-	 * that challenge will be <TT>COMPLETED</TT> for the particular player. This
-	 * class is used by {@link QuizWalkGame}.
-	 */
-	public static enum ChallengeState {
-		/**
-		 * Completed challenge.
-		 */
-		COMPLETED,
-
-		FAILED,
-
-		/**
-		 * The challenge has been ignored.
-		 */
-		IGNORED,
-
-		/**
-		 * Not yet visited challenge. This is what all the active
-		 * ChallengeStates should be in a newly initialized running
-		 * QuizWalkGame.
-		 */
-		UNVISITED,
-
-		/**
-		 * The challenge is inactive or dormant. In a running game all
-		 * challenges should be set to something else than <code>DEFAULT</code>
-		 */
-		DEFAULT;
-
-	}
-
-	/**
 	 * Builder pattern class for Challenge. "Builder"-class makes it easier to
 	 * create a Challenge. Useful to be called from GUI that lets users to
 	 * create Challenges. Every method returns the same Builder it was called
@@ -110,7 +76,7 @@ public class Challenge implements Serializable {
 				"Question can't be empty."));
 			return this;
 		}
-		
+
 		public Builder question(Question<String> s) {
 			this.question = s;
 			return this;
@@ -129,24 +95,23 @@ public class Challenge implements Serializable {
 			return this;
 
 		}
-		
+
 		public Builder correctAnswer(Answer<String> a) {
 			this.correctAnswer = a;
 			return this;
 		}
-
 
 		public Builder addIncorrectAnswer(String a) {
 			setOfAnswers.add(new StringAnswer(checkNotNullOrEmpty(a,
 				"incorrect answer can't be empty")));
 			return this;
 		}
-		
+
 		public Builder addIncorrectAnswer(Answer<String> a) {
 			setOfAnswers.add(a);
 			return this;
 		}
-		
+
 		public Builder addSetOfIncorrectAnswers(Set<Answer<String>> l) {
 			setOfAnswers = l;
 			return this;

@@ -23,16 +23,18 @@ public class AndroidUser implements Serializable {
 
 	/**
 	 * a Users different settings.
-	 *
+	 * 
 	 */
-	public static class UserSettings implements Serializable{
+	public static class UserSettings implements Serializable {
 		private static final long serialVersionUID = 1L;
-		
+
 		private boolean soundEnabled;
+
 		public UserSettings() {
 			soundEnabled = true;
 		}
-		public boolean isSoundEnabled(){
+
+		public boolean isSoundEnabled() {
 			return soundEnabled;
 		}
 	}
@@ -55,7 +57,7 @@ public class AndroidUser implements Serializable {
 	 * Rewards collected by this user.
 	 */
 	@DatabaseField(dataType = DataType.SERIALIZABLE)
-	private final ArrayList<Reward_> listOfUserRewards;
+	private final ArrayList<AbstractReward> listOfUserRewards;
 
 	/**
 	 * Create a user. This represents the actual human user using the game
@@ -69,7 +71,7 @@ public class AndroidUser implements Serializable {
 	 *            Rewards awarded this user.
 	 */
 	public AndroidUser(String userName, UserSettings userSettings,
-			ArrayList<Reward_> listOfUserRewards) {
+			ArrayList<AbstractReward> listOfUserRewards) {
 
 		this.userName = checkNotNull(userName);
 		checkArgument(!userName.isEmpty(),
@@ -89,7 +91,7 @@ public class AndroidUser implements Serializable {
 	public AndroidUser() {
 		this("John Doe",
 			new UserSettings(),
-			new ArrayList<Reward_>());
+			new ArrayList<AbstractReward>());
 
 	}
 
@@ -101,7 +103,7 @@ public class AndroidUser implements Serializable {
 		this.userName = userName;
 	}
 
-	public boolean addReward(Reward_ reward) {
+	public boolean addReward(AbstractReward reward) {
 		return listOfUserRewards.add(reward);
 	}
 

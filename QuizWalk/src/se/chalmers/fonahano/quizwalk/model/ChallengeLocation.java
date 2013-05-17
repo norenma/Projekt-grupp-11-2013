@@ -30,16 +30,13 @@ public class ChallengeLocation extends Coordinates implements Serializable {
 	 * @param image
 	 *            is optional.
 	 */
-	public ChallengeLocation(double latitude, double longitude, String description,
-			Optional<Image> image) {
-		super(latitude, longitude);
+	public ChallengeLocation(double latitude, double longitude,
+			String description, Optional<Image> image) {
+		super(latitude,
+			longitude);
 
-		if (null == description) {
-			this.description = "";
-		} else {
-			this.description = description;
-		}
-		
+		this.description = checkNotNull(description);
+
 		this.image = checkNotNull(image);
 	}
 

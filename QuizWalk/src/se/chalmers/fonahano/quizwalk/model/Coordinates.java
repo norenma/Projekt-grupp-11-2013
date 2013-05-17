@@ -4,14 +4,13 @@ import java.io.Serializable;
 
 import se.chalmers.fonahano.quizwalk.interfaces.LatitudeLongitude;
 
-
 //TODO: this Class with probably be replace/linked with Google Maps API Coordinates class. We must however keep MVC and aim to make the model autonomous.
 /**
  * Coordinates.
  */
-public class Coordinates implements Serializable, LatitudeLongitude{
+public class Coordinates implements Serializable, LatitudeLongitude {
 	private static final long serialVersionUID = 1L;
-	
+
 	private final double latitude;
 	private final double longitude;
 
@@ -20,7 +19,9 @@ public class Coordinates implements Serializable, LatitudeLongitude{
 		this.longitude = longitude;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see se.chalmers.fonahano.quizwalk.model.LatitudeLongitude#getLatitude()
 	 */
 	@Override
@@ -28,7 +29,9 @@ public class Coordinates implements Serializable, LatitudeLongitude{
 		return latitude;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see se.chalmers.fonahano.quizwalk.model.LatitudeLongitude#getLongitude()
 	 */
 	@Override
@@ -36,7 +39,9 @@ public class Coordinates implements Serializable, LatitudeLongitude{
 		return longitude;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -48,16 +53,16 @@ public class Coordinates implements Serializable, LatitudeLongitude{
 		if (getClass() != obj.getClass())
 			return false;
 		Coordinates other = (Coordinates) obj;
-		if (Double.doubleToLongBits(latitude) != Double
-				.doubleToLongBits(other.latitude))
+		if (Double.doubleToLongBits(latitude) != Double.doubleToLongBits(other.latitude))
 			return false;
-		if (Double.doubleToLongBits(longitude) != Double
-				.doubleToLongBits(other.longitude))
+		if (Double.doubleToLongBits(longitude) != Double.doubleToLongBits(other.longitude))
 			return false;
 		return true;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -72,7 +77,9 @@ public class Coordinates implements Serializable, LatitudeLongitude{
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -85,6 +92,5 @@ public class Coordinates implements Serializable, LatitudeLongitude{
 		builder.append("]");
 		return builder.toString();
 	}
-	
-	
+
 }

@@ -1,6 +1,5 @@
 package se.chalmers.fonahano.quizwalk.interfaces;
 
-
 /**
  * Global identifiers here. Constants, Keys, etc.
  */
@@ -30,13 +29,12 @@ public interface C {
 	 */
 	public final static int MARKER_PROXIMITY_RADIUS = 10;
 
-	
 	/**
 	 * Genres for a {@link Question}
-	 *
+	 * 
 	 */
 	public static enum Genre {
-		
+
 		MISC, SPORT, SCIENCE, GEOGRAPHY;
 	}
 }

@@ -6,7 +6,7 @@ import java.io.Serializable;
  * <code>QuizWalkGame</code> will subclass this.
  * 
  */
-public abstract class Game implements Serializable{
+public abstract class Game implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**

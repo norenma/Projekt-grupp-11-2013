@@ -26,4 +26,12 @@ public interface Answer<T> extends Serializable {
 	 */
 	public abstract T getAnswer();
 
+	/**
+	 * Convenience method.
+	 * 
+	 * @return The Answer in string-form. If the question is a Answer of strings
+	 *         this should return the same as <code>get()</code>.
+	 */
+	public abstract String toString();
+
 }

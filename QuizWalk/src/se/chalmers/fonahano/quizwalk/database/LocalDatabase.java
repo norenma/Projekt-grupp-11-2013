@@ -26,18 +26,19 @@ public interface LocalDatabase {
 	 * Delete the QuizWalkGame from the database.
 	 */
 	public abstract void deleteQuizWalkGame(QuizWalkGame q);
-	
-	
+
 	/**
-	 * This method is only used when starting the application for the very first time.
+	 * This method is only used when starting the application for the very first
+	 * time.
 	 */
 	public abstract void createUser(AndroidUser u);
-	
+
 	/**
-	 * @param u updates the unique user (id=1).
+	 * @param u
+	 *            updates the unique user (id=1).
 	 */
 	public abstract void updateUser(AndroidUser u);
-	
+
 	/**
 	 * @return the unique user (id=1)
 	 */

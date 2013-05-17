@@ -54,7 +54,8 @@ public enum GameMap {
 	/**
 	 * Gets the list of saved nodes. Use <code>addNode()</code> to save nodes.
 	 * 
-	 * @return a list of previously added custom ChallengeLocation object ("node").
+	 * @return a list of previously added custom ChallengeLocation object
+	 *         ("node").
 	 */
 	public ImmutableList<ChallengeLocation> getNodes() {
 		return ImmutableList.copyOf(nodes);

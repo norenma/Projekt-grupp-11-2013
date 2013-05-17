@@ -1,6 +1,5 @@
 package se.chalmers.fonahano.quizwalk.interfaces;
 
-
 import com.google.common.base.Optional;
 
 public interface Reward {

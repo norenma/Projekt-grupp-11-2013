@@ -23,7 +23,8 @@ public class StringAnswer implements Answer<String> {
 	 */
 	public StringAnswer(String answer) {
 		this.answer = checkNotNull(answer);
-		checkArgument(!answer.isEmpty(), "answer can't be empty");
+		checkArgument(!answer.isEmpty(),
+			"answer can't be empty");
 	}
 
 	@Override
