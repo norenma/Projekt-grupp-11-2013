@@ -1,6 +1,7 @@
 package se.chalmers.fonahano.quizwalk.activities;
 
 import se.chalmers.fonahano.quizwalk.R;
+import se.chalmers.fonahano.quizwalk.model.QuizWalkGame;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.view.View;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.common.base.Optional;
 
 public class GameMenuActivity extends Activity {
 
@@ -40,7 +42,9 @@ public class GameMenuActivity extends Activity {
 	}
 	
 	public void onButtonClick_CreateGame(View v) {
-		startActivity(new Intent(this, CreateGameActivity.class));
+		Intent intent=new Intent(this, EditQuizWalkGameActivity.class);
+		intent.putExtra("QuizWalk", Optional.<QuizWalkGame>absent());
+		startActivity(intent);
 	}
 	public void onButtonClick_QuizWalkManager(View v) {
 		startActivity(new Intent(this, QuizWalkManagerActivity.class));

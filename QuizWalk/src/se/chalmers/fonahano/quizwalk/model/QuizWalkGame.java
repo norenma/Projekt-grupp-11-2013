@@ -58,6 +58,18 @@ public class QuizWalkGame extends Game {
 		}
 
 		/**
+		 * Creates a builder from already existing QuizWalkGame
+		 * @param q the QuizWalkGame to build from
+		 */
+		public Builder(QuizWalkGame q) {
+			name=q.name;
+			description=q.description;
+			image=q.image;
+			challenges=q.challenges;
+			reward=q.reward;
+		}
+
+		/**
 		 * @param name
 		 *            of this Game. COMPULSORY
 		 */
