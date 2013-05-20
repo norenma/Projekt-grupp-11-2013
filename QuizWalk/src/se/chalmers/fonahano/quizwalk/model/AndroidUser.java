@@ -4,7 +4,11 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import se.chalmers.fonahano.quizwalk.interfaces.Reward;
 
@@ -20,6 +24,8 @@ import com.j256.ormlite.table.DatabaseTable;
 @DatabaseTable
 public class AndroidUser implements Serializable {
 	private static final long serialVersionUID = 1L;
+
+	private static final String DEFAULT_USERNAME = "John Doe";
 
 	/**
 	 * a Users different settings.
@@ -37,7 +43,7 @@ public class AndroidUser implements Serializable {
 		public boolean isSoundEnabled() {
 			return soundEnabled;
 		}
-		
+
 		public boolean setSoundEnabled(boolean soundEnabled) {
 			return soundEnabled == (this.soundEnabled = soundEnabled);
 		}
@@ -50,6 +56,12 @@ public class AndroidUser implements Serializable {
 	 */
 	@DatabaseField
 	private String userName;
+
+	@DatabaseField
+	private String email;
+
+	@DatabaseField(dataType = DataType.BYTE_ARRAY)
+	private byte[] password;
 
 	/**
 	 * Local client settings.
@@ -65,7 +77,7 @@ public class AndroidUser implements Serializable {
 
 	/**
 	 * Create a user. This represents the actual human user using the game
-	 * client.
+	 * client. See the no-args constructor for default values.
 	 * 
 	 * @param userName
 	 *            Public user name for this AndroidUser.
@@ -78,8 +90,7 @@ public class AndroidUser implements Serializable {
 			ArrayList<AbstractReward> listOfUserRewards) {
 
 		this.userName = checkNotNull(userName);
-		checkArgument(!userName.isEmpty(),
-			"userName can't be empty");
+		checkArgument(!userName.isEmpty(), "userName can't be empty");
 
 		this.userSettings = checkNotNull(userSettings);
 
@@ -93,9 +104,8 @@ public class AndroidUser implements Serializable {
 	 *            Public user name for this AndroidUser.
 	 */
 	public AndroidUser() {
-		this("John Doe",
-			new UserSettings(),
-			new ArrayList<AbstractReward>());
+		this(DEFAULT_USERNAME, new UserSettings(),
+				new ArrayList<AbstractReward>());
 
 	}
 
@@ -105,6 +115,13 @@ public class AndroidUser implements Serializable {
 
 	public final void setUserName(String userName) {
 		this.userName = userName;
+	}
+
+	/**
+	 * @return the listOfUserRewards
+	 */
+	public ArrayList<AbstractReward> getListOfUserRewards() {
+		return listOfUserRewards;
 	}
 
 	public boolean addReward(AbstractReward reward) {
@@ -124,10 +141,70 @@ public class AndroidUser implements Serializable {
 		this.userSettings = userSettings;
 	}
 
+	/**
+	 * @return the email
+	 */
+	public String getEmail() {
+		return email;
+	}
+
+	/**
+	 * @param email
+	 *            the email to set
+	 */
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	/**
+	 * @return True, only if the passwords MD5-hash equals the MD5 of the saved
+	 *         one.
+	 */
+	public boolean isCorrectPassword(String pw) {
+
+		MessageDigest digester = null;
+		byte[] bytesOfPassword = null;
+
+		try {
+			digester = MessageDigest.getInstance("MD5");
+			bytesOfPassword = pw.getBytes("UTF-8");
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			// TODO: handle exception
+		}
+
+		byte[] hashedInput = digester.digest(bytesOfPassword);
+
+		return Arrays.equals(hashedInput, this.password);
+
+	}
+
+	/**
+	 * @param password
+	 *            the password to set
+	 */
+	public void setPassword(String password) {
+		MessageDigest digester = null;
+		byte[] bytesOfPassword = null;
+
+		try {
+			digester = MessageDigest.getInstance("MD5");
+			bytesOfPassword = password.getBytes("UTF-8");
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			// TODO: handle exception
+		}
+
+		byte[] hashedPassword = digester.digest(bytesOfPassword);
+		this.password = hashedPassword;
+	}
+
 	@Override
 	public String toString() {
-		return new GsonBuilder().setPrettyPrinting()
-			.create()
-			.toJson(this);
+		return new GsonBuilder().setPrettyPrinting().create().toJson(this);
 	}
 }
