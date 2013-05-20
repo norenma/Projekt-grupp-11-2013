@@ -33,9 +33,9 @@
     <string name="menuButton_StartGame">Start Game</string>
     <string name="menuButton_CreateGame">Create Game</string>
     <string name="menuButton_QuizWalks">QuizWalks</string>
-    
-    
-    
     <string name="hello_world">Hello World!</string>
+    <string name="title_activity_register_user">RegisterUserActivity</string>
+    <string name="Register_new_user_string">Register new User:</string>
+    <string name="create_user_string">Create User</string>
 
 </resources>

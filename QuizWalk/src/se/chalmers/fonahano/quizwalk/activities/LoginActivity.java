@@ -26,5 +26,10 @@ public class LoginActivity extends Activity {
 		Intent intent = new Intent(this, GameMenuActivity.class);
 		startActivity(intent);
 	}
+	
+	public void onClickRegisterUser(View view){
+		Intent intent = new Intent(this, RegisterUserActivity.class);
+		startActivity(intent);
+	}
 
 }
