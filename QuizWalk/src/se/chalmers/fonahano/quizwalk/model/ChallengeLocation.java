@@ -7,7 +7,7 @@ import com.google.common.base.Optional;
 
 /**
  * A Coordinate with some optional description and optional Image. These
- * locations can populate the {@link GameMap} and constitute {@link Challenge}s
+ * locations can populate the {@link StateSingleton} and constitute {@link Challenge}s
  */
 
 // TODO: Class name might(read will) interfere with com.android.location
