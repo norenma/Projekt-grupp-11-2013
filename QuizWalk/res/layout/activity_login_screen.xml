@@ -18,7 +18,7 @@
         android:layout_alignRight="@+id/questionText"
         android:layout_marginBottom="90dp"
         android:onClick="changeScreen"
-        android:text="Login"
+        android:text="@string/login_text"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
         android:typeface="sans" />
@@ -51,14 +51,16 @@
     </EditText>
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/registerUserText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/editText3"
         android:layout_below="@+id/editText3"
         android:layout_marginTop="14dp"
-        android:text="@string/title_activity_register_user" 
+        android:clickable="true"
         android:onClick="onClickRegisterUser"
-		android:clickable="true"/>
+        android:text="@string/register"
+        android:textColor="@color/white"
+  		 />
 
  </RelativeLayout>

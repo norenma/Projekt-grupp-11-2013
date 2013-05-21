@@ -9,47 +9,51 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".RegisterUserActivity" >
 
-    <EditText
-        android:id="@+id/editText1"
+    <Button
+        android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:ems="10"
-        android:hint="@string/username_login"
-        android:inputType="textEmailAddress" />
-
-    <EditText
-        android:id="@+id/PasswordText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editText1"
-        android:layout_below="@+id/editText1"
-        android:ems="10"
-        android:inputType="textPassword" >
-
-        <requestFocus />
-    </EditText>
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="97dp"
+        android:layout_marginLeft="16dp"
+        android:layout_toRightOf="@+id/RegisterUserText"
+        android:onClick="OnClickRegister"
+        android:text="@string/create_user_string" />
 
     <TextView
         android:id="@+id/RegisterUserText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/editText1"
+        android:layout_above="@+id/button1"
         android:layout_alignParentLeft="true"
-        android:layout_marginBottom="14dp"
+        android:layout_marginBottom="106dp"
         android:layout_marginLeft="19dp"
         android:text="@string/Register_new_user_string"
         android:textColor="@color/white" />
 
-    <Button
-        android:id="@+id/button1"
+    <EditText
+        android:id="@+id/PasswordText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/editText2"
-        android:layout_below="@+id/editText2"
-        android:layout_marginTop="30dp"
-        android:text="@string/create_user_string" 
-        android:onClick="OnClickRegister"/>
+        android:layout_above="@+id/button1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="19dp"
+        android:ems="10"
+        android:inputType="textPassword" />
+
+    <EditText
+        android:id="@+id/MailText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/PasswordText"
+        android:layout_alignLeft="@+id/PasswordText"
+        android:layout_alignRight="@+id/PasswordText"
+        android:layout_marginBottom="14dp"
+        android:ems="10"
+        android:hint="@string/username_login"
+        android:inputType="textEmailAddress" >
+
+        <requestFocus />
+    </EditText>
 
 </RelativeLayout>

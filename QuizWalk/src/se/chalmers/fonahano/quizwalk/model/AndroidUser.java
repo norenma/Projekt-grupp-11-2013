@@ -49,8 +49,8 @@ public class AndroidUser implements Serializable {
 		}
 	}
 
-	@DatabaseField(generatedId = true)
-	private int id;
+	@DatabaseField(id=true)
+	private int id = 1;
 	/**
 	 * String representation of this user globally.
 	 */

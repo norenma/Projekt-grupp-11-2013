@@ -37,5 +37,9 @@
     <string name="title_activity_register_user">RegisterUserActivity</string>
     <string name="Register_new_user_string">Register new User:</string>
     <string name="create_user_string">Create User</string>
+    <string name="login_text">Login</string>
+    <string name="title_activity_launcher">LauncherActivity</string>
+    <string name="register"><u>Register!</u></string>
+    <string name="registration_successful"> "Registration successful!" </string>
 
 </resources>

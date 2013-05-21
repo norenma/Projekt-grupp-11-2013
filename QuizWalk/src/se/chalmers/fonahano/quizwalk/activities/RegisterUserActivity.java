@@ -1,13 +1,24 @@
 package se.chalmers.fonahano.quizwalk.activities;
 
 import se.chalmers.fonahano.quizwalk.R;
+import se.chalmers.fonahano.quizwalk.database.GameDatabaseManager;
+import se.chalmers.fonahano.quizwalk.database.LocalDatabase;
+import se.chalmers.fonahano.quizwalk.model.AndroidUser;
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.DialogInterface.OnClickListener;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.support.v4.app.NavUtils;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 
 /***
@@ -29,9 +40,7 @@ public class RegisterUserActivity extends Activity {
 	 * Set up the {@link android.app.ActionBar}.
 	 */
 	private void setupActionBar() {
-
 		getActionBar().setDisplayHomeAsUpEnabled(true);
-
 	}
 
 	@Override
@@ -58,9 +67,31 @@ public class RegisterUserActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 	
+	/***
+	 * When clicked, registers the user to local database, and confirms this with a dialog to the user.
+	 * User will be sent to login again after this. 
+	 * @param view
+	 */
 	public void OnClickRegister(View view){
-		String mail=((EditText) this.findViewById(R.id.RegisterUserText)).getText().toString();
-		String pw=((EditText) this.findViewById(R.id.PasswordText)).getText().toString();
+		GameDatabaseManager.init(this);
+		LocalDatabase gdm=GameDatabaseManager.getInstance();
+		AndroidUser user=gdm.getUser();
+		user.setEmail(((EditText) this.findViewById(R.id.PasswordText)).getText().toString());
+		user.setPassword(((EditText) this.findViewById(R.id.PasswordText)).getText().toString());
+		gdm.updateUser(user);
+		
+		//Shows a fragment after registration 
+		AlertDialog.Builder builder=new AlertDialog.Builder(this);
+		builder.setTitle(R.string.registration_successful).setCancelable(false)
+	       .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+	           public void onClick(DialogInterface dialog, int id) {
+	                Intent intent=new Intent(RegisterUserActivity.this, LoginActivity.class);
+	                startActivity(intent);
+	           }
+	       });
+		builder.create().show();
+		
 	}
+	
 
 }
