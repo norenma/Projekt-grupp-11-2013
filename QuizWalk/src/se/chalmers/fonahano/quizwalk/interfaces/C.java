@@ -28,6 +28,10 @@ public interface C {
 	 * The radius of which, if entered, the marker proximity alert will be fired
 	 */
 	public final static int MARKER_PROXIMITY_RADIUS = 10;
+	
+	public static class GameMap{
+		public final static String MAP_STATE = "MAP_STATE";
+	}
 
 	/**
 	 * Genres for a {@link Question}
