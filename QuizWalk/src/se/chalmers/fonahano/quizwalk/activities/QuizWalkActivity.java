@@ -5,13 +5,15 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.util.Iterator;
 
 import se.chalmers.fonahano.quizwalk.R;
+import se.chalmers.fonahano.quizwalk.database.GameDatabaseManager;
+import se.chalmers.fonahano.quizwalk.database.LocalDatabase;
 import se.chalmers.fonahano.quizwalk.interfaces.C;
 import se.chalmers.fonahano.quizwalk.model.Challenge;
 import se.chalmers.fonahano.quizwalk.model.ChallengeLocation;
 import se.chalmers.fonahano.quizwalk.model.Coordinates;
 import se.chalmers.fonahano.quizwalk.model.QuizWalkGame;
 import se.chalmers.fonahano.quizwalk.model.Utilities;
-import temp.debug.norenma.TestRun;
+import temp.debug.tortal.DebugFactory;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.PendingIntent;
@@ -38,6 +40,7 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 	private LocationManager locationManager;
 	private String provider;
 	private Location location;
+	private LocalDatabase db;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,18 +49,28 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 		map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map))
 				.getMap();
 		
+		// db init
+		db = GameDatabaseManager.getInstance();
+		
 		//shows where user is now. 
 		map.setMyLocationEnabled(true);
 
 		// Gets a question from test-class, good for now.
-		final QuizWalkGame q = TestRun.createGame();
-		Iterator<Challenge> challengeIt = q.getChallenges().iterator();
-
+		final QuizWalkGame q = DebugFactory.getRandomTortalChalmersQuizWalkGame1();
+		
+		//Checks if the gps is turned on
+		LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
+		if(!service.isProviderEnabled(LocationManager.GPS_PROVIDER)){
+			showEnableGPSDialog();
+		}
+		
+	    locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+		
+		ActivityHelper.populateMap(map, db.getAllQuizWalkGame());
 		// Sets out locations on map
 		ActivityHelper.populateMap(map, q);
 
-		map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.558,
-				9.927), 3));
+		
 
 		final QuestionDialogBuilder questionFragment = new QuestionDialogBuilder(
 				this);
@@ -86,23 +99,23 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 				}
 				return false;*/
 
-                questionFragment.showChallenge(q.getChallenge(Utilities.latLngToCoordinates(arg0.getPosition())));
+				if(getIntent().getIntExtra(C.GameMap.MAP_STATE, -1) == 1){
+					
+				}else if(getIntent().getIntExtra(C.GameMap.MAP_STATE, -1) == 2){	
+					questionFragment.showChallenge(q.getChallenge(Utilities.latLngToCoordinates(arg0.getPosition())));
+				}
                 return true;
 			}
 
             });
 
-            //Checks if the gps is turned on
-		LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
-		if(!service.isProviderEnabled(LocationManager.GPS_PROVIDER)){
-			showEnableGPSDialog();
-		}
-		
-	    locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            
 	    checkNotNull(locationManager.getBestProvider(new Criteria(), false));
 	    provider = locationManager.getBestProvider(new Criteria(), false);
 
 	    location = locationManager.getLastKnownLocation(provider);
+	    
+	    map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 3));
 		
 	    checkNotNull(location);
 	    onLocationChanged(location);
