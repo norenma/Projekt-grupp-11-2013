@@ -39,7 +39,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="19dp"
         android:ems="10"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:textColor="@color/white" />
 
     <EditText
         android:id="@+id/MailText"
@@ -51,7 +52,8 @@
         android:layout_marginBottom="14dp"
         android:ems="10"
         android:hint="@string/username_login"
-        android:inputType="textEmailAddress" >
+        android:inputType="textEmailAddress"
+        android:textColor="@color/white" >
 
         <requestFocus />
     </EditText>

@@ -10,13 +10,19 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
 
+/***
+ * Empty activity to set up program before visual things will happen.
+ * 
+ * @author Markus
+ *
+ */
 public class LauncherActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		// TODO Debug, delete database.
-		deleteDatabase(C.Data.DATABASE_NAME);
+		//deleteDatabase(C.Data.DATABASE_NAME);
 		GameDatabaseManager.init(this);
 
 		LocalDatabase gdm = GameDatabaseManager.getInstance();
