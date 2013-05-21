@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import se.chalmers.fonahano.quizwalk.database.GameDatabaseManager;
 import se.chalmers.fonahano.quizwalk.interfaces.LatitudeLongitude;
 import se.chalmers.fonahano.quizwalk.model.Challenge;
 import se.chalmers.fonahano.quizwalk.model.ChallengeLocation;
@@ -13,9 +14,11 @@ import se.chalmers.fonahano.quizwalk.model.Coordinates;
 import se.chalmers.fonahano.quizwalk.model.QuizWalkGame;
 import se.chalmers.fonahano.quizwalk.model.Utilities;
 import android.location.Location;
+
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.common.base.Optional;
 
 /**
  * Every GUI or activity related convenience methods should be here!
@@ -148,6 +151,16 @@ public abstract class ActivityHelper {
 		
 		return markers;
 		
+	}
+	
+	
+	public static Optional<QuizWalkGame> getQuizWalkGame(String title){
+		for(QuizWalkGame quiz : GameDatabaseManager.getInstance().getAllQuizWalkGame()){
+			if(quiz.getDescription().equalsIgnoreCase(title)){
+				return Optional.of(quiz);
+			}
+		}
+		return Optional.<QuizWalkGame> absent();
 	}
 
 }
