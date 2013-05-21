@@ -13,7 +13,6 @@ import se.chalmers.fonahano.quizwalk.model.Coordinates;
 import se.chalmers.fonahano.quizwalk.model.QuizWalkGame;
 import se.chalmers.fonahano.quizwalk.model.Utilities;
 import android.location.Location;
-
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -120,7 +119,8 @@ public abstract class ActivityHelper {
 		while (itChallenge.hasNext()) {
 			currentIt = itChallenge.next();
 	
-			markers.add(populateMap(map, currentIt.getLocation(), currentIt.getChallengeDescription()));
+			Marker temp = populateMap(map, currentIt.getLocation(), currentIt.getChallengeDescription());
+			markers.add(temp);
 	
 		}
 		
