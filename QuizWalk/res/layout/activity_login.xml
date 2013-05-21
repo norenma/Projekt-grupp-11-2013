@@ -10,25 +10,25 @@
     tools:context=".MainActivity" >
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/LoginButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editText3"
+        android:layout_alignLeft="@+id/Password"
         android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/questionText"
+        android:layout_alignRight="@+id/Email"
         android:layout_marginBottom="90dp"
-        android:onClick="changeScreen"
+        android:onClick="Login"
         android:text="@string/login_text"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
         android:typeface="sans" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/Password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/questionText"
-        android:layout_alignRight="@+id/questionText"
+        android:layout_alignLeft="@+id/Email"
+        android:layout_alignRight="@+id/Email"
         android:layout_centerVertical="true"
         android:ems="10"
         android:inputType="textPassword"
@@ -36,10 +36,10 @@
         android:textColor="#FFFFFF" />
 
     <EditText
-        android:id="@+id/questionText"
+        android:id="@+id/Email"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/editText3"
+        android:layout_above="@+id/Password"
         android:layout_centerHorizontal="true"
         android:ems="10"
         android:inputType="textEmailAddress"
@@ -54,13 +54,22 @@
         android:id="@+id/registerUserText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/editText3"
-        android:layout_below="@+id/editText3"
+        android:layout_alignRight="@+id/Password"
+        android:layout_below="@+id/Password"
         android:layout_marginTop="14dp"
         android:clickable="true"
         android:onClick="onClickRegisterUser"
         android:text="@string/register"
         android:textColor="@color/white"
   		 />
+
+    <TextView
+        android:id="@+id/errorMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/registerUserText"
+        android:layout_alignLeft="@+id/Password"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/Red" />
 
  </RelativeLayout>
