@@ -12,6 +12,7 @@ import se.chalmers.fonahano.quizwalk.model.Challenge;
 import se.chalmers.fonahano.quizwalk.model.ChallengeLocation;
 import se.chalmers.fonahano.quizwalk.model.Coordinates;
 import se.chalmers.fonahano.quizwalk.model.QuizWalkGame;
+import se.chalmers.fonahano.quizwalk.model.StateSingleton;
 import se.chalmers.fonahano.quizwalk.model.Utilities;
 import temp.debug.tortal.DebugFactory;
 import android.app.Activity;
@@ -41,6 +42,8 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 	private String provider;
 	private Location location;
 	private LocalDatabase db;
+	private int gameMapState;
+	private QuizWalkGame q;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +59,7 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 		map.setMyLocationEnabled(true);
 
 		// Gets a question from test-class, good for now.
-		final QuizWalkGame q = DebugFactory.getRandomTortalChalmersQuizWalkGame1();
+		// final QuizWalkGame q = DebugFactory.getRandomTortalChalmersQuizWalkGame1();
 		
 		//Checks if the gps is turned on
 		LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
@@ -66,9 +69,17 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 		
 	    locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 		
-		ActivityHelper.populateMap(map, db.getAllQuizWalkGame());
-		// Sets out locations on map
-		ActivityHelper.populateMap(map, q);
+	    int gameMapState = getIntent().getIntExtra(C.GameMap.MAP_STATE, 1);
+	    
+	    if(gameMapState == 1){
+			ActivityHelper.populateMap(map, db.getAllQuizWalkGame());
+		}
+	    else if(gameMapState == 2){
+	    	q = StateSingleton.INSTANCE.getActiveQuizWalk().get();
+	    	ActivityHelper.populateMap(map, q);
+	    }
+		
+		
 
 		
 
@@ -87,7 +98,7 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 
 		map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
 			@Override
-            public boolean onMarkerClick(Marker arg0) {
+            public boolean onMarkerClick(Marker marker) {
 				/*for (int i = 0; i < q.getChallenges().size(); i++) {
 					if (arg0.getTitle().equals(
 							q.getChallenges().get(i).getChallengeDescription())) {
@@ -99,10 +110,10 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 				}
 				return false;*/
 
-				if(getIntent().getIntExtra(C.GameMap.MAP_STATE, -1) == 1){
-					
-				}else if(getIntent().getIntExtra(C.GameMap.MAP_STATE, -1) == 2){	
-					questionFragment.showChallenge(q.getChallenge(Utilities.latLngToCoordinates(arg0.getPosition())));
+				if(getIntent().getIntExtra(C.GameMap.MAP_STATE, 1) == 1){
+					ActivityHelper.getQuizWalkGame(marker.getTitle());
+				}else if(getIntent().getIntExtra(C.GameMap.MAP_STATE, 1) == 2){	
+					questionFragment.showChallenge(q.getChallenge(Utilities.latLngToCoordinates(marker.getPosition())));
 				}
                 return true;
 			}
@@ -176,6 +187,27 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 		});
 		
 		ab.setTitle("Your GPS is disabled, it must be enabled to play to game");
+
+		ab.show();
+	}
+	
+	public void showQuizWalkStartDialog(final QuizWalkGame q){
+		AlertDialog.Builder ab = new AlertDialog.Builder(this);
+		String[] choice = {"Yes", "No"};
+		ab.setItems(choice, new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface d, int choice) {
+				if(choice == 0){
+					Intent intent = new Intent(QuizWalkActivity.this, QuizWalkActivity.class);
+					intent.putExtra(C.GameMap.MAP_STATE, 2);
+					StateSingleton.INSTANCE.setActiveQuizWalk(q);
+					
+					startActivity(intent);
+				}
+				
+			}
+		});
+		
+		ab.setTitle(q.getDescription() + ": Do you want to play this QuizWalk?");
 
 		ab.show();
 	}
