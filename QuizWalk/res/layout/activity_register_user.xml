@@ -46,10 +46,10 @@
         android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/editText2"
-        android:layout_below="@+id/editText2"
-        android:layout_marginTop="30dp"
-        android:text="@string/create_user_string" 
-        android:onClick="OnClickRegister"/>
+        android:layout_below="@+id/PasswordText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="21dp"
+        android:onClick="OnClickRegister"
+        android:text="@string/create_user_string" />
 
 </RelativeLayout>

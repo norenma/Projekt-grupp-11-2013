@@ -1,19 +1,20 @@
 package se.chalmers.fonahano.quizwalk.activities;
 
 import se.chalmers.fonahano.quizwalk.R;
-import android.os.Bundle;
 import android.app.Activity;
+import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.support.v4.app.NavUtils;
-
+import android.widget.TextView;
 
 /***
- * Class to register a user. 
+ * Class to register a user.
+ * 
  * @author Markus
- *
+ * 
  */
 public class RegisterUserActivity extends Activity {
 
@@ -37,7 +38,7 @@ public class RegisterUserActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		//getMenuInflater().inflate(R.menu.register_user, menu);
+		// getMenuInflater().inflate(R.menu.register_user, menu);
 		return true;
 	}
 
@@ -57,10 +58,13 @@ public class RegisterUserActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
-	public void OnClickRegister(View view){
-		String mail=((EditText) this.findViewById(R.id.RegisterUserText)).getText().toString();
-		String pw=((EditText) this.findViewById(R.id.PasswordText)).getText().toString();
+
+	public void OnClickRegister(View view) {
+		String mail = ((TextView) this.findViewById(R.id.RegisterUserText)).getText()
+			.toString();
+
+		String pw = ((EditText) this.findViewById(R.id.PasswordText)).getText()
+			.toString();
 	}
 
 }
