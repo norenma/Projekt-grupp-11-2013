@@ -10,7 +10,6 @@ import se.chalmers.fonahano.quizwalk.model.ChallengeReward;
 import se.chalmers.fonahano.quizwalk.model.QuizWalkGame;
 import se.chalmers.fonahano.quizwalk.model.StringAnswer;
 import se.chalmers.fonahano.quizwalk.model.StringQuestion;
-import se.chalmers.fonahano.quizwalk.model.Utilities;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -84,7 +83,7 @@ public class EditQuizWalkGameActivity extends Activity {
 			.getSerializableExtra("QuizWalk");
 		if (opt.isPresent()) {
 			QuizWalkGame qwg = (QuizWalkGame) opt.get();
-			Utilities.populateMap(map,
+			ActivityHelper.populateMap(map,
 				qwg);
 			builder = new QuizWalkGame.Builder(qwg);
 		} else

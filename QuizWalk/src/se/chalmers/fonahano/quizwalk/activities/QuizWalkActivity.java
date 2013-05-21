@@ -54,7 +54,7 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 		Iterator<Challenge> challengeIt = q.getChallenges().iterator();
 
 		// Sets out locations on map
-		Utilities.populateMap(map, q);
+		ActivityHelper.populateMap(map, q);
 
 		map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.558,
 				9.927), 3));

@@ -4,15 +4,11 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 import se.chalmers.fonahano.quizwalk.interfaces.LatitudeLongitude;
 
-import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 /**
  * Common static utility methods goes here.
@@ -90,42 +86,9 @@ public class Utilities {
 			c.getLongitude());
 	}
 
-	/**
-	 * Populates a map with {@link Challenge} {@link ChallengeLocation} based on
-	 * a {@link QuizWalkGame}w
-	 * 
-	 * @param m
-	 *            Map to be populated
-	 * @param q
-	 *            QuizWalkGame of which ChallengeLocations will be presented
-	 * @return boolean for debugg purposes
-	 */
-	public static boolean populateMap(GoogleMap m, QuizWalkGame q) {
-		checkNotNull(q);
-		checkNotNull(m);
-
-		List<Challenge> challenges = q.getChallenges();
-
-		Iterator<Challenge> itChallenge = challenges.iterator();
-		Challenge currentIt;
-		// extracts the locations of all the challenges
-
-		while (itChallenge.hasNext()) {
-			currentIt = itChallenge.next();
-
-			// //TODO to make UC work, for now.
-			m.addMarker(new MarkerOptions().position(coordinatesToLatLng(currentIt.getLocation())))
-				.setTitle(currentIt.getChallengeDescription());
-
-		}
-
-		// TODO: Add proper use of return value
-		return true;
-	}
-
-	public static LatitudeLongitude latLngToCoordinates(LatLng ll) {
-		return new Coordinates(ll.latitude,
-			ll.longitude);
+	public static LatitudeLongitude latLngToCoordinates(LatLng latLong) {
+		return new Coordinates(latLong.latitude,
+			latLong.longitude);
 	}
 
 }
