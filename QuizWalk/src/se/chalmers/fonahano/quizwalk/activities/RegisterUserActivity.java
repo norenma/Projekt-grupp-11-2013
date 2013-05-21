@@ -7,24 +7,19 @@ import se.chalmers.fonahano.quizwalk.model.AndroidUser;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.DialogInterface.OnClickListener;
+import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.support.v4.app.NavUtils;
-
-import static com.google.common.base.Preconditions.checkNotNull;
-
 
 /***
- * Class to register a user. 
+ * Class to register a user.
+ * 
  * @author Markus
- *
+ * 
  */
 public class RegisterUserActivity extends Activity {
 
@@ -46,7 +41,7 @@ public class RegisterUserActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		//getMenuInflater().inflate(R.menu.register_user, menu);
+		// getMenuInflater().inflate(R.menu.register_user, menu);
 		return true;
 	}
 
@@ -90,8 +85,7 @@ public class RegisterUserActivity extends Activity {
 	           }
 	       });
 		builder.create().show();
-		
 	}
-	
+
 
 }
