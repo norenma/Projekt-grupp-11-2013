@@ -18,6 +18,7 @@
     <string name="right_answer">Right:</string>
     <string name="correct_answer">Correct:</string>
     <string name="correct_Answer">Correct Answer</string>
+    <string name="password">Password</string>
 
     <string name="title_activity_temporary_proximity">TemporaryProximityActivity</string>
     <string name="title_activity_quiz_walk_manager">QuizWalkManagerActivity</string>
