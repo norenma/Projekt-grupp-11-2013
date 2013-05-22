@@ -32,7 +32,7 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme" android:name="@string/quiz_walk">
         <activity
             android:name="se.chalmers.fonahano.quizwalk.activities.LoginActivity"
             android:label="@string/app_name"
