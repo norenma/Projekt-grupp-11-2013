@@ -17,6 +17,8 @@ import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
 public class GameOrmLiteSQLiteOpenHelper extends OrmLiteSqliteOpenHelper {
+	private final String CLASS_NAME = getClass().getName();
+
 	// any time you make changes to your database objects, you may have to
 	// increase the database version
 	private static final int DATABASE_VERSION = 1;
@@ -43,7 +45,7 @@ public class GameOrmLiteSQLiteOpenHelper extends OrmLiteSqliteOpenHelper {
 			TableUtils.createTable(connectionSource,
 				AndroidUser.class);
 		} catch (SQLException e) {
-			Log.e(GameOrmLiteSQLiteOpenHelper.class.getName(),
+			Log.e(CLASS_NAME,
 				"Can't create database",
 				e);
 			throw new RuntimeException(e);
@@ -67,7 +69,7 @@ public class GameOrmLiteSQLiteOpenHelper extends OrmLiteSqliteOpenHelper {
 				db.execSQL(sql);
 			}
 		} catch (SQLException e) {
-			Log.e(GameOrmLiteSQLiteOpenHelper.class.getName(),
+			Log.e(CLASS_NAME,
 				"exception during onUpgrade",
 				e);
 			throw new RuntimeException(e);
