@@ -1,6 +1,8 @@
 package se.chalmers.fonahano.quizwalk.activities;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import se.chalmers.fonahano.quizwalk.interfaces.Answer;
 import se.chalmers.fonahano.quizwalk.model.Challenge;
@@ -11,7 +13,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 
 /***
- * A Fragment-class to show a question as a pop-up
+ * A Fragment to show a question as Dialog to the user
+ * When shown, it displays A question and answers. When users 
+ * presses one answer, it will give feedback to the user, letting 
+ * it know if the answer was right or wrong. 
  * 
  * @author Markus Andersson Norén
  * 
@@ -19,12 +24,12 @@ import android.content.DialogInterface;
 @SuppressLint("ValidFragment")
 public class QuestionDialogBuilder extends AlertDialog.Builder {
 
+	//for some reason this class is "undefined without 
+	//implicit constructor. 
 	public QuestionDialogBuilder(Context arg0) {
 		super(arg0);
 	}
 
-	private String[] answers = new String[4];
-	private int rightNbr;
 
 	/***
 	 * Shows the question and answers of a challenge as a pop-up
@@ -35,20 +40,23 @@ public class QuestionDialogBuilder extends AlertDialog.Builder {
 	public void showChallenge(Challenge c) {
 		// Gets answers from challenge
 		Iterator<Answer<String>> answersIt = c.getSetOfAnswers().iterator();
+		List<String> answersTmp=new ArrayList<String>();
+		int rightNbrTmp=1;
 		for (int i = 0; i < 4; i++) {
 			if (answersIt.hasNext())
-				answers[i] = (String) answersIt.next().getAnswer();
+				answersTmp.set(i, (String) answersIt.next().getAnswer());
 			else
 				break;
 		}
 
-		for (int i = 0; i < answers.length; i++) {
-			if (c.isCorrectAnswer(new StringAnswer(answers[i])))
-				rightNbr = i;
+		for (int i = 0; i < answersTmp.size(); i++) {
+			if (c.isCorrectAnswer(new StringAnswer(answersTmp.get(i))))
+				rightNbrTmp = i;
 		}
+		final int rightNbr=rightNbrTmp;
 
 		// Sets up the popup
-		this.setItems(answers, new DialogInterface.OnClickListener() {
+		this.setItems((String[])(answersTmp.toArray()), new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface d, int choice) {
 				if (choice == rightNbr) {
 					AlertDialog.Builder ab = new AlertDialog.Builder(

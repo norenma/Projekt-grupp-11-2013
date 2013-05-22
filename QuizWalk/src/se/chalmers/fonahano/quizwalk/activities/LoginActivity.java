@@ -34,15 +34,15 @@ public class LoginActivity extends Activity {
 		GameDatabaseManager.init(this);
 		LocalDatabase gdm=GameDatabaseManager.getInstance();
 		//if(password correct and mail correct)
-		if(gdm.getUser().isCorrectPassword(((EditText)findViewById(R.id.Password)).getText().toString())
-				&& gdm.getUser().getEmail().equals(((EditText)findViewById(R.id.Email)).getText().toString())){
+		//if(gdm.getUser().isCorrectPassword(((EditText)findViewById(R.id.Password)).getText().toString())
+		//		&& gdm.getUser().getEmail().equals(((EditText)findViewById(R.id.Email)).getText().toString())){
 			Intent intent = new Intent(this, GameMenuActivity.class);
 			startActivity(intent);
-		}
-		else{
+		//}
+		//else{
 			//shows a error-text
-			((TextView) findViewById(R.id.errorMessage)).setText(R.string.wrong_password);
-		}
+		//	((TextView) findViewById(R.id.errorMessage)).setText(R.string.wrong_password);
+		//}
 		
 	}
 	
