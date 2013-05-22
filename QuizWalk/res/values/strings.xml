@@ -41,7 +41,7 @@
     <string name="registration_successful"> "Registration successful!" </string>
     <string name="wrong_password"><u> Wrong Password!</u></string>
     <string name="create_quizwalk">Create QuizWalk!</string>
-    <string name="quiz_walk"> QuizWalk </string>
+    <string name="quiz_walk"><u> QuizWalk </u></string>
     <string name="title_activity_completed_quiz_walk">CompletedQuizWalkActivity</string>
     <string name="grattis">Grattis du har fått:</string>
 

@@ -11,36 +11,6 @@
         android:layout_height="match_parent"
         android:clickable="false" />
 
-    <Button
-        android:id="@+id/LoginButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/Email"
-        android:layout_marginBottom="90dp"
-        android:onClick="Login"
-        android:text="@string/login_text"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold"
-        android:typeface="sans" />
-
-    <TextView
-        android:id="@+id/errorMessage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/registerUserText"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="@color/Red" />
-
-    <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="58dp"
-        android:src="@drawable/ic_launcher" />
-
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
@@ -48,66 +18,94 @@
         android:layout_below="@+id/imageView1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="14dp"
-        android:background="@color/black_overlay"
+        android:alpha="0.8"
+        android:background="@color/black"
+        android:fontFamily="Droid Serif"
         android:padding="@dimen/small_padding"
         android:text="@string/quiz_walk"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/Tomato" />
+        android:textColor="@color/white"
+        android:textStyle="bold|italic"
+        android:typeface="serif" />
 
-    <!--
-         <View 
-        android:id="@+id/panel"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height=""/>
-    -->
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/LoginButton"
-        android:layout_alignParentRight="true"
-        android:background="@color/black_overlay"
-        android:orientation="vertical" >
-
-
+        android:layout_height="200dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView1"
+        android:background="@color/black"
+        android:alpha="0.8" >
 
         <EditText
             android:id="@+id/Email"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
+            android:layout_marginTop="13dp"
             android:ems="10"
             android:hint="@string/username_login"
             android:inputType="textEmailAddress"
             android:shadowColor="@android:color/white"
-            android:textColor="#FFFFFF" >
-
-            <requestFocus />
-        </EditText>
+            android:textColor="#FFFFFF" />
+        <requestFocus />
 
         <EditText
             android:id="@+id/Password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="36dp"
-            android:layout_weight="1"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/Email"
+            android:layout_marginTop="10dp"
             android:ems="10"
             android:hint="@string/password"
             android:inputType="textPassword"
-            android:textColor="#FFFFFF" />
+            android:textColor="#FFFFFF" >
+
+            
+        </EditText>
+
+        <TextView
+            android:id="@+id/errorMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Password"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/Red"
+            android:layout_marginLeft="200dp" />
+
+        <Button
+            android:id="@+id/LoginButton"
+            android:layout_width="175dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="14dp"
+            android:onClick="Login"
+            android:text="@string/login_text"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:typeface="sans" />
 
         <TextView
             android:id="@+id/registerUserText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="18dp"
+            android:layout_below="@+id/Password"
+            android:layout_marginLeft="50dp"
+            android:layout_toRightOf="@+id/errorMessage"
             android:clickable="true"
             android:onClick="onClickRegisterUser"
             android:text="@string/register"
-            android:textColor="@color/white"
-    		android:layout_marginLeft="240dp" />
+            android:textColor="@color/white" />
 
-    </LinearLayout>
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="160dp"
+        android:src="@drawable/quiz_walk_big" />
 
 </RelativeLayout>
