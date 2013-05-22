@@ -93,7 +93,7 @@
         </activity>
         <activity
             android:name="se.chalmers.fonahano.quizwalk.activities.LauncherActivity"
-            android:label="@string/title_activity_launcher"
+            android:label="@string/quiz_walk"
             android:screenOrientation="portrait" >
              <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
