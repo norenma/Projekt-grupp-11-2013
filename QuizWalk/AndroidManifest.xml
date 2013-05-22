@@ -32,7 +32,7 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/quiz_walk"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme" >
         <activity
             android:name="se.chalmers.fonahano.quizwalk.activities.LoginActivity"
             android:label="@string/app_name"
@@ -50,8 +50,8 @@
         <activity
             android:name="temp.activities.TemporaryProximityActivity"
             android:label="@string/title_activity_temporary_proximity"
-            android:parentActivityName="se.chalmers.fonahano.quizwalk.activities.QuizWalkActivity" 
-            android:screenOrientation="portrait">
+            android:parentActivityName="se.chalmers.fonahano.quizwalk.activities.QuizWalkActivity"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="se.chalmers.it12.tda367.vt13.grp11.quizwalk.activities.QuizWalkActivity" />
@@ -63,8 +63,8 @@
         </activity>
         <activity
             android:name="se.chalmers.fonahano.quizwalk.activities.EditQuizWalkGameActivity"
-            android:label="@string/title_activity_edit_quiz_walk_game" 
-            android:screenOrientation="portrait">
+            android:label="@string/title_activity_edit_quiz_walk_game"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="se.chalmers.fonahano.quizwalk.activities.DebugActivity"
@@ -84,22 +84,26 @@
         <activity
             android:name="se.chalmers.fonahano.quizwalk.activities.RegisterUserActivity"
             android:label="@string/title_activity_register_user"
-            android:parentActivityName="se.chalmers.fonahano.quizwalk.activities.LoginActivity" 
-            android:screenOrientation="portrait">
+            android:parentActivityName="se.chalmers.fonahano.quizwalk.activities.LoginActivity"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="se.chalmers.fonahano.quizwalk.activities.LoginActivity"
-                android:screenOrientation="portrait" />
+                android:screenOrientation="portrait"
+                android:value="se.chalmers.fonahano.quizwalk.activities.LoginActivity" />
         </activity>
         <activity
             android:name="se.chalmers.fonahano.quizwalk.activities.LauncherActivity"
             android:label="@string/quiz_walk"
             android:screenOrientation="portrait" >
-             <intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="se.chalmers.fonahano.quizwalk.activities.CompletedQuizWalkActivity"
+            android:label="@string/title_activity_completed_quiz_walk" >
         </activity>
     </application>
 

@@ -19,7 +19,6 @@
     <string name="correct_answer">Correct:</string>
     <string name="correct_Answer">Correct Answer</string>
     <string name="password">Password</string>
-
     <string name="title_activity_temporary_proximity">TemporaryProximityActivity</string>
     <string name="title_activity_quiz_walk_manager">QuizWalkManagerActivity</string>
     <string name="title_activity_edit_quiz_walk">EditQuizWalkActivity</string>
@@ -43,5 +42,7 @@
     <string name="wrong_password"><u> Wrong Password!</u></string>
     <string name="create_quizwalk">Create QuizWalk!</string>
     <string name="quiz_walk"> QuizWalk </string>
+    <string name="title_activity_completed_quiz_walk">CompletedQuizWalkActivity</string>
+    <string name="grattis">Grattis du har fått:</string>
 
 </resources>
