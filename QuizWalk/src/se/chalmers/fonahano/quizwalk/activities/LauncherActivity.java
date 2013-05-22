@@ -22,7 +22,7 @@ public class LauncherActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		// TODO Debug, delete database.
-		//deleteDatabase(C.Data.DATABASE_NAME);
+		deleteDatabase(C.Data.DATABASE_NAME);
 		GameDatabaseManager.init(this);
 
 		LocalDatabase gdm = GameDatabaseManager.getInstance();

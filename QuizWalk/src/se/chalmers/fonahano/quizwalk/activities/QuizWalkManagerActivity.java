@@ -32,7 +32,7 @@ public class QuizWalkManagerActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		
 		//TODO: Uncomment to delete database
-		deleteDatabase(C.Data.DATABASE_NAME);
+		//deleteDatabase(C.Data.DATABASE_NAME);
 		
 		GameDatabaseManager.init(this);
 
@@ -110,6 +110,10 @@ public class QuizWalkManagerActivity extends Activity {
 		getMenuInflater().inflate(R.menu.quiz_walk_manager,
 			menu);
 		return true;
+	}
+	
+	public void generateQuizWalk(View view){
+		GameDatabaseManager.getInstance().addQuizWalkGame(DebugFactory.getRandomTortalChalmersQuizWalkGame1());
 	}
 
 }

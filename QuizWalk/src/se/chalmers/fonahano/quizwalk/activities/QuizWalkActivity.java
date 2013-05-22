@@ -77,6 +77,7 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 	    else if(gameMapState == 2){
 	    	q = StateSingleton.INSTANCE.getActiveQuizWalk().get();
 	    	ActivityHelper.populateMap(map, q);
+	    	initProximityAlerts(q, locationManager);
 	    }
 		
 		
@@ -108,12 +109,11 @@ public class QuizWalkActivity extends Activity implements LocationListener {
                         arg0.getPosition();
 					}
 				}
-				return false;*/
-
-				if(getIntent().getIntExtra(C.GameMap.MAP_STATE, 1) == 1){
-					ActivityHelper.getQuizWalkGame(marker.getTitle());
-				}else if(getIntent().getIntExtra(C.GameMap.MAP_STATE, 1) == 2){	
+				return false;*/	
+				if(getIntent().getIntExtra(C.GameMap.MAP_STATE, 1) == 2){	
 					questionFragment.showChallenge(q.getChallenge(Utilities.latLngToCoordinates(marker.getPosition())));
+				}else{
+					showQuizWalkStartDialog(ActivityHelper.getQuizWalkGame(marker.getTitle()).get());
 				}
                 return true;
 			}
