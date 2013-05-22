@@ -5,17 +5,16 @@
     tools:context=".MainActivity" >
 
     <fragment
-    android:id="@+id/map"
-    android:name="com.google.android.gms.maps.MapFragment"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" 
-    android:clickable="false"/>
-            
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.MapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="false" />
+
     <Button
         android:id="@+id/LoginButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/Password"
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/Email"
         android:layout_marginBottom="90dp"
@@ -25,53 +24,90 @@
         android:textStyle="bold"
         android:typeface="sans" />
 
-    <EditText
-        android:id="@+id/Password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/Email"
-        android:layout_alignRight="@+id/Email"
-        android:layout_centerVertical="true"
-        android:ems="10"
-        android:inputType="textPassword"
-        android:hint="@string/password"
-        android:textColor="#FFFFFF" />
-
-    <EditText
-        android:id="@+id/Email"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/Password"
-        android:layout_centerHorizontal="true"
-        android:ems="10"
-        android:inputType="textEmailAddress"
-        android:shadowColor="@android:color/white"
-        android:hint="@string/username_login"
-        android:textColor="#FFFFFF" >
-
-        <requestFocus />
-    </EditText>
-
-    <TextView
-        android:id="@+id/registerUserText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/Password"
-        android:layout_below="@+id/Password"
-        android:layout_marginTop="14dp"
-        android:clickable="true"
-        android:onClick="onClickRegisterUser"
-        android:text="@string/register"
-        android:textColor="@color/white"
-  		 />
-
     <TextView
         android:id="@+id/errorMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/registerUserText"
-        android:layout_alignLeft="@+id/Password"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/Red" />
 
- </RelativeLayout>
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="58dp"
+        android:src="@drawable/ic_launcher" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp"
+        android:background="@color/black_overlay"
+        android:padding="@dimen/small_padding"
+        android:text="@string/quiz_walk"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/Tomato" />
+
+    <!--
+         <View 
+        android:id="@+id/panel"
+        android:layout_width="match_parent"
+        android:layout_height=""/>
+    -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/LoginButton"
+        android:layout_alignParentRight="true"
+        android:background="@color/black_overlay"
+        android:orientation="vertical" >
+
+
+
+        <EditText
+            android:id="@+id/Email"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:ems="10"
+            android:hint="@string/username_login"
+            android:inputType="textEmailAddress"
+            android:shadowColor="@android:color/white"
+            android:textColor="#FFFFFF" >
+
+            <requestFocus />
+        </EditText>
+
+        <EditText
+            android:id="@+id/Password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="36dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/registerUserText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="18dp"
+            android:clickable="true"
+            android:onClick="onClickRegisterUser"
+            android:text="@string/register"
+            android:textColor="@color/white"
+    		android:layout_marginLeft="240dp" />
+
+    </LinearLayout>
+
+</RelativeLayout>
