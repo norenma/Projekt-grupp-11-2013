@@ -342,4 +342,75 @@ public class Challenge implements Serializable {
 		return challengeReward;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime
+				* result
+				+ ((challengeDescription == null) ? 0 : challengeDescription
+						.hashCode());
+		result = prime * result
+				+ ((challengeReward == null) ? 0 : challengeReward.hashCode());
+		result = prime * result
+				+ ((correctAnswer == null) ? 0 : correctAnswer.hashCode());
+		result = prime * result
+				+ ((location == null) ? 0 : location.hashCode());
+		result = prime * result
+				+ ((question == null) ? 0 : question.hashCode());
+		result = prime * result
+				+ ((setOfAnswers == null) ? 0 : setOfAnswers.hashCode());
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Challenge other = (Challenge) obj;
+		if (challengeDescription == null) {
+			if (other.challengeDescription != null)
+				return false;
+		} else if (!challengeDescription.equals(other.challengeDescription))
+			return false;
+		if (challengeReward == null) {
+			if (other.challengeReward != null)
+				return false;
+		} else if (!challengeReward.equals(other.challengeReward))	
+			return false;		// equals challengeReward 
+		if (correctAnswer == null) {
+			if (other.correctAnswer != null)
+				return false;
+		} else if (!correctAnswer.equals(other.correctAnswer))	//equals Answer
+			return false;
+		if (location == null) {
+			if (other.location != null)
+				return false;
+		} else if (!location.equals(other.location))	//equals Location
+			return false;
+		if (question == null) {
+			if (other.question != null)
+				return false;
+		} else if (!question.equals(other.question))	//equals Question
+			return false;
+		if (setOfAnswers == null) {
+			if (other.setOfAnswers != null)
+				return false;
+		} else if (!setOfAnswers.equals(other.setOfAnswers))
+			return false;
+		return true;
+	}
+	
+	
+
 }

@@ -18,5 +18,7 @@ public class ChallengeReward extends AbstractReward {
 			image);
 		// TODO Auto-generated constructor stub
 	}
+	
+	
 
 }
