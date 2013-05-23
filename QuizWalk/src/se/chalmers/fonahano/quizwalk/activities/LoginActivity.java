@@ -38,7 +38,8 @@ public class LoginActivity extends Activity {
 		
 		CameraPosition cameraPos = new CameraPosition.Builder().target(new LatLng(57.685528, 12.979389)).zoom(12).build();
 		
-		map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPos), 100000, null);
+		//not rendering properly
+		//map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPos), 100000, null);
 	}
 
 	@Override
