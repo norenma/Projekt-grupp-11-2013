@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import se.chalmers.fonahano.quizwalk.R;
 import se.chalmers.fonahano.quizwalk.database.GameDatabaseManager;
 import se.chalmers.fonahano.quizwalk.interfaces.LatitudeLongitude;
 import se.chalmers.fonahano.quizwalk.model.Challenge;
@@ -13,9 +14,12 @@ import se.chalmers.fonahano.quizwalk.model.ChallengeLocation;
 import se.chalmers.fonahano.quizwalk.model.Coordinates;
 import se.chalmers.fonahano.quizwalk.model.QuizWalkGame;
 import se.chalmers.fonahano.quizwalk.model.Utilities;
+import android.content.Context;
 import android.location.Location;
+import android.util.Log;
 
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.common.base.Optional;
@@ -25,32 +29,26 @@ import com.google.common.base.Optional;
  * 
  */
 
-//TODO: javaDoc till alla metoder
+// TODO: javaDoc till alla metoder
 public abstract class ActivityHelper {
-
 
 	private static void distance(LatitudeLongitude firstPos,
 			LatitudeLongitude secondPos, float[] result) {
 		Location.distanceBetween(firstPos.getLatitude(),
-			firstPos.getLongitude(),
-			secondPos.getLatitude(),
-			secondPos.getLongitude(),
-			result);
+				firstPos.getLongitude(), secondPos.getLatitude(),
+				secondPos.getLongitude(), result);
 	}
 
 	public static float distance(LatitudeLongitude firstPos,
 			LatitudeLongitude secondPos) {
 		float[] floatArray = new float[1];
-		distance(firstPos,
-			secondPos,
-			floatArray);
+		distance(firstPos, secondPos, floatArray);
 		return floatArray[0];
 	}
 
 	public static List<Float> distance(QuizWalkGame q) {
 		List<Float> l = new ArrayList<Float>();
-		Iterator<Challenge> it = q.getChallenges()
-			.iterator();
+		Iterator<Challenge> it = q.getChallenges().iterator();
 		LatitudeLongitude f, s;
 		Challenge itNext = it.hasNext() ? it.next() : null;
 
@@ -68,37 +66,37 @@ public abstract class ActivityHelper {
 				break;
 			}
 
-			l.add(distance(f,
-				s));
+			l.add(distance(f, s));
 		}
 
 		return l;
 	}
-	
+
 	/**
 	 * 
 	 * @param q
-	 * @return
-	 * 		The total distance between all questions in a quizwalk
+	 * @return The total distance between all questions in a quizwalk
 	 */
-	public static float totalQuizWalkDistance(QuizWalkGame q){
+	public static float totalQuizWalkDistance(QuizWalkGame q) {
 		Iterator<Float> dist = distance(q).iterator();
 		float distance = 0;
-		
-		while (dist.hasNext()){
+
+		while (dist.hasNext()) {
 			distance += dist.next();
 		}
 		return distance;
 	}
-	
-	private static Marker populateMap(GoogleMap map, Coordinates coordinates, String title){
-		Marker marker = map.addMarker(new MarkerOptions().position(Utilities.coordinatesToLatLng(coordinates)));
+
+	private static Marker populateMap(GoogleMap map, Coordinates coordinates,
+			String title) {
+		Marker marker = map.addMarker(new MarkerOptions().position(Utilities
+				.coordinatesToLatLng(coordinates)));
 		marker.setTitle(title);
-		
+
 		return marker;
 	}
 
-	/** 
+	/**
 	 * Populates a map with {@link Challenge} {@link ChallengeLocation} based on
 	 * a {@link QuizWalkGame}w
 	 * 
@@ -108,55 +106,139 @@ public abstract class ActivityHelper {
 	 *            QuizWalkGame of which ChallengeLocations will be presented
 	 * @return boolean for debugg purposes
 	 */
-	public static List<Marker> populateMap(GoogleMap map, QuizWalkGame q) {
+	public static List<Marker> populateMap(GoogleMap map, QuizWalkGame q,
+			Context cxt) {
 		checkNotNull(q);
 		checkNotNull(map);
-	
+
 		List<Challenge> challenges = q.getChallenges();
 		List<Marker> markers = new ArrayList();
-	
+
 		Iterator<Challenge> itChallenge = challenges.iterator();
 		Challenge currentIt;
 		// extracts the locations of all the challenges
-	
+		int i = 1;
 		while (itChallenge.hasNext()) {
 			currentIt = itChallenge.next();
-	
-			Marker temp = populateMap(map, currentIt.getLocation(), currentIt.getChallengeDescription());
+
+			Marker temp = populateMap(map, currentIt.getLocation(),
+					currentIt.getChallengeDescription());
+
+//			if (i < 29) {
+//				String imageID = "number_" + i;
+//				int resID = cxt.getResources().(imageID, "id",
+//						cxt.getPackageName());
+//				
+//				temp.setIcon(BitmapDescriptorFactory.fromResource(resID));
+//			} else
+//				temp.setIcon(BitmapDescriptorFactory
+//						.fromResource(R.drawable.number_0));
+
+			//TODO: VERY VERY Preliminary solution. Just to get the project forward
+			switch(i){
+			case 1: temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_1));
+					break;
+			case 2: temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_2));
+			break;
+			case 3: temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_3));
+			break;
+			case 4: temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_4));
+			break;
+			case 5: temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_5));
+			break;
+			case 6: temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_6));
+			break;
+			case 7: temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_7));
+			break;
+			case 8: temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_8));
+			break;
+			case 9: temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_9));
+			break;
+			case 10: temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_10));
+			break;
+			case 11: temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_11));
+			break;
+			case 12: temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_12));
+			break;
+			case 13: temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_13));
+			break;
+			case 14: temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_14));
+			break;
+			case 15: temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_15));
+			break;
+			case 16: temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_16));
+			break;
+			case 17: temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_17));
+			break;
+			case 18: temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_18));
+			break;
+			case 19: temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_19));
+			break;
+			case 20: temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_20));
+			break;
+			case 21: temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_21));
+			break;
+			case 22: temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_22));
+			break;
+			case 23: temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_23));
+			break;
+			case 24: temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_24));
+			break;
+			case 25: temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_25));
+			break;
+			case 26: temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_26));
+			break;
+			case 27: temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_27));
+			break;
+			case 28: temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_28));
+			break;
+			case 29: temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_29));
+			break;
+			default:temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_0));
+			break;
+			
+			}
+			i++;
 			markers.add(temp);
-	
+
 		}
-		
+
 		return markers;
 	}
+
 	/**
 	 * Populates map with quizWalkLocations
+	 * 
 	 * @param googleMap
 	 * @param quizWalkGames
 	 * @return
 	 */
-	public static List<Marker> populateMap(GoogleMap googleMap, List<QuizWalkGame> quizWalkGames){
+	public static List<Marker> populateMap(GoogleMap googleMap,
+			List<QuizWalkGame> quizWalkGames, Context cxt) {
 		checkNotNull(googleMap);
-		Utilities.checkNotNullOrEmpty(quizWalkGames, "the list of QuizWalkGames is empty");
+		Utilities.checkNotNullOrEmpty(quizWalkGames,
+				"the list of QuizWalkGames is empty");
 		List<Marker> markers = new ArrayList();
-		
+
 		Iterator<QuizWalkGame> qIt = quizWalkGames.iterator();
-		
-		while(qIt.hasNext()){
+
+		while (qIt.hasNext()) {
 			QuizWalkGame qItNext = qIt.next();
 			Challenge c = checkNotNull(qItNext.getChallenges().get(0));
-			markers.add(populateMap(googleMap, c.getLocation(), qItNext.getDescription()));
-			
+
+			markers.add(populateMap(googleMap, c.getLocation(),
+					qItNext.getDescription()));
+
 		}
-		
+
 		return markers;
-		
+
 	}
-	
-	
-	public static Optional<QuizWalkGame> getQuizWalkGame(String title){
-		for(QuizWalkGame quiz : GameDatabaseManager.getInstance().getAllQuizWalkGame()){
-			if(quiz.getDescription().equalsIgnoreCase(title)){
+
+	public static Optional<QuizWalkGame> getQuizWalkGame(String title) {
+		for (QuizWalkGame quiz : GameDatabaseManager.getInstance()
+				.getAllQuizWalkGame()) {
+			if (quiz.getDescription().equalsIgnoreCase(title)) {
 				return Optional.of(quiz);
 			}
 		}
