@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <lint>
+    <issue id="ContentDescription">
+        <ignore path="res/layout/activity_register_user.xml" />
+    </issue>
     <issue id="ExtraTranslation" severity="warning" />
     <issue id="MissingTranslation" severity="warning" />
     <issue id="SpUsage">
@@ -7,4 +10,7 @@
     </issue>
     <issue id="StringFormatInvalid" severity="warning" />
     <issue id="StringFormatMatches" severity="warning" />
+    <issue id="UnknownIdInLayout">
+        <ignore path="res/layout/activity_register_user.xml" />
+    </issue>
 </lint>
