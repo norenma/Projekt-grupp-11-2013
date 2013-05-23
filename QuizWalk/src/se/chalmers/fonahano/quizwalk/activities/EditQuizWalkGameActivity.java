@@ -93,7 +93,7 @@ public class EditQuizWalkGameActivity extends Activity {
 		} else{
 			QuizWalkGame qwg = StateSingleton.INSTANCE.getActiveQuizWalk().get();
 			ActivityHelper.populateMap(map,
-					qwg);
+					qwg, this);
 			builder = new QuizWalkGame.Builder(qwg);
 		}
 	}
