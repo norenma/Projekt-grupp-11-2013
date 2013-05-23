@@ -2,6 +2,9 @@
 <lint>
     <issue id="ExtraTranslation" severity="warning" />
     <issue id="MissingTranslation" severity="warning" />
+    <issue id="SpUsage">
+        <ignore path="res/layout/activity_settings.xml" />
+    </issue>
     <issue id="StringFormatInvalid" severity="warning" />
     <issue id="StringFormatMatches" severity="warning" />
 </lint>
