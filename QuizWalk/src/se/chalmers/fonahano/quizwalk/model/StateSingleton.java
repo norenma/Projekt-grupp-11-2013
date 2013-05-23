@@ -5,6 +5,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+import se.chalmers.fonahano.quizwalk.interfaces.C.Intent.Action;
+
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
 
@@ -22,10 +24,6 @@ public enum StateSingleton {
 	INSTANCE;
 
 	public static class Key {
-		public static final String STATE_CHANGED_ACTIVE_QUIZWALK = "se.chalmers.fonahano.quizwalk.STATE_CHANGED_QUIZWALK";
-		public static final String STATE_CHANGED_QUIZWALK_BUILDER = "se.chalmers.fonahano.quizwalk.STATE_CHANGED_QUIZWALK_BUILDER";
-		public static final String STATE_CHANGED_CHALLENGE_BUILDER = "se.chalmers.fonahano.quizwalk.STATE_CHANGED_CHALLENGE_BUILDER";
-		public static final String STATE_CHANGED_CURRENT_LOCATION = "se.chalmers.fonahano.quizwalk.STATE_CHANGED_CURRENT_LOCATION";
 	}
 
 	/**
@@ -125,41 +123,44 @@ public enum StateSingleton {
 	 */
 	public String setCurrentLocation(ChallengeLocation currentLocation) {
 		this.currentLocation = currentLocation;
-		return Key.STATE_CHANGED_CURRENT_LOCATION;
+		return Action.STATE_CHANGED_CURRENT_LOCATION;
 	}
 
 	/**
 	 * @param currentQuizWalkBuilder
 	 *            the currentQuizWalkBuilder to set
-	 * @return the key that represents this change
+	 * @return the key {@link Action#STATE_CHANGED_QUIZWALK_BUILDER} that represents
+	 *         this intent.
 	 */
 	public String setCurrentQuizWalkBuilder(
 			QuizWalkGame.Builder currentQuizWalkBuilder) {
 		this.currentQuizWalkBuilder = currentQuizWalkBuilder;
-		return Key.STATE_CHANGED_CHALLENGE_BUILDER;
+		return Action.STATE_CHANGED_QUIZWALK_BUILDER;
 	}
 
 	/**
 	 * @param currentChallengeBuilder
 	 *            the currentChallengeBuilder to set. Set to null to clear.
 	 * 
-	 * @return the key that represents this change
+	 * @return the key {@link Action#STATE_CHANGED_CHALLENGE_BUILDER} that represents
+	 *         this intent.
 	 */
 	public String setCurrentChallengeBuilder(
 			Challenge.Builder currentChallengeBuilder) {
 		this.currentChallengeBuilder = currentChallengeBuilder;
-		return Key.STATE_CHANGED_CHALLENGE_BUILDER;
+		return Action.STATE_CHANGED_CHALLENGE_BUILDER;
 	}
 
 	/**
 	 * @param activeQuizWalk
 	 *            the activeQuizWalk to set. Set to null to clear.
 	 * 
-	 * @return the key that represents this change
+	 * @return the key {@link Action#STATE_CHANGED_ACTIVE_QUIZWALK} that represents
+	 *         this intent.
 	 */
 	public String setActiveQuizWalk(QuizWalkGame activeQuizWalk) {
 		this.activeQuizWalk = activeQuizWalk;
-		return Key.STATE_CHANGED_ACTIVE_QUIZWALK;
+		return Action.STATE_CHANGED_ACTIVE_QUIZWALK;
 	}
 
 }
