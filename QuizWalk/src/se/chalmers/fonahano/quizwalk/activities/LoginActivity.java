@@ -1,20 +1,19 @@
 package se.chalmers.fonahano.quizwalk.activities;
 
-import java.util.Map;
-
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
-
 import se.chalmers.fonahano.quizwalk.R;
 import se.chalmers.fonahano.quizwalk.database.GameDatabaseManager;
 import se.chalmers.fonahano.quizwalk.database.LocalDatabase;
 import android.app.Activity;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.TextView;
+
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.LatLng;
 
 public class LoginActivity extends Activity {
 
@@ -24,6 +23,10 @@ public class LoginActivity extends Activity {
 		setContentView(R.layout.activity_login);
 		GoogleMap map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
 		map.getUiSettings().setAllGesturesEnabled(false);
+		
+		map.getUiSettings().setZoomControlsEnabled(false);
+		
+		map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(57.685528, 11.979389), 12));
 	}
 
 	@Override
