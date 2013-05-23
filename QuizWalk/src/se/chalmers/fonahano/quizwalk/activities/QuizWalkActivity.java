@@ -72,11 +72,11 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 	    final int gameMapState = getIntent().getIntExtra(C.GameMap.MAP_STATE, 1);
 	    
 	    if(gameMapState == 1){
-			ActivityHelper.populateMap(map, db.getAllQuizWalkGame());
+			ActivityHelper.populateMap(map, db.getAllQuizWalkGame(), this);
 		}
 	    else if(gameMapState == 2){
 	    	q = StateSingleton.INSTANCE.getActiveQuizWalk().get();
-	    	ActivityHelper.populateMap(map, q);
+	    	ActivityHelper.populateMap(map, q, this);
 	    	initProximityAlerts(q, locationManager);
 	    }
 		
@@ -126,6 +126,7 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 
 	    location = locationManager.getLastKnownLocation(provider);
 	    
+	    // not rendering properly
 	    map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 1));
 		
 	    checkNotNull(location);
