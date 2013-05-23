@@ -31,11 +31,14 @@ public class TestChallenge {
 		assertTrue(cTmp.getReward().get().getScore() == 50);
 		
 		//Tests second constructor of builder, that make a build of a QuizWalk
+		assertTrue(c.equals(new Challenge.Builder(c).build()));
 	}
 	
 	@Test
 	public void testIsCorrectAnswer() {
 		assertTrue(c.isCorrectAnswer(new StringAnswer("4")));
 	}
+	
+	
 
 }

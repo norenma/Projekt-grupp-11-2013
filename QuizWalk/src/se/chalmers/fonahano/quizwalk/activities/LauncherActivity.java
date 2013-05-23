@@ -13,7 +13,7 @@ import android.view.Menu;
 import android.view.Window;
 import android.view.WindowManager;
 
-/***
+/**
  * Empty activity to set up program before visual things will happen.
  * 
  * @author Markus

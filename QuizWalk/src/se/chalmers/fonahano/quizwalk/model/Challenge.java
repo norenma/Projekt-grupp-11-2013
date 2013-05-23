@@ -61,6 +61,22 @@ public class Challenge implements Serializable {
 				Optional.<Image> absent());
 			challengeReward = Optional.<ChallengeReward> absent();
 		}
+		
+		/**
+		 * Constructor to create a builder from
+		 * already built challenge
+		 *  
+		 * @param c the challenge to make a new builder
+		 * from.
+		 */
+		public Builder(Challenge c) {
+			question=c.question;
+			correctAnswer=c.correctAnswer;
+			description=c.challengeDescription;
+			setOfAnswers=c.setOfAnswers;
+			location=c.location;
+			challengeReward=c.challengeReward;
+		}
 
 		/**
 		 * @param d
@@ -366,9 +382,7 @@ public class Challenge implements Serializable {
 		return result;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -387,21 +401,21 @@ public class Challenge implements Serializable {
 			if (other.challengeReward != null)
 				return false;
 		} else if (!challengeReward.equals(other.challengeReward))	
-			return false;		// equals challengeReward 
+			return false;		// challengeReward 
 		if (correctAnswer == null) {
 			if (other.correctAnswer != null)
 				return false;
-		} else if (!correctAnswer.equals(other.correctAnswer))	//equals Answer
+		} else if (!correctAnswer.equals(other.correctAnswer))	// Answer
 			return false;
 		if (location == null) {
 			if (other.location != null)
 				return false;
-		} else if (!location.equals(other.location))	//equals Location
+		} else if (!location.equals(other.location))	// Location
 			return false;
 		if (question == null) {
 			if (other.question != null)
 				return false;
-		} else if (!question.equals(other.question))	//equals Question
+		} else if (!question.equals(other.question))	// Question
 			return false;
 		if (setOfAnswers == null) {
 			if (other.setOfAnswers != null)
