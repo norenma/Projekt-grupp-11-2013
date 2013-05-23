@@ -7,6 +7,7 @@ import java.util.List;
 import se.chalmers.fonahano.quizwalk.interfaces.Answer;
 import se.chalmers.fonahano.quizwalk.model.Challenge;
 import se.chalmers.fonahano.quizwalk.model.StringAnswer;
+import se.chalmers.fonahano.quizwalk.model.Utilities;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -18,7 +19,7 @@ import android.content.DialogInterface;
  * presses one answer, it will give feedback to the user, letting 
  * it know if the answer was right or wrong. 
  * 
- * @author Markus Andersson NorŽn
+ * @author Markus Andersson Norï¿½n
  * 
  */
 @SuppressLint("ValidFragment")
@@ -39,14 +40,18 @@ public class QuestionDialogBuilder extends AlertDialog.Builder {
 	 */
 	public void showChallenge(Challenge c) {
 		// Gets answers from challenge
-		Iterator<Answer<String>> answersIt = c.getSetOfAnswers().iterator();
+		//Iterator<Answer<String>> answersIt = c.getSetOfAnswers().iterator();
 		List<String> answersTmp=new ArrayList<String>();
 		int rightNbrTmp=1;
-		for (int i = 0; i < 4; i++) {
-			if (answersIt.hasNext())
-				answersTmp.set(i, (String) answersIt.next().getAnswer());
-			else
-				break;
+//		for (int i = 0; i < 4; i++) {
+//			if (answersIt.hasNext())
+//				answersTmp.set(i, (String) answersIt.next().getAnswer());
+//			else
+//				break;
+//		}
+		
+		for(Answer<String> s: Utilities.checkNotNullOrEmpty(c.getSetOfAnswers(), "Some anwsers are null or not present")){
+			answersTmp.add(s.getAnswer());
 		}
 
 		for (int i = 0; i < answersTmp.size(); i++) {
@@ -61,7 +66,7 @@ public class QuestionDialogBuilder extends AlertDialog.Builder {
 				if (choice == rightNbr) {
 					AlertDialog.Builder ab = new AlertDialog.Builder(
 							getContext());
-					ab.setTitle("RŠtt");
+					ab.setTitle("Rï¿½tt");
 					ab.show();
 
 				} else {

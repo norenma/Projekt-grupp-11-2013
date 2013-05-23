@@ -1,5 +1,7 @@
 package se.chalmers.fonahano.quizwalk.activities;
 
+import java.util.List;
+
 import se.chalmers.fonahano.quizwalk.R;
 import se.chalmers.fonahano.quizwalk.database.GameDatabaseManager;
 import se.chalmers.fonahano.quizwalk.database.LocalDatabase;
@@ -15,7 +17,9 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -47,6 +51,9 @@ public class EditQuizWalkGameActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_edit_game);
+		
+
+        
 		map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
 
 		// shows where user is now.

@@ -69,7 +69,7 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 		
 	    locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 		
-	    int gameMapState = getIntent().getIntExtra(C.GameMap.MAP_STATE, 1);
+	    final int gameMapState = getIntent().getIntExtra(C.GameMap.MAP_STATE, 1);
 	    
 	    if(gameMapState == 1){
 			ActivityHelper.populateMap(map, db.getAllQuizWalkGame());
@@ -110,7 +110,7 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 					}
 				}
 				return false;*/	
-				if(getIntent().getIntExtra(C.GameMap.MAP_STATE, 1) == 2){	
+				if(gameMapState == 2){	
 					questionFragment.showChallenge(q.getChallenge(Utilities.latLngToCoordinates(marker.getPosition())));
 				}else{
 					showQuizWalkStartDialog(ActivityHelper.getQuizWalkGame(marker.getTitle()).get());
@@ -126,7 +126,7 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 
 	    location = locationManager.getLastKnownLocation(provider);
 	    
-	    map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 3));
+	    map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 1));
 		
 	    checkNotNull(location);
 	    onLocationChanged(location);
@@ -149,7 +149,7 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 	@Override
 	public void onLocationChanged(Location location) {
 		Log.v("Debug", location.getLongitude() + " " + location.getLatitude());
-		map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(),location.getLongitude()),3));	
+		//map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(),location.getLongitude()),3));	
 	}
 
 	@Override
