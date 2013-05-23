@@ -27,15 +27,7 @@ public class LauncherActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        new Handler().postDelayed(new Runnable(){
-            @Override
-            public void run() {
-                /* Create an Intent that will start the Menu-Activity. */
-                Intent mainIntent = new Intent(LauncherActivity.this,LoginActivity.class);
-                LauncherActivity.this.startActivity(mainIntent);
-                LauncherActivity.this.finish();
-            }
-        }, SPLASH_DISPLAY_LENGHT);
+        
         // remove title
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -51,11 +43,16 @@ public class LauncherActivity extends Activity {
 		if (user == null) {
 			gdm.createUser(new AndroidUser());
 		}
-//		Intent intent = new Intent(this, LoginActivity.class);
-//		startActivity(intent);
-//		
-		 /* New Handler to start the Menu-Activity 
-         * and close this Splash-Screen after some seconds.*/
+
+		new Handler().postDelayed(new Runnable(){
+            @Override
+            public void run() {
+                /* Create an Intent that will start the Menu-Activity. */
+                Intent mainIntent = new Intent(LauncherActivity.this,LoginActivity.class);
+                LauncherActivity.this.startActivity(mainIntent);
+                LauncherActivity.this.finish();
+            }
+        }, SPLASH_DISPLAY_LENGHT);
 
 	}
 
