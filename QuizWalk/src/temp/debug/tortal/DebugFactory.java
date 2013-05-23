@@ -27,7 +27,7 @@ public class DebugFactory {
 
 		// Challenges
 		Challenge c1 = new Challenge.Builder().description("1: Korsningen")
-			.location(57.689854d,
+			.location(58.689854d,
 				11.978145d)
 			.question("What is really cool?")
 			.correctAnswer("42")
@@ -49,7 +49,7 @@ public class DebugFactory {
 		// Return QuizWalkGame
 		return builder.name("tortal test game :: "
 				+ (int) (1 + Math.random() * 99))
-			.description("Two challenges in chalmers")
+			.description("Two challenges in chalmers(1)")
 			.addChallenge(c1)
 			.addChallenge(c2)
 			.build();
@@ -82,7 +82,7 @@ public class DebugFactory {
 		// Return QuizWalkGame
 		return builder.name("tortal test game :: "
 				+ (int) (1 + Math.random() * 99))
-			.description("Two challenges in chalmers")
+			.description("Two challenges in chalmers(2)")
 			.addChallenge(c1)
 			.addChallenge(c2)
 			.build();
@@ -115,7 +115,7 @@ public class DebugFactory {
 		// Return QuizWalkGame
 		return builder.name("tortal test game :: "
 				+ (int) (1 + Math.random() * 99))
-			.description("Two challenges in chalmers")
+			.description("Two challenges in chalmers(3)")
 			.addChallenge(c1)
 			.addChallenge(c2)
 			.build();
