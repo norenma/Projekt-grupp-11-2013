@@ -4,22 +4,18 @@ import se.chalmers.fonahano.quizwalk.R;
 import se.chalmers.fonahano.quizwalk.database.GameDatabaseManager;
 import se.chalmers.fonahano.quizwalk.database.LocalDatabase;
 import android.app.Activity;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
-
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
-
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.EditText;
-import android.widget.TextView;
 
 public class LoginActivity extends Activity {
 
@@ -39,6 +35,10 @@ public class LoginActivity extends Activity {
 		map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(57.685528, 11.979389), 12));
 
 		map.getUiSettings().setZoomControlsEnabled(false);
+		
+		CameraPosition cameraPos = new CameraPosition.Builder().target(new LatLng(57.685528, 12.979389)).zoom(12).build();
+		
+		map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPos), 100000, null);
 	}
 
 	@Override
