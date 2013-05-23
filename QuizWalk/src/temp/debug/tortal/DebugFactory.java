@@ -3,20 +3,24 @@ package temp.debug.tortal;
 import java.util.ArrayList;
 import java.util.List;
 
+import se.chalmers.fonahano.quizwalk.database.GameDatabaseManager;
+import se.chalmers.fonahano.quizwalk.database.LocalDatabase;
 import se.chalmers.fonahano.quizwalk.model.Challenge;
 import se.chalmers.fonahano.quizwalk.model.QuizWalkGame;
 
 public class DebugFactory {
 
-	public static List<QuizWalkGame> getListOfQuizWalks(){
+	public static void addRandomListOfQuizWalksToDB(){
 		List<QuizWalkGame> list = new ArrayList<QuizWalkGame>();
 		
 		list.add(getRandomTortalChalmersQuizWalkGame1());
 		list.add(getRandomTortalChalmersQuizWalkGame2());
 		list.add(getRandomTortalChalmersQuizWalkGame3());
 		
-		return list;
-		
+		LocalDatabase db = GameDatabaseManager.getInstance();
+		for(QuizWalkGame g : list){
+			db.addQuizWalkGame(g);
+		}
 	}
 	public static QuizWalkGame getRandomTortalChalmersQuizWalkGame1() {
 		QuizWalkGame.Builder builder = new QuizWalkGame.Builder();
