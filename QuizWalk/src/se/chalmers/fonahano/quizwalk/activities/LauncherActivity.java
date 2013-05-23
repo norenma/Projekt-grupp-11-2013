@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
+import android.view.Window;
+import android.view.WindowManager;
 
 /***
  * Empty activity to set up program before visual things will happen.
@@ -20,7 +22,12 @@ public class LauncherActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState);
+        // remove title
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		setContentView(R.layout.activity_login);
 		// TODO Debug, delete database.
 		deleteDatabase(C.Data.DATABASE_NAME);
 		GameDatabaseManager.init(this);

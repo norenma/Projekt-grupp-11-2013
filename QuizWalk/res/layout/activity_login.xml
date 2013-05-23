@@ -106,6 +106,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="160dp"
-        android:src="@drawable/quiz_walk_big" />
+        android:src="@drawable/quiz_walk_big"
+        android:alpha="0.8" />
 
 </RelativeLayout>

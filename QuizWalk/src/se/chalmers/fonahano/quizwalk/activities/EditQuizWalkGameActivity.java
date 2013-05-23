@@ -5,11 +5,13 @@ import java.util.List;
 import se.chalmers.fonahano.quizwalk.R;
 import se.chalmers.fonahano.quizwalk.database.GameDatabaseManager;
 import se.chalmers.fonahano.quizwalk.database.LocalDatabase;
+import se.chalmers.fonahano.quizwalk.interfaces.C;
 import se.chalmers.fonahano.quizwalk.interfaces.Image;
 import se.chalmers.fonahano.quizwalk.model.Challenge;
 import se.chalmers.fonahano.quizwalk.model.ChallengeLocation;
 import se.chalmers.fonahano.quizwalk.model.ChallengeReward;
 import se.chalmers.fonahano.quizwalk.model.QuizWalkGame;
+import se.chalmers.fonahano.quizwalk.model.StateSingleton;
 import se.chalmers.fonahano.quizwalk.model.StringAnswer;
 import se.chalmers.fonahano.quizwalk.model.StringQuestion;
 import android.app.Activity;
@@ -85,16 +87,15 @@ public class EditQuizWalkGameActivity extends Activity {
 			}
 		});
 
-		// Retrievs the included QuizWalk if there is one.
-		Optional<QuizWalkGame> opt = (Optional<QuizWalkGame>) this.getIntent()
-			.getSerializableExtra("QuizWalk");
-		if (opt.isPresent()) {
-			QuizWalkGame qwg = (QuizWalkGame) opt.get();
-			ActivityHelper.populateMap(map,
-				qwg);
-			builder = new QuizWalkGame.Builder(qwg);
-		} else
+		// Retrieves the included QuizWalk if there is one.
+		if (this.getIntent().getAction().equals(C.Intent.Action.EDIT_NEW_QUIZ_WALK)) {
 			builder = new QuizWalkGame.Builder();
+		} else{
+			QuizWalkGame qwg = StateSingleton.INSTANCE.getActiveQuizWalk().get();
+			ActivityHelper.populateMap(map,
+					qwg);
+			builder = new QuizWalkGame.Builder(qwg);
+		}
 	}
 
 	/***

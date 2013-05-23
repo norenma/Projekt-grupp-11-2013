@@ -1,6 +1,7 @@
 package se.chalmers.fonahano.quizwalk.activities;
 
 import se.chalmers.fonahano.quizwalk.R;
+import se.chalmers.fonahano.quizwalk.interfaces.C;
 import se.chalmers.fonahano.quizwalk.model.QuizWalkGame;
 import android.app.Activity;
 import android.content.Intent;
@@ -43,7 +44,7 @@ public class GameMenuActivity extends Activity {
 	
 	public void onButtonClick_CreateGame(View v) {
 		Intent intent=new Intent(this, EditQuizWalkGameActivity.class);
-		intent.putExtra("QuizWalk", Optional.<QuizWalkGame>absent());
+		intent.setAction(C.Intent.Action.EDIT_NEW_QUIZ_WALK);
 		startActivity(intent);
 	}
 	public void onButtonClick_QuizWalkManager(View v) {
