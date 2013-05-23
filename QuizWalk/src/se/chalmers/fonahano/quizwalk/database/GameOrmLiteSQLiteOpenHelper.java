@@ -19,8 +19,9 @@ import com.j256.ormlite.table.TableUtils;
 public class GameOrmLiteSQLiteOpenHelper extends OrmLiteSqliteOpenHelper {
 	private final String CLASS_NAME = getClass().getName();
 
-	// any time you make changes to your database objects, you may have to
-	// increase the database version
+	/**
+	 * To be incremented so that onUpgrade(...) will know when changes are made.
+	 */
 	private static final int DATABASE_VERSION = 1;
 
 	// the DAO object we use to access the SimpleData table
@@ -38,15 +39,17 @@ public class GameOrmLiteSQLiteOpenHelper extends OrmLiteSqliteOpenHelper {
 	public void onCreate(SQLiteDatabase database,
 			ConnectionSource connectionSource) {
 		try {
-			// Create QuizWalkGame table
+
+			// QuizWalkGame
 			TableUtils.createTable(connectionSource,
 				QuizWalkGame.class);
-			// Create AndroidUser table
+
+			// AndroidUser
 			TableUtils.createTable(connectionSource,
 				AndroidUser.class);
 		} catch (SQLException e) {
 			Log.e(CLASS_NAME,
-				"Can't create database",
+				"Exception when creating tables",
 				e);
 			throw new RuntimeException(e);
 		} catch (java.sql.SQLException e) {

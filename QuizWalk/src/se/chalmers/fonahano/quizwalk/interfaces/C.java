@@ -6,6 +6,24 @@ package se.chalmers.fonahano.quizwalk.interfaces;
 public interface C {
 
 	/**
+	 * Activity intents etc should be in this class atm.
+	 * 
+	 */
+	public static class Intent {
+
+		public static class Action {
+
+			public static final String STATE_CHANGED_ACTIVE_QUIZWALK = "se.chalmers.fonahano.quizwalk.STATE_CHANGED_QUIZWALK";
+			public static final String STATE_CHANGED_QUIZWALK_BUILDER = "se.chalmers.fonahano.quizwalk.STATE_CHANGED_QUIZWALK_BUILDER";
+			public static final String STATE_CHANGED_CHALLENGE_BUILDER = "se.chalmers.fonahano.quizwalk.STATE_CHANGED_CHALLENGE_BUILDER";
+			public static final String STATE_CHANGED_CURRENT_LOCATION = "se.chalmers.fonahano.quizwalk.STATE_CHANGED_CURRENT_LOCATION";
+
+			public static final String EDIT_NEW_QUIZ_WALK = "se.chalmers.fonahano.quizwalk.EDIT_NEW_QUIZ_WALK";
+		}
+
+	}
+
+	/**
 	 * Public message key for proximity alert
 	 */
 	public final static String PROXIMITY_ALERT_MESSAGE = "se.chalmers.fonahano.quizwalk.activitiesMESSAGE";
@@ -28,8 +46,8 @@ public interface C {
 	 * The radius of which, if entered, the marker proximity alert will be fired
 	 */
 	public final static int MARKER_PROXIMITY_RADIUS = 10;
-	
-	public static class GameMap{
+
+	public static class GameMap {
 		public final static String MAP_STATE = "MAP_STATE";
 	}
 

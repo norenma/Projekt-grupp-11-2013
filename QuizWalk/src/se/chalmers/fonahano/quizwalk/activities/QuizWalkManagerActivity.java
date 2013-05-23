@@ -20,20 +20,24 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 public class QuizWalkManagerActivity extends Activity {
 
 	ListView listView;
 
+	List<QuizWalkGame> listOfQuizWalks;
+
+	ArrayAdapter<QuizWalkGame> listViewOfQuizWalks;
+
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
-		//TODO: Uncomment to delete database
-		//deleteDatabase(C.Data.DATABASE_NAME);
-		
+
+		// TODO: Uncomment to delete database
+		// deleteDatabase(C.Data.DATABASE_NAME);
+
 		GameDatabaseManager.init(this);
 
 		ViewGroup contentView = (ViewGroup) getLayoutInflater().inflate(R.layout.activity_quiz_walk_manager,
@@ -79,22 +83,14 @@ public class QuizWalkManagerActivity extends Activity {
 				QuizWalkGame clickedQuizWalk = allQuizWalkGames.get(position);
 				Intent intent = new Intent(activity,
 					DebugActivity.class);
-				intent.putExtra("json_data",
-					new Gson().toJson(clickedQuizWalk));
+				intent.putExtra(C.Data.JSON_DATA,
+					new GsonBuilder().setPrettyPrinting()
+						.create()
+						.toJson(clickedQuizWalk));
 				startActivity(intent);
 			}
 		});
 	}
-
-	// private void setupButton(Button btn) {
-	// final Activity activity = this;
-	// btn.setOnClickListener(new OnClickListener() {
-	// public void onClick(View v) {
-	// Intent intent = new Intent(activity, AddWishListActivity.class);
-	// startActivity(intent);
-	// }
-	// });
-	// }
 
 	// TODO: Persisting static QuizWalkGame
 	// (temp.debub.tortal.DebugFactory.java)
@@ -111,9 +107,12 @@ public class QuizWalkManagerActivity extends Activity {
 			menu);
 		return true;
 	}
-	
-	public void generateQuizWalk(View view){
-		GameDatabaseManager.getInstance().addQuizWalkGame(DebugFactory.getRandomTortalChalmersQuizWalkGame1());
+
+	public void generateQuizWalk(View view) {
+		QuizWalkGame g = null;
+		GameDatabaseManager.getInstance()
+			.addQuizWalkGame(g);
+		listOfQuizWalks.add(g);
 	}
 
 }
