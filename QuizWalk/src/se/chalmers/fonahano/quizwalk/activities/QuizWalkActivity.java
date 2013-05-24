@@ -14,7 +14,6 @@ import se.chalmers.fonahano.quizwalk.model.Coordinates;
 import se.chalmers.fonahano.quizwalk.model.QuizWalkGame;
 import se.chalmers.fonahano.quizwalk.model.StateSingleton;
 import se.chalmers.fonahano.quizwalk.model.Utilities;
-import temp.debug.tortal.DebugFactory;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.PendingIntent;
@@ -33,6 +32,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 
 
@@ -78,6 +78,13 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 	    	q = StateSingleton.INSTANCE.getActiveQuizWalk().get();
 	    	ActivityHelper.populateMap(map, q, this);
 	    	initProximityAlerts(q, locationManager);
+	    	LatLngBounds.Builder builder = new LatLngBounds.Builder();
+	    	for (Challenge c : q.getChallenges()) {
+	    	    builder.include(Utilities.coordinatesToLatLng(c.getLocation()));
+	    	}
+	    	//TODO: Make bounds work
+	    	//LatLngBounds bounds = builder.build();
+	    	//map.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, 100));
 	    }
 		
 		
