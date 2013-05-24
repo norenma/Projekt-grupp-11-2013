@@ -226,8 +226,10 @@ public abstract class ActivityHelper {
 			QuizWalkGame qItNext = qIt.next();
 			Challenge c = checkNotNull(qItNext.getChallenges().get(0));
 
-			markers.add(populateMap(googleMap, c.getLocation(),
-					qItNext.getDescription()));
+			Marker temp = populateMap(googleMap, c.getLocation(),
+					qItNext.getDescription());
+			temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.letter_q));
+			markers.add(temp);
 
 		}
 
