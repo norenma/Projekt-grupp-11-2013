@@ -17,6 +17,7 @@ public class CompletedQuizWalkActivity extends Activity {
 
 	QuizWalkGame quizWalkGame = DebugFactory.getRandomTortalChalmersQuizWalkGame1();
 	
+	//TODO get Quizwalks from Singleton
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -28,26 +29,5 @@ public class CompletedQuizWalkActivity extends Activity {
 		
 		
 	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.completed_quiz_walk, menu);
-		return true;
-	}
-	
-	//Metoden tar en QuizWalkGame som beräknar och returnerar poängen på alla challenges. 
-	public int calculatePoints(QuizWalkGame game){
-		int points = 0;
-		
-		for(Challenge c: game.getChallenges()){
-			quizWalkGame.setChallengeState(c, ChallengeState.COMPLETED);
-			if(game.getChallengeStateOf(c) == ChallengeState.COMPLETED){
-				points+= game.getReward().get().getScore();
-			}
-		}
-		return points; 
-	}
-	
 
 }
