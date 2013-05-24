@@ -49,7 +49,7 @@ public class DebugFactory {
 		// Return QuizWalkGame
 		return builder.name("tortal test game :: "
 				+ (int) (1 + Math.random() * 99))
-			.description("Two challenges in chalmers(1)")
+			.description("Two challenges in chalmers")
 			.addChallenge(c1)
 			.addChallenge(c2)
 			.build();
@@ -60,8 +60,8 @@ public class DebugFactory {
 
 		// Challenges
 		Challenge c1 = new Challenge.Builder().description("1: Korsningen")
-			.location(57.689854d,
-				11.978145d)
+			.location(58.684854d,
+				11.973145d)
 			.question("What is really cool?")
 			.correctAnswer("42")
 			.addIncorrectAnswer("Bieber")
@@ -93,8 +93,8 @@ public class DebugFactory {
 
 		// Challenges
 		Challenge c1 = new Challenge.Builder().description("1: Korsningen")
-			.location(57.619854d,
-				11.908145d)
+			.location(57.687107d,
+					11.981138d)
 			.question("What is really cool?")
 			.correctAnswer("42")
 			.addIncorrectAnswer("Bieber")
@@ -103,13 +103,13 @@ public class DebugFactory {
 			.build();
 
 		Challenge c2 = new Challenge.Builder().description("2: Kiosken")
-			.location(57.687107d,
-				11.981138d)
-			.question("Vilken film �r b�st?")
-			.correctAnswer("Mad Max 2: The Road Warrior")
-			.addIncorrectAnswer("Avatar")
-			.addIncorrectAnswer("Bad Boys 2")
-			.addIncorrectAnswer("Fast & Furious 8")
+			.location(57.619854d,
+					11.908145d)
+			.question("What's the capitol of The United States?")
+			.correctAnswer("Washington")
+			.addIncorrectAnswer("Boston")
+			.addIncorrectAnswer("New York")
+			.addIncorrectAnswer("Chicago")
 			.build();
 
 		// Return QuizWalkGame
