@@ -27,7 +27,6 @@
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    
 
     <application
         android:allowBackup="true"
@@ -35,6 +34,7 @@
         android:label="@string/quiz_walk"
         android:theme="@style/AppTheme" >
         <uses-library android:name="android.test.runner" />
+
         <activity
             android:name="se.chalmers.fonahano.quizwalk.activities.LoginActivity"
             android:label="@string/app_name"
@@ -78,11 +78,7 @@
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyDRPZc9dBBl_SV-Rx4P_3N8WZmUIAsWHr4" />
 
-        <activity
-            android:name="se.chalmers.fonahano.quizwalk.activities.SettingsActivity"
-            android:label="@string/title_activity_settings"
-            android:screenOrientation="portrait" >
-        </activity>
+        
         <activity
             android:name="se.chalmers.fonahano.quizwalk.activities.RegisterUserActivity"
             android:label="@string/title_activity_register_user"
@@ -107,10 +103,16 @@
             android:name="se.chalmers.fonahano.quizwalk.activities.CompletedQuizWalkActivity"
             android:label="@string/title_activity_completed_quiz_walk" >
         </activity>
+        <activity
+            android:name="se.chalmers.fonahano.quizwalk.activities.SettingsActivity"
+            android:label="@string/title_activity_settings" 
+            android:screenOrientation="portrait">
+        </activity>
     </application>
-    
-    <instrumentation android:name="android.test.InstrumentationTestRunner"
-    android:targetPackage="se.chalmers.fonahano.quizwalk"
-    android:label="Tests" />
+
+    <instrumentation
+        android:name="android.test.InstrumentationTestRunner"
+        android:label="Tests"
+        android:targetPackage="se.chalmers.fonahano.quizwalk" />
 
 </manifest>

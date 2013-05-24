@@ -2,61 +2,113 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/blurryquiz2"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".RegisterUserActivity" >
+    tools:context=".MainActivity" >
 
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="97dp"
-        android:layout_marginLeft="16dp"
-        android:layout_toRightOf="@+id/RegisterUserText"
-        android:onClick="OnClickRegister"
-        android:text="@string/create_user_string" />
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.MapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="false" />
 
-    <TextView
-        android:id="@+id/RegisterUserText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/button1"
+<!--     <TextView -->
+<!--         android:id="@+id/textView1" -->
+<!--         android:layout_width="wrap_content" -->
+<!--         android:layout_height="wrap_content" -->
+<!--         android:layout_below="@+id/imageView1" -->
+<!--         android:layout_centerHorizontal="true" -->
+<!--         android:layout_marginTop="14dp" -->
+<!--         android:alpha="0.8" -->
+<!--         android:background="@color/black" -->
+<!--         android:fontFamily="Droid Serif" -->
+<!--         android:padding="@dimen/small_padding" -->
+<!--         android:text="@string/quiz_walk" -->
+<!--         android:textAppearance="?android:attr/textAppearanceLarge" -->
+<!--         android:textColor="@color/white" -->
+<!--         android:textStyle="bold" -->
+<!--         android:typeface="serif" /> -->
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginTop="300dp"
         android:layout_alignParentLeft="true"
-        android:layout_marginBottom="106dp"
-        android:layout_marginLeft="19dp"
-        android:text="@string/Register_new_user_string"
-        android:textColor="@color/white" />
+        android:layout_below="@+id/textView1"
+        android:alpha="0.8"
+        android:background="@color/black" >
 
-    <EditText
-        android:id="@+id/PasswordText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/button1"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="19dp"
-        android:ems="10"
-        android:inputType="textPassword"
-        android:textColor="@color/white" />
-
-    <EditText
-        android:id="@+id/MailText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/PasswordText"
-        android:layout_alignLeft="@+id/PasswordText"
-        android:layout_alignRight="@+id/PasswordText"
-        android:layout_marginBottom="14dp"
-        android:ems="10"
-        android:hint="@string/username_login"
-        android:inputType="textEmailAddress"
-        android:textColor="@color/white" >
+        <EditText
+            android:id="@+id/Email"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            android:ems="10"
+            android:hint="@string/username_login"
+            android:inputType="textEmailAddress"
+            android:shadowColor="@android:color/white"
+            android:textColor="#FFFFFF" />
 
         <requestFocus />
-    </EditText>
 
+        <EditText
+            android:id="@+id/PasswordText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/Email"
+            android:layout_marginTop="10dp"
+            android:ems="10"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:textColor="#FFFFFF" >
+        </EditText>
+
+        <TextView
+            android:id="@+id/errorMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Password"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="200dp"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/Red" />
+
+        <TextView
+            android:id="@+id/registerUserText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="18dp"
+            android:clickable="true"
+            android:onClick="onClickRegisterUser"
+            android:text="@string/Register_new_user_string"
+            android:textColor="@color/white" />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="160dp"
+        android:alpha="0.8"
+        android:src="@drawable/quiz_walk_big" />
+
+    <Button
+        android:id="@+id/LoginButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/imageView1"
+        android:layout_below="@+id/relativeLayout1"
+        android:layout_margin="20dp"
+        android:onClick="OnClickRegister"
+        android:text="@string/create_user_string"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:typeface="sans" />
 
 </RelativeLayout>

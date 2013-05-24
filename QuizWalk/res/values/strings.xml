@@ -44,5 +44,12 @@
     <string name="quiz_walk"><u> QuizWalk </u></string>
     <string name="title_activity_completed_quiz_walk">CompletedQuizWalkActivity</string>
     <string name="grattis">Grattis du har fått:</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="Settings">Settings</string>
+    <string name="username_settings">Username</string>
+    <string name="password_settings">Password</string>
+    <string name="logout_settings">Logout</string>
+    <string name="about_settings">About</string>
+    <string name="help_settings">Help</string>
 
 </resources>
