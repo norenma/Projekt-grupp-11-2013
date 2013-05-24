@@ -457,12 +457,12 @@ public class QuizWalkGame extends Game {
 	 * Calculate current points of the QuizWalk. 
 	 */
 	
-	public int getCurrentScore(QuizWalkGame game){
+	public int getCurrentScore(){
 		int points = 0;
 			
-		for(Challenge c: game.getChallenges()){
-			if(game.getChallengeStateOf(c) == ChallengeState.COMPLETED){
-				points+= game.getReward().get().getScore();
+		for(Challenge c: this.getChallenges()){
+			if(this.getChallengeStateOf(c) == ChallengeState.COMPLETED){
+				points+= c.getReward().get().getScore();
 			}
 		}
 		return points; 
