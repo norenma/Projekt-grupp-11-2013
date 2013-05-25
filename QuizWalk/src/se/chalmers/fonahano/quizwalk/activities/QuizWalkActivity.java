@@ -12,6 +12,7 @@ import se.chalmers.fonahano.quizwalk.model.Challenge;
 import se.chalmers.fonahano.quizwalk.model.ChallengeLocation;
 import se.chalmers.fonahano.quizwalk.model.Coordinates;
 import se.chalmers.fonahano.quizwalk.model.QuizWalkGame;
+import se.chalmers.fonahano.quizwalk.model.QuizWalkGame.ChallengeState;
 import se.chalmers.fonahano.quizwalk.model.StateSingleton;
 import se.chalmers.fonahano.quizwalk.model.Utilities;
 import android.app.Activity;
@@ -27,6 +28,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -104,23 +106,32 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 		map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
 			@Override
 			public boolean onMarkerClick(Marker marker) {
-				/*
-				 * for (int i = 0; i < q.getChallenges().size(); i++) { if
-				 * (arg0.getTitle().equals(
-				 * q.getChallenges().get(i).getChallengeDescription())) {
-				 * questionFragment .showChallenge(q.getChallenges().get(i));
-				 * 
-				 * arg0.getPosition(); } } return false;
-				 */
 				if (gameMapState == 2) {
+					Challenge markerChallenge = q.getChallenge(Utilities
+							.latLngToCoordinates(marker.getPosition()));
 					
-					questionFragment.showChallenge(q.getChallenge(Utilities
-							.latLngToCoordinates(marker.getPosition())));
-					if(q.isGameCompleted()){
-						Intent completedQuizWalkIntent = new Intent(QuizWalkActivity.this, CompletedQuizWalkActivity.class);
-						StateSingleton.INSTANCE.setActiveQuizWalk(q);
-						completedQuizWalkIntent.setAction(C.Intent.Action.STATE_CHANGED_COMPLETED_QUIZWALK);
+					if (q.getChallengeStateOf(markerChallenge).equals(
+							ChallengeState.COMPLETED)
+							|| q.getChallengeStateOf(markerChallenge).equals(
+									ChallengeState.FAILED)) {
 						
+						Toast.makeText(QuizWalkActivity.this,
+								"You already anwsered this question :(",
+								Toast.LENGTH_SHORT).show();
+
+					} else {
+						questionFragment.showChallenge(q.getChallenge(Utilities
+								.latLngToCoordinates(marker.getPosition())));
+					}
+					
+					if (q.isGameCompleted()) {
+						Intent completedQuizWalkIntent = new Intent(
+								QuizWalkActivity.this,
+								CompletedQuizWalkActivity.class);
+						StateSingleton.INSTANCE.setActiveQuizWalk(q);
+						completedQuizWalkIntent
+								.setAction(C.Intent.Action.STATE_CHANGED_COMPLETED_QUIZWALK);
+
 						startActivity(completedQuizWalkIntent);
 					}
 
