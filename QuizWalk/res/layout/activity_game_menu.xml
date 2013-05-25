@@ -65,4 +65,15 @@
         android:textSize="26sp"
         android:textStyle="bold|italic" />
 
+    <Button
+        android:id="@+id/save_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button4"
+        android:layout_alignRight="@+id/button4"
+        android:layout_below="@+id/button4"
+        android:layout_marginTop="28dp"
+        android:text="Button" 
+        android:onClick="testCompletedQW"/>
+
 </RelativeLayout>

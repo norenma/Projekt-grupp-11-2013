@@ -57,6 +57,9 @@ public class GameMenuActivity extends Activity {
 	public void onButtonClick_Settings(View v){
 		startActivity(new Intent(this, SettingsActivity.class));
 	}
+	public void testCompletedQW(View v){
+		startActivity(new Intent(this, CompletedQuizWalkActivity.class));
+	}
 	
 	/**
 	 * Set up the {@link android.app.ActionBar}.
@@ -90,5 +93,6 @@ public class GameMenuActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+	
 
 }

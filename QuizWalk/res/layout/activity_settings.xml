@@ -10,7 +10,7 @@
     tools:context=".SettingsActivity" >
 
     <EditText
-        android:id="@+id/editText1"
+        android:id="@+id/username_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -19,43 +19,33 @@
         android:layout_marginTop="20dp"
         android:ems="10"
         android:hint="@string/username_settings"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/password_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editText1"
-        android:layout_alignRight="@+id/editText1"
-        android:layout_below="@+id/editText1"
+        android:layout_alignLeft="@+id/username_tv"
+        android:layout_alignRight="@+id/username_tv"
+        android:layout_below="@+id/username_tv"
         android:layout_marginTop="22dp"
         android:ems="10"
-        android:inputType="textPassword" 
-        android:hint="@string/password_settings"/>
+        android:hint="@string/password_settings"
+        android:inputType="textPassword" />
 
     <Button
         android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editText2"
+        android:layout_alignLeft="@+id/password_tv"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_marginBottom="31dp"
         android:text="@string/logout_settings"
         android:textColor="#FFFFFF"
-        android:textStyle="bold" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/button1"
-        android:layout_alignLeft="@+id/button1"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="70dp"
-        android:text="@string/about_settings"
-        android:textColor="#FFFFFF" 
-        android:textStyle="bold"/>
+        android:textStyle="bold" 
+        android:onClick="onButtonClick_logout" />
 
     <Button
         android:id="@+id/button3"
@@ -66,13 +56,14 @@
         android:layout_alignParentRight="true"
         android:text="@string/help_settings"
         android:textColor="#FFFFFF" 
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:onClick="onButtonClick_help" />
 
     <Button
         android:id="@+id/button4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editText1"
+        android:layout_alignLeft="@+id/username_tv"
         android:layout_alignParentTop="true"
         android:background="@drawable/ic_launcher" />
 
@@ -86,5 +77,28 @@
         android:textColor="#800080"
         android:textSize="25dp"
         android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button1"
+        android:layout_alignLeft="@+id/button1"
+        android:layout_alignRight="@+id/button1"
+        android:layout_marginBottom="33dp"
+        android:text="@string/about_settings"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold" 
+        android:onClick="onButtonClick_about" />
+
+    <Button
+        android:id="@+id/save_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button3"
+        android:layout_alignRight="@+id/button3"
+        android:text="@string/save_settings"
+        android:textColor="#FFFFFF" 
+        android:onClick="onButtonClick_save" />
 
 </RelativeLayout>
