@@ -36,8 +36,8 @@ public class DebugFactory {
 			.build();
 
 		Challenge c2 = new Challenge.Builder().description("2: Kiosken")
-			.location(57.687107d,
-				11.981138d)
+			.location(57.687121,
+				11.981823)
 			.question("Vilken film �r b�st?")
 			.correctAnswer("Mad Max 2: The Road Warrior")
 			.addIncorrectAnswer("Avatar")
@@ -59,7 +59,7 @@ public class DebugFactory {
 
 		// Challenges
 		Challenge c1 = new Challenge.Builder().description("1: Korsningen")
-			.location(57.69064,11.976905)
+			.location(57.694012,11.970551)
 			.question("What is really cool?")
 			.correctAnswer("42")
 			.addIncorrectAnswer("Bieber")
@@ -69,7 +69,7 @@ public class DebugFactory {
 		
 
 		Challenge c2 = new Challenge.Builder().description("2: Kiosken")
-			.location(57.690095,11.977388)
+			.location(57.690551,11.938823)
 			.question("Vilken film �r b�st?")
 			.correctAnswer("Mad Max 2: The Road Warrior")
 			.addIncorrectAnswer("Avatar")
@@ -78,7 +78,7 @@ public class DebugFactory {
 			.build();
 		
 		Challenge c3 = new Challenge.Builder().description("2: Kiosken")
-				.location(57.690909,11.976294)
+				.location(57.690932,11.976212)
 				.question("What's the capitol of The United States?")
 				.correctAnswer("Washington")
 				.addIncorrectAnswer("Boston")
@@ -110,8 +110,8 @@ public class DebugFactory {
 			.build();
 
 		Challenge c2 = new Challenge.Builder().description("2: Kiosken")
-			.location(57.619854d,
-					11.908145d)
+			.location(57.619854,
+					11.908145)
 			.question("What's the capitol of The United States?")
 			.correctAnswer("Washington")
 			.addIncorrectAnswer("Boston")

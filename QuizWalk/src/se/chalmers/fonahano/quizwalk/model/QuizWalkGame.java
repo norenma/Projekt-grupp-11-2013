@@ -447,7 +447,11 @@ public class QuizWalkGame extends Game {
 		Challenge itNext;
 		while (it.hasNext()) {
 			itNext = it.next();
-			if (c == itNext.getLocation())
+			double latDiff = Math.abs(c.getLatitude() - itNext.getLocation().getLatitude());
+			double lngDiff = Math.abs(c.getLongitude() - itNext.getLocation().getLongitude());
+			double eps = 0.000001;
+			
+			if (latDiff < eps && lngDiff < eps)
 				return itNext;
 		}
 		return null;
