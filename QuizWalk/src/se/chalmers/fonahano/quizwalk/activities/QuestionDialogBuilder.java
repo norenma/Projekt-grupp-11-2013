@@ -2,14 +2,10 @@ package se.chalmers.fonahano.quizwalk.activities;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import se.chalmers.fonahano.quizwalk.interfaces.Answer;
 import se.chalmers.fonahano.quizwalk.model.Challenge;
-import se.chalmers.fonahano.quizwalk.model.StringAnswer;
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.util.Log;
@@ -22,18 +18,17 @@ import android.util.Log;
  */
 public class QuestionDialogBuilder extends AlertDialog.Builder {
 
-	class ChallengeOnClickListener implements DialogInterface.OnClickListener {
+	private class ChallengeOnClickListener implements DialogInterface.OnClickListener {
 
 		private final int correctAnswerIndex;
 
 		public ChallengeOnClickListener(int correctAnswerIndex) {
-			super();
 			this.correctAnswerIndex = correctAnswerIndex;
 		}
 
 		private AlertDialog showDialog(String s) {
-			return new AlertDialog.Builder(QuestionDialogBuilder.this.getContext()).setTitle(s)
-				.show();
+			return new AlertDialog.Builder(
+					QuestionDialogBuilder.this.getContext()).setTitle(s).show();
 		}
 
 		@Override
@@ -64,11 +59,10 @@ public class QuestionDialogBuilder extends AlertDialog.Builder {
 	 */
 	public void showChallenge(Challenge challenge) {
 		List<String> listOfAnswers = new ArrayList<String>();
-		
+
 		int i = 0;
 		// Add Answers to dialog-list.
 		for (Answer<String> s : challenge.getSetOfAnswers()) {
-			
 
 			String currentAnswer = s.getAnswer();
 			listOfAnswers.add(currentAnswer);
@@ -83,20 +77,17 @@ public class QuestionDialogBuilder extends AlertDialog.Builder {
 		// Error handling if broken Challenge-object was retrieved.
 		if (correctAnswerIndex < 0) {
 			String errorMsg = "Could not find correct answer";
-			Log.e(getClass().getName(),
-				errorMsg);
+			Log.e(getClass().getName(), errorMsg);
 			throw new RuntimeException(errorMsg);
 		}
 
-
 		// Sets up the popup
 		setItems((String[]) listOfAnswers.toArray(),
-			new ChallengeOnClickListener(correctAnswerIndex));
-		
+				new ChallengeOnClickListener(correctAnswerIndex));
+
 		// Sets the question
-		setTitle(challenge.getQuestion()
-			.get());
-		
+		setTitle(challenge.getQuestion().get());
+
 		// Displays the pop-up
 		show();
 	}
