@@ -18,7 +18,7 @@ public class DebugActivity extends Activity {
 
 		textView = (TextView) findViewById(R.id.debug_text);
 		if (getIntent().hasExtra(C.Data.JSON_DATA)) {
-			textView.setText(getIntent().getStringExtra("json_data"));
+			textView.setText(getIntent().getStringExtra(C.Data.JSON_DATA));
 		}
 	}
 	

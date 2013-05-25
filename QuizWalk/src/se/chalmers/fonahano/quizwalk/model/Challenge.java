@@ -312,8 +312,12 @@ public class Challenge implements Serializable {
 	 * @return <TT>TRUE</TT> only if the supplied argument equals
 	 *         {@link #correctAnswer}
 	 */
-	public final boolean isCorrectAnswer(Answer<String> answer) {
+	public boolean isCorrectAnswer(Answer<String> answer) {
 		return correctAnswer.equals(answer);
+	}
+	
+	public boolean isCorrectAnswer(String answer) {
+		return correctAnswer.equals(new StringAnswer(answer));
 	}
 
 	/**
