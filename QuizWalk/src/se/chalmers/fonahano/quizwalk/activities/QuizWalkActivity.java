@@ -143,8 +143,7 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 					}
 
 				} else {
-					showQuizWalkStartDialog(ActivityHelper.getQuizWalkGame(
-							marker.getTitle()).get());
+					showQuizWalkStartDialog(ActivityHelper.getQuizWalkGame(marker.getTitle()).get());
 				}
 				return true;
 			}
@@ -244,7 +243,7 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 			}
 		});
 
-		ab.setTitle(q.getDescription() + ": Do you want to play this QuizWalk?");
+		ab.setTitle(q.getName() + ": Do you want to play this QuizWalk?");
 
 		ab.show();
 	}

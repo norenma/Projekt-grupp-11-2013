@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import se.chalmers.fonahano.quizwalk.R;
+import se.chalmers.fonahano.quizwalk.interfaces.C;
 import se.chalmers.fonahano.quizwalk.model.Challenge;
 import se.chalmers.fonahano.quizwalk.model.QuizWalkGame;
 import se.chalmers.fonahano.quizwalk.model.StateSingleton;
@@ -19,10 +20,14 @@ import android.widget.TextView;
 
 public class CompletedQuizWalkActivity extends Activity {
 
-	QuizWalkGame quizWalkGame = StateSingleton.INSTANCE.getActiveQuizWalk().get();
+	QuizWalkGame quizWalkGame;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		if(getIntent().getAction().equals(C.Intent.Action.STATE_CHANGED_COMPLETED_QUIZWALK)){
+			quizWalkGame = StateSingleton.INSTANCE.getActiveQuizWalk().get();
+		}
+		
 		// remove actionbar
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,

@@ -227,7 +227,7 @@ public abstract class ActivityHelper {
 			Challenge c = checkNotNull(qItNext.getChallenges().get(0));
 
 			Marker temp = populateMap(googleMap, c.getLocation(),
-					qItNext.getDescription());
+					qItNext.getName());
 			temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.letter_q));
 			markers.add(temp);
 
@@ -240,7 +240,7 @@ public abstract class ActivityHelper {
 	public static Optional<QuizWalkGame> getQuizWalkGame(String title) {
 		for (QuizWalkGame quiz : GameDatabaseManager.getInstance()
 				.getAllQuizWalkGame()) {
-			if (quiz.getDescription().equalsIgnoreCase(title)) {
+			if (quiz.getName().equalsIgnoreCase(title)) {
 				return Optional.of(quiz);
 			}
 		}

@@ -40,7 +40,8 @@
         android:background="@color/WhiteSmoke"
         android:ems="10"
         android:hint="@string/enter_your_question"
-        android:textColorHint="@color/LowaplhaPurple" />
+        android:textColorHint="@color/LowaplhaPurple"
+        android:nextFocusDown="@+id/answer1" />
 
     <RelativeLayout
         android:id="@+id/relativeLayout1"
@@ -53,7 +54,7 @@
         android:padding="5dp" >
 
         <EditText
-            android:id="@+id/answer1"
+            android:id="@id/answer1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -61,10 +62,11 @@
             android:layout_alignParentTop="true"
             android:ems="10"
             android:hint="@string/correct_Answer"
-            android:textColorHint="@color/LowaplhaPurple" />
+            android:textColorHint="@color/LowaplhaPurple"
+            android:nextFocusDown="@+id/answer2" />
 
         <EditText
-            android:id="@+id/answer2"
+            android:id="@id/answer2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -73,10 +75,11 @@
             android:layout_marginTop="20dp"
             android:ems="10"
             android:hint="@string/answer2"
-            android:textColorHint="@color/LowaplhaPurple" />
+            android:textColorHint="@color/LowaplhaPurple"
+            android:nextFocusDown="@+id/answer3" />
 
         <EditText
-            android:id="@+id/answer3"
+            android:id="@id/answer3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -85,10 +88,11 @@
             android:layout_marginTop="20dp"
             android:ems="10"
             android:hint="@string/answer3"
-            android:textColorHint="@color/LowaplhaPurple" />
+            android:textColorHint="@color/LowaplhaPurple"
+            android:nextFocusDown="@+id/answer4" />
 
         <EditText
-            android:id="@+id/answer4"
+            android:id="@id/answer4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
