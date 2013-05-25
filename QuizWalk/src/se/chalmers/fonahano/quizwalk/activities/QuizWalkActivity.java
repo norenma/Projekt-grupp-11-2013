@@ -143,8 +143,7 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 					}
 
 				} else {
-					showQuizWalkStartDialog(ActivityHelper.getQuizWalkGame(
-							marker.getTitle()).get());
+					showQuizWalkStartDialog(ActivityHelper.getQuizWalkGame(marker.getTitle()).get());
 				}
 				return true;
 			}

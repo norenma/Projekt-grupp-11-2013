@@ -240,7 +240,7 @@ public abstract class ActivityHelper {
 	public static Optional<QuizWalkGame> getQuizWalkGame(String title) {
 		for (QuizWalkGame quiz : GameDatabaseManager.getInstance()
 				.getAllQuizWalkGame()) {
-			if (quiz.getDescription().equalsIgnoreCase(title)) {
+			if (quiz.getName().equalsIgnoreCase(title)) {
 				return Optional.of(quiz);
 			}
 		}
