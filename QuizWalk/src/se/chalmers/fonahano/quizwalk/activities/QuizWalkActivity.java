@@ -113,7 +113,6 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 				 * arg0.getPosition(); } } return false;
 				 */
 				if (gameMapState == 2) {
-					double eps = 0.000005;
 					
 					questionFragment.showChallenge(q.getChallenge(Utilities
 							.latLngToCoordinates(marker.getPosition())));
