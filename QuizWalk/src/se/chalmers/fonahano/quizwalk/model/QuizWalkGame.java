@@ -468,6 +468,7 @@ public class QuizWalkGame extends Game {
 			
 		for(Challenge c: this.getChallenges()){
 			if(this.getChallengeStateOf(c) == ChallengeState.COMPLETED){
+				
 				points+= c.getReward().get().getScore();
 			}
 		}
