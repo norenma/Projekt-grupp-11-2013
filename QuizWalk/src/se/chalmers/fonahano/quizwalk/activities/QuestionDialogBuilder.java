@@ -3,11 +3,15 @@ package se.chalmers.fonahano.quizwalk.activities;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gson.Gson;
+
 import se.chalmers.fonahano.quizwalk.interfaces.Answer;
 import se.chalmers.fonahano.quizwalk.model.Challenge;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Debug;
+import android.sax.StartElementListener;
 import android.util.Log;
 
 /***
@@ -45,8 +49,6 @@ public class QuestionDialogBuilder extends AlertDialog.Builder {
 
 	private int correctAnswerIndex = -1;
 
-	// for some reason this class is "undefined without
-	// implicit constructor.
 	public QuestionDialogBuilder(Context arg0) {
 		super(arg0);
 	}
@@ -73,6 +75,7 @@ public class QuestionDialogBuilder extends AlertDialog.Builder {
 			}
 			i++;
 		}
+		
 
 		// Error handling if broken Challenge-object was retrieved.
 		if (correctAnswerIndex < 0) {
@@ -80,6 +83,10 @@ public class QuestionDialogBuilder extends AlertDialog.Builder {
 			Log.e(getClass().getName(), errorMsg);
 			throw new RuntimeException(errorMsg);
 		}
+		
+		Log.d("listOfAnswers", new Gson().toJson((String[]) listOfAnswers.toArray()));
+		Log.d("correct answer index", "" +  correctAnswerIndex);
+		Log.d("correct answer index", challenge.getCorrectAnswer().toString());
 
 		// Sets up the popup
 		setItems((String[]) listOfAnswers.toArray(),
@@ -91,4 +98,5 @@ public class QuestionDialogBuilder extends AlertDialog.Builder {
 		// Displays the pop-up
 		show();
 	}
+	
 }
