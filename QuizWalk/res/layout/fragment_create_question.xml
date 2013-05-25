@@ -9,13 +9,33 @@
     android:padding="15dp"
     android:textColorHint="@color/LowaplhaPurple" >
 
+    <Button
+        android:id="@+id/button1"
+        style="@style/ButtonBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/relativeLayout1"
+        android:layout_alignParentBottom="true"
+        android:onClick="CreateQuestion"
+        android:text="@string/create_question" />
+
+    <TextView
+        android:id="@+id/errorMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button1"
+        android:layout_alignLeft="@+id/button1"
+        android:layout_marginBottom="14dp"
+        android:alpha="0"
+        android:text="@string/please_provide_a_question_and_answers_string"
+        android:textColor="@color/red" />
+
     <EditText
         android:id="@+id/questionText"
         android:layout_width="match_parent"
         android:layout_height="65dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="26dp"
+        android:layout_above="@+id/relativeLayout1"
+        android:layout_centerHorizontal="true"
         android:alpha="0.9"
         android:background="@color/WhiteSmoke"
         android:ems="10"
@@ -26,9 +46,8 @@
         android:id="@+id/relativeLayout1"
         android:layout_width="220dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignRight="@+id/questionText"
-        android:layout_below="@+id/questionText"
+        android:layout_above="@+id/errorMessage"
+        android:layout_alignLeft="@+id/questionText"
         android:alpha="0.9"
         android:background="@color/WhiteSmoke"
         android:padding="5dp" >
@@ -79,28 +98,15 @@
             android:ems="10"
             android:hint="@string/answer4"
             android:textColorHint="@color/LowaplhaPurple" />
-
     </RelativeLayout>
 
-    <Button
-        android:id="@+id/button1"
-        style="@style/ButtonBar"
+    <ImageView
+        android:id="@+id/imageView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/relativeLayout1"
-        android:layout_alignParentBottom="true"
-        android:onClick="CreateQuestion"
-        android:text="@string/create_question" />
-
-    <TextView
-        android:id="@+id/errorMessage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/button1"
-        android:layout_alignLeft="@+id/button1"
-        android:layout_marginBottom="26dp"
-        android:text="@string/please_provide_a_question_and_answers_string"
-        android:textColor="@color/red" 
-        android:alpha="0"/>
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/ic_launcher"
+        android:alpha="0.6" />
 
 </RelativeLayout>
