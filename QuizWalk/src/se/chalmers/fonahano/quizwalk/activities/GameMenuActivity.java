@@ -1,6 +1,8 @@
 package se.chalmers.fonahano.quizwalk.activities;
 
 import se.chalmers.fonahano.quizwalk.R;
+import se.chalmers.fonahano.quizwalk.database.GameDatabaseManager;
+import se.chalmers.fonahano.quizwalk.database.LocalDatabase;
 import se.chalmers.fonahano.quizwalk.interfaces.C;
 import se.chalmers.fonahano.quizwalk.model.QuizWalkGame;
 import temp.debug.tortal.DebugFactory;
@@ -14,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -24,21 +27,18 @@ public class GameMenuActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// remove actionbar
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_game_menu);
 		// Show the Up button in the action bar.
-		
-		//Check if Google play service APK is installed
+
+		// Check if Google play service APK is installed
 		ensureGooglePlayServicesIsEnabled();
-		
-		//Adds a few random QuizWalks to the db. For debuging
-		DebugFactory.addRandomListOfQuizWalksToDB();
-		
+
 	}
-	
+
 	private void ensureGooglePlayServicesIsEnabled() {
 		int result = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
 		Log.i("GOOGLE_PLAY_SERVICES_AVAILABLE", String.valueOf(result));
@@ -48,24 +48,30 @@ public class GameMenuActivity extends Activity {
 	}
 
 	public void onButtonClick_StartGame(View v) {
-		startActivity(new Intent(this, QuizWalkActivity.class));
+		if (GameDatabaseManager.getInstance().getAllQuizWalkGame().size() > 1) {
+			startActivity(new Intent(this, QuizWalkActivity.class));
+		} else {
+			Toast.makeText(this, "There's no QuizWalks available",
+					Toast.LENGTH_LONG).show();
+		}
 	}
-	
+
 	public void onButtonClick_CreateGame(View v) {
-		Intent intent=new Intent(this, EditQuizWalkGameActivity.class);
+		Intent intent = new Intent(this, EditQuizWalkGameActivity.class);
 		intent.setAction(C.Intent.Action.EDIT_NEW_QUIZ_WALK);
 		startActivity(intent);
 	}
+
 	public void onButtonClick_QuizWalkManager(View v) {
 		startActivity(new Intent(this, QuizWalkManagerActivity.class));
 	}
-	public void onButtonClick_Settings(View v){
+
+	public void onButtonClick_Settings(View v) {
 		startActivity(new Intent(this, SettingsActivity.class));
 	}
-	public void testCompletedQW(View v){
+
+	public void testCompletedQW(View v) {
 		startActivity(new Intent(this, CompletedQuizWalkActivity.class));
 	}
-	
-	
 
 }
