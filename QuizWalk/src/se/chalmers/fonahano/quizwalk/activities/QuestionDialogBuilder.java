@@ -83,14 +83,14 @@ public class QuestionDialogBuilder extends AlertDialog.Builder {
 			Log.e(getClass().getName(), errorMsg);
 			throw new RuntimeException(errorMsg);
 		}
-
+		String[] itemsArray = listOfAnswers.toArray(new String[listOfAnswers
+				.size()]);
 		Log.d("listOfAnswers",
-				new Gson().toJson((String[]) listOfAnswers.toArray()));
+				new Gson().toJson( itemsArray));
 		Log.d("correct answer index", "" + correctAnswerIndex);
 		Log.d("correct answer index", challenge.getCorrectAnswer().toString());
 
-		String[] itemsArray = listOfAnswers.toArray(new String[listOfAnswers
-				.size()]);
+		
 
 		// Sets up the popup
 		setItems(itemsArray, new ChallengeOnClickListener(correctAnswerIndex));
