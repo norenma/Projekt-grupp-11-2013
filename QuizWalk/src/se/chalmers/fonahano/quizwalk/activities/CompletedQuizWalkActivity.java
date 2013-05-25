@@ -36,7 +36,7 @@ public class CompletedQuizWalkActivity extends Activity {
 		for(Challenge c: challenges){
 			items.add(c.getQuestion().toString());
 		}
-		ArrayAdapter<String> adapter=new ArrayAdapter<String>(this, R.id.challenges,items);
+		ArrayAdapter<String> adapter=new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,items);
 		list.setAdapter(adapter);
 	}
 }

@@ -1,21 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/question_form"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white" 
-    android:id="@+id/question_form">
-
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="42dp"
-        android:text="@string/create_question"
-        android:onClick="CreateQuestion" />
-
+    android:alpha="0.98"
+    android:background="@color/WhiteSmoke"
+    android:padding="15dp"
+    android:textColorHint="@color/purple" >
 
     <EditText
         android:id="@+id/questionText"
@@ -24,14 +16,22 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="26dp"
+        android:alpha="0.9"
+        android:background="@color/WhiteSmoke"
         android:ems="10"
-        android:hint="@string/enter_your_question" />
+        android:hint="@string/enter_your_question"
+        android:textColorHint="@color/Purple" />
 
     <RelativeLayout
+        android:id="@+id/relativeLayout1"
         android:layout_width="220dp"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button1"
-        android:layout_centerHorizontal="true" >
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/questionText"
+        android:layout_below="@+id/questionText"
+        android:alpha="0.9"
+        android:background="@color/WhiteSmoke"
+        android:padding="5dp" >
 
         <EditText
             android:id="@+id/answer1"
@@ -41,40 +41,56 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:ems="10"
-            android:hint="@string/correct_Answer" >
-
-            <requestFocus />
-        </EditText>
+            android:hint="@string/correct_Answer"
+            android:textColorHint="@color/Purple" />
 
         <EditText
             android:id="@+id/answer2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
+            android:layout_alignRight="@+id/answer1"
             android:layout_below="@+id/answer1"
             android:layout_marginTop="20dp"
             android:ems="10"
-            android:hint="@string/answer2" />
+            android:hint="@string/answer2"
+            android:textColorHint="@color/Purple" />
 
         <EditText
             android:id="@+id/answer3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
+            android:layout_alignRight="@+id/answer2"
             android:layout_below="@+id/answer2"
             android:layout_marginTop="20dp"
             android:ems="10"
-            android:hint="@string/answer3" />
+            android:hint="@string/answer3"
+            android:textColorHint="@color/Purple" />
 
         <EditText
             android:id="@+id/answer4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
+            android:layout_alignRight="@+id/answer3"
             android:layout_below="@+id/answer3"
             android:layout_marginTop="20dp"
             android:ems="10"
-            android:hint="@string/answer4" />
+            android:hint="@string/answer4"
+            android:textColorHint="@color/Purple" />
+
     </RelativeLayout>
+
+    <Button
+        android:id="@+id/button1"
+        style="@style/ButtonBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/relativeLayout1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="18dp"
+        android:onClick="CreateQuestion"
+        android:text="@string/create_question" />
 
 </RelativeLayout>
