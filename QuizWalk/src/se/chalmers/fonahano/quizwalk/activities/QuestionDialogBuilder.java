@@ -64,10 +64,11 @@ public class QuestionDialogBuilder extends AlertDialog.Builder {
 	 */
 	public void showChallenge(Challenge challenge) {
 		List<String> listOfAnswers = new ArrayList<String>();
-
+		
+		int i = 0;
 		// Add Answers to dialog-list.
 		for (Answer<String> s : challenge.getSetOfAnswers()) {
-			int i = 0;
+			
 
 			String currentAnswer = s.getAnswer();
 			listOfAnswers.add(currentAnswer);
