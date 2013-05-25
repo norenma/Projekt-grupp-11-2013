@@ -87,10 +87,20 @@
         style="@style/ButtonBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/relativeLayout1"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="18dp"
+        android:layout_alignLeft="@+id/relativeLayout1"
+        android:layout_alignParentBottom="true"
         android:onClick="CreateQuestion"
         android:text="@string/create_question" />
+
+    <TextView
+        android:id="@+id/errorMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button1"
+        android:layout_alignLeft="@+id/button1"
+        android:layout_marginBottom="26dp"
+        android:text="@string/please_provide_a_question_and_answers_string"
+        android:textColor="@color/red" 
+        android:alpha="0"/>
 
 </RelativeLayout>

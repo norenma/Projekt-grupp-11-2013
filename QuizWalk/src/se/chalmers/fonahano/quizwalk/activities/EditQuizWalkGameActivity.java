@@ -1,5 +1,6 @@
 package se.chalmers.fonahano.quizwalk.activities;
 
+import static se.chalmers.fonahano.quizwalk.model.Utilities.checkNotNullOrEmpty;
 import java.util.List;
 
 import se.chalmers.fonahano.quizwalk.R;
@@ -59,9 +60,9 @@ public class EditQuizWalkGameActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// remove actionbar
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_edit_game);
 
@@ -117,7 +118,6 @@ public class EditQuizWalkGameActivity extends Activity {
 		toast.show();
 	}
 
-	
 	/***
 	 * Creates a challenge out of collected data and adds it to the game. Called
 	 * when CreateQuestion-button is pushed.
@@ -127,19 +127,27 @@ public class EditQuizWalkGameActivity extends Activity {
 	public void CreateQuestion(View view) {
 		Challenge.Builder build = new Challenge.Builder();
 
-		// Gets question and answers
-		build.question(new StringQuestion((((EditText) this
-				.findViewById(R.id.questionText)).getText().toString())));
-		build.correctAnswer(((EditText) this.findViewById(R.id.answer1))
-				.getText().toString());
-		build.addIncorrectAnswer(new StringAnswer(((EditText) this
-				.findViewById(R.id.answer2)).getText().toString()));
-		build.addIncorrectAnswer(new StringAnswer(((EditText) this
-				.findViewById(R.id.answer3)).getText().toString()));
-		build.addIncorrectAnswer(new StringAnswer(((EditText) this
-				.findViewById(R.id.answer4)).getText().toString()));
-		build.challengeReward(new ChallengeReward(100, " ", Optional
-				.<Image> absent()));
+		try {
+			// Gets question and answers
+			build.question(new StringQuestion(checkNotNullOrEmpty(((EditText) this
+							.findViewById(R.id.questionText)).getText()
+							.toString(),"")));
+
+			build.correctAnswer(checkNotNullOrEmpty(((EditText) this
+					.findViewById(R.id.answer1)).getText().toString(), ""));
+			build.correctAnswer(checkNotNullOrEmpty(((EditText) this
+					.findViewById(R.id.answer2)).getText().toString(), ""));
+			build.correctAnswer(checkNotNullOrEmpty(((EditText) this
+					.findViewById(R.id.answer3)).getText().toString(), ""));
+			build.correctAnswer(checkNotNullOrEmpty(((EditText) this
+					.findViewById(R.id.answer4)).getText().toString(), ""));
+			build.challengeReward(new ChallengeReward(10, " ", Optional
+					.<Image> absent()));
+		} catch (IllegalArgumentException e) {
+			findViewById(R.id.errorMessage).setAlpha(1);
+			e.printStackTrace();
+			return;
+		}
 
 		// Gets the coordinates
 		ChallengeLocation location = new ChallengeLocation(
@@ -166,10 +174,8 @@ public class EditQuizWalkGameActivity extends Activity {
 		Toast toast = Toast.makeText(this, "Question Created!",
 				Toast.LENGTH_SHORT);
 		toast.show();
-
 	}
 
-	
 	/**
 	 * Creates a quizwalk, when the user presses a button.
 	 * 
@@ -190,15 +196,17 @@ public class EditQuizWalkGameActivity extends Activity {
 						String value = input.getText().toString();
 						builder.name(value);
 
-						//Builds quizwalk and saves to database
+						// Builds quizwalk and saves to database
 						GameDatabaseManager.init(EditQuizWalkGameActivity.this);
 						LocalDatabase gdm = GameDatabaseManager.getInstance();
 						gdm.addQuizWalkGame(builder.build());
-						
-						// Small text on the screen to let the user know how to input a new
+
+						// Small text on the screen to let the user know how to
+						// input a new
 						// question
 						// to the game.
-						Toast toast = Toast.makeText(EditQuizWalkGameActivity.this,
+						Toast toast = Toast.makeText(
+								EditQuizWalkGameActivity.this,
 								"QuizWalk created!", Toast.LENGTH_LONG);
 						toast.show();
 						startActivity(new Intent(EditQuizWalkGameActivity.this,
