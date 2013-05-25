@@ -17,6 +17,7 @@ public interface C {
 			public static final String STATE_CHANGED_QUIZWALK_BUILDER = "se.chalmers.fonahano.quizwalk.STATE_CHANGED_QUIZWALK_BUILDER";
 			public static final String STATE_CHANGED_CHALLENGE_BUILDER = "se.chalmers.fonahano.quizwalk.STATE_CHANGED_CHALLENGE_BUILDER";
 			public static final String STATE_CHANGED_CURRENT_LOCATION = "se.chalmers.fonahano.quizwalk.STATE_CHANGED_CURRENT_LOCATION";
+			public static final String STATE_CHANGED_COMPLETED_QUIZWALK = "se.chalmers.fonahano.quizwalk.STATE_CHANGED_COMPLETED_QUIZWALK";
 
 			public static final String EDIT_NEW_QUIZ_WALK = "se.chalmers.fonahano.quizwalk.EDIT_NEW_QUIZ_WALK";
 		}

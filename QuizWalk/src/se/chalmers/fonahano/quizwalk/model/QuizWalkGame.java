@@ -12,6 +12,8 @@ import se.chalmers.fonahano.quizwalk.interfaces.Game;
 import se.chalmers.fonahano.quizwalk.interfaces.Image;
 import se.chalmers.fonahano.quizwalk.interfaces.LatitudeLongitude;
 
+import com.google.android.gms.internal.ch;
+import com.google.android.gms.internal.n;
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
 import com.j256.ormlite.field.DataType;
@@ -470,6 +472,19 @@ public class QuizWalkGame extends Game {
 			}
 		}
 		return points; 
+	}
+	
+	public boolean isGameCompleted(){
+		int nbrOfDoneQuizWalks = 0;
+		for(Challenge c: challenges){
+			if(getChallengeStateOf(c).equals(ChallengeState.COMPLETED) || getChallengeStateOf(c).equals(ChallengeState.FAILED))
+				nbrOfDoneQuizWalks++;
+		}
+		
+		if(nbrOfDoneQuizWalks == challenges.size())
+			return true;
+		
+		return false;
 	}
 
 }
