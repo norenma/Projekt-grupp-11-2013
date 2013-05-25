@@ -5,6 +5,8 @@ import se.chalmers.fonahano.quizwalk.interfaces.C;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 public class DebugActivity extends Activity {
@@ -13,6 +15,10 @@ public class DebugActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		// remove actionbar
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.debug_screen);
 
@@ -22,10 +28,5 @@ public class DebugActivity extends Activity {
 		}
 	}
 	
-	@Override
-	//INACTIVE
-	public boolean onCreateOptionsMenu(Menu menu) {
-		return false;
-	}
 
 }
