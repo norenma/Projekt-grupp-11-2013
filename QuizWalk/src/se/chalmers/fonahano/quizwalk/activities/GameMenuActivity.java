@@ -48,7 +48,7 @@ public class GameMenuActivity extends Activity {
 	}
 
 	public void onButtonClick_StartGame(View v) {
-		if (GameDatabaseManager.getInstance().getAllQuizWalkGame().size() > 1) {
+		if (GameDatabaseManager.getInstance().getAllQuizWalkGame().size() >= 1) {
 			startActivity(new Intent(this, QuizWalkActivity.class));
 		} else {
 			Toast.makeText(this, "There's no QuizWalks available",
