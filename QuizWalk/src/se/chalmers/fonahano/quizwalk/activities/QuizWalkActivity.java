@@ -28,7 +28,10 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
+
 import android.widget.Toast;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -47,6 +50,10 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		// remove actionbar
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_quiz_walk_game);
 		map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map))
