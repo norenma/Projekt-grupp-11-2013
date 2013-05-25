@@ -227,7 +227,7 @@ public abstract class ActivityHelper {
 			Challenge c = checkNotNull(qItNext.getChallenges().get(0));
 
 			Marker temp = populateMap(googleMap, c.getLocation(),
-					qItNext.getDescription());
+					qItNext.getName());
 			temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.letter_q));
 			markers.add(temp);
 
