@@ -35,7 +35,7 @@
         android:padding="5dp" >
 
         <EditText
-            android:id="@+id/answer1"
+            android:id="@id/answer1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -47,7 +47,7 @@
             android:nextFocusDown="@+id/answer2" />
 
         <EditText
-            android:id="@+id/answer2"
+            android:id="@id/answer2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -60,7 +60,7 @@
             android:nextFocusDown="@+id/answer3" />
 
         <EditText
-            android:id="@+id/answer3"
+            android:id="@id/answer3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -73,7 +73,7 @@
             android:nextFocusDown="@+id/answer4" />
 
         <EditText
-            android:id="@+id/answer4"
+            android:id="@id/answer4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"

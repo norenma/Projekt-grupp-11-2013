@@ -243,7 +243,7 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 			}
 		});
 
-		ab.setTitle(q.getDescription() + ": Do you want to play this QuizWalk?");
+		ab.setTitle(q.getName() + ": Do you want to play this QuizWalk?");
 
 		ab.show();
 	}
