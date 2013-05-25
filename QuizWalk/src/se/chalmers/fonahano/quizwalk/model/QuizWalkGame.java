@@ -481,7 +481,7 @@ public class QuizWalkGame extends Game {
 				nbrOfDoneQuizWalks++;
 		}
 		
-		if(nbrOfDoneQuizWalks == challenges.size())
+		if(nbrOfDoneQuizWalks >= challenges.size())
 			return true;
 		
 		return false;
