@@ -22,7 +22,8 @@ import android.util.Log;
  */
 public class QuestionDialogBuilder extends AlertDialog.Builder {
 
-	private class ChallengeOnClickListener implements DialogInterface.OnClickListener {
+	private class ChallengeOnClickListener implements
+			DialogInterface.OnClickListener {
 
 		private final int correctAnswerIndex;
 
@@ -75,7 +76,6 @@ public class QuestionDialogBuilder extends AlertDialog.Builder {
 			}
 			i++;
 		}
-		
 
 		// Error handling if broken Challenge-object was retrieved.
 		if (correctAnswerIndex < 0) {
@@ -83,14 +83,17 @@ public class QuestionDialogBuilder extends AlertDialog.Builder {
 			Log.e(getClass().getName(), errorMsg);
 			throw new RuntimeException(errorMsg);
 		}
-		
-		Log.d("listOfAnswers", new Gson().toJson((String[]) listOfAnswers.toArray()));
-		Log.d("correct answer index", "" +  correctAnswerIndex);
+
+		Log.d("listOfAnswers",
+				new Gson().toJson((String[]) listOfAnswers.toArray()));
+		Log.d("correct answer index", "" + correctAnswerIndex);
 		Log.d("correct answer index", challenge.getCorrectAnswer().toString());
 
+		String[] itemsArray = listOfAnswers.toArray(new String[listOfAnswers
+				.size()]);
+
 		// Sets up the popup
-		setItems((String[]) listOfAnswers.toArray(),
-				new ChallengeOnClickListener(correctAnswerIndex));
+		setItems(itemsArray, new ChallengeOnClickListener(correctAnswerIndex));
 
 		// Sets the question
 		setTitle(challenge.getQuestion().get());
@@ -98,5 +101,5 @@ public class QuestionDialogBuilder extends AlertDialog.Builder {
 		// Displays the pop-up
 		show();
 	}
-	
+
 }
