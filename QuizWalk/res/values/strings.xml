@@ -54,5 +54,6 @@
     <string name="you_got">You got:</string>
     <string name="points_string">Points</string>
     <string name="save_settings">Save</string>
+    <string name="please_provide_a_question_and_answers_string">Please provide a question with 4 answers.</string>
 
 </resources>
