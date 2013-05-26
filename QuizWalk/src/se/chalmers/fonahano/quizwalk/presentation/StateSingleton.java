@@ -9,7 +9,7 @@ import se.chalmers.fonahano.quizwalk.model.Challenge;
 import se.chalmers.fonahano.quizwalk.model.ChallengeLocation;
 import se.chalmers.fonahano.quizwalk.model.Coordinates;
 import se.chalmers.fonahano.quizwalk.model.QuizWalkGame;
-import se.chalmers.fonahano.quizwalk.model.QuizWalkGame.Builder;
+import se.chalmers.fonahano.quizwalk.presentation.C.Intent.Action;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
