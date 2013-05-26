@@ -28,7 +28,6 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
@@ -63,7 +62,6 @@ public class EditQuizWalkGameActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_edit_game);
 
-		map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
 
 		//checks if gps is turned on
 		if (!((LocationManager) getSystemService(LOCATION_SERVICE)).isProviderEnabled(LocationManager.GPS_PROVIDER)) {
@@ -84,6 +82,8 @@ public class EditQuizWalkGameActivity extends Activity {
 			ActivityHelper.populateMap(map, qwg, this);
 			builder = new QuizWalkGame.Builder(qwg);
 		}
+		
+		setupMap();
 
 		// Small text on the screen to let the user know how to input a new
 		// question
@@ -92,12 +92,24 @@ public class EditQuizWalkGameActivity extends Activity {
 				this.getResources().getString(R.string.longpress_to_add_question), Toast.LENGTH_LONG);
 
 		toast.show();
+		
+		
 	}
 
 	/**
 	 * Sets up the map, and adds a click-listener
 	 */
 	private void setupMap() {
+		map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
+
+		//checks if gps is turned on
+		if (!((LocationManager) getSystemService(LOCATION_SERVICE)).isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+			ActivityHelper.showEnableGPSDialog(this);
+		}
+		// shows where user is now.
+		map.setMyLocationEnabled(true);
+		map.getUiSettings().setZoomControlsEnabled(false);
+
 		map.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
 
 			/***
@@ -116,7 +128,7 @@ public class EditQuizWalkGameActivity extends Activity {
 
 				CreateQuestionFragment cqa = new CreateQuestionFragment();
 				fragmentTransaction.add(R.id.fragment_container, cqa,
-						getResources().getString(R.string.no_quizwalks));
+						getResources().getString(R.string.question));
 
 				fragmentTransaction.commit();
 
@@ -196,7 +208,6 @@ public class EditQuizWalkGameActivity extends Activity {
 				.findViewById(R.id.answer4)).getText().toString(), ""));
 		build.challengeReward(new ChallengeReward(10, " ", Optional
 				.<Image> absent()));
-
 	}
 
 	/**
