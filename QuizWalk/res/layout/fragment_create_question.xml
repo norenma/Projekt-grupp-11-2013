@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/relativeLayout1"
         android:layout_alignParentBottom="true"
-        android:onClick="CreateQuestion"
+        android:onClick="onButtonClicked_createQuestion"
         android:text="@string/create_question" />
 
     <TextView
