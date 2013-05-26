@@ -73,7 +73,7 @@ public class EditQuizWalkGameActivity extends Activity {
 		map.setMyLocationEnabled(true);
 		map.getUiSettings().setZoomControlsEnabled(false);
 
-		map.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(map.getMyLocation().getLatitude(), map.getMyLocation().getLongitude())));
+		//map.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(map.getMyLocation().getLatitude(), map.getMyLocation().getLongitude())));
 		setupMap();
 
 		// Retrieves the included QuizWalk if there is one.

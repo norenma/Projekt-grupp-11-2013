@@ -120,14 +120,6 @@ public class TestRun {
 			"Sweet!",
 			Optional.<Image> absent());
 
-		//TODO: See example from createChallenge1
-		
-//		return new Challenge("A question about OS..",
-//			question,
-//			answers,
-//			correctAnswer,
-//			locations,
-//			Optional.of(reward));
 		return null;
 	}
 

@@ -89,15 +89,6 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 			q = StateSingleton.INSTANCE.getActiveQuizWalk().get();
 			ActivityHelper.populateMap(map, q, this);
 			initProximityAlerts(q, locationManager);
-
-			LatLngBounds.Builder builder = new LatLngBounds.Builder();
-			for (Challenge c : q.getChallenges()) {
-				builder.include(Utilities.coordinatesToLatLng(c.getLocation()));
-			}
-			// TODO: Make bounds work
-			// LatLngBounds bounds = builder.build();
-			// map.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds,
-			// 100));
 		}
 
 		// Handles if the activity has been prompted by a "questionintent" which
@@ -238,17 +229,13 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 	 * @param lm
 	 *            Adds proximity alerts to the LocationManager
 	 */
-
-	// TODO: Not sure how referencing a LocationManager works. Will need testing
-	// TODO: Reformat this method. The way it looks makes my brain scream in
-	// agony and pain
 	private void initProximityAlerts(QuizWalkGame q, LocationManager lm) {
 		Iterator<Challenge> it = q.getChallenges().iterator();
 		while (it.hasNext()) {
 
 			Challenge itNext = it.next();
 			ChallengeLocation location = itNext.getLocation();
-			Intent intent = new Intent(this, QuizWalkActivity.class);
+			Intent intent = new Intent(this, ProximityIntentReceiver.class);
 			double[] latNLng = { itNext.getLocation().getLatitude(), itNext.getLocation().getLongitude() };
 
 			intent.putExtra(Extra.PROXIMITY_ALERT_MESSAGE, latNLng);

@@ -137,79 +137,14 @@ public abstract class ActivityHelper {
 			Marker temp = populateMap(map, currentIt.getLocation(),
 					currentIt.getChallengeDescription());
 
-//			if (i < 29) {
-//				String imageID = "number_" + i;
-//				int resID = cxt.getResources().(imageID, "id",
-//						cxt.getPackageName());
-//				
-//				temp.setIcon(BitmapDescriptorFactory.fromResource(resID));
-//			} else
-//				temp.setIcon(BitmapDescriptorFactory
-//						.fromResource(R.drawable.number_0));
-
-			//TODO: VERY VERY Preliminary solution. Just to get the project forward
-			switch(i){
-			case 1: temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_1));
-					break;
-			case 2: temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_2));
-			break;
-			case 3: temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_3));
-			break;
-			case 4: temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_4));
-			break;
-			case 5: temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_5));
-			break;
-			case 6: temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_6));
-			break;
-			case 7: temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_7));
-			break;
-			case 8: temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_8));
-			break;
-			case 9: temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_9));
-			break;
-			case 10: temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_10));
-			break;
-			case 11: temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_11));
-			break;
-			case 12: temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_12));
-			break;
-			case 13: temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_13));
-			break;
-			case 14: temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_14));
-			break;
-			case 15: temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_15));
-			break;
-			case 16: temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_16));
-			break;
-			case 17: temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_17));
-			break;
-			case 18: temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_18));
-			break;
-			case 19: temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_19));
-			break;
-			case 20: temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_20));
-			break;
-			case 21: temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_21));
-			break;
-			case 22: temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_22));
-			break;
-			case 23: temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_23));
-			break;
-			case 24: temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_24));
-			break;
-			case 25: temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_25));
-			break;
-			case 26: temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_26));
-			break;
-			case 27: temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_27));
-			break;
-			case 28: temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_28));
-			break;
-			case 29: temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_29));
-			break;
-			default:temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.number_0));
-			break;
-			
+			if (i < 29) {
+				String imageID = "number_" + i;
+				int resID = cxt.getResources().getIdentifier(imageID, "id",cxt.getPackageName());
+				
+				temp.setIcon(BitmapDescriptorFactory.fromResource(resID));
+			} else {
+				temp.setIcon(BitmapDescriptorFactory
+						.fromResource(R.drawable.number_0));
 			}
 			i++;
 			markers.add(temp);

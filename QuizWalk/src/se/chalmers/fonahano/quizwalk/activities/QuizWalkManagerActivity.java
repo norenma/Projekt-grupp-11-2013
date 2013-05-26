@@ -24,7 +24,6 @@ import android.widget.ListView;
 
 import com.google.gson.GsonBuilder;
 
-//TODO: Ska vi använda denna klassen?
 public class QuizWalkManagerActivity extends Activity {
 
 	ListView listView;
@@ -42,18 +41,12 @@ public class QuizWalkManagerActivity extends Activity {
             WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		super.onCreate(savedInstanceState);
 
-		// TODO: Uncomment to delete database
-		// deleteDatabase(C.Data.DATABASE_NAME);
-
 		GameDatabaseManager.init(this);
 
 		ViewGroup contentView = (ViewGroup) getLayoutInflater().inflate(R.layout.activity_quiz_walk_manager,
 			null);
 		listView = (ListView) contentView.findViewById(R.id.list_view);
 
-		Button btn = (Button) contentView.findViewById(R.id.button_add);
-		// TODO: Make it work :)
-		// setupButton(btn);
 		setContentView(contentView);
 	}
 
@@ -64,9 +57,6 @@ public class QuizWalkManagerActivity extends Activity {
 	}
 
 	private void setupListView(ListView listView) {
-
-		// TODO: Debugging
-		addEntryFromDebugFactory();
 
 		final List<QuizWalkGame> allQuizWalkGames = GameDatabaseManager.getInstance()
 			.getAllQuizWalkGame();
@@ -98,15 +88,6 @@ public class QuizWalkManagerActivity extends Activity {
 			}
 		});
 	}
-
-	// TODO: Persisting static QuizWalkGame
-	// (temp.debub.tortal.DebugFactory.java)
-	private void addEntryFromDebugFactory() {
-		QuizWalkGame g = DebugFactory.getRandomTortalChalmersQuizWalkGame1();
-		GameDatabaseManager.getInstance()
-			.addQuizWalkGame(g);
-	}
-
 
 
 	public void generateQuizWalk(View view) {

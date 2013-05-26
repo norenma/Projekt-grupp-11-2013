@@ -34,8 +34,7 @@ public class LauncherActivity extends Activity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.activity_launcher);
-
-		// TODO Debug, delete database.
+		
 		deleteDatabase(C.Data.DATABASE_NAME);
 		GameDatabaseManager.init(this);
 

@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import se.chalmers.fonahano.quizwalk.interfaces.LatitudeLongitude;
 
-//TODO: this Class with probably be replace/linked with Google Maps API Coordinates class. We must however keep MVC and aim to make the model autonomous.
 /**
  * Coordinates.
  */
