@@ -3,8 +3,8 @@ package se.chalmers.fonahano.quizwalk.database;
 import java.sql.SQLException;
 import java.util.List;
 
-import se.chalmers.fonahano.quizwalk.model.AndroidUser;
 import se.chalmers.fonahano.quizwalk.model.QuizWalkGame;
+import se.chalmers.fonahano.quizwalk.model.QuizWalkUser;
 import android.content.Context;
 
 public class GameDatabaseManager implements LocalDatabase {
@@ -37,8 +37,7 @@ public class GameDatabaseManager implements LocalDatabase {
 	public List<QuizWalkGame> getAllQuizWalkGame() {
 		List<QuizWalkGame> quizWalkGameList = null;
 		try {
-			quizWalkGameList = getHelper().getQuizWalkDao()
-				.queryForAll();
+			quizWalkGameList = getHelper().getQuizWalkDao().queryForAll();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -49,8 +48,7 @@ public class GameDatabaseManager implements LocalDatabase {
 	public QuizWalkGame getQuizWalkGameById(int quizWalkId) {
 		QuizWalkGame quizWalk = null;
 		try {
-			quizWalk = getHelper().getQuizWalkDao()
-				.queryForId(quizWalkId);
+			quizWalk = getHelper().getQuizWalkDao().queryForId(quizWalkId);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -60,8 +58,7 @@ public class GameDatabaseManager implements LocalDatabase {
 	@Override
 	public void addQuizWalkGame(QuizWalkGame q) {
 		try {
-			getHelper().getQuizWalkDao()
-				.create(q);
+			getHelper().getQuizWalkDao().create(q);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -70,39 +67,35 @@ public class GameDatabaseManager implements LocalDatabase {
 	@Override
 	public void deleteQuizWalkGame(QuizWalkGame q) {
 		try {
-			getHelper().getQuizWalkDao()
-				.delete(q);
+			getHelper().getQuizWalkDao().delete(q);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
 	@Override
-	public void createUser(AndroidUser u) {
+	public void createUser(QuizWalkUser u) {
 		try {
-			getHelper().getAndroidUserDao()
-				.create(u);
+			getHelper().getAndroidUserDao().create(u);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
 	@Override
-	public void updateUser(AndroidUser u) {
+	public void updateUser(QuizWalkUser u) {
 		try {
-			getHelper().getAndroidUserDao()
-				.update(u);
+			getHelper().getAndroidUserDao().update(u);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
 	@Override
-	public AndroidUser getUser() {
-		AndroidUser u = null;
+	public QuizWalkUser getUser() {
+		QuizWalkUser u = null;
 		try {
-			u = getHelper().getAndroidUserDao()
-				.queryForId(1);
+			u = getHelper().getAndroidUserDao().queryForId(1);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

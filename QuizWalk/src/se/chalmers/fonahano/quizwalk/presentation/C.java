@@ -20,8 +20,8 @@ public interface C {
 			public static final String STATE_CHANGED_COMPLETED_QUIZWALK = "se.chalmers.fonahano.quizwalk.STATE_CHANGED_COMPLETED_QUIZWALK";
 			public static final String EDIT_NEW_QUIZ_WALK = "se.chalmers.fonahano.quizwalk.EDIT_NEW_QUIZ_WALK";
 		}
-		
-		public static class Extra{
+
+		public static class Extra {
 
 			public static class GameMap {
 				public final static String MAP_STATE = "MAP_STATE";
@@ -32,10 +32,11 @@ public interface C {
 			 */
 			public final static String PROXIMITY_ALERT_MESSAGE = "se.chalmers.fonahano.quizwalk.activitiesMESSAGE";
 			/**
-			 * The radius of which, if entered, the marker proximity alert will be fired
+			 * The radius of which, if entered, the marker proximity alert will
+			 * be fired
 			 */
 			public final static int MARKER_PROXIMITY_RADIUS = 50;
-			
+
 		}
 
 	}

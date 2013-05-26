@@ -3,8 +3,8 @@ package se.chalmers.fonahano.quizwalk.database;
 import java.util.ArrayList;
 import java.util.List;
 
-import se.chalmers.fonahano.quizwalk.model.AndroidUser;
 import se.chalmers.fonahano.quizwalk.model.QuizWalkGame;
+import se.chalmers.fonahano.quizwalk.model.QuizWalkUser;
 import se.chalmers.fonahano.quizwalk.presentation.C;
 import android.content.Context;
 import android.database.SQLException;
@@ -26,13 +26,10 @@ public class GameOrmLiteSQLiteOpenHelper extends OrmLiteSqliteOpenHelper {
 
 	// the DAO object we use to access the SimpleData table
 	private Dao<QuizWalkGame, Integer> quizWalkDao = null;
-	private Dao<AndroidUser, Integer> androidUserDao = null;
+	private Dao<QuizWalkUser, Integer> androidUserDao = null;
 
 	public GameOrmLiteSQLiteOpenHelper(Context context) {
-		super(context,
-			C.Data.DATABASE_NAME,
-			null,
-			DATABASE_VERSION);
+		super(context, C.Data.DATABASE_NAME, null, DATABASE_VERSION);
 	}
 
 	@Override
@@ -41,16 +38,12 @@ public class GameOrmLiteSQLiteOpenHelper extends OrmLiteSqliteOpenHelper {
 		try {
 
 			// QuizWalkGame
-			TableUtils.createTable(connectionSource,
-				QuizWalkGame.class);
+			TableUtils.createTable(connectionSource, QuizWalkGame.class);
 
-			// AndroidUser
-			TableUtils.createTable(connectionSource,
-				AndroidUser.class);
+			// QuizWalkUser
+			TableUtils.createTable(connectionSource, QuizWalkUser.class);
 		} catch (SQLException e) {
-			Log.e(CLASS_NAME,
-				"Exception when creating tables",
-				e);
+			Log.e(CLASS_NAME, "Exception when creating tables", e);
 			throw new RuntimeException(e);
 		} catch (java.sql.SQLException e) {
 			e.printStackTrace();
@@ -72,9 +65,7 @@ public class GameOrmLiteSQLiteOpenHelper extends OrmLiteSqliteOpenHelper {
 				db.execSQL(sql);
 			}
 		} catch (SQLException e) {
-			Log.e(CLASS_NAME,
-				"exception during onUpgrade",
-				e);
+			Log.e(CLASS_NAME, "exception during onUpgrade", e);
 			throw new RuntimeException(e);
 		}
 
@@ -91,10 +82,10 @@ public class GameOrmLiteSQLiteOpenHelper extends OrmLiteSqliteOpenHelper {
 		return quizWalkDao;
 	}
 
-	public Dao<AndroidUser, Integer> getAndroidUserDao() {
+	public Dao<QuizWalkUser, Integer> getAndroidUserDao() {
 		if (null == androidUserDao) {
 			try {
-				androidUserDao = getDao(AndroidUser.class);
+				androidUserDao = getDao(QuizWalkUser.class);
 			} catch (java.sql.SQLException e) {
 				e.printStackTrace();
 			}

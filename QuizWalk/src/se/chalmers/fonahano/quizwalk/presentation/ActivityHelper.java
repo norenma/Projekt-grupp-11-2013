@@ -45,9 +45,9 @@ public abstract class ActivityHelper {
 				secondPos.getLongitude(), result);
 	}
 
-
 	/**
 	 * Calculates distance between 2 positions
+	 * 
 	 * @param firstPos
 	 * @param secondPos
 	 * @return
@@ -139,8 +139,9 @@ public abstract class ActivityHelper {
 
 			if (i < 29) {
 				String imageID = "number_" + i;
-				int resID = cxt.getResources().getIdentifier(imageID, "id",cxt.getPackageName());
-				
+				int resID = cxt.getResources().getIdentifier(imageID, "id",
+						cxt.getPackageName());
+
 				temp.setIcon(BitmapDescriptorFactory.fromResource(resID));
 			} else {
 				temp.setIcon(BitmapDescriptorFactory
@@ -176,7 +177,8 @@ public abstract class ActivityHelper {
 
 			Marker temp = populateMap(googleMap, c.getLocation(),
 					qItNext.getName());
-			temp.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.letter_q));
+			temp.setIcon(BitmapDescriptorFactory
+					.fromResource(R.drawable.letter_q));
 			markers.add(temp);
 
 		}
@@ -194,7 +196,7 @@ public abstract class ActivityHelper {
 		}
 		return Optional.<QuizWalkGame> absent();
 	}
-	
+
 	/**
 	 * Displays a popup prompting the user to enable the gps and then, if the
 	 * user choses to, takes the user to the android settings interface
@@ -206,7 +208,8 @@ public abstract class ActivityHelper {
 		ab.setItems(choice, new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface d, int choice) {
 				if (choice == 0) {
-					Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+					Intent intent = new Intent(
+							Settings.ACTION_LOCATION_SOURCE_SETTINGS);
 					cxt.startActivity(intent);
 				}
 

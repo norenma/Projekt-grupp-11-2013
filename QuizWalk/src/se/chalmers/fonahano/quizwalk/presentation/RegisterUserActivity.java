@@ -3,7 +3,7 @@ package se.chalmers.fonahano.quizwalk.presentation;
 import se.chalmers.fonahano.quizwalk.R;
 import se.chalmers.fonahano.quizwalk.database.GameDatabaseManager;
 import se.chalmers.fonahano.quizwalk.database.LocalDatabase;
-import se.chalmers.fonahano.quizwalk.model.AndroidUser;
+import se.chalmers.fonahano.quizwalk.model.QuizWalkUser;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -60,7 +60,7 @@ public class RegisterUserActivity extends Activity {
 	public void OnClickRegister(View view) {
 		GameDatabaseManager.init(this);
 		LocalDatabase gdm = GameDatabaseManager.getInstance();
-		AndroidUser user = gdm.getUser();
+		QuizWalkUser user = gdm.getUser();
 		user.setEmail(((EditText) this.findViewById(R.id.PasswordText))
 				.getText().toString());
 		user.setPassword(((EditText) this.findViewById(R.id.PasswordText))

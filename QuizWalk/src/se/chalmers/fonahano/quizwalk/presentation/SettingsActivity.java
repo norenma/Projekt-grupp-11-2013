@@ -3,7 +3,7 @@ package se.chalmers.fonahano.quizwalk.presentation;
 import se.chalmers.fonahano.quizwalk.R;
 import se.chalmers.fonahano.quizwalk.database.GameDatabaseManager;
 import se.chalmers.fonahano.quizwalk.database.LocalDatabase;
-import se.chalmers.fonahano.quizwalk.model.AndroidUser;
+import se.chalmers.fonahano.quizwalk.model.QuizWalkUser;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -51,7 +51,7 @@ public class SettingsActivity extends Activity {
 	public void onButtonClick_save(View v) {
 		GameDatabaseManager.init(this);
 		LocalDatabase gdm = GameDatabaseManager.getInstance();
-		AndroidUser user = gdm.getUser();
+		QuizWalkUser user = gdm.getUser();
 		user.setUserName(((EditText) this.findViewById(R.id.username_tv))
 				.getText().toString());
 		user.setPassword(((EditText) this.findViewById(R.id.password_tv))

@@ -14,9 +14,9 @@ public class DebugActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// remove actionbar
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.debug_screen);
 
@@ -25,6 +25,5 @@ public class DebugActivity extends Activity {
 			textView.setText(getIntent().getStringExtra(C.Data.JSON_DATA));
 		}
 	}
-	
 
 }
