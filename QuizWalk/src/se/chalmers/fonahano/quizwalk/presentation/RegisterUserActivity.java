@@ -1,6 +1,5 @@
 package se.chalmers.fonahano.quizwalk.presentation;
 
-import static com.google.common.base.Preconditions.checkNotNull;
 import se.chalmers.fonahano.quizwalk.R;
 import se.chalmers.fonahano.quizwalk.database.GameDatabaseManager;
 import se.chalmers.fonahano.quizwalk.database.LocalDatabase;
@@ -62,8 +61,8 @@ public class RegisterUserActivity extends Activity {
 		GameDatabaseManager.init(this);
 		LocalDatabase gdm = GameDatabaseManager.getInstance();
 		QuizWalkUser user = gdm.getUser();
-		user.setEmail(((EditText) this.findViewById(R.id.Email))
-				.getText().toString());
+		user.setEmail(((EditText) this.findViewById(R.id.Email)).getText()
+				.toString());
 		user.setPassword(((EditText) this.findViewById(R.id.PasswordText))
 				.getText().toString());
 		gdm.updateUser(user);

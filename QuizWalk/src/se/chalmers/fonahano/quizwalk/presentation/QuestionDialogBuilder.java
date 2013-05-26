@@ -92,7 +92,7 @@ public class QuestionDialogBuilder extends AlertDialog.Builder {
 		}
 		String[] itemsArray = listOfAnswers.toArray(new String[listOfAnswers
 				.size()]);
-		Log.d("derp", listOfAnswers.size() + " "+ itemsArray.length);
+		Log.d("derp", listOfAnswers.size() + " " + itemsArray.length);
 
 		// Sets up the popup
 		setItems(itemsArray, new ChallengeOnClickListener(correctAnswerIndex));

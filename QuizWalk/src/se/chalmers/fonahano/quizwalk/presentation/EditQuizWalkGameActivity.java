@@ -220,17 +220,18 @@ public class EditQuizWalkGameActivity extends Activity {
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int whichButton) {
 						String value;
-							try {
-								value = checkNotNull(input.getText().toString());
-							} catch (IllegalArgumentException e) {
-								Toast toast = Toast.makeText(
-										EditQuizWalkGameActivity.this, getResources()
-												.getString(R.string.enter_a_name),
-										Toast.LENGTH_LONG);
-								toast.show();
-								e.printStackTrace();
-								return;
-							}
+						try {
+							value = checkNotNull(input.getText().toString());
+						} catch (IllegalArgumentException e) {
+							Toast toast = Toast.makeText(
+									EditQuizWalkGameActivity.this,
+									getResources().getString(
+											R.string.enter_a_name),
+									Toast.LENGTH_LONG);
+							toast.show();
+							e.printStackTrace();
+							return;
+						}
 
 						builder.name(value);
 						// Builds quizwalk and saves to database
