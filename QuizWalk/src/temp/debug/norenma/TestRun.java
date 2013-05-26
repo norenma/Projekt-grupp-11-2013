@@ -151,7 +151,7 @@ public class TestRun {
 //			correctAnswer,
 //			locations,
 //			Optional.of(reward));
-		return null; //TODO
+		return null;
 	}
 
 	public static QuizWalkGame createGame() {

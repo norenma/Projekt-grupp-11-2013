@@ -14,7 +14,6 @@ public class ChallengeReward extends AbstractReward {
 
 	public ChallengeReward(int score, String description, Optional<Image> image) {
 		super(score, description, image);
-		// TODO Auto-generated constructor stub
 	}
 
 }

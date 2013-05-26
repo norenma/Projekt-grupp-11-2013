@@ -25,7 +25,6 @@ public class TempDbReceipt implements Response {
 
 
 	public Object getObject() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	

@@ -10,7 +10,6 @@ public class QuizWalkGameReward extends AbstractReward {
 	public QuizWalkGameReward(int score, String description,
 			Optional<Image> image) {
 		super(score, description, image);
-		// TODO Auto-generated constructor stub
 	}
 
 }

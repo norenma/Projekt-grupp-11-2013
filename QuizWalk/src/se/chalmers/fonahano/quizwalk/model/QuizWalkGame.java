@@ -164,6 +164,55 @@ public class QuizWalkGame implements Game {
 		public Optional<QuizWalkGameReward> getReward() {
 			return reward;
 		}
+
+		@Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + ((challenges == null) ? 0 : challenges.hashCode());
+			result = prime * result + ((description == null) ? 0 : description.hashCode());
+			result = prime * result + ((image == null) ? 0 : image.hashCode());
+			result = prime * result + ((name == null) ? 0 : name.hashCode());
+			result = prime * result + ((reward == null) ? 0 : reward.hashCode());
+			return result;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			Builder other = (Builder) obj;
+			if (challenges == null) {
+				if (other.challenges != null)
+					return false;
+			} else if (!challenges.equals(other.challenges))
+				return false;
+			if (description == null) {
+				if (other.description != null)
+					return false;
+			} else if (!description.equals(other.description))
+				return false;
+			if (image == null) {
+				if (other.image != null)
+					return false;
+			} else if (!image.equals(other.image))
+				return false;
+			if (name == null) {
+				if (other.name != null)
+					return false;
+			} else if (!name.equals(other.name))
+				return false;
+			if (reward == null) {
+				if (other.reward != null)
+					return false;
+			} else if (!reward.equals(other.reward))
+				return false;
+			return true;
+		}
 	}
 
 	// Class variables //
@@ -488,6 +537,61 @@ public class QuizWalkGame implements Game {
 			}
 		}
 
+		return true;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((challengeStates == null) ? 0 : challengeStates.hashCode());
+		result = prime * result + ((challenges == null) ? 0 : challenges.hashCode());
+		result = prime * result + ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((image == null) ? 0 : image.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((reward == null) ? 0 : reward.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		QuizWalkGame other = (QuizWalkGame) obj;
+		if (challengeStates == null) {
+			if (other.challengeStates != null)
+				return false;
+		} else if (!challengeStates.equals(other.challengeStates))
+			return false;
+		if (challenges == null) {
+			if (other.challenges != null)
+				return false;
+		} else if (!challenges.equals(other.challenges))
+			return false;
+		if (description == null) {
+			if (other.description != null)
+				return false;
+		} else if (!description.equals(other.description))
+			return false;
+		if (image == null) {
+			if (other.image != null)
+				return false;
+		} else if (!image.equals(other.image))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (reward == null) {
+			if (other.reward != null)
+				return false;
+		} else if (!reward.equals(other.reward))
+			return false;
 		return true;
 	}
 

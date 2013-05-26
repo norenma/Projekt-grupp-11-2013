@@ -32,7 +32,6 @@ import com.google.common.base.Optional;
  * 
  */
 
-// TODO: javaDoc till alla metoder
 public abstract class ActivityHelper {
 
 	/**
