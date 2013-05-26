@@ -8,10 +8,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-import se.chalmers.fonahano.quizwalk.interfaces.Game;
 import se.chalmers.fonahano.quizwalk.interfaces.Image;
 import se.chalmers.fonahano.quizwalk.interfaces.LatitudeLongitude;
 
+import com.google.android.gms.games.Game;
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
 import com.j256.ormlite.field.DataType;
@@ -32,7 +32,7 @@ import com.j256.ormlite.table.DatabaseTable;
  * 
  */
 @DatabaseTable(tableName = "quizwalkgames")
-public class QuizWalkGame implements Game {
+public class QuizWalkGame {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -396,23 +396,6 @@ public class QuizWalkGame implements Game {
 		return ImmutableList.copyOf(challenges);
 	}
 
-	/**
-	 * Returns the {@link GameState} of the game.
-	 * 
-	 * @return {@link Game.GameState#RUNNING} if not all challenges have been
-	 *         interacted with. {@link GameState#GAME_OVER} otherwise.
-	 */
-	@Override
-	public GameState getGameState() {
-
-		GameState s = GameState.GAME_OVER;
-
-		for (Challenge c : challengeStates.keySet()) {
-			if (challengeStates.get(c).equals(ChallengeState.UNVISITED))
-				s = GameState.RUNNING;
-		}
-		return s;
-	}
 
 	/**
 	 * Sets a Challenge in this game to a particular {@link GameState}. If you
