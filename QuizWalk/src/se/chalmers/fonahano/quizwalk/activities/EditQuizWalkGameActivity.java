@@ -1,7 +1,6 @@
 package se.chalmers.fonahano.quizwalk.activities;
 
 import static se.chalmers.fonahano.quizwalk.model.Utilities.checkNotNullOrEmpty;
-import java.util.List;
 
 import se.chalmers.fonahano.quizwalk.R;
 import se.chalmers.fonahano.quizwalk.database.GameDatabaseManager;
@@ -9,11 +8,11 @@ import se.chalmers.fonahano.quizwalk.database.LocalDatabase;
 import se.chalmers.fonahano.quizwalk.interfaces.C;
 import se.chalmers.fonahano.quizwalk.interfaces.Image;
 import se.chalmers.fonahano.quizwalk.model.Challenge;
+import se.chalmers.fonahano.quizwalk.model.Challenge.Builder;
 import se.chalmers.fonahano.quizwalk.model.ChallengeLocation;
 import se.chalmers.fonahano.quizwalk.model.ChallengeReward;
 import se.chalmers.fonahano.quizwalk.model.QuizWalkGame;
 import se.chalmers.fonahano.quizwalk.model.StateSingleton;
-import se.chalmers.fonahano.quizwalk.model.StringAnswer;
 import se.chalmers.fonahano.quizwalk.model.StringQuestion;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -22,13 +21,10 @@ import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
@@ -41,7 +37,7 @@ import com.google.common.base.Optional;
  * Class to show a map and let user insert questions into a custom
  * quizwalk-game.
  * 
- * @author Markus
+ * @author Markus Andersson Norén
  * 
  */
 public class EditQuizWalkGameActivity extends Activity {
@@ -49,6 +45,7 @@ public class EditQuizWalkGameActivity extends Activity {
 	private QuizWalkGame.Builder builder;
 	private GoogleMap map;
 	private LatLng activeLocation;
+	
 
 	/***
 	 * 
@@ -73,31 +70,7 @@ public class EditQuizWalkGameActivity extends Activity {
 		map.setMyLocationEnabled(true);
 		map.getUiSettings().setZoomControlsEnabled(false);
 
-		map.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
-
-			/***
-			 * Listener that responds to Longpresses on the map, to add a
-			 * Question. When pressed, it shows a fragment, giving the user a
-			 * form to create a challenge.
-			 * 
-			 */
-			@Override
-			public void onMapLongClick(LatLng arg0) {
-				map.addMarker(new MarkerOptions().position(arg0));
-
-				FragmentManager fragmentManager = getFragmentManager();
-				FragmentTransaction fragmentTransaction = fragmentManager
-						.beginTransaction();
-
-				CreateQuestionFragment cqa = new CreateQuestionFragment();
-				fragmentTransaction.add(R.id.fragment_container, cqa,
-						"question");
-				fragmentTransaction.commit();
-
-				activeLocation = arg0;
-
-			}
-		});
+		setupMap();
 
 		// Retrieves the included QuizWalk if there is one.
 		if (this.getIntent().getAction()
@@ -118,6 +91,38 @@ public class EditQuizWalkGameActivity extends Activity {
 		toast.show();
 	}
 
+	/**
+	 * Sets up the map, and adds a click-listener
+	 */
+	private void setupMap() {
+		map.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
+
+			/***
+			 * Listener that responds to Long presses on the map, to add a
+			 * Question. When pressed, it shows a fragment, giving the user a
+			 * form to create a challenge.
+			 * 
+			 */
+			@Override
+			public void onMapLongClick(LatLng arg0) {
+				map.addMarker(new MarkerOptions().position(arg0));
+
+				// Creates and shows a dialog asking user for question details
+				FragmentManager fragmentManager = getFragmentManager();
+				FragmentTransaction fragmentTransaction = fragmentManager
+						.beginTransaction();
+
+				CreateQuestionFragment cqa = new CreateQuestionFragment();
+				fragmentTransaction.add(R.id.fragment_container, cqa,
+						"question");
+				fragmentTransaction.commit();
+
+				activeLocation = arg0;
+
+			}
+		});
+	}
+
 	/***
 	 * Creates a challenge out of collected data and adds it to the game. Called
 	 * when CreateQuestion-button is pushed.
@@ -129,21 +134,9 @@ public class EditQuizWalkGameActivity extends Activity {
 
 		try {
 			// Gets question and answers
-			build.question(new StringQuestion(checkNotNullOrEmpty(((EditText) this
-							.findViewById(R.id.questionText)).getText()
-							.toString(),"")));
-
-			build.correctAnswer(checkNotNullOrEmpty(((EditText) this
-					.findViewById(R.id.answer1)).getText().toString(), ""));
-			build.correctAnswer(checkNotNullOrEmpty(((EditText) this
-					.findViewById(R.id.answer2)).getText().toString(), ""));
-			build.correctAnswer(checkNotNullOrEmpty(((EditText) this
-					.findViewById(R.id.answer3)).getText().toString(), ""));
-			build.correctAnswer(checkNotNullOrEmpty(((EditText) this
-					.findViewById(R.id.answer4)).getText().toString(), ""));
-			build.challengeReward(new ChallengeReward(10, " ", Optional
-					.<Image> absent()));
+			addQuestionsAndAnswers(build);
 		} catch (IllegalArgumentException e) {
+			//error-message if any empty input
 			findViewById(R.id.errorMessage).setAlpha(1);
 			e.printStackTrace();
 			return;
@@ -177,6 +170,27 @@ public class EditQuizWalkGameActivity extends Activity {
 	}
 
 	/**
+	 * Gets question with answers from input
+	 * @param build adds question and answers to this build. 
+	 */
+	private void addQuestionsAndAnswers(Builder build) throws IllegalArgumentException {
+		build.question(new StringQuestion(checkNotNullOrEmpty(((EditText) this
+				.findViewById(R.id.questionText)).getText()
+				.toString(),"")));
+		build.correctAnswer(checkNotNullOrEmpty(((EditText) this
+				.findViewById(R.id.answer1)).getText().toString(), ""));
+		build.correctAnswer(checkNotNullOrEmpty(((EditText) this
+				.findViewById(R.id.answer2)).getText().toString(), ""));
+		build.correctAnswer(checkNotNullOrEmpty(((EditText) this
+				.findViewById(R.id.answer3)).getText().toString(), ""));
+		build.correctAnswer(checkNotNullOrEmpty(((EditText) this
+				.findViewById(R.id.answer4)).getText().toString(), ""));
+		build.challengeReward(new ChallengeReward(10, " ", Optional
+		.<Image> absent()));
+		
+	}
+
+	/**
 	 * Creates a quizwalk, when the user presses a button.
 	 * 
 	 * @param view
@@ -186,7 +200,7 @@ public class EditQuizWalkGameActivity extends Activity {
 		AlertDialog.Builder alert = new AlertDialog.Builder(this);
 		alert.setMessage("Name your quiz:");
 
-		// Set an EditText view to get user input
+		// Set an EditText view to get user input of the quizwalk name 
 		final EditText input = new EditText(this);
 		alert.setView(input);
 
@@ -209,6 +223,7 @@ public class EditQuizWalkGameActivity extends Activity {
 								EditQuizWalkGameActivity.this,
 								"QuizWalk created!", Toast.LENGTH_LONG);
 						toast.show();
+						// Sends user back to the menu. 
 						startActivity(new Intent(EditQuizWalkGameActivity.this,
 								GameMenuActivity.class));
 					}
@@ -220,8 +235,6 @@ public class EditQuizWalkGameActivity extends Activity {
 						return;
 					}
 				});
-
 		alert.show();
-
 	}
 }

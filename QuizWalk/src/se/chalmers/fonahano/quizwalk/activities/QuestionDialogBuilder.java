@@ -22,6 +22,10 @@ import com.google.gson.Gson;
  * 
  */
 public class QuestionDialogBuilder extends AlertDialog.Builder {
+	
+	
+	static final String ERRORMESSAGE = "Could not find correct answer";
+	
 	private Challenge challenge;
 
 	private class ChallengeOnClickListener implements
@@ -41,7 +45,6 @@ public class QuestionDialogBuilder extends AlertDialog.Builder {
 		@Override
 		public void onClick(DialogInterface dialog, int which) {
 			if (correctAnswerIndex == which) {
-				// TODO: Change to static string resources
 				StateSingleton.INSTANCE.getActiveQuizWalk().get().setChallengeState(challenge, ChallengeState.COMPLETED);
 				showDialog(QuestionDialogBuilder.this.getContext().getResources().getString(R.string.correct_answer_prompt));
 			} else {
@@ -84,9 +87,8 @@ public class QuestionDialogBuilder extends AlertDialog.Builder {
 
 		// Error handling if broken Challenge-object was retrieved.
 		if (correctAnswerIndex < 0) {
-			String errorMsg = "Could not find correct answer";
-			Log.e(getClass().getName(), errorMsg);
-			throw new RuntimeException(errorMsg);
+			Log.e(getClass().getName(), ERRORMESSAGE);
+			throw new RuntimeException(ERRORMESSAGE);
 		}
 		String[] itemsArray = listOfAnswers.toArray(new String[listOfAnswers
 				.size()]);

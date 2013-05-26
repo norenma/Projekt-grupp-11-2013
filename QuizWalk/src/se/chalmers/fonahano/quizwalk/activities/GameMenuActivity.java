@@ -2,17 +2,11 @@ package se.chalmers.fonahano.quizwalk.activities;
 
 import se.chalmers.fonahano.quizwalk.R;
 import se.chalmers.fonahano.quizwalk.database.GameDatabaseManager;
-import se.chalmers.fonahano.quizwalk.database.LocalDatabase;
 import se.chalmers.fonahano.quizwalk.interfaces.C;
-import se.chalmers.fonahano.quizwalk.model.QuizWalkGame;
-import temp.debug.tortal.DebugFactory;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -20,9 +14,10 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.google.common.base.Optional;
 
 public class GameMenuActivity extends Activity {
+	
+	final static String NOQUIZWALKS = "There's no QuizWalks available";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +46,7 @@ public class GameMenuActivity extends Activity {
 		if (GameDatabaseManager.getInstance().getAllQuizWalkGame().size() >= 1) {
 			startActivity(new Intent(this, QuizWalkActivity.class));
 		} else {
-			Toast.makeText(this, "There's no QuizWalks available",
+			Toast.makeText(this, NOQUIZWALKS,
 					Toast.LENGTH_LONG).show();
 		}
 	}

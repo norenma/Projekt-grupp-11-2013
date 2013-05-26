@@ -8,16 +8,14 @@ import se.chalmers.fonahano.quizwalk.interfaces.C;
 import se.chalmers.fonahano.quizwalk.model.Challenge;
 import se.chalmers.fonahano.quizwalk.model.QuizWalkGame;
 import se.chalmers.fonahano.quizwalk.model.StateSingleton;
-import temp.debug.tortal.DebugFactory;
 import android.os.Bundle;
 import android.app.Activity;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-
+//TODO javadoc 
 public class CompletedQuizWalkActivity extends Activity {
 
 	QuizWalkGame quizWalkGame;
@@ -27,7 +25,6 @@ public class CompletedQuizWalkActivity extends Activity {
 		if(getIntent().getAction().equals(C.Intent.Action.STATE_CHANGED_COMPLETED_QUIZWALK)){
 			quizWalkGame = StateSingleton.INSTANCE.getActiveQuizWalk().get();
 		}
-		
 		// remove actionbar
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -35,6 +32,7 @@ public class CompletedQuizWalkActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_completed_quiz_walk);
 		
+		//shows gained score on the screen
 		TextView points=(TextView) findViewById(R.id.points);
 		points.setText(quizWalkGame.getCurrentScore() +"");
 		fillListView(quizWalkGame);

@@ -16,7 +16,6 @@ import se.chalmers.fonahano.quizwalk.model.QuizWalkGame;
 import se.chalmers.fonahano.quizwalk.model.Utilities;
 import android.content.Context;
 import android.location.Location;
-import android.util.Log;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -31,6 +30,8 @@ import com.google.common.base.Optional;
 
 // TODO: javaDoc till alla metoder
 public abstract class ActivityHelper {
+	
+	final static String QUIZWALKGAMES_EMPTY = "the list of QuizWalkGames is empty";
 
 	/**
 	 * Calculates the distance between multiple positions
@@ -41,6 +42,7 @@ public abstract class ActivityHelper {
 				firstPos.getLongitude(), secondPos.getLatitude(),
 				secondPos.getLongitude(), result);
 	}
+
 
 	/**
 	 * Calculates distance between 2 positions
@@ -226,8 +228,8 @@ public abstract class ActivityHelper {
 			List<QuizWalkGame> quizWalkGames, Context cxt) {
 		checkNotNull(googleMap);
 		Utilities.checkNotNullOrEmpty(quizWalkGames,
-				"the list of QuizWalkGames is empty");
-		List<Marker> markers = new ArrayList();
+				QUIZWALKGAMES_EMPTY);
+		List<Marker> markers = new ArrayList<Marker>();
 
 		Iterator<QuizWalkGame> qIt = quizWalkGames.iterator();
 
