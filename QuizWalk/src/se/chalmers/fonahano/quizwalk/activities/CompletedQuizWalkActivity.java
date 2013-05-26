@@ -15,7 +15,12 @@ import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-//TODO javadoc 
+
+/***
+ * A class to summary the result of a players QuizWalkGame. 
+ * 
+ * @author Johanna
+ */
 public class CompletedQuizWalkActivity extends Activity {
 
 	QuizWalkGame quizWalkGame;
@@ -25,18 +30,25 @@ public class CompletedQuizWalkActivity extends Activity {
 		if(getIntent().getAction().equals(C.Intent.Action.STATE_CHANGED_COMPLETED_QUIZWALK)){
 			quizWalkGame = StateSingleton.INSTANCE.getActiveQuizWalk().get();
 		}
-		// remove actionbar
+		/**
+		 * Removes the actionbar. 
+		 */
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_completed_quiz_walk);
 		
-		//shows gained score on the screen
+		/**
+		 * Shows the gained score on the screen. 
+		 */
 		TextView points=(TextView) findViewById(R.id.points);
 		points.setText(quizWalkGame.getCurrentScore() +"");
 		fillListView(quizWalkGame);
 	}
+	/**
+	 * Fill the ListView with all of the challenges in the current QuizWalkGame. 
+	 */
 	
 	public void fillListView(QuizWalkGame game){
 		List<Challenge> challenges = game.getChallenges();
