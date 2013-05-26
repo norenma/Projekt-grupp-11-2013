@@ -16,8 +16,18 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 
-public class SettingsActivity extends Activity {
+/***
+ * A settingsscreen that represents all the users different settings. 
+ * 
+ * @author Johanna
+ */
 
+public class SettingsActivity extends Activity {
+	
+	/**
+	 * Creates SettingsActivity and shows the layout. 
+	 * Removes actionbar. 
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// remove actionbar
@@ -27,19 +37,19 @@ public class SettingsActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_settings);
 	}
-
+	/**
+	 * Takes the user back to the loginscreen. 
+	 */
 	public void onButtonClick_logout(View v) {
 		startActivity(new Intent(this, LoginActivity.class));
 	}
-
-	public void onButtonClick_help(View v) {
-		startActivity(new Intent(this, CompletedQuizWalkActivity.class));
-	}
-
+	
 	public void onButtonClick_about(View v) {
 		startActivity(new Intent(this, CompletedQuizWalkActivity.class));
 	}
-
+	/**
+	 * Give the user possibility to change user. 
+	 */
 	public void onButtonClick_save(View v) {
 		GameDatabaseManager.init(this);
 		LocalDatabase gdm = GameDatabaseManager.getInstance();

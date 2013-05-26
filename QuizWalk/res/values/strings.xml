@@ -68,5 +68,8 @@
  	<string name="could_not_find_answer">"Could not find correct answer</string>   
  	<string name="saved">Saved!</string>
  	<string name="ok">OK</string>
+    <string name="could_not_find_answer">"Could not find correct answer</string>
+    <string name="saved">Saved!</string>
+    <string name="title_activity_about">AboutActivity</string>
 
 </resources>

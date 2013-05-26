@@ -78,7 +78,6 @@
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyDRPZc9dBBl_SV-Rx4P_3N8WZmUIAsWHr4" />
 
-        
         <activity
             android:name="se.chalmers.fonahano.quizwalk.activities.RegisterUserActivity"
             android:label="@string/title_activity_register_user"
@@ -105,8 +104,12 @@
         </activity>
         <activity
             android:name="se.chalmers.fonahano.quizwalk.activities.SettingsActivity"
-            android:label="@string/title_activity_settings" 
-            android:screenOrientation="portrait">
+            android:label="@string/title_activity_settings"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="se.chalmers.fonahano.quizwalk.activities.AboutActivity"
+            android:label="@string/title_activity_about" >
         </activity>
     </application>
 
