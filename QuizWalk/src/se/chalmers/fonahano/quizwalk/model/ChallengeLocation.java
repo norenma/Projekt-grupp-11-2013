@@ -10,7 +10,6 @@ import com.google.common.base.Optional;
  * locations can populate the {@link StateSingleton} and constitute {@link Challenge}s
  */
 
-// TODO: Class name might(read will) interfere with com.android.location
 public class ChallengeLocation extends Coordinates {
 	private static final long serialVersionUID = 1L;
 

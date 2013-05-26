@@ -5,7 +5,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-import se.chalmers.fonahano.quizwalk.C.Intent.Action;
+import se.chalmers.fonahano.quizwalk.interfaces.C.Intent.Action;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;

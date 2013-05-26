@@ -1,4 +1,4 @@
-package se.chalmers.fonahano.quizwalk;
+package se.chalmers.fonahano.quizwalk.interfaces;
 
 /**
  * Global identifiers here. Constants, Keys, etc.
@@ -34,7 +34,7 @@ public interface C {
 			/**
 			 * The radius of which, if entered, the marker proximity alert will be fired
 			 */
-			public final static int MARKER_PROXIMITY_RADIUS = 10;
+			public final static int MARKER_PROXIMITY_RADIUS = 50;
 			
 		}
 
