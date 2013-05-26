@@ -20,6 +20,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -27,6 +28,7 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
@@ -37,7 +39,7 @@ import com.google.common.base.Optional;
  * Class to show a map and let user insert questions into a custom
  * quizwalk-game.
  * 
- * @author Markus Andersson NorŽn
+ * @author Markus Andersson Norï¿½n
  * 
  */
 public class EditQuizWalkGameActivity extends Activity {
@@ -45,7 +47,6 @@ public class EditQuizWalkGameActivity extends Activity {
 	private QuizWalkGame.Builder builder;
 	private GoogleMap map;
 	private LatLng activeLocation;
-	
 
 	/***
 	 * 
@@ -58,27 +59,28 @@ public class EditQuizWalkGameActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// remove actionbar
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-				WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_edit_game);
 
-		map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map))
-				.getMap();
+		map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
 
+		//checks if gps is turned on
+		if (!((LocationManager) getSystemService(LOCATION_SERVICE)).isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+			ActivityHelper.showEnableGPSDialog(this);
+		}
 		// shows where user is now.
 		map.setMyLocationEnabled(true);
 		map.getUiSettings().setZoomControlsEnabled(false);
 
+		map.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(map.getMyLocation().getLatitude(), map.getMyLocation().getLongitude())));
 		setupMap();
 
 		// Retrieves the included QuizWalk if there is one.
-		if (this.getIntent().getAction()
-				.equals(C.Intent.Action.EDIT_NEW_QUIZ_WALK)) {
+		if (this.getIntent().getAction().equals(C.Intent.Action.EDIT_NEW_QUIZ_WALK)) {
 			builder = new QuizWalkGame.Builder();
 		} else {
-			QuizWalkGame qwg = StateSingleton.INSTANCE.getActiveQuizWalk()
-					.get();
+			QuizWalkGame qwg = StateSingleton.INSTANCE.getActiveQuizWalk().get();
 			ActivityHelper.populateMap(map, qwg, this);
 			builder = new QuizWalkGame.Builder(qwg);
 		}
@@ -86,8 +88,7 @@ public class EditQuizWalkGameActivity extends Activity {
 		// Small text on the screen to let the user know how to input a new
 		// question
 		// to the game.
-		Toast toast = Toast.makeText(this,
-				"Longpress a location the add a question", Toast.LENGTH_LONG);
+		Toast toast = Toast.makeText(this, "Longpress a location the add a question", Toast.LENGTH_LONG);
 		toast.show();
 	}
 
@@ -109,12 +110,10 @@ public class EditQuizWalkGameActivity extends Activity {
 
 				// Creates and shows a dialog asking user for question details
 				FragmentManager fragmentManager = getFragmentManager();
-				FragmentTransaction fragmentTransaction = fragmentManager
-						.beginTransaction();
+				FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
 				CreateQuestionFragment cqa = new CreateQuestionFragment();
-				fragmentTransaction.add(R.id.fragment_container, cqa,
-						"question");
+				fragmentTransaction.add(R.id.fragment_container, cqa, "question");
 				fragmentTransaction.commit();
 
 				activeLocation = arg0;
@@ -136,16 +135,14 @@ public class EditQuizWalkGameActivity extends Activity {
 			// Gets question and answers
 			addQuestionsAndAnswers(build);
 		} catch (IllegalArgumentException e) {
-			//error-message if any empty input
+			// error-message if any empty input
 			findViewById(R.id.errorMessage).setAlpha(1);
 			e.printStackTrace();
 			return;
 		}
 
 		// Gets the coordinates
-		ChallengeLocation location = new ChallengeLocation(
-				activeLocation.latitude, activeLocation.longitude, " ",
-				Optional.<Image> absent());
+		ChallengeLocation location = new ChallengeLocation(activeLocation.latitude, activeLocation.longitude, " ", Optional.<Image> absent());
 		build.location(location);
 
 		// Builds the challenge
@@ -156,38 +153,31 @@ public class EditQuizWalkGameActivity extends Activity {
 
 		// Gets back to the map-view
 		FragmentManager fragmentManager = getFragmentManager();
-		FragmentTransaction fragmentTransaction = fragmentManager
-				.beginTransaction();
+		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
 		fragmentTransaction.hide(fragmentManager.findFragmentByTag("question"));
 		fragmentTransaction.commit();
 
 		// Small text on the screen to let the user know that the Question is
 		// created
-		Toast toast = Toast.makeText(this, "Question Created!",
-				Toast.LENGTH_SHORT);
+		Toast toast = Toast.makeText(this, "Question Created!", Toast.LENGTH_SHORT);
 		toast.show();
 	}
 
 	/**
 	 * Gets question with answers from input
-	 * @param build adds question and answers to this build. 
+	 * 
+	 * @param build
+	 *            adds question and answers to this build.
 	 */
 	private void addQuestionsAndAnswers(Builder build) throws IllegalArgumentException {
-		build.question(new StringQuestion(checkNotNullOrEmpty(((EditText) this
-				.findViewById(R.id.questionText)).getText()
-				.toString(),"")));
-		build.correctAnswer(checkNotNullOrEmpty(((EditText) this
-				.findViewById(R.id.answer1)).getText().toString(), ""));
-		build.correctAnswer(checkNotNullOrEmpty(((EditText) this
-				.findViewById(R.id.answer2)).getText().toString(), ""));
-		build.correctAnswer(checkNotNullOrEmpty(((EditText) this
-				.findViewById(R.id.answer3)).getText().toString(), ""));
-		build.correctAnswer(checkNotNullOrEmpty(((EditText) this
-				.findViewById(R.id.answer4)).getText().toString(), ""));
-		build.challengeReward(new ChallengeReward(10, " ", Optional
-		.<Image> absent()));
-		
+		build.question(new StringQuestion(checkNotNullOrEmpty(((EditText) this.findViewById(R.id.questionText)).getText().toString(), "")));
+		build.correctAnswer(checkNotNullOrEmpty(((EditText) this.findViewById(R.id.answer1)).getText().toString(), ""));
+		build.correctAnswer(checkNotNullOrEmpty(((EditText) this.findViewById(R.id.answer2)).getText().toString(), ""));
+		build.correctAnswer(checkNotNullOrEmpty(((EditText) this.findViewById(R.id.answer3)).getText().toString(), ""));
+		build.correctAnswer(checkNotNullOrEmpty(((EditText) this.findViewById(R.id.answer4)).getText().toString(), ""));
+		build.challengeReward(new ChallengeReward(10, " ", Optional.<Image> absent()));
+
 	}
 
 	/**
@@ -200,41 +190,36 @@ public class EditQuizWalkGameActivity extends Activity {
 		AlertDialog.Builder alert = new AlertDialog.Builder(this);
 		alert.setMessage("Name your quiz:");
 
-		// Set an EditText view to get user input of the quizwalk name 
+		// Set an EditText view to get user input of the quizwalk name
 		final EditText input = new EditText(this);
 		alert.setView(input);
 
-		alert.setPositiveButton("Create!",
-				new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int whichButton) {
-						String value = input.getText().toString();
-						builder.name(value);
+		alert.setPositiveButton("Create!", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int whichButton) {
+				String value = input.getText().toString();
+				builder.name(value);
 
-						// Builds quizwalk and saves to database
-						GameDatabaseManager.init(EditQuizWalkGameActivity.this);
-						LocalDatabase gdm = GameDatabaseManager.getInstance();
-						gdm.addQuizWalkGame(builder.build());
+				// Builds quizwalk and saves to database
+				GameDatabaseManager.init(EditQuizWalkGameActivity.this);
+				LocalDatabase gdm = GameDatabaseManager.getInstance();
+				gdm.addQuizWalkGame(builder.build());
 
-						// Small text on the screen to let the user know how to
-						// input a new
-						// question
-						// to the game.
-						Toast toast = Toast.makeText(
-								EditQuizWalkGameActivity.this,
-								"QuizWalk created!", Toast.LENGTH_LONG);
-						toast.show();
-						// Sends user back to the menu. 
-						startActivity(new Intent(EditQuizWalkGameActivity.this,
-								GameMenuActivity.class));
-					}
-				});
+				// Small text on the screen to let the user know how to
+				// input a new
+				// question
+				// to the game.
+				Toast toast = Toast.makeText(EditQuizWalkGameActivity.this, "QuizWalk created!", Toast.LENGTH_LONG);
+				toast.show();
+				// Sends user back to the menu.
+				startActivity(new Intent(EditQuizWalkGameActivity.this, GameMenuActivity.class));
+			}
+		});
 
-		alert.setNegativeButton("Cancel",
-				new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int whichButton) {
-						return;
-					}
-				});
+		alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int whichButton) {
+				return;
+			}
+		});
 		alert.show();
 	}
 }

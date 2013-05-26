@@ -14,8 +14,12 @@ import se.chalmers.fonahano.quizwalk.model.ChallengeLocation;
 import se.chalmers.fonahano.quizwalk.model.Coordinates;
 import se.chalmers.fonahano.quizwalk.model.QuizWalkGame;
 import se.chalmers.fonahano.quizwalk.model.Utilities;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.location.Location;
+import android.provider.Settings;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -256,6 +260,29 @@ public abstract class ActivityHelper {
 			}
 		}
 		return Optional.<QuizWalkGame> absent();
+	}
+	
+	/**
+	 * Displays a popup prompting the user to enable the gps and then, if the
+	 * user choses to, takes the user to the android settings interface
+	 */
+	public static void showEnableGPSDialog(final Context cxt) {
+
+		AlertDialog.Builder ab = new AlertDialog.Builder(cxt);
+		String[] choice = { "Enable GPS", "Exit" };
+		ab.setItems(choice, new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface d, int choice) {
+				if (choice == 0) {
+					Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+					cxt.startActivity(intent);
+				}
+
+			}
+		});
+
+		ab.setTitle("Your GPS is disabled, it must be enabled to play to game");
+
+		ab.show();
 	}
 
 }

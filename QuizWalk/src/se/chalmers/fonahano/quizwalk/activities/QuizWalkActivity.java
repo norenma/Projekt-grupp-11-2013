@@ -49,10 +49,6 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 	private LocalDatabase db;
 	private QuizWalkGame q;
 	
-	private static final long MINIMUM_DISTANCECHANGE_FOR_UPDATE = 1; // in Meters
-	private static final long MINIMUM_TIME_BETWEEN_UPDATE = 1000; // in Milliseconds
-
-	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState){ 
@@ -83,7 +79,7 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 		LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
 		
 		if (!service.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-			showEnableGPSDialog();
+			ActivityHelper.showEnableGPSDialog(this);
 		}
 
 		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -182,7 +178,7 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 
 	@Override
 	public void onProviderDisabled(String provider) {
-		showEnableGPSDialog();
+		ActivityHelper.showEnableGPSDialog(this);
 	}
 
 	@Override
@@ -197,28 +193,7 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 
 	}
 
-	/**
-	 * Displays a popup prompting the user to enable the gps and then, if the
-	 * user choses to, takes the user to the android settings interface
-	 */
-	public void showEnableGPSDialog() {
-
-		AlertDialog.Builder ab = new AlertDialog.Builder(this);
-		String[] choice = { "Enable GPS", "Exit" };
-		ab.setItems(choice, new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface d, int choice) {
-				if (choice == 0) {
-					Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-					startActivity(intent);
-				}
-
-			}
-		});
-
-		ab.setTitle("Your GPS is disabled, it must be enabled to play to game");
-
-		ab.show();
-	}
+	
 
 	public void showQuizWalkStartDialog(final QuizWalkGame q) {
 		AlertDialog.Builder ab = new AlertDialog.Builder(this);
