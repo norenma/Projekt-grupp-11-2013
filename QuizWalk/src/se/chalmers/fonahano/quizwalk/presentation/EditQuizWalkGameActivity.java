@@ -1,5 +1,6 @@
 package se.chalmers.fonahano.quizwalk.presentation;
 
+import static com.google.common.base.Preconditions.checkNotNull;
 import static se.chalmers.fonahano.quizwalk.model.Utilities.checkNotNullOrEmpty;
 import se.chalmers.fonahano.quizwalk.R;
 import se.chalmers.fonahano.quizwalk.database.GameDatabaseManager;
@@ -58,18 +59,6 @@ public class EditQuizWalkGameActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_edit_game);
 
-		// checks if gps is turned on
-		if (!((LocationManager) getSystemService(LOCATION_SERVICE))
-				.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-			ActivityHelper.showEnableGPSDialog(this);
-		}
-		// shows where user is now.
-		map.setMyLocationEnabled(true);
-		map.getUiSettings().setZoomControlsEnabled(false);
-
-		// map.moveCamera(CameraUpdateFactory.newLatLng(new
-		// LatLng(map.getMyLocation().getLatitude(),
-		// map.getMyLocation().getLongitude())));
 		setupMap();
 
 		// Retrieves the included QuizWalk if there is one.
@@ -202,11 +191,11 @@ public class EditQuizWalkGameActivity extends Activity {
 				.findViewById(R.id.questionText)).getText().toString(), "")));
 		build.correctAnswer(checkNotNullOrEmpty(((EditText) this
 				.findViewById(R.id.answer1)).getText().toString(), ""));
-		build.correctAnswer(checkNotNullOrEmpty(((EditText) this
-				.findViewById(R.id.answer2)).getText().toString(), ""));
-		build.correctAnswer(checkNotNullOrEmpty(((EditText) this
+		build.addIncorrectAnswer((checkNotNullOrEmpty(((EditText) this
+				.findViewById(R.id.answer2)).getText().toString(), "")));
+		build.addIncorrectAnswer(checkNotNullOrEmpty(((EditText) this
 				.findViewById(R.id.answer3)).getText().toString(), ""));
-		build.correctAnswer(checkNotNullOrEmpty(((EditText) this
+		build.addIncorrectAnswer(checkNotNullOrEmpty(((EditText) this
 				.findViewById(R.id.answer4)).getText().toString(), ""));
 		build.challengeReward(new ChallengeReward(10, " ", Optional
 				.<Image> absent()));
@@ -227,12 +216,23 @@ public class EditQuizWalkGameActivity extends Activity {
 		alert.setView(input);
 
 		alert.setPositiveButton(
-				getResources().getString(R.string.create_question),
+				getResources().getString(R.string.create_quizwalk),
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int whichButton) {
-						String value = input.getText().toString();
-						builder.name(value);
+						String value;
+							try {
+								value = checkNotNull(input.getText().toString());
+							} catch (IllegalArgumentException e) {
+								Toast toast = Toast.makeText(
+										EditQuizWalkGameActivity.this, getResources()
+												.getString(R.string.enter_a_name),
+										Toast.LENGTH_LONG);
+								toast.show();
+								e.printStackTrace();
+								return;
+							}
 
+						builder.name(value);
 						// Builds quizwalk and saves to database
 						GameDatabaseManager.init(EditQuizWalkGameActivity.this);
 						LocalDatabase gdm = GameDatabaseManager.getInstance();

@@ -49,16 +49,6 @@
         </EditText>
 
         <TextView
-            android:id="@+id/errorMessage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/Password"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="200dp"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="@color/Red" />
-
-        <TextView
             android:id="@+id/registerUserText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -70,6 +60,17 @@
             android:onClick="onClickRegisterUser"
             android:text="@string/register"
             android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/errorMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignTop="@+id/registerUserText"
+            android:layout_marginLeft="134dp"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/Red" />
+
     </RelativeLayout>
 
     <ImageView

@@ -2,11 +2,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/LowaplhaPurple"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@drawable/blurryquiz2"
     tools:context=".GameMenuActivity" >
 
     <Button
@@ -55,9 +55,10 @@
         android:id="@+id/button4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/button1"
+        android:layout_alignLeft="@+id/button2"
+        android:layout_alignRight="@+id/button2"
+        android:layout_below="@+id/button2"
+        android:layout_marginTop="22dp"
         android:background="@color/black_overlay"
         android:onClick="onButtonClick_Settings"
         android:text="@string/menuButton_Settings"
@@ -65,15 +66,13 @@
         android:textSize="26sp"
         android:textStyle="bold|italic" />
 
-    <Button
-        android:id="@+id/save_settings"
+    <ImageView
+        android:id="@+id/imageView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button4"
-        android:layout_alignRight="@+id/button4"
-        android:layout_below="@+id/button4"
-        android:layout_marginTop="28dp"
-        android:text="Button" 
-        android:onClick="testCompletedQW"/>
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="76dp"
+        android:src="@drawable/quiz_walk_big" />
 
 </RelativeLayout>

@@ -1,5 +1,7 @@
 package se.chalmers.fonahano.quizwalk.presentation;
 
+import com.google.android.gms.common.GooglePlayServicesUtil;
+
 import se.chalmers.fonahano.quizwalk.R;
 import se.chalmers.fonahano.quizwalk.database.GameDatabaseManager;
 import se.chalmers.fonahano.quizwalk.database.LocalDatabase;
@@ -24,13 +26,14 @@ public class LauncherActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
 		// remove title
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.activity_launcher);
 
-		// deleteDatabase(C.Data.DATABASE_NAME);
+		//deleteDatabase(C.Data.DATABASE_NAME);
 		GameDatabaseManager.init(this);
 
 		LocalDatabase gdm = GameDatabaseManager.getInstance();
