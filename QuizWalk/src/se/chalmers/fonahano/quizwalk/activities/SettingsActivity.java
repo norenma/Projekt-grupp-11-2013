@@ -17,7 +17,7 @@ import android.view.WindowManager;
 import android.widget.EditText;
 
 /***
- * Settingsscreen that represents all the users different settings. 
+ * A settingsscreen that represents all the users different settings. 
  * 
  * @author Johanna
  */
@@ -42,9 +42,6 @@ public class SettingsActivity extends Activity {
 	 */
 	public void onButtonClick_logout(View v) {
 		startActivity(new Intent(this, LoginActivity.class));
-	}
-	public void onButtonClick_help(View v) {
-		startActivity(new Intent(this, CompletedQuizWalkActivity.class));
 	}
 	
 	public void onButtonClick_about(View v) {
