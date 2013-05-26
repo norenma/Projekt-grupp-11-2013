@@ -2,8 +2,6 @@ package se.chalmers.fonahano.quizwalk.interfaces;
 
 import java.util.ArrayList;
 
-import se.chalmers.fonahano.quizwalk.model.AbstractReward;
-
 public interface User {
 
 	public abstract String getUserName();
@@ -11,7 +9,7 @@ public interface User {
 	/**
 	 * @return the listOfUserRewards
 	 */
-	public abstract ArrayList<? extends AbstractReward> getListOfUserRewards();
+	public abstract ArrayList<? extends Reward> getListOfUserRewards();
 
 	/**
 	 * @return the email

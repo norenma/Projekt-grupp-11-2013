@@ -1,8 +1,8 @@
 package temp.activities;
 
 import se.chalmers.fonahano.quizwalk.R;
-import se.chalmers.fonahano.quizwalk.activities.QuizWalkActivity;
-import se.chalmers.fonahano.quizwalk.interfaces.C.Intent.Extra;
+import se.chalmers.fonahano.quizwalk.presentation.QuizWalkActivity;
+import se.chalmers.fonahano.quizwalk.presentation.C.Intent.Extra;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
