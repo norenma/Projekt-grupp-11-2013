@@ -1,6 +1,6 @@
-package se.chalmers.fonahano.quizwalk.activities;
+package se.chalmers.fonahano.quizwalk.presentation;
 
-import se.chalmers.fonahano.quizwalk.activities.QuizWalkActivity;
+import se.chalmers.fonahano.quizwalk.presentation.QuizWalkActivity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;

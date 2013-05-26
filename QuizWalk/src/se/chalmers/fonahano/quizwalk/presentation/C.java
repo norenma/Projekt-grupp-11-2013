@@ -1,4 +1,4 @@
-package se.chalmers.fonahano.quizwalk.interfaces;
+package se.chalmers.fonahano.quizwalk.presentation;
 
 /**
  * Global identifiers here. Constants, Keys, etc.

@@ -36,40 +36,40 @@
         <uses-library android:name="android.test.runner" />
 
         <activity
-            android:name="se.chalmers.fonahano.quizwalk.activities.LoginActivity"
+            android:name="se.chalmers.fonahano.quizwalk.presentation.LoginActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="se.chalmers.fonahano.quizwalk.activities.QuizWalkActivity"
+            android:name="se.chalmers.fonahano.quizwalk.presentation.QuizWalkActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="se.chalmers.fonahano.quizwalk.activities.GameMenuActivity"
+            android:name="se.chalmers.fonahano.quizwalk.presentation.GameMenuActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="temp.activities.TemporaryProximityActivity"
             android:label="@string/title_activity_temporary_proximity"
-            android:parentActivityName="se.chalmers.fonahano.quizwalk.activities.QuizWalkActivity"
+            android:parentActivityName="se.chalmers.fonahano.quizwalk.presentation.QuizWalkActivity"
             android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="se.chalmers.it12.tda367.vt13.grp11.quizwalk.activities.QuizWalkActivity" />
         </activity>
         <activity
-            android:name="se.chalmers.fonahano.quizwalk.activities.QuizWalkManagerActivity"
+            android:name="se.chalmers.fonahano.quizwalk.presentation.QuizWalkManagerActivity"
             android:label="@string/title_activity_quiz_walk_manager"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="se.chalmers.fonahano.quizwalk.activities.EditQuizWalkGameActivity"
+            android:name="se.chalmers.fonahano.quizwalk.presentation.EditQuizWalkGameActivity"
             android:label="@string/title_activity_edit_quiz_walk_game"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="se.chalmers.fonahano.quizwalk.activities.DebugActivity"
+            android:name="se.chalmers.fonahano.quizwalk.presentation.DebugActivity"
             android:label="@string/title_activity_debug"
             android:screenOrientation="portrait" >
         </activity>
@@ -79,9 +79,9 @@
             android:value="AIzaSyDRPZc9dBBl_SV-Rx4P_3N8WZmUIAsWHr4" />
 
         <activity
-            android:name="se.chalmers.fonahano.quizwalk.activities.RegisterUserActivity"
+            android:name="se.chalmers.fonahano.quizwalk.presentation.RegisterUserActivity"
             android:label="@string/title_activity_register_user"
-            android:parentActivityName="se.chalmers.fonahano.quizwalk.activities.LoginActivity"
+            android:parentActivityName="se.chalmers.fonahano.quizwalk.presentation.LoginActivity"
             android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -89,7 +89,7 @@
                 android:value="se.chalmers.fonahano.quizwalk.activities.LoginActivity" />
         </activity>
         <activity
-            android:name="se.chalmers.fonahano.quizwalk.activities.LauncherActivity"
+            android:name="se.chalmers.fonahano.quizwalk.presentation.LauncherActivity"
             android:label="@string/quiz_walk"
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -99,16 +99,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="se.chalmers.fonahano.quizwalk.activities.CompletedQuizWalkActivity"
+            android:name="se.chalmers.fonahano.quizwalk.presentation.CompletedQuizWalkActivity"
             android:label="@string/title_activity_completed_quiz_walk" >
         </activity>
         <activity
-            android:name="se.chalmers.fonahano.quizwalk.activities.SettingsActivity"
+            android:name="se.chalmers.fonahano.quizwalk.presentation.SettingsActivity"
             android:label="@string/title_activity_settings"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="se.chalmers.fonahano.quizwalk.activities.AboutActivity"
+            android:name="se.chalmers.fonahano.quizwalk.presentation.AboutActivity"
             android:label="@string/title_activity_about" >
         </activity>
     </application>

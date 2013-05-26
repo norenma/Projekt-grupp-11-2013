@@ -1,11 +1,15 @@
-package se.chalmers.fonahano.quizwalk.model;
+package se.chalmers.fonahano.quizwalk.presentation;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import se.chalmers.fonahano.quizwalk.interfaces.C.Intent.Action;
+import se.chalmers.fonahano.quizwalk.model.Challenge;
+import se.chalmers.fonahano.quizwalk.model.ChallengeLocation;
+import se.chalmers.fonahano.quizwalk.model.Coordinates;
+import se.chalmers.fonahano.quizwalk.model.QuizWalkGame;
+import se.chalmers.fonahano.quizwalk.model.QuizWalkGame.Builder;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;

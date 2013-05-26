@@ -1,4 +1,4 @@
-package se.chalmers.fonahano.quizwalk.activities;
+package se.chalmers.fonahano.quizwalk.presentation;
 
 import se.chalmers.fonahano.quizwalk.R;
 import se.chalmers.fonahano.quizwalk.R.layout;
