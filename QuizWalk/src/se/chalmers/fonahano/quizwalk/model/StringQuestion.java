@@ -1,9 +1,8 @@
 package se.chalmers.fonahano.quizwalk.model;
 
 import static se.chalmers.fonahano.quizwalk.model.Utilities.checkNotNullOrEmpty;
-import se.chalmers.fonahano.quizwalk.interfaces.C;
-import se.chalmers.fonahano.quizwalk.interfaces.C.Genre;
 import se.chalmers.fonahano.quizwalk.interfaces.Question;
+import se.chalmers.fonahano.quizwalk.interfaces.Question.Genre;
 
 /**
  * Text question.
@@ -12,7 +11,7 @@ public class StringQuestion implements Question<String> {
 	private static final long serialVersionUID = 1L;
 
 	private final String question;
-	private final Genre genre;
+	private final Question.Genre genre;
 
 	/**
 	 * Create a string question. Questions can be added to games.
@@ -22,7 +21,7 @@ public class StringQuestion implements Question<String> {
 	public StringQuestion(String question) {
 		this.question = checkNotNullOrEmpty(question,
 			"question can't be empty");
-		this.genre = C.Genre.MISC;
+		this.genre = Question.Genre.MISC;
 	}
 
 	@Override
@@ -31,7 +30,7 @@ public class StringQuestion implements Question<String> {
 	}
 
 	@Override
-	public Genre getGenre() {
+	public Question.Genre getGenre() {
 		return genre;
 	}
 

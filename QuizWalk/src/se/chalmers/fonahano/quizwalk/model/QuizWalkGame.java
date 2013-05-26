@@ -9,11 +9,10 @@ import java.util.Iterator;
 import java.util.List;
 
 import se.chalmers.fonahano.quizwalk.interfaces.Game;
+import se.chalmers.fonahano.quizwalk.interfaces.Game.GameState;
 import se.chalmers.fonahano.quizwalk.interfaces.Image;
 import se.chalmers.fonahano.quizwalk.interfaces.LatitudeLongitude;
 
-import com.google.android.gms.internal.ch;
-import com.google.android.gms.internal.n;
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
 import com.j256.ormlite.field.DataType;
@@ -27,9 +26,14 @@ import com.j256.ormlite.table.DatabaseTable;
  * needed to describe a whole set of {@link Challenge}s, including their current
  * {@link ChallengeState}.
  * 
+ * This class is the only mutable class in the model. However it is only mutable
+ * in the sense of different {@link ChallengeState}s. This makes it convenient
+ * to both persist, recreate (through the {@link QuizWalkGame.Builder} and
+ * operate from the Controller.
+ * 
  */
 @DatabaseTable(tableName = "quizwalkgames")
-public class QuizWalkGame extends Game {
+public class QuizWalkGame implements Game {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -61,14 +65,16 @@ public class QuizWalkGame extends Game {
 
 		/**
 		 * Creates a builder from already existing QuizWalkGame
-		 * @param q the QuizWalkGame to build from
+		 * 
+		 * @param q
+		 *            the QuizWalkGame to build from
 		 */
 		public Builder(QuizWalkGame q) {
-			name=q.name;
-			description=q.description;
-			image=q.image;
-			challenges=q.challenges;
-			reward=q.reward;
+			name = q.name;
+			description = q.description;
+			image = q.image;
+			challenges = q.challenges;
+			reward = q.reward;
 		}
 
 		/**
@@ -121,11 +127,8 @@ public class QuizWalkGame extends Game {
 		 *         description, an preferably some challenges.
 		 */
 		public QuizWalkGame build() {
-			return new QuizWalkGame(name,
-				description,
-				image,
-				challenges,
-				reward);
+			return new QuizWalkGame(name, description, image, challenges,
+					reward);
 		}
 
 		/**
@@ -281,15 +284,14 @@ public class QuizWalkGame extends Game {
 	public QuizWalkGame(String name, String description, Optional<Image> image,
 			List<Challenge> challenges, Optional<QuizWalkGameReward> reward) {
 
-		this.name = checkNotNullOrEmpty(name,
-			"name can't be non-empty.");
+		this.name = checkNotNullOrEmpty(name, "name can't be non-empty.");
 
 		this.description = checkNotNull(description);
 
 		this.image = checkNotNull(image);
 
-		this.challenges = new ArrayList<Challenge>(checkNotNullOrEmpty(challenges,
-			"list of challenges can't be empty"));
+		this.challenges = new ArrayList<Challenge>(checkNotNullOrEmpty(
+				challenges, "list of challenges can't be empty"));
 
 		this.reward = checkNotNull(reward);
 
@@ -297,8 +299,7 @@ public class QuizWalkGame extends Game {
 
 		// Add challenges from list and set them to default.
 		for (Challenge c : challenges) {
-			challengeStates.put(c,
-				ChallengeState.DEFAULT);
+			challengeStates.put(c, ChallengeState.DEFAULT);
 		}
 	}
 
@@ -317,8 +318,7 @@ public class QuizWalkGame extends Game {
 		this.reward = o.getReward();
 		this.challengeStates = new HashMap<Challenge, ChallengeState>();
 		for (Challenge c : o.getChallenges()) {
-			challengeStates.put(c,
-				o.getChallengeStateOf(c));
+			challengeStates.put(c, o.getChallengeStateOf(c));
 		}
 	}
 
@@ -328,8 +328,7 @@ public class QuizWalkGame extends Game {
 	 */
 	public void start() {
 		for (Challenge c : challenges) {
-			challengeStates.put(c,
-				ChallengeState.UNVISITED);
+			challengeStates.put(c, ChallengeState.UNVISITED);
 		}
 	}
 
@@ -338,8 +337,7 @@ public class QuizWalkGame extends Game {
 	 */
 	public void stop() {
 		for (Challenge c : challenges) {
-			challengeStates.put(c,
-				ChallengeState.DEFAULT);
+			challengeStates.put(c, ChallengeState.DEFAULT);
 		}
 	}
 
@@ -362,8 +360,7 @@ public class QuizWalkGame extends Game {
 		GameState s = GameState.GAME_OVER;
 
 		for (Challenge c : challengeStates.keySet()) {
-			if (challengeStates.get(c)
-				.equals(ChallengeState.UNVISITED))
+			if (challengeStates.get(c).equals(ChallengeState.UNVISITED))
 				s = GameState.RUNNING;
 		}
 		return s;
@@ -384,8 +381,7 @@ public class QuizWalkGame extends Game {
 		if (!challenges.contains(challenge))
 			return false;
 		else {
-			this.challengeStates.put(challenge,
-				challengeState);
+			this.challengeStates.put(challenge, challengeState);
 			return true;
 		}
 
@@ -395,8 +391,7 @@ public class QuizWalkGame extends Game {
 	 * @return the state of the provided Challenge.
 	 */
 	public ChallengeState getChallengeStateOf(Challenge c) {
-
-		// TODO: Handle null challengeStates
+		// Fast-fail
 		return checkNotNull(challengeStates.get(c));
 	}
 
@@ -418,7 +413,7 @@ public class QuizWalkGame extends Game {
 	}
 
 	/**
-	 * @return the image representing this game, if available.
+	 * @return the image representing this game if available.
 	 */
 	public Optional<Image> getImage() {
 		return image;
@@ -433,7 +428,8 @@ public class QuizWalkGame extends Game {
 	}
 
 	/**
-	 * @return the id
+	 * @return the index id that represents its row number if it has been
+	 *         persisted with ORMLite to SQL.
 	 */
 	public int getId() {
 		return id;
@@ -449,43 +445,51 @@ public class QuizWalkGame extends Game {
 		Challenge itNext;
 		while (it.hasNext()) {
 			itNext = it.next();
-			double latDiff = Math.abs(c.getLatitude() - itNext.getLocation().getLatitude());
-			double lngDiff = Math.abs(c.getLongitude() - itNext.getLocation().getLongitude());
+			double latDiff = Math.abs(c.getLatitude()
+					- itNext.getLocation().getLatitude());
+			double lngDiff = Math.abs(c.getLongitude()
+					- itNext.getLocation().getLongitude());
 			double eps = 0.000001;
-			
+
 			if (latDiff < eps && lngDiff < eps)
 				return itNext;
 		}
 		return null;
 	}
-	
+
 	/**
-	 * Calculate current points of the QuizWalk. 
+	 * Calculate current points of the QuizWalk.
 	 */
-	
-	public int getCurrentScore(){
+
+	public int getCurrentScore() {
 		int points = 0;
-			
-		for(Challenge c: this.getChallenges()){
-			if(this.getChallengeStateOf(c) == ChallengeState.COMPLETED){
-				
-				points+= c.getReward().get().getScore();
+
+		for (Challenge c : this.getChallenges()) {
+			if (this.getChallengeStateOf(c) == ChallengeState.COMPLETED) {
+
+				points += c.getReward().get().getScore();
 			}
 		}
-		return points; 
+		return points;
 	}
-	
-	public boolean isGameCompleted(){
-		int nbrOfDoneQuizWalks = 0;
-		for(Challenge c: challenges){
-			if(getChallengeStateOf(c).equals(ChallengeState.COMPLETED) || getChallengeStateOf(c).equals(ChallengeState.FAILED))
-				nbrOfDoneQuizWalks++;
+
+	/**
+	 * @return <code>false</code> if any of the {@link ChallengeState} for the
+	 *         {@link Challenge} in this QuizWalkGame are not either
+	 *         {@link ChallengeState#COMPLETED} or {@link ChallengeState#FAILED}
+	 *         . <code>false</code> otherwise.
+	 */
+	public boolean isGameCompleted() {
+		for (Challenge c : challenges) {
+			ChallengeState cState = getChallengeStateOf(c);
+
+			if (!cState.equals(ChallengeState.COMPLETED)
+					&& !cState.equals(ChallengeState.FAILED)) {
+				return false;
+			}
 		}
-		
-		if(nbrOfDoneQuizWalks >= challenges.size())
-			return true;
-		
-		return false;
+
+		return true;
 	}
 
 }

@@ -2,7 +2,7 @@ package se.chalmers.fonahano.quizwalk.interfaces;
 
 import java.io.Serializable;
 
-import se.chalmers.fonahano.quizwalk.interfaces.C.Genre;
+import se.chalmers.fonahano.quizwalk.interfaces.Question.Genre;
 import se.chalmers.fonahano.quizwalk.model.Challenge;
 
 /**
@@ -12,6 +12,15 @@ import se.chalmers.fonahano.quizwalk.model.Challenge;
 public interface Question<T> extends Serializable {
 
 	/**
+	 * Genres for a {@link Question}
+	 * 
+	 */
+	public static enum Genre {
+	
+		MISC, SPORT, SCIENCE, GEOGRAPHY;
+	}
+
+	/**
 	 * @return the question.
 	 */
 	public abstract T get();
@@ -19,7 +28,7 @@ public interface Question<T> extends Serializable {
 	/**
 	 * @return the genre of this Question.
 	 */
-	public abstract Genre getGenre();
+	public abstract Question.Genre getGenre();
 
 	/**
 	 * Convenience method.

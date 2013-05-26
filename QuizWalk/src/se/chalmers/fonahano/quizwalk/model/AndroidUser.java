@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import se.chalmers.fonahano.quizwalk.interfaces.Reward;
+import se.chalmers.fonahano.quizwalk.interfaces.User;
 
 import com.google.gson.GsonBuilder;
 import com.j256.ormlite.field.DataType;
@@ -22,7 +23,7 @@ import com.j256.ormlite.table.DatabaseTable;
  * 
  */
 @DatabaseTable
-public class AndroidUser implements Serializable {
+public class AndroidUser implements Serializable, User {
 	private static final long serialVersionUID = 1L;
 
 	private static final String DEFAULT_USERNAME = "John Doe";
@@ -109,6 +110,10 @@ public class AndroidUser implements Serializable {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see se.chalmers.fonahano.quizwalk.model.User#getUserName()
+	 */
+	@Override
 	public final String getUserName() {
 		return userName;
 	}
@@ -117,10 +122,11 @@ public class AndroidUser implements Serializable {
 		this.userName = userName;
 	}
 
-	/**
-	 * @return the listOfUserRewards
+	/* (non-Javadoc)
+	 * @see se.chalmers.fonahano.quizwalk.model.User#getListOfUserRewards()
 	 */
-	public ArrayList<AbstractReward> getListOfUserRewards() {
+	@Override
+	public ArrayList<? extends AbstractReward> getListOfUserRewards() {
 		return listOfUserRewards;
 	}
 
@@ -141,9 +147,7 @@ public class AndroidUser implements Serializable {
 		this.userSettings = userSettings;
 	}
 
-	/**
-	 * @return the email
-	 */
+	@Override
 	public String getEmail() {
 		return email;
 	}
@@ -153,7 +157,7 @@ public class AndroidUser implements Serializable {
 	 *            the email to set
 	 */
 	public void setEmail(String email) {
-		this.email = email;
+		this.email = checkNotNull(email);
 	}
 
 	/**
@@ -169,10 +173,11 @@ public class AndroidUser implements Serializable {
 			digester = MessageDigest.getInstance("MD5");
 			bytesOfPassword = pw.getBytes("UTF-8");
 		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new RuntimeException();
 		} catch (UnsupportedEncodingException e) {
-			// TODO: handle exception
+			e.printStackTrace();
+			throw new RuntimeException();
 		}
 
 		byte[] hashedInput = digester.digest(bytesOfPassword);
@@ -193,10 +198,11 @@ public class AndroidUser implements Serializable {
 			digester = MessageDigest.getInstance("MD5");
 			bytesOfPassword = password.getBytes("UTF-8");
 		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new RuntimeException();
 		} catch (UnsupportedEncodingException e) {
-			// TODO: handle exception
+			e.printStackTrace();
+			throw new RuntimeException();
 		}
 
 		byte[] hashedPassword = digester.digest(bytesOfPassword);

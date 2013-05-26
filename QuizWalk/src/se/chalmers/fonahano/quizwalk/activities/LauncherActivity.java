@@ -1,9 +1,10 @@
 package se.chalmers.fonahano.quizwalk.activities;
 
+import se.chalmers.fonahano.quizwalk.C;
 import se.chalmers.fonahano.quizwalk.R;
 import se.chalmers.fonahano.quizwalk.database.GameDatabaseManager;
 import se.chalmers.fonahano.quizwalk.database.LocalDatabase;
-import se.chalmers.fonahano.quizwalk.interfaces.C;
+import se.chalmers.fonahano.quizwalk.interfaces.User;
 import se.chalmers.fonahano.quizwalk.model.AndroidUser;
 import android.os.Bundle;
 import android.os.Handler;
@@ -39,7 +40,7 @@ public class LauncherActivity extends Activity {
 		GameDatabaseManager.init(this);
 
 		LocalDatabase gdm = GameDatabaseManager.getInstance();
-		AndroidUser user = gdm.getUser();
+		User user = gdm.getUser();
 		if (user == null) {
 			gdm.createUser(new AndroidUser());
 		}
