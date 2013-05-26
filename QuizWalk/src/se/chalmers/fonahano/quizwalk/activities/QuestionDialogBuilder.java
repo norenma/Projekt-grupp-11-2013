@@ -3,18 +3,17 @@ package se.chalmers.fonahano.quizwalk.activities;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.gson.Gson;
-
 import se.chalmers.fonahano.quizwalk.interfaces.Answer;
 import se.chalmers.fonahano.quizwalk.model.Challenge;
-import se.chalmers.fonahano.quizwalk.model.StateSingleton;
 import se.chalmers.fonahano.quizwalk.model.QuizWalkGame.ChallengeState;
+import se.chalmers.fonahano.quizwalk.model.StateSingleton;
+import android.R;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.os.Debug;
-import android.sax.StartElementListener;
 import android.util.Log;
+
+import com.google.gson.Gson;
 
 /***
  * A Fragment to show a question as Dialog to the user When shown, it displays A

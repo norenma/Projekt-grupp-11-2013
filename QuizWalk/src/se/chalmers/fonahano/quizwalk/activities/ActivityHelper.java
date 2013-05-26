@@ -33,6 +33,9 @@ public abstract class ActivityHelper {
 	
 	final static String QUIZWALKGAMES_EMPTY = "the list of QuizWalkGames is empty";
 
+	/**
+	 * Calculates the distance between multiple positions
+	 */
 	private static void distance(LatitudeLongitude firstPos,
 			LatitudeLongitude secondPos, float[] result) {
 		Location.distanceBetween(firstPos.getLatitude(),
@@ -40,7 +43,13 @@ public abstract class ActivityHelper {
 				secondPos.getLongitude(), result);
 	}
 
-	
+
+	/**
+	 * Calculates distance between 2 positions
+	 * @param firstPos
+	 * @param secondPos
+	 * @return
+	 */
 	public static float distance(LatitudeLongitude firstPos,
 			LatitudeLongitude secondPos) {
 		float[] floatArray = new float[1];

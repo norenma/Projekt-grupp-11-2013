@@ -3,8 +3,8 @@ package se.chalmers.fonahano.quizwalk.activities;
 import java.util.ArrayList;
 import java.util.List;
 
-import se.chalmers.fonahano.quizwalk.C;
 import se.chalmers.fonahano.quizwalk.R;
+import se.chalmers.fonahano.quizwalk.interfaces.C;
 import se.chalmers.fonahano.quizwalk.model.Challenge;
 import se.chalmers.fonahano.quizwalk.model.QuizWalkGame;
 import se.chalmers.fonahano.quizwalk.model.StateSingleton;

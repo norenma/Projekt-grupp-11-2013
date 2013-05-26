@@ -1,10 +1,11 @@
 package se.chalmers.fonahano.quizwalk.activities;
 
 import static se.chalmers.fonahano.quizwalk.model.Utilities.checkNotNullOrEmpty;
-import se.chalmers.fonahano.quizwalk.C;
+
 import se.chalmers.fonahano.quizwalk.R;
 import se.chalmers.fonahano.quizwalk.database.GameDatabaseManager;
 import se.chalmers.fonahano.quizwalk.database.LocalDatabase;
+import se.chalmers.fonahano.quizwalk.interfaces.C;
 import se.chalmers.fonahano.quizwalk.interfaces.Image;
 import se.chalmers.fonahano.quizwalk.model.Challenge;
 import se.chalmers.fonahano.quizwalk.model.Challenge.Builder;

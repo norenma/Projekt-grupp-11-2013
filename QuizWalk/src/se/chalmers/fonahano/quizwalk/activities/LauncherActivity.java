@@ -1,9 +1,9 @@
 package se.chalmers.fonahano.quizwalk.activities;
 
-import se.chalmers.fonahano.quizwalk.C;
 import se.chalmers.fonahano.quizwalk.R;
 import se.chalmers.fonahano.quizwalk.database.GameDatabaseManager;
 import se.chalmers.fonahano.quizwalk.database.LocalDatabase;
+import se.chalmers.fonahano.quizwalk.interfaces.C;
 import se.chalmers.fonahano.quizwalk.interfaces.User;
 import se.chalmers.fonahano.quizwalk.model.AndroidUser;
 import android.os.Bundle;

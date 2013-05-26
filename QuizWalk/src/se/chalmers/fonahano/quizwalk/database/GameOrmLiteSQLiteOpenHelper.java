@@ -3,7 +3,7 @@ package se.chalmers.fonahano.quizwalk.database;
 import java.util.ArrayList;
 import java.util.List;
 
-import se.chalmers.fonahano.quizwalk.C;
+import se.chalmers.fonahano.quizwalk.interfaces.C;
 import se.chalmers.fonahano.quizwalk.model.AndroidUser;
 import se.chalmers.fonahano.quizwalk.model.QuizWalkGame;
 import android.content.Context;
