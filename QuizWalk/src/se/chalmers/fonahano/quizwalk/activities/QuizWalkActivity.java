@@ -49,10 +49,6 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 	private LocalDatabase db;
 	private QuizWalkGame q;
 	
-	private static final long MINIMUM_DISTANCECHANGE_FOR_UPDATE = 1; // in Meters
-	private static final long MINIMUM_TIME_BETWEEN_UPDATE = 1000; // in Milliseconds
-
-	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState){ 
@@ -88,7 +84,7 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 		LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
 		
 		if (!service.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-			showEnableGPSDialog();
+			ActivityHelper.showEnableGPSDialog(this);
 		}
 
 		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -202,7 +198,7 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 
 	@Override
 	public void onProviderDisabled(String provider) {
-		showEnableGPSDialog();
+		ActivityHelper.showEnableGPSDialog(this);
 	}
 
 	@Override
@@ -240,6 +236,7 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 
 		ab.show();
 	}
+
 
 	public void showQuizWalkStartDialog(final QuizWalkGame q) {
 		AlertDialog.Builder ab = new AlertDialog.Builder(this);
@@ -298,7 +295,6 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 			
 			IntentFilter filter = new IntentFilter(C.Intent.Extra.PROXIMITY_ALERT_MESSAGE);
 			registerReceiver(new ProximityIntentReceiver(), filter);
-
 
 		}
 	}
