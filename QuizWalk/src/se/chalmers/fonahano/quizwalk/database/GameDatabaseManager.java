@@ -102,14 +102,4 @@ public class GameDatabaseManager implements LocalDatabase {
 		return u;
 	}
 
-	// @Override
-	// public void updateQuizWalkGame(QuizWalkGame quizWalkGame) {
-	// try {
-	// getHelper().getQuizWalkDao()
-	// .update(quizWalkGame);
-	// } catch (SQLException e) {
-	// e.printStackTrace();
-	// }
-	// }
-
 }
