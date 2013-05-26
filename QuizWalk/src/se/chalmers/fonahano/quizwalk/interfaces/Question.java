@@ -2,7 +2,6 @@ package se.chalmers.fonahano.quizwalk.interfaces;
 
 import java.io.Serializable;
 
-import se.chalmers.fonahano.quizwalk.interfaces.Question.Genre;
 import se.chalmers.fonahano.quizwalk.model.Challenge;
 
 /**
@@ -16,7 +15,7 @@ public interface Question<T> extends Serializable {
 	 * 
 	 */
 	public static enum Genre {
-	
+
 		MISC, SPORT, SCIENCE, GEOGRAPHY;
 	}
 

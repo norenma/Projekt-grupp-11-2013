@@ -13,12 +13,8 @@ public class ChallengeReward extends AbstractReward {
 	private static final long serialVersionUID = 1L;
 
 	public ChallengeReward(int score, String description, Optional<Image> image) {
-		super(score,
-			description,
-			image);
+		super(score, description, image);
 		// TODO Auto-generated constructor stub
 	}
-	
-	
 
 }

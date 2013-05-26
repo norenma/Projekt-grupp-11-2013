@@ -12,7 +12,7 @@ import se.chalmers.fonahano.quizwalk.interfaces.Reward;
 import com.google.common.base.Optional;
 
 /**
- * A reward is an achievement that a {@link AndroidUser} can collect.
+ * A reward is an achievement that a {@link QuizWalkUser} can collect.
  * 
  */
 public abstract class AbstractReward implements Serializable, Reward {
@@ -54,11 +54,10 @@ public abstract class AbstractReward implements Serializable, Reward {
 	public AbstractReward(int score, String description, Optional<Image> image) {
 
 		this.score = score;
-		checkArgument(score >= 0,
-			"Score can't be negative");
+		checkArgument(score >= 0, "Score can't be negative");
 
 		this.description = checkNotNullOrEmpty(description,
-			"Description can't be empty");
+				"Description can't be empty");
 
 		this.image = checkNotNull(image);
 	}
@@ -93,7 +92,9 @@ public abstract class AbstractReward implements Serializable, Reward {
 		return image;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -107,7 +108,9 @@ public abstract class AbstractReward implements Serializable, Reward {
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -133,7 +136,5 @@ public abstract class AbstractReward implements Serializable, Reward {
 			return false;
 		return true;
 	}
-	
-	
 
 }

@@ -2,7 +2,6 @@ package se.chalmers.fonahano.quizwalk.model;
 
 import static se.chalmers.fonahano.quizwalk.model.Utilities.checkNotNullOrEmpty;
 import se.chalmers.fonahano.quizwalk.interfaces.Question;
-import se.chalmers.fonahano.quizwalk.interfaces.Question.Genre;
 
 /**
  * Text question.
@@ -19,8 +18,7 @@ public class StringQuestion implements Question<String> {
 	 * @param question
 	 */
 	public StringQuestion(String question) {
-		this.question = checkNotNullOrEmpty(question,
-			"question can't be empty");
+		this.question = checkNotNullOrEmpty(question, "question can't be empty");
 		this.genre = Question.Genre.MISC;
 	}
 
@@ -39,7 +37,6 @@ public class StringQuestion implements Question<String> {
 		return question;
 	}
 
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -49,7 +46,6 @@ public class StringQuestion implements Question<String> {
 				+ ((question == null) ? 0 : question.hashCode());
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -69,7 +65,5 @@ public class StringQuestion implements Question<String> {
 			return false;
 		return true;
 	}
-	
-	
 
 }

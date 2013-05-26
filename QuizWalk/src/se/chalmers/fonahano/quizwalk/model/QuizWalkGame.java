@@ -9,7 +9,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import se.chalmers.fonahano.quizwalk.interfaces.Game;
-import se.chalmers.fonahano.quizwalk.interfaces.Game.GameState;
 import se.chalmers.fonahano.quizwalk.interfaces.Image;
 import se.chalmers.fonahano.quizwalk.interfaces.LatitudeLongitude;
 

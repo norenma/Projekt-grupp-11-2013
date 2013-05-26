@@ -2,12 +2,14 @@ package se.chalmers.fonahano.quizwalk.model;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import se.chalmers.fonahano.quizwalk.interfaces.Image;
+import se.chalmers.fonahano.quizwalk.presentation.StateSingleton;
 
 import com.google.common.base.Optional;
 
 /**
  * A Coordinate with some optional description and optional Image. These
- * locations can populate the {@link StateSingleton} and constitute {@link Challenge}s
+ * locations can populate the {@link StateSingleton} and constitute
+ * {@link Challenge}s
  */
 
 public class ChallengeLocation extends Coordinates {
@@ -29,8 +31,7 @@ public class ChallengeLocation extends Coordinates {
 	 */
 	public ChallengeLocation(double latitude, double longitude,
 			String description, Optional<Image> image) {
-		super(latitude,
-			longitude);
+		super(latitude, longitude);
 
 		this.description = checkNotNull(description);
 
@@ -66,7 +67,6 @@ public class ChallengeLocation extends Coordinates {
 		return builder.toString();
 	}
 
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -76,7 +76,6 @@ public class ChallengeLocation extends Coordinates {
 		result = prime * result + ((image == null) ? 0 : image.hashCode());
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -99,8 +98,5 @@ public class ChallengeLocation extends Coordinates {
 			return false;
 		return true;
 	}
-	
-	
-	
 
 }

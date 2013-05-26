@@ -19,11 +19,11 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 /**
- * A <TT>AndroidUser</TT> represents a person using the Application.
+ * A <TT>QuizWalkUser</TT> represents a person using the Application.
  * 
  */
 @DatabaseTable
-public class AndroidUser implements Serializable, User {
+public class QuizWalkUser implements Serializable, User {
 	private static final long serialVersionUID = 1L;
 
 	private static final String DEFAULT_USERNAME = "John Doe";
@@ -50,7 +50,7 @@ public class AndroidUser implements Serializable, User {
 		}
 	}
 
-	@DatabaseField(id=true)
+	@DatabaseField(id = true)
 	private int id = 1;
 	/**
 	 * String representation of this user globally.
@@ -81,13 +81,13 @@ public class AndroidUser implements Serializable, User {
 	 * client. See the no-args constructor for default values.
 	 * 
 	 * @param userName
-	 *            Public user name for this AndroidUser.
+	 *            Public user name for this QuizWalkUser.
 	 * @param userSettings
 	 *            Personal settings for this user.
 	 * @param listOfUserRewards
 	 *            Rewards awarded this user.
 	 */
-	public AndroidUser(String userName, UserSettings userSettings,
+	public QuizWalkUser(String userName, UserSettings userSettings,
 			ArrayList<AbstractReward> listOfUserRewards) {
 
 		this.userName = checkNotNull(userName);
@@ -102,15 +102,17 @@ public class AndroidUser implements Serializable, User {
 	 * Create a user with default settings and no rewards.
 	 * 
 	 * @param userName
-	 *            Public user name for this AndroidUser.
+	 *            Public user name for this QuizWalkUser.
 	 */
-	public AndroidUser() {
+	public QuizWalkUser() {
 		this(DEFAULT_USERNAME, new UserSettings(),
 				new ArrayList<AbstractReward>());
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see se.chalmers.fonahano.quizwalk.model.User#getUserName()
 	 */
 	@Override
@@ -122,7 +124,9 @@ public class AndroidUser implements Serializable, User {
 		this.userName = userName;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see se.chalmers.fonahano.quizwalk.model.User#getListOfUserRewards()
 	 */
 	@Override

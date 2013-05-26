@@ -26,8 +26,7 @@ public class Utilities {
 	public static String checkNotNullOrEmpty(String stringToCheck,
 			Object errorMessage) {
 		checkNotNull(stringToCheck);
-		checkArgument(!stringToCheck.isEmpty(),
-			errorMessage);
+		checkArgument(!stringToCheck.isEmpty(), errorMessage);
 		return stringToCheck;
 	}
 
@@ -43,8 +42,7 @@ public class Utilities {
 	public static <K, V> Map<K, V> checkNotNullOrEmpty(Map<K, V> mapToCheck,
 			Object errorMessage) {
 		checkNotNull(mapToCheck);
-		checkArgument(!mapToCheck.isEmpty(),
-			errorMessage);
+		checkArgument(!mapToCheck.isEmpty(), errorMessage);
 		for (K e : mapToCheck.keySet()) {
 			checkNotNull(e);
 		}
@@ -65,11 +63,10 @@ public class Utilities {
 	public static <T extends Collection<E>, E> T checkNotNullOrEmpty(
 			T collectionToCheck, Object errorMessage) {
 		checkNotNull(collectionToCheck);
-		checkArgument(!collectionToCheck.isEmpty(),
-			errorMessage);
+		checkArgument(!collectionToCheck.isEmpty(), errorMessage);
 		for (E t : collectionToCheck) {
-			checkArgument(t != null,
-				errorMessage + ":" + "Some entry in Collection is null");
+			checkArgument(t != null, errorMessage + ":"
+					+ "Some entry in Collection is null");
 		}
 		return collectionToCheck;
 	}
@@ -82,13 +79,11 @@ public class Utilities {
 	 * @return LatLng
 	 */
 	public static LatLng coordinatesToLatLng(LatitudeLongitude c) {
-		return new LatLng(c.getLatitude(),
-			c.getLongitude());
+		return new LatLng(c.getLatitude(), c.getLongitude());
 	}
 
 	public static LatitudeLongitude latLngToCoordinates(LatLng latLong) {
-		return new Coordinates(latLong.latitude,
-			latLong.longitude);
+		return new Coordinates(latLong.latitude, latLong.longitude);
 	}
 
 }

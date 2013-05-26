@@ -55,27 +55,24 @@ public class Challenge implements Serializable {
 		public Builder() {
 			description = "";
 			setOfAnswers = new HashSet<Answer<String>>();
-			location = new ChallengeLocation(0d,
-				0d,
-				"default location",
-				Optional.<Image> absent());
+			location = new ChallengeLocation(0d, 0d, "default location",
+					Optional.<Image> absent());
 			challengeReward = Optional.<ChallengeReward> absent();
 		}
-		
+
 		/**
-		 * Constructor to create a builder from
-		 * already built challenge
-		 *  
-		 * @param c the challenge to make a new builder
-		 * from.
+		 * Constructor to create a builder from already built challenge
+		 * 
+		 * @param c
+		 *            the challenge to make a new builder from.
 		 */
 		public Builder(Challenge c) {
-			question=c.question;
-			correctAnswer=c.correctAnswer;
-			description=c.challengeDescription;
-			setOfAnswers=c.setOfAnswers;
-			location=c.location;
-			challengeReward=c.challengeReward;
+			question = c.question;
+			correctAnswer = c.correctAnswer;
+			description = c.challengeDescription;
+			setOfAnswers = c.setOfAnswers;
+			location = c.location;
+			challengeReward = c.challengeReward;
 		}
 
 		/**
@@ -89,7 +86,7 @@ public class Challenge implements Serializable {
 
 		public Builder question(String q) {
 			this.question = new StringQuestion(checkNotNullOrEmpty(q,
-				"Question can't be empty."));
+					"Question can't be empty."));
 			return this;
 		}
 
@@ -106,7 +103,7 @@ public class Challenge implements Serializable {
 		 */
 		public Builder correctAnswer(String a) {
 			this.correctAnswer = new StringAnswer(checkNotNullOrEmpty(a,
-				"correctAnswer can't be empty"));
+					"correctAnswer can't be empty"));
 			setOfAnswers.add(correctAnswer);
 			return this;
 
@@ -119,7 +116,7 @@ public class Challenge implements Serializable {
 
 		public Builder addIncorrectAnswer(String a) {
 			setOfAnswers.add(new StringAnswer(checkNotNullOrEmpty(a,
-				"incorrect answer can't be empty")));
+					"incorrect answer can't be empty")));
 			return this;
 		}
 
@@ -143,10 +140,8 @@ public class Challenge implements Serializable {
 		}
 
 		public Builder location(double latitude, double longitude) {
-			ChallengeLocation l = new ChallengeLocation(latitude,
-				longitude,
-				latitude + ":" + longitude,
-				Optional.<Image> absent());
+			ChallengeLocation l = new ChallengeLocation(latitude, longitude,
+					latitude + ":" + longitude, Optional.<Image> absent());
 			return location(l);
 		}
 
@@ -166,12 +161,8 @@ public class Challenge implements Serializable {
 		 * @return the Challenge defined in the builder.
 		 */
 		public Challenge build() {
-			return new Challenge(description,
-				question,
-				setOfAnswers,
-				correctAnswer,
-				location,
-				challengeReward);
+			return new Challenge(description, question, setOfAnswers,
+					correctAnswer, location, challengeReward);
 		}
 
 		/**
@@ -247,7 +238,7 @@ public class Challenge implements Serializable {
 
 	/**
 	 * Optionally, a <code>ChallengeReward</code> to be granted the
-	 * <code>AndroidUser</code> who completes this <code>Challenge</code>.
+	 * <code>QuizWalkUser</code> who completes this <code>Challenge</code>.
 	 */
 	@DatabaseField
 	private final Optional<ChallengeReward> challengeReward;
@@ -276,13 +267,13 @@ public class Challenge implements Serializable {
 
 		this.location = checkNotNull(location);
 
-		this.setOfAnswers = new HashSet<Answer<String>>(checkNotNullOrEmpty(setOfAnswers,
-			"Set of answers must be present"));
+		this.setOfAnswers = new HashSet<Answer<String>>(checkNotNullOrEmpty(
+				setOfAnswers, "Set of answers must be present"));
 
 		this.correctAnswer = checkNotNull(correctAnswer);
 		// Set correctAnswer only if it's present in list.
 		checkArgument(setOfAnswers.contains(correctAnswer),
-			"correctAnswer must be present in the set of answers");
+				"correctAnswer must be present in the set of answers");
 
 		this.challengeReward = checkNotNull(challengeReward);
 
@@ -315,7 +306,7 @@ public class Challenge implements Serializable {
 	public boolean isCorrectAnswer(Answer<String> answer) {
 		return correctAnswer.equals(answer);
 	}
-	
+
 	public boolean isCorrectAnswer(String answer) {
 		return correctAnswer.equals(new StringAnswer(answer));
 	}
@@ -362,7 +353,9 @@ public class Challenge implements Serializable {
 		return challengeReward;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -386,7 +379,6 @@ public class Challenge implements Serializable {
 		return result;
 	}
 
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -404,22 +396,22 @@ public class Challenge implements Serializable {
 		if (challengeReward == null) {
 			if (other.challengeReward != null)
 				return false;
-		} else if (!challengeReward.equals(other.challengeReward))	
-			return false;		// challengeReward 
+		} else if (!challengeReward.equals(other.challengeReward))
+			return false; // challengeReward
 		if (correctAnswer == null) {
 			if (other.correctAnswer != null)
 				return false;
-		} else if (!correctAnswer.equals(other.correctAnswer))	// Answer
+		} else if (!correctAnswer.equals(other.correctAnswer)) // Answer
 			return false;
 		if (location == null) {
 			if (other.location != null)
 				return false;
-		} else if (!location.equals(other.location))	// Location
+		} else if (!location.equals(other.location)) // Location
 			return false;
 		if (question == null) {
 			if (other.question != null)
 				return false;
-		} else if (!question.equals(other.question))	// Question
+		} else if (!question.equals(other.question)) // Question
 			return false;
 		if (setOfAnswers == null) {
 			if (other.setOfAnswers != null)
@@ -428,7 +420,5 @@ public class Challenge implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
 
 }
