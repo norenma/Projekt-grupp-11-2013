@@ -70,7 +70,7 @@ public class RegisterUserActivity extends Activity {
 		//Shows a fragment after registration 
 		AlertDialog.Builder builder=new AlertDialog.Builder(this);
 		builder.setTitle(R.string.registration_successful).setCancelable(false)
-	       .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+	       .setPositiveButton(this.getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
 	           public void onClick(DialogInterface dialog, int id) {
 	                Intent intent=new Intent(RegisterUserActivity.this, LoginActivity.class);
 	                startActivity(intent);
