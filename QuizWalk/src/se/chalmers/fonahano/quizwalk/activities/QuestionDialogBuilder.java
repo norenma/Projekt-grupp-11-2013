@@ -23,6 +23,12 @@ import android.util.Log;
  * 
  */
 public class QuestionDialogBuilder extends AlertDialog.Builder {
+	
+	
+	static final String ERRORMESSAGE = "Could not find correct answer";
+	static final String CORRECT = "Correct!";
+	static final String WRONG = "Wrong answer.. ";
+	
 	private Challenge challenge;
 
 	private class ChallengeOnClickListener implements
@@ -44,10 +50,10 @@ public class QuestionDialogBuilder extends AlertDialog.Builder {
 			if (correctAnswerIndex == which) {
 				// TODO: Change to static string resources
 				StateSingleton.INSTANCE.getActiveQuizWalk().get().setChallengeState(challenge, ChallengeState.COMPLETED);
-				showDialog("Correct!");
+				showDialog(CORRECT);
 			} else {
 				StateSingleton.INSTANCE.getActiveQuizWalk().get().setChallengeState(challenge, ChallengeState.FAILED);
-				showDialog("Wrong...");
+				showDialog(WRONG);
 			}
 		}
 
@@ -85,9 +91,8 @@ public class QuestionDialogBuilder extends AlertDialog.Builder {
 
 		// Error handling if broken Challenge-object was retrieved.
 		if (correctAnswerIndex < 0) {
-			String errorMsg = "Could not find correct answer";
-			Log.e(getClass().getName(), errorMsg);
-			throw new RuntimeException(errorMsg);
+			Log.e(getClass().getName(), ERRORMESSAGE);
+			throw new RuntimeException(ERRORMESSAGE);
 		}
 		String[] itemsArray = listOfAnswers.toArray(new String[listOfAnswers
 				.size()]);
