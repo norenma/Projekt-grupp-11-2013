@@ -22,6 +22,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
@@ -47,9 +48,14 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 	private Location location;
 	private LocalDatabase db;
 	private QuizWalkGame q;
+	
+	private static final long MINIMUM_DISTANCECHANGE_FOR_UPDATE = 1; // in Meters
+	private static final long MINIMUM_TIME_BETWEEN_UPDATE = 1000; // in Milliseconds
+
+	
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState){ 
 		// remove actionbar
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -58,6 +64,7 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 		setContentView(R.layout.activity_quiz_walk_game);
 		map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map))
 				.getMap();
+		
 
 		final QuestionDialogBuilder questionFragment = new QuestionDialogBuilder(
 				this);
@@ -79,6 +86,7 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 
 		// Checks if the gps is turned on
 		LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
+		
 		if (!service.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
 			showEnableGPSDialog();
 		}
@@ -278,14 +286,20 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 					itNext.getLocation().getLongitude() };
 
 			intent.putExtra(Extra.PROXIMITY_ALERT_MESSAGE, latNLng);
-			// To verify that the intent is infact a question
+			// To verify that the intent is in fact a question
 			intent.putExtra(Extra.PROXIMITY_ALERT_MESSAGE, true);
+
 
 			PendingIntent pIntent = PendingIntent.getBroadcast(this, 0, intent,
 					0);
 			lm.addProximityAlert(location.getLatitude(),
 					location.getLongitude(), Extra.MARKER_PROXIMITY_RADIUS, -1,
 					pIntent);
+			
+			IntentFilter filter = new IntentFilter(C.Intent.Extra.PROXIMITY_ALERT_MESSAGE);
+			registerReceiver(new ProximityIntentReceiver(), filter);
+
+
 		}
 	}
 }

@@ -7,7 +7,7 @@ import se.chalmers.fonahano.quizwalk.interfaces.Answer;
 import se.chalmers.fonahano.quizwalk.model.Challenge;
 import se.chalmers.fonahano.quizwalk.model.QuizWalkGame.ChallengeState;
 import se.chalmers.fonahano.quizwalk.model.StateSingleton;
-import android.R;
+import se.chalmers.fonahano.quizwalk.R;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -23,9 +23,6 @@ import com.google.gson.Gson;
  */
 public class QuestionDialogBuilder extends AlertDialog.Builder {
 
-	static final String ERRORMESSAGE = "Could not find correct answer";
-	static final String CORRECT = "Correct!";
-	static final String WRONG = "Wrong answer.. ";
 
 	private Challenge challenge;
 
@@ -46,13 +43,11 @@ public class QuestionDialogBuilder extends AlertDialog.Builder {
 		@Override
 		public void onClick(DialogInterface dialog, int which) {
 			if (correctAnswerIndex == which) {
-				StateSingleton.INSTANCE.getActiveQuizWalk().get()
-						.setChallengeState(challenge, ChallengeState.COMPLETED);
-				showDialog(CORRECT);
+				StateSingleton.INSTANCE.getActiveQuizWalk().get().setChallengeState(challenge, ChallengeState.COMPLETED);
+				showDialog(QuestionDialogBuilder.this.getContext().getResources().getString(R.string.correct_answer_prompt));
 			} else {
-				StateSingleton.INSTANCE.getActiveQuizWalk().get()
-						.setChallengeState(challenge, ChallengeState.FAILED);
-				showDialog(WRONG);
+				StateSingleton.INSTANCE.getActiveQuizWalk().get().setChallengeState(challenge, ChallengeState.FAILED);
+				showDialog(QuestionDialogBuilder.this.getContext().getResources().getString(R.string.incorrect_answer_prompt));
 			}
 		}
 
@@ -90,14 +85,17 @@ public class QuestionDialogBuilder extends AlertDialog.Builder {
 
 		// Error handling if broken Challenge-object was retrieved.
 		if (correctAnswerIndex < 0) {
-			Log.e(getClass().getName(), ERRORMESSAGE);
-			throw new RuntimeException(ERRORMESSAGE);
+			Log.e(getClass().getName(), QuestionDialogBuilder.this.getContext().getResources().getString(R.string.could_not_find_answer));
+			throw new RuntimeException(QuestionDialogBuilder.this.getContext().getResources().getString(R.string.could_not_find_answer));
 		}
 		String[] itemsArray = listOfAnswers.toArray(new String[listOfAnswers
 				.size()]);
-		Log.d("listOfAnswers", new Gson().toJson(itemsArray));
+		Log.d("listOfAnswers",
+				new Gson().toJson( itemsArray));
 		Log.d("correct answer index", "" + correctAnswerIndex);
 		Log.d("correct answer index", challenge.getCorrectAnswer().toString());
+
+
 
 		// Sets up the popup
 		setItems(itemsArray, new ChallengeOnClickListener(correctAnswerIndex));

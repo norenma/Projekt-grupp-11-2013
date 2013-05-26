@@ -65,6 +65,7 @@
     <string name="name_quiz">Name your QuizWalk</string>
     <string name="cancel">Cancel</string>
     <string name="no_quizwalks">No QuizWalks available</string>
-    
+ 	<string name="could_not_find_answer">"Could not find correct answer</string>   
+ 	<string name="saved">Saved!</string>
 
 </resources>
