@@ -17,7 +17,6 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 
 public class GameMenuActivity extends Activity {
 	
-	final static String NOQUIZWALKS = "There's no QuizWalks available";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +45,7 @@ public class GameMenuActivity extends Activity {
 		if (GameDatabaseManager.getInstance().getAllQuizWalkGame().size() >= 1) {
 			startActivity(new Intent(this, QuizWalkActivity.class));
 		} else {
-			Toast.makeText(this, NOQUIZWALKS,
+			Toast.makeText(this, getResources().getString(R.string.no_quizwalks),
 					Toast.LENGTH_LONG).show();
 		}
 	}

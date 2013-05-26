@@ -30,8 +30,6 @@ import com.google.common.base.Optional;
 
 // TODO: javaDoc till alla metoder
 public abstract class ActivityHelper {
-	
-	final static String QUIZWALKGAMES_EMPTY = "the list of QuizWalkGames is empty";
 
 	/**
 	 * Calculates the distance between multiple positions
@@ -123,7 +121,7 @@ public abstract class ActivityHelper {
 		checkNotNull(map);
 
 		List<Challenge> challenges = q.getChallenges();
-		List<Marker> markers = new ArrayList();
+		List<Marker> markers = new ArrayList<Marker>();
 
 		Iterator<Challenge> itChallenge = challenges.iterator();
 		Challenge currentIt;
@@ -228,7 +226,7 @@ public abstract class ActivityHelper {
 			List<QuizWalkGame> quizWalkGames, Context cxt) {
 		checkNotNull(googleMap);
 		Utilities.checkNotNullOrEmpty(quizWalkGames,
-				QUIZWALKGAMES_EMPTY);
+				R.string.list_of_quizwalks_empty);
 		List<Marker> markers = new ArrayList<Marker>();
 
 		Iterator<QuizWalkGame> qIt = quizWalkGames.iterator();

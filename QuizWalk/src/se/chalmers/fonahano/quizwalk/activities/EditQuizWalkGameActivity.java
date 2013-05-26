@@ -87,7 +87,7 @@ public class EditQuizWalkGameActivity extends Activity {
 		// question
 		// to the game.
 		Toast toast = Toast.makeText(this,
-				"Longpress a location the add a question", Toast.LENGTH_LONG);
+				R.string.longpress_to_add_question, Toast.LENGTH_LONG);
 		toast.show();
 	}
 
@@ -114,7 +114,7 @@ public class EditQuizWalkGameActivity extends Activity {
 
 				CreateQuestionFragment cqa = new CreateQuestionFragment();
 				fragmentTransaction.add(R.id.fragment_container, cqa,
-						"question");
+						getResources().getString(R.string.no_quizwalks));
 				fragmentTransaction.commit();
 
 				activeLocation = arg0;
@@ -159,12 +159,12 @@ public class EditQuizWalkGameActivity extends Activity {
 		FragmentTransaction fragmentTransaction = fragmentManager
 				.beginTransaction();
 
-		fragmentTransaction.hide(fragmentManager.findFragmentByTag("question"));
+		fragmentTransaction.hide(fragmentManager.findFragmentByTag(getResources().getString(R.string.question)));
 		fragmentTransaction.commit();
 
 		// Small text on the screen to let the user know that the Question is
 		// created
-		Toast toast = Toast.makeText(this, "Question Created!",
+		Toast toast = Toast.makeText(this, getResources().getString(R.string.question_created),
 				Toast.LENGTH_SHORT);
 		toast.show();
 	}
@@ -198,13 +198,13 @@ public class EditQuizWalkGameActivity extends Activity {
 	public void CreateQuiz(View view) {
 		// Asks the User to name the Quiz
 		AlertDialog.Builder alert = new AlertDialog.Builder(this);
-		alert.setMessage("Name your quiz:");
+		alert.setMessage(getResources().getString(R.string.name_quiz));
 
 		// Set an EditText view to get user input of the quizwalk name 
 		final EditText input = new EditText(this);
 		alert.setView(input);
 
-		alert.setPositiveButton("Create!",
+		alert.setPositiveButton(getResources().getString(R.string.create_question),
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int whichButton) {
 						String value = input.getText().toString();
@@ -221,7 +221,7 @@ public class EditQuizWalkGameActivity extends Activity {
 						// to the game.
 						Toast toast = Toast.makeText(
 								EditQuizWalkGameActivity.this,
-								"QuizWalk created!", Toast.LENGTH_LONG);
+								getResources().getString(R.string.quizwalk_created), Toast.LENGTH_LONG);
 						toast.show();
 						// Sends user back to the menu. 
 						startActivity(new Intent(EditQuizWalkGameActivity.this,
@@ -229,7 +229,7 @@ public class EditQuizWalkGameActivity extends Activity {
 					}
 				});
 
-		alert.setNegativeButton("Cancel",
+		alert.setNegativeButton(getResources().getString(R.string.cancel),
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int whichButton) {
 						return;

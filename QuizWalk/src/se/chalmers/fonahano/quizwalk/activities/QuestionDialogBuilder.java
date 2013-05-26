@@ -22,12 +22,11 @@ import com.google.gson.Gson;
  * 
  */
 public class QuestionDialogBuilder extends AlertDialog.Builder {
-	
-	
+
 	static final String ERRORMESSAGE = "Could not find correct answer";
 	static final String CORRECT = "Correct!";
 	static final String WRONG = "Wrong answer.. ";
-	
+
 	private Challenge challenge;
 
 	private class ChallengeOnClickListener implements
@@ -47,11 +46,12 @@ public class QuestionDialogBuilder extends AlertDialog.Builder {
 		@Override
 		public void onClick(DialogInterface dialog, int which) {
 			if (correctAnswerIndex == which) {
-				// TODO: Change to static string resources
-				StateSingleton.INSTANCE.getActiveQuizWalk().get().setChallengeState(challenge, ChallengeState.COMPLETED);
+				StateSingleton.INSTANCE.getActiveQuizWalk().get()
+						.setChallengeState(challenge, ChallengeState.COMPLETED);
 				showDialog(CORRECT);
 			} else {
-				StateSingleton.INSTANCE.getActiveQuizWalk().get().setChallengeState(challenge, ChallengeState.FAILED);
+				StateSingleton.INSTANCE.getActiveQuizWalk().get()
+						.setChallengeState(challenge, ChallengeState.FAILED);
 				showDialog(WRONG);
 			}
 		}
@@ -95,12 +95,9 @@ public class QuestionDialogBuilder extends AlertDialog.Builder {
 		}
 		String[] itemsArray = listOfAnswers.toArray(new String[listOfAnswers
 				.size()]);
-		Log.d("listOfAnswers",
-				new Gson().toJson( itemsArray));
+		Log.d("listOfAnswers", new Gson().toJson(itemsArray));
 		Log.d("correct answer index", "" + correctAnswerIndex);
 		Log.d("correct answer index", challenge.getCorrectAnswer().toString());
-
-		
 
 		// Sets up the popup
 		setItems(itemsArray, new ChallengeOnClickListener(correctAnswerIndex));

@@ -57,5 +57,14 @@
     <string name="please_provide_a_question_and_answers_string">Please provide a question with 4 answers.</string>
     <string name="correct_answer_prompt">Correct!</string>
     <string name="incorrect_answer_prompt">Wrong...</string>
+    <string name="list_of_quizwalks_empty">the list of QuizWalkGames is empty</string>
+    <string name="longpress_to_add_question">Longpress a location the add a question</string>
+    <string name="question">question</string>
+    <string name="question_created">Question Created!</string>
+    <string name="quizwalk_created">QuizWalk Created!</string>
+    <string name="name_quiz">Name your QuizWalk</string>
+    <string name="cancel">Cancel</string>
+    <string name="no_quizwalks">No QuizWalks available</string>
+    
 
 </resources>
