@@ -27,9 +27,6 @@ public enum StateSingleton {
 
 	INSTANCE;
 
-	public static class Key {
-	}
-
 	/**
 	 * The users current location, or at least the last known position.
 	 */
@@ -56,12 +53,6 @@ public enum StateSingleton {
 		currentChallengeBuilder = null;
 		currentQuizWalkBuilder = null;
 	}
-
-	// TODO: Debug methods to get all nodes. I don't like arrays but since we
-	// don't want to let View (mVc) to modify our list we'll do this way
-	// now.
-	// Check Google Guava on Immutable Collections.
-	// https://google-collections.googlecode.com/svn/trunk/javadoc/com/google/common/collect/ImmutableList.html
 
 	/**
 	 * Gets the list of saved nodes. Use <code>addNode()</code> to save nodes.
@@ -133,8 +124,8 @@ public enum StateSingleton {
 	/**
 	 * @param currentQuizWalkBuilder
 	 *            the currentQuizWalkBuilder to set
-	 * @return the key {@link Action#STATE_CHANGED_QUIZWALK_BUILDER} that represents
-	 *         this intent.
+	 * @return the key {@link Action#STATE_CHANGED_QUIZWALK_BUILDER} that
+	 *         represents this intent.
 	 */
 	public String setCurrentQuizWalkBuilder(
 			QuizWalkGame.Builder currentQuizWalkBuilder) {
@@ -146,8 +137,8 @@ public enum StateSingleton {
 	 * @param currentChallengeBuilder
 	 *            the currentChallengeBuilder to set. Set to null to clear.
 	 * 
-	 * @return the key {@link Action#STATE_CHANGED_CHALLENGE_BUILDER} that represents
-	 *         this intent.
+	 * @return the key {@link Action#STATE_CHANGED_CHALLENGE_BUILDER} that
+	 *         represents this intent.
 	 */
 	public String setCurrentChallengeBuilder(
 			Challenge.Builder currentChallengeBuilder) {
@@ -159,8 +150,8 @@ public enum StateSingleton {
 	 * @param activeQuizWalk
 	 *            the activeQuizWalk to set. Set to null to clear.
 	 * 
-	 * @return the key {@link Action#STATE_CHANGED_ACTIVE_QUIZWALK} that represents
-	 *         this intent.
+	 * @return the key {@link Action#STATE_CHANGED_ACTIVE_QUIZWALK} that
+	 *         represents this intent.
 	 */
 	public String setActiveQuizWalk(QuizWalkGame activeQuizWalk) {
 		this.activeQuizWalk = activeQuizWalk;

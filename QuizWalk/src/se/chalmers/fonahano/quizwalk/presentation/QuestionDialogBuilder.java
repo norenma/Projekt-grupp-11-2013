@@ -3,16 +3,14 @@ package se.chalmers.fonahano.quizwalk.presentation;
 import java.util.ArrayList;
 import java.util.List;
 
+import se.chalmers.fonahano.quizwalk.R;
 import se.chalmers.fonahano.quizwalk.interfaces.Answer;
 import se.chalmers.fonahano.quizwalk.model.Challenge;
 import se.chalmers.fonahano.quizwalk.model.QuizWalkGame.ChallengeState;
-import se.chalmers.fonahano.quizwalk.R;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.util.Log;
-
-import com.google.gson.Gson;
 
 /***
  * A Fragment to show a question as Dialog to the user When shown, it displays A
@@ -21,10 +19,6 @@ import com.google.gson.Gson;
  * 
  */
 public class QuestionDialogBuilder extends AlertDialog.Builder {
-
-
-	private Challenge challenge;
-
 	private class ChallengeOnClickListener implements
 			DialogInterface.OnClickListener {
 
@@ -42,16 +36,23 @@ public class QuestionDialogBuilder extends AlertDialog.Builder {
 		@Override
 		public void onClick(DialogInterface dialog, int which) {
 			if (correctAnswerIndex == which) {
-				StateSingleton.INSTANCE.getActiveQuizWalk().get().setChallengeState(challenge, ChallengeState.COMPLETED);
-				showDialog(QuestionDialogBuilder.this.getContext().getResources().getString(R.string.correct_answer_prompt));
+				StateSingleton.INSTANCE.getActiveQuizWalk().get()
+						.setChallengeState(challenge, ChallengeState.COMPLETED);
+				showDialog(QuestionDialogBuilder.this.getContext()
+						.getResources()
+						.getString(R.string.correct_answer_prompt));
 			} else {
-				StateSingleton.INSTANCE.getActiveQuizWalk().get().setChallengeState(challenge, ChallengeState.FAILED);
-				showDialog(QuestionDialogBuilder.this.getContext().getResources().getString(R.string.incorrect_answer_prompt));
+				StateSingleton.INSTANCE.getActiveQuizWalk().get()
+						.setChallengeState(challenge, ChallengeState.FAILED);
+				showDialog(QuestionDialogBuilder.this.getContext()
+						.getResources()
+						.getString(R.string.incorrect_answer_prompt));
 			}
 		}
 
 	}
 
+	private Challenge challenge;
 	private int correctAnswerIndex = -1;
 
 	public QuestionDialogBuilder(Context arg0) {
@@ -84,17 +85,13 @@ public class QuestionDialogBuilder extends AlertDialog.Builder {
 
 		// Error handling if broken Challenge-object was retrieved.
 		if (correctAnswerIndex < 0) {
-			Log.e(getClass().getName(), QuestionDialogBuilder.this.getContext().getResources().getString(R.string.could_not_find_answer));
-			throw new RuntimeException(QuestionDialogBuilder.this.getContext().getResources().getString(R.string.could_not_find_answer));
+			Log.e(getClass().getName(), QuestionDialogBuilder.this.getContext()
+					.getResources().getString(R.string.could_not_find_answer));
+			throw new RuntimeException(QuestionDialogBuilder.this.getContext()
+					.getResources().getString(R.string.could_not_find_answer));
 		}
 		String[] itemsArray = listOfAnswers.toArray(new String[listOfAnswers
 				.size()]);
-		Log.d("listOfAnswers",
-				new Gson().toJson( itemsArray));
-		Log.d("correct answer index", "" + correctAnswerIndex);
-		Log.d("correct answer index", challenge.getCorrectAnswer().toString());
-
-
 
 		// Sets up the popup
 		setItems(itemsArray, new ChallengeOnClickListener(correctAnswerIndex));

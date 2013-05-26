@@ -15,15 +15,15 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
 public class GameMenuActivity extends Activity {
-	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 		// remove actionbar
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		super.onCreate(savedInstanceState);
+
 		setContentView(R.layout.activity_game_menu);
 		// Show the Up button in the action bar.
 
@@ -44,7 +44,8 @@ public class GameMenuActivity extends Activity {
 		if (GameDatabaseManager.getInstance().getAllQuizWalkGame().size() >= 1) {
 			startActivity(new Intent(this, QuizWalkActivity.class));
 		} else {
-			Toast.makeText(this, getResources().getString(R.string.no_quizwalks),
+			Toast.makeText(this,
+					getResources().getString(R.string.no_quizwalks),
 					Toast.LENGTH_LONG).show();
 		}
 	}

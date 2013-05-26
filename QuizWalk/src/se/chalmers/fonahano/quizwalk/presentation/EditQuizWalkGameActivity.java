@@ -1,7 +1,6 @@
 package se.chalmers.fonahano.quizwalk.presentation;
 
 import static se.chalmers.fonahano.quizwalk.model.Utilities.checkNotNullOrEmpty;
-
 import se.chalmers.fonahano.quizwalk.R;
 import se.chalmers.fonahano.quizwalk.database.GameDatabaseManager;
 import se.chalmers.fonahano.quizwalk.database.LocalDatabase;
@@ -36,8 +35,6 @@ import com.google.common.base.Optional;
  * Class to show a map and let user insert questions into a custom
  * quizwalk-game.
  * 
- * @author Markus Andersson Nor�n
- * 
  */
 public class EditQuizWalkGameActivity extends Activity {
 
@@ -56,52 +53,58 @@ public class EditQuizWalkGameActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// remove actionbar
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_edit_game);
 
-
-		//checks if gps is turned on
-		if (!((LocationManager) getSystemService(LOCATION_SERVICE)).isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+		// checks if gps is turned on
+		if (!((LocationManager) getSystemService(LOCATION_SERVICE))
+				.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
 			ActivityHelper.showEnableGPSDialog(this);
 		}
 		// shows where user is now.
 		map.setMyLocationEnabled(true);
 		map.getUiSettings().setZoomControlsEnabled(false);
 
-		//map.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(map.getMyLocation().getLatitude(), map.getMyLocation().getLongitude())));
+		// map.moveCamera(CameraUpdateFactory.newLatLng(new
+		// LatLng(map.getMyLocation().getLatitude(),
+		// map.getMyLocation().getLongitude())));
 		setupMap();
 
 		// Retrieves the included QuizWalk if there is one.
-		if (this.getIntent().getAction().equals(C.Intent.Action.EDIT_NEW_QUIZ_WALK)) {
+		if (this.getIntent().getAction()
+				.equals(C.Intent.Action.EDIT_NEW_QUIZ_WALK)) {
 			builder = new QuizWalkGame.Builder();
 		} else {
-			QuizWalkGame qwg = StateSingleton.INSTANCE.getActiveQuizWalk().get();
+			QuizWalkGame qwg = StateSingleton.INSTANCE.getActiveQuizWalk()
+					.get();
 			ActivityHelper.populateMap(map, qwg, this);
 			builder = new QuizWalkGame.Builder(qwg);
 		}
-		
-		setupMap();
 
 		// Small text on the screen to let the user know how to input a new
 		// question
 		// to the game.
-		Toast toast = Toast.makeText(this,
-				this.getResources().getString(R.string.longpress_to_add_question), Toast.LENGTH_LONG);
+		Toast toast = Toast.makeText(
+				this,
+				this.getResources().getString(
+						R.string.longpress_to_add_question), Toast.LENGTH_LONG);
 
 		toast.show();
-		
-		
+
 	}
 
 	/**
 	 * Sets up the map, and adds a click-listener
 	 */
 	private void setupMap() {
-		map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
+		map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map))
+				.getMap();
 
-		//checks if gps is turned on
-		if (!((LocationManager) getSystemService(LOCATION_SERVICE)).isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+		// checks if gps is turned on
+		if (!((LocationManager) getSystemService(LOCATION_SERVICE))
+				.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
 			ActivityHelper.showEnableGPSDialog(this);
 		}
 		// shows where user is now.
@@ -122,7 +125,8 @@ public class EditQuizWalkGameActivity extends Activity {
 
 				// Creates and shows a dialog asking user for question details
 				FragmentManager fragmentManager = getFragmentManager();
-				FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+				FragmentTransaction fragmentTransaction = fragmentManager
+						.beginTransaction();
 
 				CreateQuestionFragment cqa = new CreateQuestionFragment();
 				fragmentTransaction.add(R.id.fragment_container, cqa,
@@ -142,7 +146,7 @@ public class EditQuizWalkGameActivity extends Activity {
 	 * 
 	 * @param view
 	 */
-	public void CreateQuestion(View view) {
+	public void onButtonClicked_createQuestion(View view) {
 		Challenge.Builder build = new Challenge.Builder();
 
 		try {
@@ -213,7 +217,7 @@ public class EditQuizWalkGameActivity extends Activity {
 	 * 
 	 * @param view
 	 */
-	public void CreateQuiz(View view) {
+	public void onButtonClicked_createQuizWalk(View view) {
 		// Asks the User to name the Quiz
 		AlertDialog.Builder alert = new AlertDialog.Builder(this);
 		alert.setMessage(getResources().getString(R.string.name_quiz));

@@ -1,12 +1,9 @@
 package se.chalmers.fonahano.quizwalk.presentation;
 
 import se.chalmers.fonahano.quizwalk.R;
-import se.chalmers.fonahano.quizwalk.R.layout;
-import se.chalmers.fonahano.quizwalk.R.menu;
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
-import android.view.Menu;
+import android.os.Bundle;
 import android.view.View;
 
 /***

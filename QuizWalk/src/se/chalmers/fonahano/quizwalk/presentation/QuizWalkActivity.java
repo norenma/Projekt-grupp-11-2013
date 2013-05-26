@@ -30,13 +30,11 @@ import android.provider.Settings;
 import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 
 public class QuizWalkActivity extends Activity implements LocationListener {
@@ -51,12 +49,15 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		// remove actionbar
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_quiz_walk_game);
-		map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
+		map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map))
+				.getMap();
 
-		final QuestionDialogBuilder questionFragment = new QuestionDialogBuilder(this);
+		final QuestionDialogBuilder questionFragment = new QuestionDialogBuilder(
+				this);
 
 		// db init
 		db = GameDatabaseManager.getInstance();
@@ -64,10 +65,13 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 		// shows where user is now.
 		map.setMyLocationEnabled(true);
 
-		if (getIntent().getBooleanExtra(C.Intent.Extra.PROXIMITY_ALERT_MESSAGE, false)) {
-			double[] challengeLatLng = getIntent().getDoubleArrayExtra(C.Intent.Extra.PROXIMITY_ALERT_MESSAGE);
+		if (getIntent().getBooleanExtra(C.Intent.Extra.PROXIMITY_ALERT_MESSAGE,
+				false)) {
+			double[] challengeLatLng = getIntent().getDoubleArrayExtra(
+					C.Intent.Extra.PROXIMITY_ALERT_MESSAGE);
 
-			questionFragment.showChallenge(q.getChallenge(new Coordinates(challengeLatLng[0], challengeLatLng[1])));
+			questionFragment.showChallenge(q.getChallenge(new Coordinates(
+					challengeLatLng[0], challengeLatLng[1])));
 		}
 
 		// Checks if the gps is turned on
@@ -79,7 +83,8 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 
 		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-		final int gameMapState = getIntent().getIntExtra(Extra.GameMap.MAP_STATE, 1);
+		final int gameMapState = getIntent().getIntExtra(
+				Extra.GameMap.MAP_STATE, 1);
 
 		if (gameMapState == 1) {
 			ActivityHelper.populateMap(map, db.getAllQuizWalkGame(), this);
@@ -94,30 +99,41 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 		Intent intent = getIntent();
 
 		if (intent.getBooleanExtra(Extra.PROXIMITY_ALERT_MESSAGE, false) == true) {
-			double[] intentChallengeLatLng = intent.getDoubleArrayExtra(Extra.PROXIMITY_ALERT_MESSAGE);
-			questionFragment.showChallenge(q.getChallenge(new Coordinates(intentChallengeLatLng[0], intentChallengeLatLng[1])));
+			double[] intentChallengeLatLng = intent
+					.getDoubleArrayExtra(Extra.PROXIMITY_ALERT_MESSAGE);
+			questionFragment.showChallenge(q.getChallenge(new Coordinates(
+					intentChallengeLatLng[0], intentChallengeLatLng[1])));
 		}
 
 		map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
 			@Override
 			public boolean onMarkerClick(Marker marker) {
 				if (gameMapState == 2) {
-					Challenge markerChallenge = q.getChallenge(Utilities.latLngToCoordinates(marker.getPosition()));
+					Challenge markerChallenge = q.getChallenge(Utilities
+							.latLngToCoordinates(marker.getPosition()));
 
-					if (!q.getChallengeStateOf(markerChallenge).equals(ChallengeState.COMPLETED) || !q.getChallengeStateOf(markerChallenge).equals(ChallengeState.FAILED)) {
-						questionFragment.showChallenge(q.getChallenge(Utilities.latLngToCoordinates(marker.getPosition())));
+					if (!q.getChallengeStateOf(markerChallenge).equals(
+							ChallengeState.COMPLETED)
+							|| !q.getChallengeStateOf(markerChallenge).equals(
+									ChallengeState.FAILED)) {
+						questionFragment.showChallenge(q.getChallenge(Utilities
+								.latLngToCoordinates(marker.getPosition())));
 
 						if (q.isGameCompleted()) {
-							Intent completedQuizWalkIntent = new Intent(QuizWalkActivity.this, CompletedQuizWalkActivity.class);
+							Intent completedQuizWalkIntent = new Intent(
+									QuizWalkActivity.this,
+									CompletedQuizWalkActivity.class);
 							StateSingleton.INSTANCE.setActiveQuizWalk(q);
-							completedQuizWalkIntent.setAction(C.Intent.Action.STATE_CHANGED_COMPLETED_QUIZWALK);
+							completedQuizWalkIntent
+									.setAction(C.Intent.Action.STATE_CHANGED_COMPLETED_QUIZWALK);
 
 							startActivity(completedQuizWalkIntent);
 						}
 					}
 
 				} else {
-					showQuizWalkStartDialog(ActivityHelper.getQuizWalkGame(marker.getTitle()).get());
+					showQuizWalkStartDialog(ActivityHelper.getQuizWalkGame(
+							marker.getTitle()).get());
 				}
 
 				return true;
@@ -130,7 +146,8 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 		location = locationManager.getLastKnownLocation(provider);
 
 		// not rendering properly
-		map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 1));
+		map.moveCamera(CameraUpdateFactory.newLatLngZoom(
+				new LatLng(location.getLatitude(), location.getLongitude()), 1));
 
 		checkNotNull(location);
 		onLocationChanged(location);
@@ -186,7 +203,8 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 		ab.setItems(choice, new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface d, int choice) {
 				if (choice == 0) {
-					Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+					Intent intent = new Intent(
+							Settings.ACTION_LOCATION_SOURCE_SETTINGS);
 					startActivity(intent);
 				}
 
@@ -204,7 +222,8 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 		ab.setItems(choice, new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface d, int choice) {
 				if (choice == 0) {
-					Intent intent = new Intent(QuizWalkActivity.this, QuizWalkActivity.class);
+					Intent intent = new Intent(QuizWalkActivity.this,
+							QuizWalkActivity.class);
 					intent.putExtra(Extra.GameMap.MAP_STATE, 2);
 					StateSingleton.INSTANCE.setActiveQuizWalk(q);
 
@@ -234,16 +253,21 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 			Challenge itNext = it.next();
 			ChallengeLocation location = itNext.getLocation();
 			Intent intent = new Intent(this, ProximityIntentReceiver.class);
-			double[] latNLng = { itNext.getLocation().getLatitude(), itNext.getLocation().getLongitude() };
+			double[] latNLng = { itNext.getLocation().getLatitude(),
+					itNext.getLocation().getLongitude() };
 
 			intent.putExtra(Extra.PROXIMITY_ALERT_MESSAGE, latNLng);
 			// To verify that the intent is in fact a question
 			intent.putExtra(Extra.PROXIMITY_ALERT_MESSAGE, true);
 
-			PendingIntent pIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
-			lm.addProximityAlert(location.getLatitude(), location.getLongitude(), Extra.MARKER_PROXIMITY_RADIUS, -1, pIntent);
+			PendingIntent pIntent = PendingIntent.getBroadcast(this, 0, intent,
+					0);
+			lm.addProximityAlert(location.getLatitude(),
+					location.getLongitude(), Extra.MARKER_PROXIMITY_RADIUS, -1,
+					pIntent);
 
-			IntentFilter filter = new IntentFilter(C.Intent.Extra.PROXIMITY_ALERT_MESSAGE);
+			IntentFilter filter = new IntentFilter(
+					C.Intent.Extra.PROXIMITY_ALERT_MESSAGE);
 			registerReceiver(new ProximityIntentReceiver(), filter);
 
 		}
