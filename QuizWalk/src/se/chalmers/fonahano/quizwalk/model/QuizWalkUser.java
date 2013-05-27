@@ -240,7 +240,9 @@ public class QuizWalkUser implements Serializable, User {
 		return new GsonBuilder().setPrettyPrinting().create().toJson(this);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -248,14 +250,21 @@ public class QuizWalkUser implements Serializable, User {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((listOfUserRewards == null) ? 0 : listOfUserRewards.hashCode());
+		result = prime
+				* result
+				+ ((listOfUserRewards == null) ? 0 : listOfUserRewards
+						.hashCode());
 		result = prime * result + Arrays.hashCode(password);
-		result = prime * result + ((userName == null) ? 0 : userName.hashCode());
-		result = prime * result + ((userSettings == null) ? 0 : userSettings.hashCode());
+		result = prime * result
+				+ ((userName == null) ? 0 : userName.hashCode());
+		result = prime * result
+				+ ((userSettings == null) ? 0 : userSettings.hashCode());
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override

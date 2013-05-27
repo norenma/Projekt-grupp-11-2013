@@ -1,6 +1,5 @@
 package se.chalmers.fonahano.quizwalk.presentation;
 
-import static com.google.common.base.Preconditions.checkNotNull;
 import se.chalmers.fonahano.quizwalk.R;
 import se.chalmers.fonahano.quizwalk.database.GameDatabaseManager;
 import se.chalmers.fonahano.quizwalk.database.LocalDatabase;

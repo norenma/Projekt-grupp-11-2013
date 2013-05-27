@@ -1,7 +1,5 @@
 package se.chalmers.fonahano.quizwalk.presentation;
 
-import com.google.android.gms.common.GooglePlayServicesUtil;
-
 import se.chalmers.fonahano.quizwalk.R;
 import se.chalmers.fonahano.quizwalk.database.GameDatabaseManager;
 import se.chalmers.fonahano.quizwalk.database.LocalDatabase;
@@ -13,6 +11,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.Window;
 import android.view.WindowManager;
+
+import com.google.android.gms.common.GooglePlayServicesUtil;
 
 /**
  * Empty activity to set up program before GUI.
@@ -33,7 +33,7 @@ public class LauncherActivity extends Activity {
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.activity_launcher);
 
-		//deleteDatabase(C.Data.DATABASE_NAME);
+		// deleteDatabase(C.Data.DATABASE_NAME);
 		GameDatabaseManager.init(this);
 
 		LocalDatabase gdm = GameDatabaseManager.getInstance();

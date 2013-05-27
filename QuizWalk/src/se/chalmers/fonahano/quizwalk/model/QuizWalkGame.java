@@ -11,7 +11,6 @@ import java.util.List;
 import se.chalmers.fonahano.quizwalk.interfaces.Image;
 import se.chalmers.fonahano.quizwalk.interfaces.LatitudeLongitude;
 
-import com.google.android.gms.games.Game;
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
 import com.j256.ormlite.field.DataType;
@@ -33,7 +32,6 @@ import com.j256.ormlite.table.DatabaseTable;
  */
 @DatabaseTable(tableName = "quizwalkgames")
 public class QuizWalkGame {
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Builder pattern class for QuizWalkGame. "Builder"-class makes it easier
@@ -169,11 +167,14 @@ public class QuizWalkGame {
 		public int hashCode() {
 			final int prime = 31;
 			int result = 1;
-			result = prime * result + ((challenges == null) ? 0 : challenges.hashCode());
-			result = prime * result + ((description == null) ? 0 : description.hashCode());
+			result = prime * result
+					+ ((challenges == null) ? 0 : challenges.hashCode());
+			result = prime * result
+					+ ((description == null) ? 0 : description.hashCode());
 			result = prime * result + ((image == null) ? 0 : image.hashCode());
 			result = prime * result + ((name == null) ? 0 : name.hashCode());
-			result = prime * result + ((reward == null) ? 0 : reward.hashCode());
+			result = prime * result
+					+ ((reward == null) ? 0 : reward.hashCode());
 			return result;
 		}
 
@@ -396,7 +397,6 @@ public class QuizWalkGame {
 		return ImmutableList.copyOf(challenges);
 	}
 
-
 	/**
 	 * Sets a Challenge in this game to a particular {@link GameState}. If you
 	 * want to clean ChallengeState data use stop() or start() instead.
@@ -527,9 +527,12 @@ public class QuizWalkGame {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((challengeStates == null) ? 0 : challengeStates.hashCode());
-		result = prime * result + ((challenges == null) ? 0 : challenges.hashCode());
-		result = prime * result + ((description == null) ? 0 : description.hashCode());
+		result = prime * result
+				+ ((challengeStates == null) ? 0 : challengeStates.hashCode());
+		result = prime * result
+				+ ((challenges == null) ? 0 : challenges.hashCode());
+		result = prime * result
+				+ ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((image == null) ? 0 : image.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((reward == null) ? 0 : reward.hashCode());

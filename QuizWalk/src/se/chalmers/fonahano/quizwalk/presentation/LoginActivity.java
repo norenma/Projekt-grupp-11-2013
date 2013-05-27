@@ -46,12 +46,6 @@ public class LoginActivity extends Activity {
 
 		map.getUiSettings().setZoomControlsEnabled(false);
 
-		CameraPosition cameraPos = new CameraPosition.Builder()
-				.target(new LatLng(57.685528, 12.979389)).zoom(12).build();
-
-		// not rendering properly
-		// map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPos),
-		// 100000, null);
 	}
 
 	/***
