@@ -7,7 +7,9 @@ import se.chalmers.fonahano.quizwalk.R;
 import se.chalmers.fonahano.quizwalk.model.Challenge;
 import se.chalmers.fonahano.quizwalk.model.QuizWalkGame;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
@@ -56,5 +58,9 @@ public class CompletedQuizWalkActivity extends Activity {
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
 				android.R.layout.simple_list_item_1, items);
 		list.setAdapter(adapter);
+	}
+	
+	public void onClick_backMenu(View view){
+		startActivity(new Intent(this, GameMenuActivity.class));
 	}
 }

@@ -6,10 +6,13 @@ import java.util.List;
 import se.chalmers.fonahano.quizwalk.R;
 import se.chalmers.fonahano.quizwalk.interfaces.Answer;
 import se.chalmers.fonahano.quizwalk.model.Challenge;
+import se.chalmers.fonahano.quizwalk.model.QuizWalkGame;
 import se.chalmers.fonahano.quizwalk.model.QuizWalkGame.ChallengeState;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.DialogInterface.OnCancelListener;
 import android.util.Log;
 
 /***
@@ -21,6 +24,25 @@ import android.util.Log;
 public class QuestionDialogBuilder extends AlertDialog.Builder {
 	private class ChallengeOnClickListener implements
 			DialogInterface.OnClickListener {
+
+		private final class ChallengeDoneListener implements OnCancelListener {
+			@Override
+			public void onCancel(DialogInterface dialog) {
+				QuizWalkGame q = StateSingleton.INSTANCE.getActiveQuizWalk().get();
+				if (q != null) {
+					if (q.isGameCompleted()) {
+						Intent completedQuizWalkIntent = new Intent(
+								QuestionDialogBuilder.this.getContext(), CompletedQuizWalkActivity.class);
+						StateSingleton.INSTANCE.setActiveQuizWalk(q);
+						completedQuizWalkIntent
+								.setAction(C.Intent.Action.STATE_CHANGED_COMPLETED_QUIZWALK);
+
+						getContext().startActivity(completedQuizWalkIntent);
+					}//TODO
+				}
+				
+			}
+		}
 
 		private final int correctAnswerIndex;
 
@@ -40,13 +62,14 @@ public class QuestionDialogBuilder extends AlertDialog.Builder {
 						.setChallengeState(challenge, ChallengeState.COMPLETED);
 				showDialog(QuestionDialogBuilder.this.getContext()
 						.getResources()
-						.getString(R.string.correct_answer_prompt));
+						.getString(R.string.correct_answer_prompt)).setOnCancelListener(new ChallengeDoneListener());;
 			} else {
 				StateSingleton.INSTANCE.getActiveQuizWalk().get()
 						.setChallengeState(challenge, ChallengeState.FAILED);
 				showDialog(QuestionDialogBuilder.this.getContext()
 						.getResources()
-						.getString(R.string.incorrect_answer_prompt));
+						.getString(R.string.incorrect_answer_prompt)).setOnCancelListener(new ChallengeDoneListener());
+
 			}
 		}
 
@@ -92,16 +115,15 @@ public class QuestionDialogBuilder extends AlertDialog.Builder {
 		}
 		String[] itemsArray = listOfAnswers.toArray(new String[listOfAnswers
 				.size()]);
-		Log.d("derp", listOfAnswers.size() + " "+ itemsArray.length);
+		Log.d("derp", listOfAnswers.size() + " " + itemsArray.length);
 
 		// Sets up the popup
 		setItems(itemsArray, new ChallengeOnClickListener(correctAnswerIndex));
 
 		// Sets the question
 		setTitle(challenge.getQuestion().get());
-
 		// Displays the pop-up
-		show();
+				show();
 	}
 
 }

@@ -65,7 +65,7 @@ public class LoginActivity extends Activity {
 		if (gdm.getUser().isCorrectPassword(
 				((EditText) findViewById(R.id.Password)).getText().toString())
 				&& gdm.getUser()
-						.getEmail()
+						.getUserName()
 						.equals(((EditText) findViewById(R.id.Email)).getText()
 								.toString())) {
 			Intent intent = new Intent(this, GameMenuActivity.class);
