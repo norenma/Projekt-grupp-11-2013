@@ -12,6 +12,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -62,12 +63,17 @@ public class LoginActivity extends Activity {
 						.getUserName()
 						.equals(((EditText) findViewById(R.id.Email)).getText()
 								.toString())) {
+			Toast.makeText(
+					this,
+					this.getResources().getString(
+							R.string.logged_in), Toast.LENGTH_SHORT).show();
 			Intent intent = new Intent(this, GameMenuActivity.class);
 			startActivity(intent);
 		} else {
-			// shows a error-text
-			((TextView) findViewById(R.id.errorMessage))
-					.setText(R.string.wrong_password);
+			Toast.makeText(
+					this,
+					this.getResources().getString(
+							R.string.wrong_password), Toast.LENGTH_SHORT).show();
 		}
 
 	}
