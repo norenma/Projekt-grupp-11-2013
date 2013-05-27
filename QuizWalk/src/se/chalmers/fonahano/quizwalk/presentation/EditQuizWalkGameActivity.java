@@ -104,7 +104,8 @@ public class EditQuizWalkGameActivity extends Activity {
 		}else{
 			locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 			provider = locationManager.getBestProvider(new Criteria(), false);
-
+			
+			
 			location = locationManager.getLastKnownLocation(provider);
 
 			// not rendering properly

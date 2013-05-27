@@ -42,7 +42,7 @@ public class SettingsActivity extends Activity {
 	}
 
 	public void onButtonClick_about(View v) {
-		startActivity(new Intent(this, CompletedQuizWalkActivity.class));
+		startActivity(new Intent(this, SettingsActivity.class));
 	}
 
 	/**

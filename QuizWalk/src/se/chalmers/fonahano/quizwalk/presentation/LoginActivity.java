@@ -74,7 +74,7 @@ public class LoginActivity extends Activity {
 					this,
 					this.getResources().getString(
 							R.string.wrong_password), Toast.LENGTH_SHORT).show();
-		}
+		}//TODO red text, other position and bigger
 
 	}
 
