@@ -21,17 +21,23 @@ import android.widget.EditText;
 
 public class SettingsActivity extends Activity {
 
+	EditText userName;
 	/**
 	 * Creates SettingsActivity and shows the layout. Removes actionbar.
 	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_settings);
+		
+		userName = (EditText) findViewById(R.id.username_tv);
+		userName.setText(GameDatabaseManager.getInstance().getUser().getUserName());
+		
 		// remove actionbar
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_settings);
+		
 	}
 
 	/**
