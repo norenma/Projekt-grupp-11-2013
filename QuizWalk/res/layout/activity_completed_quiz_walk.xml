@@ -30,23 +30,26 @@
         android:textSize="35dp"
         android:textStyle="bold" />
 
-    <ListView
-        android:id="@+id/challenges"
-        android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:layout_above="@+id/button1"
+    <Button
+        android:id="@+id/button1"
+        style="@style/ButtonBar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/textView3">
-
-    </ListView>
+        android:layout_alignParentBottom="true"
+        android:alpha="0.8"
+        android:onClick="onClick_backMenu"
+        android:text="@string/back_menu" />
 
     <TextView
         android:id="@+id/points"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/textView1"
         android:layout_below="@+id/textView1"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="29dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="100dp"
+        android:text="30"
         android:textColor="@color/white"
         android:textSize="30dp" />
 
@@ -59,16 +62,5 @@
         android:text="@string/points_string"
         android:textColor="#FFFFFF"
         android:textSize="25dp" />
-
-    <Button
-        android:id="@+id/button1"
-        style="@style/ButtonBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/challenges"
-        android:layout_alignParentBottom="true"
-        android:text="@string/back_menu"
-        android:alpha="0.8"
-        android:onClick="onClick_backMenu" />
 
 </RelativeLayout>

@@ -1,19 +1,11 @@
 package se.chalmers.fonahano.quizwalk.presentation;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import se.chalmers.fonahano.quizwalk.R;
-import se.chalmers.fonahano.quizwalk.model.Challenge;
 import se.chalmers.fonahano.quizwalk.model.QuizWalkGame;
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 
 /***
@@ -37,7 +29,7 @@ public class CompletedQuizWalkActivity extends Activity {
 			quizWalkGame = StateSingleton.INSTANCE.getActiveQuizWalk().get();
 			TextView points = (TextView) findViewById(R.id.points);
 			points.setText(quizWalkGame.getCurrentScore() + "");
-			fillListView(quizWalkGame);
+			//fillListView(quizWalkGame);
 
 		}
 
@@ -47,19 +39,19 @@ public class CompletedQuizWalkActivity extends Activity {
 	 * Fill the ListView with all of the challenges in the current QuizWalkGame.
 	 */
 
-	private void fillListView(QuizWalkGame game) {
-		List<Challenge> challenges = game.getChallenges();
-		ListView list = (ListView) findViewById(R.id.challenges);
-		List<String> items = new ArrayList<String>();
-		for (Challenge c : challenges) {
-			items.add(c.getQuestion().toString());
-		}
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-				android.R.layout.simple_list_item_1, items);
-		list.setAdapter(adapter);
-	}
-	
-	public void onClick_backMenu(View view){
-		startActivity(new Intent(this, GameMenuActivity.class));
-	}
+	// private void fillListView(QuizWalkGame game) {
+	// List<Challenge> challenges = game.getChallenges();
+	// ListView list = (ListView) findViewById(R.id.challenges);
+	// List<String> items = new ArrayList<String>();
+	// for (Challenge c : challenges) {
+	// items.add(c.getQuestion().toString());
+	// }
+	// ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+	// android.R.layout.simple_list_item_1, items);
+	// list.setAdapter(adapter);
+	// }
+	//
+	// public void onClick_backMenu(View view){
+	// startActivity(new Intent(this, GameMenuActivity.class));
+	// }
 }

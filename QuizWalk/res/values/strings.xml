@@ -51,7 +51,7 @@
     <string name="logout_settings">Logout</string>
     <string name="about_settings">About</string>
     <string name="help_settings">Help</string>
-    <string name="you_got">You got:</string>
+    <string name="you_got">You have gained:</string>
     <string name="points_string">Points</string>
     <string name="save_settings">Save</string>
     <string name="please_provide_a_question_and_answers_string">Please provide a question with 4 answers.</string>
