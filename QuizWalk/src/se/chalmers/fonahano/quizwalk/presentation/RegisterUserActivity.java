@@ -61,8 +61,8 @@ public class RegisterUserActivity extends Activity {
 		GameDatabaseManager.init(this);
 		LocalDatabase gdm = GameDatabaseManager.getInstance();
 		QuizWalkUser user = gdm.getUser();
-		user.setEmail(((EditText) this.findViewById(R.id.Email)).getText()
-				.toString());
+		user.setUserName(((EditText) this.findViewById(R.id.Email))
+				.getText().toString());
 		user.setPassword(((EditText) this.findViewById(R.id.PasswordText))
 				.getText().toString());
 		gdm.updateUser(user);

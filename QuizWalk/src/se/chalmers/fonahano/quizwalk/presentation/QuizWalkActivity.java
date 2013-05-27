@@ -107,6 +107,8 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 					intentChallengeLatLng[0], intentChallengeLatLng[1])));
 		}
 
+
+
 		map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
 			@Override
 			public boolean onMarkerClick(Marker marker) {
@@ -121,16 +123,6 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 						questionFragment.showChallenge(q.getChallenge(Utilities
 								.latLngToCoordinates(marker.getPosition())));
 
-						if (q.isGameCompleted()) {
-							Intent completedQuizWalkIntent = new Intent(
-									QuizWalkActivity.this,
-									CompletedQuizWalkActivity.class);
-							StateSingleton.INSTANCE.setActiveQuizWalk(q);
-							completedQuizWalkIntent
-									.setAction(C.Intent.Action.STATE_CHANGED_COMPLETED_QUIZWALK);
-
-							startActivity(completedQuizWalkIntent);
-						}
 					}
 
 				} else {

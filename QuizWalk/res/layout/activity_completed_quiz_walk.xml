@@ -10,15 +10,6 @@
     tools:context=".CompletedQuizWalkActivity" >
 
     <TextView
-        android:id="@+id/points"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/textView2"
-        android:layout_below="@+id/textView2"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="65dp" />
-
-    <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -39,24 +30,45 @@
         android:textSize="35dp"
         android:textStyle="bold" />
 
+    <ListView
+        android:id="@+id/challenges"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_above="@+id/button1"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_below="@+id/textView3">
+
+    </ListView>
+
+    <TextView
+        android:id="@+id/points"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="29dp"
+        android:textColor="@color/white"
+        android:textSize="30dp" />
+
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/points"
-        android:layout_marginTop="87dp"
+        android:layout_alignBottom="@+id/points"
+        android:layout_toRightOf="@+id/points"
         android:text="@string/points_string"
         android:textColor="#FFFFFF"
         android:textSize="25dp" />
 
-    <ListView
-        android:id="@+id/challenges"
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/button1"
+        style="@style/ButtonBar"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/textView3"
-        android:layout_marginTop="14dp" >
-    </ListView>
+        android:layout_alignLeft="@+id/challenges"
+        android:layout_alignParentBottom="true"
+        android:text="@string/back_menu"
+        android:alpha="0.8"
+        android:onClick="onClick_backMenu" />
 
 </RelativeLayout>
