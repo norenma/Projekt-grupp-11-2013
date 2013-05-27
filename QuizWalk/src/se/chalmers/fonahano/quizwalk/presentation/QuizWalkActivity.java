@@ -61,6 +61,8 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 
 		// db init
 		db = GameDatabaseManager.getInstance();
+		
+		map.getUiSettings().setZoomControlsEnabled(false);
 
 		// shows where user is now.
 		map.setMyLocationEnabled(true);
@@ -147,7 +149,7 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 
 		// not rendering properly
 		map.moveCamera(CameraUpdateFactory.newLatLngZoom(
-				new LatLng(location.getLatitude(), location.getLongitude()), 1));
+				new LatLng(location.getLatitude(), location.getLongitude()), 15));
 
 		checkNotNull(location);
 		onLocationChanged(location);

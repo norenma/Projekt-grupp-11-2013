@@ -18,6 +18,8 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.Criteria;
+import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
@@ -26,6 +28,7 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
@@ -39,6 +42,9 @@ import com.google.common.base.Optional;
  */
 public class EditQuizWalkGameActivity extends Activity {
 
+	private LocationManager locationManager;
+	private String provider;
+	private Location location;
 	private QuizWalkGame.Builder builder;
 	private GoogleMap map;
 	private LatLng activeLocation;
@@ -95,7 +101,18 @@ public class EditQuizWalkGameActivity extends Activity {
 		if (!((LocationManager) getSystemService(LOCATION_SERVICE))
 				.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
 			ActivityHelper.showEnableGPSDialog(this);
+		}else{
+			locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+			provider = locationManager.getBestProvider(new Criteria(), false);
+
+			location = locationManager.getLastKnownLocation(provider);
+
+			// not rendering properly
+			map.moveCamera(CameraUpdateFactory.newLatLngZoom(
+					new LatLng(location.getLatitude(), location.getLongitude()), 15));
+
 		}
+		
 		// shows where user is now.
 		map.setMyLocationEnabled(true);
 		map.getUiSettings().setZoomControlsEnabled(false);
