@@ -46,7 +46,9 @@ public class QuizWalkUser implements Serializable, User {
 		}
 
 		public boolean setSoundEnabled(boolean soundEnabled) {
-			return soundEnabled == (this.soundEnabled = soundEnabled);
+			boolean soundChanged = (soundEnabled == this.soundEnabled);
+			this.soundEnabled = soundEnabled;
+			return soundChanged;
 		}
 
 		@Override
