@@ -6,9 +6,13 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.util.Collection;
 import java.util.Map;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import se.chalmers.fonahano.quizwalk.interfaces.LatitudeLongitude;
 
-import com.google.android.gms.maps.model.LatLng;
+import android.util.Log;
+
+
 
 /**
  * Common static utility methods goes here.
@@ -83,6 +87,7 @@ public class Utilities {
 	}
 
 	public static LatitudeLongitude latLngToCoordinates(LatLng latLong) {
+		Log.d("derp", latLong.latitude + latLong.longitude + "FRÅN LatitudeLong-metod");
 		return new Coordinates(latLong.latitude, latLong.longitude);
 	}
 

@@ -11,6 +11,8 @@ import java.util.List;
 import se.chalmers.fonahano.quizwalk.interfaces.Image;
 import se.chalmers.fonahano.quizwalk.interfaces.LatitudeLongitude;
 
+import android.util.Log;
+
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
 import com.j256.ormlite.field.DataType;
@@ -480,10 +482,12 @@ public class QuizWalkGame {
 					- itNext.getLocation().getLatitude());
 			double lngDiff = Math.abs(c.getLongitude()
 					- itNext.getLocation().getLongitude());
-			double eps = 0.000001;
+			double eps = 0.00000000001;
 
-			if (latDiff < eps && lngDiff < eps)
+			//Log.v("getChallenge", latDiff + " " + lngDiff + "");
+			if (latDiff < eps && lngDiff < eps){
 				return itNext;
+			}
 		}
 		return null;
 	}

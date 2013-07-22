@@ -8,13 +8,14 @@ import org.junit.Test;
 import se.chalmers.fonahano.quizwalk.interfaces.Image;
 import se.chalmers.fonahano.quizwalk.model.Challenge;
 import se.chalmers.fonahano.quizwalk.model.ChallengeReward;
+import se.chalmers.fonahano.quizwalk.model.Coordinates;
 import se.chalmers.fonahano.quizwalk.model.QuizWalkGame;
 import se.chalmers.fonahano.quizwalk.model.QuizWalkGame.ChallengeState;
 import se.chalmers.fonahano.quizwalk.model.StringAnswer;
 
 import com.google.common.base.Optional;
 
-public class TestQuizWalkActivity {
+public class TestQuizWalk {
 
 	private QuizWalkGame qwg;
 
@@ -22,16 +23,16 @@ public class TestQuizWalkActivity {
 	public void setUp() throws Exception {
 		Challenge c1 = new Challenge.Builder()
 				.correctAnswer("correct")
-				.question("?")
+				.question("1")
 				.challengeReward(
 						new ChallengeReward(50, " ", Optional.<Image> absent()))
-				.build();
+				.location(12.3, 12.3).build();
 		Challenge c2 = new Challenge.Builder()
 				.correctAnswer("correct")
-				.question("?")
+				.question("2")
 				.challengeReward(
 						new ChallengeReward(30, " ", Optional.<Image> absent()))
-				.build();
+				.location(32.1, 32.1).build();
 		qwg = new QuizWalkGame.Builder().addChallenge(c1).addChallenge(c2)
 				.build();
 
@@ -69,6 +70,8 @@ public class TestQuizWalkActivity {
 
 	@Test
 	public void testGetChallenge() {
+		assertTrue(qwg.getChallenge(new Coordinates(32.1, 32.1)).getQuestion().toString()
+				.equals("1"));
 
 	}
 

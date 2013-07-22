@@ -22,6 +22,7 @@ import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -101,19 +102,18 @@ public class EditQuizWalkGameActivity extends Activity {
 		if (!((LocationManager) getSystemService(LOCATION_SERVICE))
 				.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
 			ActivityHelper.showEnableGPSDialog(this);
-		}else{
+		} else {
 			locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 			provider = locationManager.getBestProvider(new Criteria(), false);
-			
-			
+
 			location = locationManager.getLastKnownLocation(provider);
 
 			// not rendering properly
-			map.moveCamera(CameraUpdateFactory.newLatLngZoom(
-					new LatLng(location.getLatitude(), location.getLongitude()), 15));
+			map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(
+					location.getLatitude(), location.getLongitude()), 15));
 
 		}
-		
+
 		// shows where user is now.
 		map.setMyLocationEnabled(true);
 		map.getUiSettings().setZoomControlsEnabled(false);
@@ -176,6 +176,7 @@ public class EditQuizWalkGameActivity extends Activity {
 		Challenge c = build.build();
 
 		// Adds question to quizwalk
+		Log.d("derp", "" + c.getQuestion().toString());
 		this.builder.addChallenge(c);
 
 		// Gets back to the map-view
@@ -184,7 +185,7 @@ public class EditQuizWalkGameActivity extends Activity {
 				.beginTransaction();
 
 		fragmentTransaction
-				.hide(fragmentManager.findFragmentByTag(getResources()
+				.remove(fragmentManager.findFragmentByTag(getResources()
 						.getString(R.string.question)));
 		fragmentTransaction.commit();
 
@@ -217,6 +218,10 @@ public class EditQuizWalkGameActivity extends Activity {
 				.findViewById(R.id.answer4)).getText().toString(), ""));
 		build.challengeReward(new ChallengeReward(10, " ", Optional
 				.<Image> absent()));
+
+		Log.d("derp", ""
+				+ ((EditText) this.findViewById(R.id.questionText)).getText()
+						.toString());
 	}
 
 	/**

@@ -1,7 +1,5 @@
 package se.chalmers.fonahano.quizwalk.presentation;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 import java.util.Iterator;
 
 import se.chalmers.fonahano.quizwalk.R;
@@ -44,6 +42,7 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 	private Location location;
 	private LocalDatabase db;
 	private QuizWalkGame q;
+	private QuestionDialogBuilder questionFragment;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -55,18 +54,30 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 		setContentView(R.layout.activity_quiz_walk_game);
 		map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map))
 				.getMap();
-
-		final QuestionDialogBuilder questionFragment = new QuestionDialogBuilder(
-				this);
-
 		// db init
 		db = GameDatabaseManager.getInstance();
-		
-		map.getUiSettings().setZoomControlsEnabled(false);
+		questionFragment = new QuestionDialogBuilder(this);
 
-		// shows where user is now.
-		map.setMyLocationEnabled(true);
+		intitGps();
 
+		final int gameMapState = getIntent().getIntExtra(
+				Extra.GameMap.MAP_STATE, 1);
+
+		if (gameMapState == 1) {
+			ActivityHelper.populateMap(map, db.getAllQuizWalkGame(), this);
+		} else if (gameMapState == 2) {
+			q = StateSingleton.INSTANCE.getActiveQuizWalk().get();
+			ActivityHelper.populateMap(map, q, this);
+			initProximityAlerts(q, locationManager);
+		}
+
+		initMap(questionFragment, gameMapState);
+
+		onLocationChanged(location);
+
+	}
+
+	private void intitGps() {
 		if (getIntent().getBooleanExtra(C.Intent.Extra.PROXIMITY_ALERT_MESSAGE,
 				false)) {
 			double[] challengeLatLng = getIntent().getDoubleArrayExtra(
@@ -84,44 +95,39 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 		}
 
 		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+	}
 
-		final int gameMapState = getIntent().getIntExtra(
-				Extra.GameMap.MAP_STATE, 1);
+	private void initMap(final QuestionDialogBuilder questionFragment,
+			final int gameMapState) {
 
-		if (gameMapState == 1) {
-			ActivityHelper.populateMap(map, db.getAllQuizWalkGame(), this);
-		} else if (gameMapState == 2) {
-			q = StateSingleton.INSTANCE.getActiveQuizWalk().get();
-			ActivityHelper.populateMap(map, q, this);
-			initProximityAlerts(q, locationManager);
-		}
-
-		// Handles if the activity has been prompted by a "questionintent" which
-		// has been fired by the proximity alert.
-		Intent intent = getIntent();
-
-		if (intent.getBooleanExtra(Extra.PROXIMITY_ALERT_MESSAGE, false) == true) {
-			double[] intentChallengeLatLng = intent
-					.getDoubleArrayExtra(Extra.PROXIMITY_ALERT_MESSAGE);
-			questionFragment.showChallenge(q.getChallenge(new Coordinates(
-					intentChallengeLatLng[0], intentChallengeLatLng[1])));
-		}
-
-
+		// shows where user is now and hides zoom-controls
+		map.setMyLocationEnabled(true);
+		map.getUiSettings().setZoomControlsEnabled(false);
 
 		map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
 			@Override
 			public boolean onMarkerClick(Marker marker) {
 				if (gameMapState == 2) {
-					Challenge markerChallenge = q.getChallenge(Utilities
-							.latLngToCoordinates(marker.getPosition()));
+					Challenge markerChallenge = q.getChallenge(new Coordinates(
+							marker.getPosition().latitude,
+							marker.getPosition().longitude));
 
 					if (!q.getChallengeStateOf(markerChallenge).equals(
 							ChallengeState.COMPLETED)
 							|| !q.getChallengeStateOf(markerChallenge).equals(
 									ChallengeState.FAILED)) {
-						questionFragment.showChallenge(q.getChallenge(Utilities
-								.latLngToCoordinates(marker.getPosition())));
+						questionFragment.showChallenge(markerChallenge);
+//						Log.d("derp", "" + q.getChallenges().get(0).getLocation().getLatitude());
+//						Log.d("derp", "" + q.getChallenges().get(1).getLocation().getLatitude());
+//						Log.d("derp", "" + q.getChallenges().get(2).getLocation().getLatitude());
+//						Log.d("derp", "" + q.getChallenges().get(0).getQuestion().toString());
+//						Log.d("derp", "" + q.getChallenges().get(1).getQuestion().toString());
+//						Log.d("derp", "" + q.getChallenges().get(2).getQuestion().toString());
+//						Log.d("derp", "" + marker.getPosition().latitude + "  "
+//								+ marker.getPosition().longitude);
+//						Log.d("derp", "" + " "
+//								+ markerChallenge.getLocation().getLatitude()
+//								+ markerChallenge.getLocation().getLongitude());
 
 					}
 
@@ -134,25 +140,21 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 			}
 		});
 
-		checkNotNull(locationManager.getBestProvider(new Criteria(), false));
+		locationManager.getBestProvider(new Criteria(), false);
 		provider = locationManager.getBestProvider(new Criteria(), false);
 
-		location = locationManager.getLastKnownLocation(provider);
+		// location = locationManager.getLastKnownLocation(provider);
 
 		// not rendering properly
-		map.moveCamera(CameraUpdateFactory.newLatLngZoom(
-				new LatLng(location.getLatitude(), location.getLongitude()), 15));
-
-		checkNotNull(location);
-		onLocationChanged(location);
-
+		// map.moveCamera(CameraUpdateFactory.newLatLngZoom(
+		// new LatLng(location.getLatitude(), location.getLongitude()), 15));
 	}
 
 	/* Request updates at startup */
 	@Override
 	protected void onResume() {
 		super.onResume();
-		locationManager.requestLocationUpdates(provider, 400, 1, this);
+		// locationManager.requestLocationUpdates(provider, 400, 1, this);
 	}
 
 	/* Remove the locationlistener updates when Activity is paused */
@@ -164,7 +166,8 @@ public class QuizWalkActivity extends Activity implements LocationListener {
 
 	@Override
 	public void onLocationChanged(Location location) {
-		Log.v("Debug", location.getLongitude() + " " + location.getLatitude());
+		// Log.v("Debug", location.getLongitude() + " " +
+		// location.getLatitude());
 		// map.moveCamera(CameraUpdateFactory.newLatLngZoom(new
 		// LatLng(location.getLatitude(),location.getLongitude()),3));
 	}
